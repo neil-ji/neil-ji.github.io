@@ -1,0 +1,14 @@
+{
+  "include": [
+      "utils"
+  ],
+  "compilerOptions": {
+      "allowJs": true,
+      "checkJs": true,
+      "strict": true,
+      "noImplicitAny": false,
+      "module": "CommonJS",
+      "target": "ESNext",
+      "outDir": "dist"
+  }
+}

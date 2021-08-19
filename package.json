@@ -1,0 +1,32 @@
+{
+  "name": "neil-blog",
+  "version": "1.0.0",
+  "description": "Neil's blog",
+  "main": "index.js",
+  "scripts": {
+    "build": "",
+    "build-script": "tsc",
+    "push": "git add . & git commit -m='update blogs' & git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neil-ji/neil-ji.github.io.git"
+  },
+  "keywords": [
+    "blog"
+  ],
+  "author": "Neil Ji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neil-ji/neil-ji.github.io/issues"
+  },
+  "homepage": "https://neil-ji.github.io",
+  "dependencies": {
+    "@types/markdown-it": "^12.2.0",
+    "markdown-it": "^12.2.0",
+    "typescript": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/node": "^16.6.2"
+  }
+}
