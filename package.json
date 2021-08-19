@@ -4,9 +4,10 @@
   "description": "Neil's blog",
   "main": "index.js",
   "scripts": {
-    "build": "",
+    "build": "node dist/build",
     "build-script": "tsc",
-    "push": "git add . & git commit -m='update blogs' & git push"
+    "push": "git add . & git commit -m='update blogs' & git push",
+    "archive": ""
   },
   "repository": {
     "type": "git",
