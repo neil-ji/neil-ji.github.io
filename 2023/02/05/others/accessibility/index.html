@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>What is Web Accessibility? | Neil&#39;s Blog</title>
+    <meta name="author" content="Neil Ji" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="前言国内公司几乎不会考虑Web Accessibility，这与我们的法律有关，我国国内的法律并不强制要求Web Accessibility，但是世界上的部分国家如美国，则出台过508康复法案，制订了若干Accessibility标准，一旦某公司的产品不达标，就要面临法律风险。所以很多外企员工，尤其是在我们国内设立研发中心的企业，基本上都要了解一点Web Accessibility的知识，我有幸曾在公司调研过Web Accessibility.当时少有中文资料，到处翻墙去找英文资料着实使我难受了" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="Neil&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">Neil&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://neil-ji.github.io"></form> -->
+
+        
+            
+                
+                    
+
+                        
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFWeb-Accessibility%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">什么是Web Accessibility？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%AE%A9%E7%AB%99%E7%82%B9%E6%98%AFAccessible%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">为什么要让站点是Accessible？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0-Web-Accessibility%EF%BC%9F"><span class="toc-number">4.</span> <span class="toc-text">怎么实现 Web Accessibility？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-WCAG%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">什么是 WCAG？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-VPAT%EF%BC%9F"><span class="toc-number">6.</span> <span class="toc-text">什么是 VPAT？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-WAI-ARIA%EF%BC%9F"><span class="toc-number">7.</span> <span class="toc-text">什么是 WAI-ARIA？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AE%8B%E9%9A%9C%E4%BA%BA%E5%A3%AB%E5%A6%82%E4%BD%95%E8%AE%BF%E9%97%AE-Web%EF%BC%9F"><span class="toc-number">8.</span> <span class="toc-text">残障人士如何访问 Web？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-ATs%EF%BC%9F"><span class="toc-number">9.</span> <span class="toc-text">什么是 ATs？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Accessibility-Tree%EF%BC%9F"><span class="toc-number">10.</span> <span class="toc-text">什么是 Accessibility Tree？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E4%BB%80%E4%B9%88%E5%B7%A5%E5%85%B7%E6%B5%8B%E8%AF%95-Web-Accessibility%EF%BC%9F"><span class="toc-number">11.</span> <span class="toc-text">用什么工具测试 Web Accessibility？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD"><span class="toc-number">12.</span> <span class="toc-text">结语</span></a></li></ol>
+                                
+    </div>
+</aside>
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            What is Web Accessibility?
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="https://neil-ji.github.io/2023/02/05/others/accessibility/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-02-05T09:29:17.000Z" itemprop="datePublished">2023-02-05</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/Accessibility/" rel="tag">Accessibility</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>国内公司几乎不会考虑Web Accessibility，这与我们的法律有关，我国国内的法律并不强制要求Web Accessibility，但是世界上的部分国家如美国，则出台过508康复法案，制订了若干Accessibility标准，一旦某公司的产品不达标，就要面临法律风险。</p>
+<span id="more"></span>
+<p>所以很多外企员工，尤其是在我们国内设立研发中心的企业，基本上都要了解一点Web Accessibility的知识，我有幸曾在公司调研过Web Accessibility.当时少有中文资料，到处翻墙去找英文资料着实使我难受了一段时间，所以在对Web Accessibility有了大概的了解后，就一直想写一篇Web Accessibility的博客，供有需要的朋友浏览，但一直拖到了2020一月中旬才开动，我会尽可能地以汉语习惯表达，但免不了出现一些纰漏，如有谬误，还请大家指教。</p>
+<p>本篇博客曾发布于CSDN，鉴于逐渐放弃了在CSDN更文，现重新编辑，于2023年2月5日发布于个人博客。</p>
+<h2 id="什么是Web-Accessibility？"><a href="#什么是Web-Accessibility？" class="headerlink" title="什么是Web Accessibility？"></a>什么是Web Accessibility？</h2><p>Web Accessibility翻译为Web可访问性或Web无障碍环境，指用户（所有用户，包括残障人士）可以轻松访问Web。为此，W3C还发起了倡议——<strong>WAI</strong>，<strong>WAI</strong>提供了一系列的规范和标准（<strong>WAI-ARIA</strong>，<strong>WCAG</strong>等）。当我们说我们的网站Accessible，那么所有用户访问起来都应该很轻松，这就意味着要对残障人士的体验做一些额外的处理。</p>
+<h2 id="为什么要让站点是Accessible？"><a href="#为什么要让站点是Accessible？" class="headerlink" title="为什么要让站点是Accessible？"></a>为什么要让站点是Accessible？</h2><p><strong>Accessible的站点不仅让残障人士可以拥有好的体验，健全用户也会因此而受益。</strong></p>
+<p>当站点有一个checkbox，点击起来非常难受，我们要很小心地移动鼠标才能准确命中它，而当我们将一个<label>用for属性绑定到这个checkbox，那么我们点击label区域就可以操作checkbox了，对于健全用户，这个checkbox用起来更舒服，对于残障人士，这个checkbox多了一个label描述的accessible name，他们更容易去理解这个checkbox的含义和用途。</p>
+<p><strong>有时候，一些国家或地区的法律要求站点是accessible的。</strong></p>
+<p>像是美国，他们有个508康复法案，要求在联邦经营的站点必须accessible，欧盟也有类似的法律，其他各国很多也有相关的法律或政策限制。所以对于想要走出国门的公司，深入了解Web Accessibility是相当必要的，国内的大部分外企就更不用多说了。</p>
+<p><strong>残障人士是一个潜在的巨大市场。</strong></p>
+<p>根据W3C的数据，全球预计1 billion残障人士，市场规模高达$7 trillion，有兴趣的可以去了解下：<a target="_blank" rel="noopener" href="https://www.w3.org/WAI/business-case/" title="The Business Case for Digital Accessibility">The Business Case for Digital Accessibility</a></p>
+<p>其实还有很多好处，就不赘述了，基本可以说有利无害，因为作为开发者，我们只需要一丢丢的额外工作，加上一丢丢Web Accessibility的知识，就可以让我们的站点变得Accessible。</p>
+<h2 id="怎么实现-Web-Accessibility？"><a href="#怎么实现-Web-Accessibility？" class="headerlink" title="怎么实现 Web Accessibility？"></a>怎么实现 Web Accessibility？</h2><p>在技术上，我们目前公认的最佳实践（Best Practice）：遵循<strong>WCAG</strong>的指导，正确使用HTML5语义化标签进行开发，辅之以<strong>WAI-ARIA</strong>.</p>
+<p>当然，在如何实现WCAG标准这个问题上，有很多技巧性的东西，但不在此赘述了，以后有时间再写，本文定位只是入门。</p>
+<h2 id="什么是-WCAG？"><a href="#什么是-WCAG？" class="headerlink" title="什么是 WCAG？"></a>什么是 WCAG？</h2><p>WCAG：全称<strong>Web Content Accessibility Guidelines</strong>（Web内容可访问性指南），是W3C制定的Web Accessibility的参考指南，说是参考，但目前是公认的Web Accessibility权威标准。</p>
+<p>跟随WCAG的指导，我们就不必再花费精力研究：哪种残障人士以哪种方式访问Web，障碍会更少。</p>
+<p>W3C推荐直接使用最新版的WCAG 2.1（2018年版），WCAG提供了非常全面的需要考虑的点，每个点还制订了三个等级的成功标准，A级，AA级和AAA级，所有点都达到A级，那么我们网站的Web可访问性就达到了WCAG Level A，以此类推其他等级。一般来说不必追求AAA级，因为有的点想达到AAA级会相当困难。</p>
+<p>当网站最终评测Web Accessibility时，我们可以用<strong>VPAT</strong>去记录我们的网站在WCAG的各个点达到了什么等级，VPAT记录好后可以提供给客户或者挂在网站上，以证明我们的网站是Accessible的，而且可以省去我们去翻阅庞大的WCAG的时间。</p>
+<h2 id="什么是-VPAT？"><a href="#什么是-VPAT？" class="headerlink" title="什么是 VPAT？"></a>什么是 VPAT？</h2><p>全称是<strong>Voluntary Product Accessibility· Template</strong>，是一个模板，用于标明产品的可访问性达到什么级别，分为几个不同版本，相同点在于都要求符合WCAG标准，这些版本的区别在于附加部分，附加部分遵循不同的标准，如美国康复法案508部分（Section 508）等。</p>
+<h2 id="什么是-WAI-ARIA？"><a href="#什么是-WAI-ARIA？" class="headerlink" title="什么是 WAI-ARIA？"></a>什么是 WAI-ARIA？</h2><p>首先有必要说一下WAI，WAI是Web Accessibility Initiative的缩写，翻译为<strong>网页可访问性倡议</strong>，绝大部分Web Accessibility的标准、规范都是WAI制定的。</p>
+<p>由于Web从早期的一个简单的文档（文字和图片），渐渐进化出了丰富的交互模式，Web进入<strong>RIA（Rich Internet Application）</strong> 时代，而这些交互模式对于残障人士是相当不友好的，有的使用起来很困难，有的甚至连普通人用着都一头雾水，这时候就需要有一个权威的非功利性的机构来指定一些规则，指导开发者开发出交互友好的Web，于是WAI出现了。</p>
+<p>WAI为了让RIA也具有良好的可访问性，提供了一个规范——<strong>WAI-ARIA</strong>，该规范全称是<strong>Web Accessibility Initiative-Accessible Rich Internet Application</strong>，该规范为HTML5提供了三种新的属性（Attribute）。</p>
+<ol>
+<li><strong>Roles</strong>（角色）：该属性用于向辅助设备说明HTML5元素（Element）真实扮演的角色是什么，例如一个a标签的role&#x3D;”button”，那么辅助设备就会将其作为Button处理，而不是将其解析成超链接；</li>
+<li><strong>Properties</strong>（属性）：该属性用于向辅助设备提供额外的语义信息，例如一个用于删除的Button，如果我们只是将其颜色设置为表示危险操作的红色，那么辅助设备并不会知道这点，辅助设备用户只会知道这个Button是用来删除的，那么它是删除什么数据的呢，是不是永久删除呢？这些额外的信息就可以通过aria-label属性来提供。</li>
+<li><strong>States</strong>（状态）：该属性和Properties作用相似，但不同点在于States代表可变的语义信息，例如上条所说的aria-label，如果aria-label的描述总是改变，那么必然会造成用户的困惑，所以可以下一个定义：<strong>Properties的改变有无限多的可能，但States的改变是在几个已知状态之间来回切换。</strong> 例如aria-hidden表示HTML5元素在显示或隐藏的状态。</li>
+</ol>
+<p>WAI-ARIA最重要的一点就是这三种属性并不会对CSS Tree或Dom Tree有任何影响，它只会影响Accessibility Tree的构建，简单来说：<strong>WAI-ARIA属性对我们的页面、js脚本没有任何影响。</strong></p>
+<p>WAI-ARIA具体有哪些属性就不列举了，这里仅提供相关文档的资源：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.w3.org/TR/wai-aria/" title="Accessible Rich Internet Applications (WAI-ARIA) 1.1">Accessible Rich Internet Applications (WAI-ARIA) 1.1</a>，关于WAI-ARIA的W3C官方的文档，最权威最详细。</li>
+<li><a target="_blank" rel="noopener" href="https://www.w3.org/TR/wai-aria-practices/" title="WAI-ARIA Authoring Practices 1.1">WAI-ARIA Authoring Practices 1.1</a>，也是W3C出品，主要是各种控件的设计原则、最佳实践、在线例子等。</li>
+</ol>
+<h2 id="残障人士如何访问-Web？"><a href="#残障人士如何访问-Web？" class="headerlink" title="残障人士如何访问 Web？"></a>残障人士如何访问 Web？</h2><p>了解残障人士访问Web的方式，有助于我们理解WCAG某些标准制定的意义，帮助我们去更全面的解决可访问性问题。</p>
+<p>首先身体缺陷有多种类型，可分为视觉、听觉、认知和运动四种，而这四种缺陷并不一定都是永久性的，例如做了近视眼手术后，视力没恢复之前，就会具有视觉缺陷；再例如骨折了，在康复之前，就会有运动缺陷。我们想一下世界上每天有多少人正处于这种身体缺陷状态呢？我估计仅中国每天都会有大量骨折、手术等等具有暂时性缺陷的人，那么我们对于可访问性的支持就变得非常有意义了。</p>
+<p>有身体缺陷的人访问Web一般通过辅助设备，如屏幕阅读器，盲文阅读器等，也有些色弱或高度近视用户会使用浏览器的高对比度或放大功能，总而言之，这些方方面面都在WCAG中有所提及。</p>
+<h2 id="什么是-ATs？"><a href="#什么是-ATs？" class="headerlink" title="什么是 ATs？"></a>什么是 ATs？</h2><p><strong>ATs</strong>（<strong>Accessible Technologies</strong>），翻译为辅助技术，也叫辅助设备。其中较为重要的就是屏幕阅读器，屏幕阅读器是一种小型设备，通过连接电脑，可以读取大部分我们肉眼可见的信息，并以语音播报的形式展示。</p>
+<p>那么信息从何而来呢？信息正是从浏览器的Accessibility Tree中解析出来的，大部分ATs也都是这个Tree中获取信息。其工作原理大致为：</p>
+<ol>
+<li>Browser通过系统提供的API（不同操作系统，API的定义、实现也不同）暴露Origin UI（我们看到的页面，即Dom Tree）的语义化版本（即Accessibility Tree）给ATs；</li>
+<li>ATs获得语义化版本，构建一个替代页面给用户，即通过语音播报描述的页面；</li>
+<li>User通过ATs执行了点击等操作，ATs通过系统提供的API向Browser转述User的意图；</li>
+<li>Browser有义务响应User的意图，并在Origin UI上下文解释User的操作（即模拟真实的点击等操作，触发页面相关部分的变化）；</li>
+</ol>
+<p>这里提供一些资源帮助大家更好的理解：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/accessibility" title="Accessibility Overview By Goggles">Accessibility Overview By Goggles</a>，谷歌开发者编写的关于Accessibility的介绍，通俗易懂，深入浅出，还很全面。</li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Learn/Accessibility" title="Accessibility Guides By MDN">Accessibility Guides By MDN</a>，MDN上关于Accessibility的介绍，更注重技术细节，非常专业。</li>
+</ol>
+<h2 id="什么是-Accessibility-Tree？"><a href="#什么是-Accessibility-Tree？" class="headerlink" title="什么是 Accessibility Tree？"></a>什么是 Accessibility Tree？</h2><p>Accessibility Tree简单来说就是浏览器构建Dom Tree之后，通过解析Dom Tree的语义信息，将每个Node的语义信息筛选出来，构建成Accessibility Node，进而构建成Accessibility Tree。Dom Tree的改变会影响Accessibility Tree，但对Accessibility Tree的操作并不会反过来影响Dom Tree，而且筛选出的信息是语义信息，更不可能影响CSS Tree，所以说WAI-ARIA对我们的页面无任何影响，原理就在此。</p>
+<p>综合上面ATs原理中，ATs读取的只是Accessibility Tree，我们可以得出一个结论：ATs只关注语义信息。足可见HTML5语义化标签的正确合理使用对Web Accessibility多么重要。</p>
+<h2 id="用什么工具测试-Web-Accessibility？"><a href="#用什么工具测试-Web-Accessibility？" class="headerlink" title="用什么工具测试 Web Accessibility？"></a>用什么工具测试 Web Accessibility？</h2><p>针对浏览器，可以使用很多插件，如Chrome和Firefox有Axe，Wave，这些插件可以自动检测网页内容的Web Accessibility是否有Bug，明确标明违反了WCAG哪条规定，应当如何改进等等相当强大的功能。</p>
+<p>个人推荐Axe，不仅免费，而且操作简单易懂，容易上手，UI也是我最喜欢的简约风，而且注册的用户可以使用更强大的测试功能，针对不同的内容提供了单独的测试模块，还可以生成测试Report，防止开发者互相扯皮。</p>
+<p>还可以使用桌面应用程序Nvda，最流行的屏幕阅读器软件，直接模拟残障人士访问Web的方式，对优化Web Accessibility也是很有帮助的。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>在公司Share Web Accessibility时，还要靠强调“它同时也是优化正常人体验的途径”来获得认可，真的觉得很无奈，同为人类，是否应该怀有对同胞的怜悯？我们对技术的追求难道只是为了升职加薪？这个世界中，如果人类社会只允许强者生，弱者死，那人和动物也并没有两样。</p>
+<p>我们是开发者，是Developers，是千千万万平凡职业中的一种，虽然做不到视钱财为粪土，但我觉得我们应当具有开发者的道德追求，因为当大家技术实力趋近时，分高低的就不再是技术本身，而是境界，这种道德追求也必将反过来促进我们技术水平的提升，拥有这种思想高度，我们的Code不再是资本家盈利的硬通货，而是沟通整个社会的桥梁。</p>
+
+        
+    </section>
+</article>
+
+
+
+
+<a id="pageprev" href="/2023/03/20/interview/interview-oop/" class="article-prev" title="前端面试题背诵纯享版（OOP）"><i class="icon-arrow-left"></i></a>
+
+
+
+
+            </div>
+        </div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+    
+        
+<script src="/js/scrollspy.min.js"></script>
+
+        <script type="text/javascript">
+        $(document.body).scrollspy({target: '#aside-inner'});
+
+        $(window).on('resize', function() {
+            var hw = $('#header').width();
+            var ww = $('#wrapper').width();
+            var space = ($(this).width() - hw - ww) / 2 / 2;
+
+            var pageprev = $('#pageprev');
+            var pagenext = $('#pagenext');
+            var avg = (pageprev.width() + pagenext.width()) / 2
+
+            if(space > avg) {
+                var len = space - avg / 2;
+                var styles = {position: 'fixed', top: '50%', marginTop: - (pageprev.width() + pagenext.width()) / 4}
+                pageprev.css($.extend({left: hw + len}, styles));
+                pagenext.css($.extend({right: len}, styles));
+            } else {
+                pageprev.removeAttr('style');
+                pagenext.removeAttr('style');
+            }
+        }).trigger('resize');
+        </script>
+    
+
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>React16.8源码 | Neil&#39;s Blog</title>
+    <meta name="author" content="Neil Ji" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="React FiberReact Fiber是为了实现Virtual DOM的树结构，每个节点通return指向其父节点，sibling指向其兄弟节点，child指向其首个子节点，在Render和Commit阶段实际操作的就是React Fiber Tree，这种树的表示方式也称为树的孩子-兄弟表示法，这种表示法可将树转化为二叉树，左孩子就是首个子节点，右孩子就是首个兄弟节点，然后Fiber Tree的构建和Commit顺序就可以看作是二叉树的先根（序）遍历，不考虑这些的话，就是单纯的树的DFS" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="Neil&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">Neil&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://neil-ji.github.io"></form> -->
+
+        
+            
+                
+                    
+
+                        
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Fiber"><span class="toc-number">1.</span> <span class="toc-text">React Fiber</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Update-Queue"><span class="toc-number">2.</span> <span class="toc-text">React Update Queue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Work-Loop"><span class="toc-number">3.</span> <span class="toc-text">React Work Loop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Lane"><span class="toc-number">4.</span> <span class="toc-text">React Lane</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Expiration-Time"><span class="toc-number">5.</span> <span class="toc-text">React Expiration Time</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Scheduler"><span class="toc-number">6.</span> <span class="toc-text">React Scheduler</span></a></li></ol>
+                                
+    </div>
+</aside>
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            React16.8源码
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="https://neil-ji.github.io/2023/05/31/react/react16-8code-md/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-05-31T07:13:51.000Z" itemprop="datePublished">2023-05-31</time>
+</a>
+
+            
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="React-Fiber"><a href="#React-Fiber" class="headerlink" title="React Fiber"></a>React Fiber</h2><p>React Fiber是为了实现Virtual DOM的树结构，每个节点通return指向其父节点，sibling指向其兄弟节点，child指向其首个子节点，在Render和Commit阶段实际操作的就是React Fiber Tree，这种树的表示方式也称为树的<strong>孩子-兄弟表示法</strong>，这种表示法可将树转化为二叉树，左孩子就是首个子节点，右孩子就是首个兄弟节点，然后Fiber Tree的构建和Commit顺序就可以看作是二叉树的先根（序）遍历，不考虑这些的话，就是单纯的树的DFS.</p>
+<p>React会维护两棵Fiber Tree，current对应当前页面，workInProgress对应正在处理、将要展示的页面，两棵树的节点之间互相通过alternate属性指向彼此，以便通过Diff算法得出节点变化，并在Commit阶段更新对应的浏览器DOM。</p>
+<p>Fiber Node是以ReactElement为基础构建的。</p>
+<p>Fiber Node还有一些其他属性：</p>
+<ol>
+<li>tag，标识组件类型；</li>
+<li>stateNode，指向对应的浏览器DOM节点或者组件实例（ClassComponent）；</li>
+<li>type，FunctionComponent指向对应函数，ClassComponent指向对应类，HostComponent存对应的HTML标签；</li>
+<li>flags，存二进制数，用于记录Diff后对应的浏览器DOM需要做什么改变，取值Placement代表新增或替换，Deletion代表删除（<code>flags |= Deletion</code>增，<code>flags &amp;Deletion </code>验，<code>flags &amp;= ~Deletion</code>删）；</li>
+<li>deletions，Diff后发现要删除的Fiber节点；</li>
+<li>effectTag，副作用类型；</li>
+<li>nextEffect，DFS顺序下，下一个有副作用的Fiber节点，构成一个单链表Effect List；</li>
+<li>firstEffect，Effect List的头节点；</li>
+<li>lastEffect，Effect List的尾节点；</li>
+<li>lane，也是二进制数，表示Fiber Node的处理优先级，低优先级任务可能被打断，然后在下一次Reconcile处理（Reconcile就是Render+Commit）；</li>
+</ol>
+<h2 id="React-Update-Queue"><a href="#React-Update-Queue" class="headerlink" title="React Update Queue"></a>React Update Queue</h2><p>每个组件会维护一个update queue，所有</p>
+<h2 id="React-Work-Loop"><a href="#React-Work-Loop" class="headerlink" title="React Work Loop"></a>React Work Loop</h2><h2 id="React-Lane"><a href="#React-Lane" class="headerlink" title="React Lane"></a>React Lane</h2><h2 id="React-Expiration-Time"><a href="#React-Expiration-Time" class="headerlink" title="React Expiration Time"></a>React Expiration Time</h2><h2 id="React-Scheduler"><a href="#React-Scheduler" class="headerlink" title="React Scheduler"></a>React Scheduler</h2><pre><code>render
+    legacyRenderSubtreeIntoContainer
+        legacyCreateRootFromDOMContainer
+            createRoot
+                new ReactDOMRoot
+                    createRootImpl
+                        createContainer 
+                            createFiberRoot 
+                                new FiberRootNode
+                                    createHostRootFiber
+                                        createFiber 
+                                            new FiberNode
+                                            initializeUpdateQueue
+        unbatchedUpdates
+            updateContainer
+                requestEventTime
+                requestUpdateLane
+                getContextForSubtree
+                createUpdate
+                enqueueUpdate
+                scheduleUpdateOnFiber !!!
+                    markUpdateLaneFromFiberToRoot // 从当前节点到根节点，依次更新节点的Lane
+                    markRootUpdated // 根节点标记为：存在pending update
+                    performSyncWorkOnRoot !!!
+                        getNextLanes
+                        renderRootSync
+                            prepareFreshStack // 初始化Work Loop必需的所有变量
+                                createWorkInProgress
+                                    createFiber
+                                enqueueInterleavedUpdates
+                            pushDispatcher // 设置一个ReactCurrentDispatcher，主要用于处理Hooks
+                            workLoopSync !!!
+                                performUnitOfWork
+                                    beginWork !!! 沿child构建
+                                        updateHostRoot !!!
+                                            pushHostRootContext
+                                            cloneUpdateQueue
+                                            processUpdateQueue // 处理update queue，计算出最终state
+                                            reconcileChildren
+                                                mountChildFibers
+                                                    reconcileChildFibers
+                                                        placeSingleChild
+                                                            reconcileSingleElement
+                                    completeUnitOfWork !!! 
+                                        completeWork
+                            resetContextDependencies
+                            popDispatcher // render结束，还原Dispatcher
+                        commitRoot
+                            commitRootImpl
+                                commitBeforeMutationEffects !!! 1阶段，Before Mutation，执行生命周期函数
+                                    prepareForCommit
+                                    commitBeforeMutationEffects_begin
+                                        commitBeforeMutationEffects_complete
+                                            commitBeforeMutationEffectsOnFiber // 执行getSnapshotBeforeUpdate
+                                commitMutationEffects !!! 2阶段，根据fiber.flags更新DOM
+                                    commitMutationEffects_begin
+                                        commitMutationEffects_complete
+                                            commitDetachRef // 解除ref
+                                            commitAttachRef // 重新设置ref
+                                            commitPlacement
+                                                insertOrAppendPlacementNodeIntoContainer // React DOM Api
+                                                insertOrAppendPlacementNode // React DOM Api
+                                            commitWork
+                                                commitHookEffectListUnmount
+                                                commitContainer
+                                                    replaceContainerChildren // React DOM Api
+                                commitLayoutEffects !!! 3阶段，执行layout
+                                    commitLayoutEffects_begin // componentDidMount
+                                        safelyCallCommitHookLayoutEffectListMount
+                                            commitHookEffectListMount // HookLayout
+
+                    ensureRootIsScheduled
+                entangleTransitions
+        getPublicRootInstance
+</code></pre>
+<p>setState</p>
+<p>useState</p>
+<p>useReducer</p>
+
+        
+    </section>
+</article>
+
+
+
+<a id="pagenext" href="/2023/05/31/interview/interview-reactcode/" class="article-next" title="前端面试题背诵纯享版（React源码）"><i class="icon-arrow-right"></i></a>
+
+
+<a id="pageprev" href="/2023/06/01/interview/interview-ts-md/" class="article-prev" title="前端面试题背诵纯享版（Typescript）"><i class="icon-arrow-left"></i></a>
+
+
+
+
+            </div>
+        </div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+    
+        
+<script src="/js/scrollspy.min.js"></script>
+
+        <script type="text/javascript">
+        $(document.body).scrollspy({target: '#aside-inner'});
+
+        $(window).on('resize', function() {
+            var hw = $('#header').width();
+            var ww = $('#wrapper').width();
+            var space = ($(this).width() - hw - ww) / 2 / 2;
+
+            var pageprev = $('#pageprev');
+            var pagenext = $('#pagenext');
+            var avg = (pageprev.width() + pagenext.width()) / 2
+
+            if(space > avg) {
+                var len = space - avg / 2;
+                var styles = {position: 'fixed', top: '50%', marginTop: - (pageprev.width() + pagenext.width()) / 4}
+                pageprev.css($.extend({left: hw + len}, styles));
+                pagenext.css($.extend({right: len}, styles));
+            } else {
+                pageprev.removeAttr('style');
+                pagenext.removeAttr('style');
+            }
+        }).trigger('resize');
+        </script>
+    
+
+</body>
+</html>

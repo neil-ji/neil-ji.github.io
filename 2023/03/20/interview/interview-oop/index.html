@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>前端面试题背诵纯享版（OOP） | Neil&#39;s Blog</title>
+    <meta name="author" content="Neil Ji" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="概述OOP（Object Orient Programming）面向对象编程；三大特征：封装，将功能封装进相对独立的模块；多态，同一接口、类型，却可以做不同的事，代表不同的涵义；继承，属性、方法可被继承或扩展；注1：JS是一种多范式语言，支持面向对象的编程思想，其原型模型中，多态体现在：实例本身的属性或方法的优先级高于其原型对象上的同名属性或方法；注2：根据Wikipedia的词条定义，多态并非OOP独有，分为特设多态：函数重载、运算符重载；参数多态：泛型编程；子类型多态：父类型可替代子类型；七" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="Neil&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">Neil&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://neil-ji.github.io"></form> -->
+
+        
+            
+                
+                    
+
+                        
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">单例模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">工厂模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">代理模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BB%BA%E9%80%A0%E8%80%85%E6%A8%A1%E5%BC%8F"><span class="toc-number">5.</span> <span class="toc-text">建造者模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">模板方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%EF%BC%88%E9%97%A8%E9%9D%A2%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">外观模式（门面模式）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E5%9E%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">8.</span> <span class="toc-text">原型模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F"><span class="toc-number">9.</span> <span class="toc-text">策略模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F%EF%BC%88%E5%8F%91%E5%B8%83-%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="toc-number">10.</span> <span class="toc-text">观察者模式（发布-订阅模式）</span></a></li></ol>
+                                
+    </div>
+</aside>
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            前端面试题背诵纯享版（OOP）
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="https://neil-ji.github.io/2023/03/20/interview/interview-oop/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-03-20T09:28:26.000Z" itemprop="datePublished">2023-03-20</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/OOP/" rel="tag">OOP</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>OOP（Object Orient Programming）面向对象编程；</p>
+<p>三大特征：</p>
+<ol>
+<li>封装，将功能封装进相对独立的模块；</li>
+<li>多态，同一接口、类型，却可以做不同的事，代表不同的涵义；</li>
+<li>继承，属性、方法可被继承或扩展；</li>
+</ol>
+<p>注1：JS是一种多范式语言，支持面向对象的编程思想，其原型模型中，多态体现在：实例本身的属性或方法的优先级高于其原型对象上的同名属性或方法；</p>
+<p>注2：根据Wikipedia的词条定义，多态并非OOP独有，分为</p>
+<ol>
+<li>特设多态：函数重载、运算符重载；</li>
+<li>参数多态：泛型编程；</li>
+<li>子类型多态：父类型可替代子类型；</li>
+</ol>
+<span id="more"></span>
+
+<p>七大设计原则（SOLIDDC）：</p>
+<ol>
+<li>Single Responsibility 单一职责，一个模块只做一件事；</li>
+<li>OpenClosed 开闭原则，对扩展开放，对修改封闭；</li>
+<li>Liskov Substitution 里氏替换，子类能覆盖父类；</li>
+<li>Interface Segregation 接口隔离，保持接口的单一且独立；</li>
+<li>Dependency Inversion 依赖倒置，依赖于抽象而非具体；</li>
+<li>Demeter 迪米特原则，类间解耦，减少对其他类的依赖；</li>
+<li>Composite Reuse 合成复用，优先通过合成（聚合、组合）实现复用；</li>
+</ol>
+<p>注：聚合、组合是两种关联关系，描述的对象是整体与部分——前者强调部分可以独立存在，例如大雁与雁群就是一种聚合关系；后者强调部分无法独立存在，例如翅膀与大雁；</p>
+<p>23种设计模式：</p>
+<ol>
+<li>创建型：<ol>
+<li><strong>单例模式</strong>；</li>
+<li><strong>原型模式</strong>；</li>
+<li><strong>工厂模式</strong>；</li>
+<li><strong>建造者模式</strong>；</li>
+</ol>
+</li>
+<li>结构型：<ol>
+<li>适配器模式；</li>
+<li>装饰器模式；</li>
+<li><strong>代理模式</strong>；</li>
+<li><strong>外观模式</strong>；</li>
+<li>桥接模式；</li>
+<li>组合模式；</li>
+<li>享元模式；</li>
+</ol>
+</li>
+<li>行为型：<ol>
+<li><strong>观察者模式</strong>；</li>
+<li>迭代器模式；</li>
+<li><strong>策略模式</strong>；</li>
+<li>模板方法模式；</li>
+<li>职责链模式；</li>
+<li>命令模式；</li>
+<li>备忘录模式；</li>
+<li>状态模式；</li>
+<li>访问者模式；</li>
+<li>中介者模式；</li>
+<li>解释器模式；</li>
+</ol>
+</li>
+</ol>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>单一实例，即保证一个类只有一个实例，为该实例提供一个全局访问点；</p>
+<p>应用场景：</p>
+<ol>
+<li>redux的状态树；</li>
+<li>网站访问计数器；</li>
+</ol>
+<p>实现方式：</p>
+<ol>
+<li>饿汉式，开始就创建实例；</li>
+<li>懒汉式，用到再创建实例；</li>
+</ol>
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p>调用者不直接创建对象，而是通过工厂来获得指定对象，调用者与创建者分离，降低耦合度；</p>
+<p>三种工厂模式：</p>
+<ol>
+<li>简单工厂，即完全由工厂创建各类对象，调用者不需要知道具体创建逻辑，工厂类职责较重；</li>
+<li>工厂方法，工厂接口预先规范好创建对象的方法，由实现该工厂接口的类负责创建对象；</li>
+<li>抽象工厂，创建工厂的工厂，可以分为总工厂、工厂和产品，总工厂决定创建哪些工厂，工厂决定创建哪些产品，这两者单独看都属于工厂模式，合起来称之为抽象工厂；</li>
+</ol>
+<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><p>不直接访问目标对象，而是通过代理对象间接地访问目标对象，在此过程中，代理对象可以在访问目标对象之前或之后添加逻辑，而不必直接修改目标对象；</p>
+<h2 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h2><p>用于拆分复杂对象的创建逻辑，并以一定顺序组装起来，分为四种角色：</p>
+<ol>
+<li>Builder，将复杂对象的创建逻辑拆分为若干个方法，Builder以接口形式存在，主要作用是方法及属性的规范化；</li>
+<li>ConcreteBuilder，是Builder的实现；</li>
+<li>Director，<strong>只负责</strong>将ConcreteBuilder的各类方法按指定顺序调用，并返回Product；</li>
+<li>Product，即复杂对象本身；</li>
+</ol>
+<h2 id="模板方法"><a href="#模板方法" class="headerlink" title="模板方法"></a>模板方法</h2><p>对于多个相似但不完全一样的业务逻辑，保留共有的部分，在模板类中实现，变化的部分由继承模板类的子类实现；</p>
+<h2 id="外观模式（门面模式）"><a href="#外观模式（门面模式）" class="headerlink" title="外观模式（门面模式）"></a>外观模式（门面模式）</h2><p>将多个接口的调用逻辑封装起来，并对外界提供一个统一接口调用该逻辑；</p>
+<h2 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h2><p>对于初始化开销大的对象，通过克隆已有对象（即原型）来减少开销；或者用于保护性拷贝；</p>
+<p>注：保护性拷贝，即不直接修改原对象属性，而是复制出一个对象，修改该克隆对象，并让指向原对象的指针指向克隆对象，这种模式也称为不可变对象；</p>
+<p>两种实现方式：</p>
+<ol>
+<li>浅拷贝，只拷贝一层，引用类型直接拷贝地址；</li>
+<li>深拷贝，拷贝所有层级的属性，引用类型会创建一个新对象，并复制原对象的属性值；</li>
+</ol>
+<h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h2><p>对于一组功能相近但实现不同的操作，将其各自封装起来，对外提供一组相同的接口，外界可以根据需要去替换接口；</p>
+<p>应用场景：支付模块的支付方式选择、各类会员的适用权益等；</p>
+<p>注：模板方法强调的是子流程的替换，策略模式强调的是整个流程的替换；</p>
+<h2 id="观察者模式（发布-订阅模式）"><a href="#观察者模式（发布-订阅模式）" class="headerlink" title="观察者模式（发布-订阅模式）"></a>观察者模式（发布-订阅模式）</h2><p>一个对象发生改变时，通知相关对象，以便相关对象采取对应操作；</p>
+<p>两种角色：</p>
+<ol>
+<li>Observer，实现一个update方法，供Subject调用；</li>
+<li>Subject，维护一个Observer数组，以便稍后挨个调用其update方法，还要提供一对subscribe&#x2F;unsubscribe方法，以便将Observer从数组中添加或移除；</li>
+</ol>
+
+        
+    </section>
+</article>
+
+
+
+<a id="pagenext" href="/2023/02/05/others/accessibility/" class="article-next" title="What is Web Accessibility?"><i class="icon-arrow-right"></i></a>
+
+
+<a id="pageprev" href="/2023/03/24/js/js_builtinobject/" class="article-prev" title="js_builtinobject.md"><i class="icon-arrow-left"></i></a>
+
+
+
+
+            </div>
+        </div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+    
+        
+<script src="/js/scrollspy.min.js"></script>
+
+        <script type="text/javascript">
+        $(document.body).scrollspy({target: '#aside-inner'});
+
+        $(window).on('resize', function() {
+            var hw = $('#header').width();
+            var ww = $('#wrapper').width();
+            var space = ($(this).width() - hw - ww) / 2 / 2;
+
+            var pageprev = $('#pageprev');
+            var pagenext = $('#pagenext');
+            var avg = (pageprev.width() + pagenext.width()) / 2
+
+            if(space > avg) {
+                var len = space - avg / 2;
+                var styles = {position: 'fixed', top: '50%', marginTop: - (pageprev.width() + pagenext.width()) / 4}
+                pageprev.css($.extend({left: hw + len}, styles));
+                pagenext.css($.extend({right: len}, styles));
+            } else {
+                pageprev.removeAttr('style');
+                pagenext.removeAttr('style');
+            }
+        }).trigger('resize');
+        </script>
+    
+
+</body>
+</html>

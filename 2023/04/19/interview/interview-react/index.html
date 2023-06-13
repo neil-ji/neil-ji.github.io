@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>前端面试题背诵纯享版（React） | Neil&#39;s Blog</title>
+    <meta name="author" content="Neil Ji" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="React简单题ClassComponent生命周期Hooks如何模拟ClassComponent生命周期useEffect VS useLayoutEffectuseReducer VS useStatesetState是同步还是异步执行HOC在React中的作用受控组件 VS 非受控组件展示组件 VS 容器组件Props VS StateclassName VS style如何捕获ReactApp的错误及实现错误出现后的Fallback如何实现Panel（或抽屉，面板）组件（Portal）虚" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="Neil&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">Neil&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://neil-ji.github.io"></form> -->
+
+        
+            
+                
+                    
+
+                        
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React%E7%AE%80%E5%8D%95%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">React简单题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSX"><span class="toc-number">2.</span> <span class="toc-text">JSX</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFReact%E8%99%9A%E6%8B%9FDOM"><span class="toc-number">3.</span> <span class="toc-text">什么是React虚拟DOM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Function-Component-VS-Class-Component"><span class="toc-number">4.</span> <span class="toc-text">Function Component VS Class Component</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React16-Hook"><span class="toc-number">5.</span> <span class="toc-text">React16 Hook</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React18%E6%96%B0%E5%A2%9EHook"><span class="toc-number">6.</span> <span class="toc-text">React18新增Hook</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#useCallback%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">7.</span> <span class="toc-text">useCallback最佳实践</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Context"><span class="toc-number">8.</span> <span class="toc-text">React Context</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React%E7%BB%84%E4%BB%B6%E7%B1%BB%E5%9E%8B"><span class="toc-number">9.</span> <span class="toc-text">React组件类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89Hook"><span class="toc-number">10.</span> <span class="toc-text">自定义Hook</span></a></li></ol>
+                                
+    </div>
+</aside>
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            前端面试题背诵纯享版（React）
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="https://neil-ji.github.io/2023/04/19/interview/interview-react/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-04-19T05:57:58.000Z" itemprop="datePublished">2023-04-19</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="React简单题"><a href="#React简单题" class="headerlink" title="React简单题"></a>React简单题</h2><ul>
+<li>ClassComponent生命周期</li>
+<li>Hooks如何模拟ClassComponent生命周期</li>
+<li>useEffect VS useLayoutEffect</li>
+<li>useReducer VS useState</li>
+<li>setState是同步还是异步执行</li>
+<li>HOC在React中的作用</li>
+<li>受控组件 VS 非受控组件</li>
+<li>展示组件 VS 容器组件</li>
+<li>Props VS State</li>
+<li>className VS style</li>
+<li>如何捕获ReactApp的错误及实现错误出现后的Fallback</li>
+<li>如何实现Panel（或抽屉，面板）组件（Portal）</li>
+<li>虚拟列表</li>
+<li>滚动加载</li>
+<li>自定义Hook（获取窗口尺寸，获取滚动偏移量）</li>
+</ul>
+<h2 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h2><p>JSX是React对JS的语法扩展，在打包后会被替换成createElement，在React App初始化时，createElement会构建一个ReactElement对象，这个对象就是虚拟DOM节点；</p>
+<h2 id="什么是React虚拟DOM"><a href="#什么是React虚拟DOM" class="headerlink" title="什么是React虚拟DOM"></a>什么是React虚拟DOM</h2><p>虚拟DOM就是React内部维护的一个树结构对象，在渲染时基于虚拟DOM进行Diff计算，，虚拟DOM，是为了解决频繁操作浏览器DOM开销大的问题，</p>
+<h2 id="Function-Component-VS-Class-Component"><a href="#Function-Component-VS-Class-Component" class="headerlink" title="Function Component VS Class Component"></a>Function Component VS Class Component</h2><p>React推荐使用函数组件和Hooks编写新的应用程序，函数组件优势主要体现在提高开发效率、维护成本降低，主要原因有以下几点：</p>
+<ol>
+<li>函数粒度更小：函数比Class更容易拆分，更容易复用，更好避免巨石组件的出现；</li>
+<li>纯函数增强程序稳定性，降低debug难度：将函数式编程思想应用到组件开发中，函数式编程的基础就是纯函数，相同输入一定得到相同输出；</li>
+<li>Effect Hooks降低了开发者的心智负担：函数组件中主要通过useEffect处理副作用，偶尔用到useLayoutEffect，而Class组件则要考虑选用哪个生命周期方法，且部分生命周期方法在Concurrent模式中是非安全的，React无法保证这些unsafe生命周期方法一定会执行到；</li>
+<li>React会减少甚至在未来版本移除Class组件部分特性的支持：如部分unsafe的生命周期方法；</li>
+</ol>
+<h2 id="React16-Hook"><a href="#React16-Hook" class="headerlink" title="React16 Hook"></a>React16 Hook</h2><ul>
+<li>useState(state)，useState(() &#x3D;&gt; state)</li>
+<li>useReducer(reducer, initialState, init?)，reducer接收上一个state和被dispatch的action，返回新state，init接收initialState，返回一个初始state，忽略后初始state默认为initialState；</li>
+<li>useMemo(value)；</li>
+<li>useCallback(callback)；</li>
+<li>useEffect()</li>
+<li>useLayoutEffect()</li>
+<li>useContext(context)</li>
+<li>useRef()</li>
+</ul>
+<h2 id="React18新增Hook"><a href="#React18新增Hook" class="headerlink" title="React18新增Hook"></a>React18新增Hook</h2><ul>
+<li>useTransition(timeoutMs): [loading, start]，标记一个过渡更新，紧急更新处理完再处理过渡更新，一旦超时则对其强制更新；</li>
+<li>useDeferredValue(value, {timeoutMs})&#96;，标记一个延迟更新的变量，紧急更新处理完再更新变量的值，一旦超时则强制更新变量的值；</li>
+<li>useId()，返回一个唯一id；</li>
+<li>useInsertionEffect(callback，dependencies)，在render结束，还不能访问DOM时执行；</li>
+<li>useExternalStore(subscribe:(setState)&#x3D;&gt;any，getExternalState)，同步外部数据源；</li>
+</ul>
+<p>注：</p>
+<ul>
+<li>对于useTransition，可看作useState和startTransition；</li>
+<li>对于useDeferredValue，可看作是useState、useEffect和startTransition；</li>
+</ul>
+<h2 id="useCallback最佳实践"><a href="#useCallback最佳实践" class="headerlink" title="useCallback最佳实践"></a>useCallback最佳实践</h2><p>综合来讲，useCallback用于缓存函数，指定若干依赖项，当依赖项变化时函数才会更新，其应用场景如下：</p>
+<ol>
+<li>缓存传递给子组件的函数，避免子组件频繁render；<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleSomeEvent = <span class="title class_">React</span>.<span class="title function_">useCallback</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;, [...])</span><br><span class="line"></span><br><span class="line">&lt;<span class="title class_">SomeChild</span> onSomeEvent=&#123;handleSomeEvent&#125;&gt;</span><br></pre></td></tr></table></figure></li>
+<li>避免effect hooks频繁执行；<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> doSomething = <span class="title class_">React</span>.<span class="title function_">useCallback</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;, [...])</span><br><span class="line"></span><br><span class="line"><span class="comment">// doSomething的逻辑无需复用且代码较少的话，也可以将doSomething的逻辑移入useEffect，这样的好处是将依赖都放在一起，便于维护；</span></span><br><span class="line"><span class="title class_">React</span>.<span class="title function_">useEffect</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="title function_">doSomething</span>()</span><br><span class="line">    ...</span><br><span class="line">&#125;,[doSomething])</span><br></pre></td></tr></table></figure></li>
+<li>上述基础上，如果新状态依赖于上一个状态计算而来，可以通过updater函数移除对state的依赖<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [n, setN] = <span class="title class_">React</span>.<span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"><span class="comment">// 常规写法：状态变化时更新函数</span></span><br><span class="line"><span class="keyword">const</span> handleSomeEvent = <span class="title class_">React</span>.<span class="title function_">useCallback</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setN</span>(n + <span class="number">1</span>);</span><br><span class="line">&#125;, [n])</span><br><span class="line"><span class="comment">// 优化写法：通过updater函数去指定state的更新，移除对state的依赖；</span></span><br><span class="line"><span class="keyword">const</span> handleSomeEvent = <span class="title class_">React</span>.<span class="title function_">useCallback</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setN</span>(<span class="function">(<span class="params">prev</span>) =&gt;</span> prev + <span class="number">1</span>);</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="React-Context"><a href="#React-Context" class="headerlink" title="React Context"></a>React Context</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建context对象</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">ThemeContext</span> = <span class="title class_">React</span>.<span class="title function_">createContext</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// hooks获取context value</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Article</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> theme = <span class="title class_">React</span>.<span class="title function_">useContext</span>(<span class="title class_">ThemeContext</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;theme&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Consumer组件获取context value</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Navigator</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">ThemeContext.Consumer</span>&gt;</span>&#123;</span></span><br><span class="line"><span class="language-xml">        (theme) =&gt; &#123;</span></span><br><span class="line"><span class="language-xml">            return <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;theme&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span>;</span></span><br><span class="line"><span class="language-xml">        &#125;</span></span><br><span class="line"><span class="language-xml">    &#125;<span class="tag">&lt;/<span class="name">ThemeContext.Consumer</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Provider提供context value</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [theme, setTheme] = <span class="title class_">React</span>.<span class="title function_">useState</span>(<span class="string">&quot;light&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">ThemeContext.Provider</span> <span class="attr">value</span>=<span class="string">&#123;theme&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;</span></span><br><span class="line"><span class="language-xml">            setTheme(&quot;dark&quot;);</span></span><br><span class="line"><span class="language-xml">        &#125;&#125;&gt;Dark Theme<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Article</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Navigator</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">ThemeContext.Provider</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="React组件类型"><a href="#React组件类型" class="headerlink" title="React组件类型"></a>React组件类型</h2><p>React内部分为以下几类：</p>
+<ol>
+<li>FunctionComponent &#x3D; 0;</li>
+<li>ClassComponent &#x3D; 1;</li>
+<li>IndeterminateComponent &#x3D; 2; &#x2F;&#x2F; Before we know whether it is function or class</li>
+<li>HostRoot &#x3D; 3; &#x2F;&#x2F; Root of a host tree. Could be nested inside another node.</li>
+<li>HostPortal &#x3D; 4; &#x2F;&#x2F; A subtree. Could be an entry point to a different renderer.</li>
+<li>HostComponent &#x3D; 5;</li>
+<li>HostText &#x3D; 6;</li>
+<li>Fragment &#x3D; 7;</li>
+<li>Mode &#x3D; 8;</li>
+<li>ContextConsumer &#x3D; 9;</li>
+<li>ContextProvider &#x3D; 10;</li>
+<li>ForwardRef &#x3D; 11;</li>
+<li>Profiler &#x3D; 12;</li>
+<li>SuspenseComponent &#x3D; 13;</li>
+<li>MemoComponent &#x3D; 14;</li>
+<li>SimpleMemoComponent &#x3D; 15;</li>
+<li>LazyComponent &#x3D; 16;</li>
+<li>IncompleteClassComponent &#x3D; 17;</li>
+<li>DehydratedFragment &#x3D; 18;</li>
+<li>SuspenseListComponent &#x3D; 19;</li>
+<li>ScopeComponent &#x3D; 21;</li>
+<li>OffscreenComponent &#x3D; 22;</li>
+<li>LegacyHiddenComponent &#x3D; 23;</li>
+<li>CacheComponent &#x3D; 24;</li>
+</ol>
+<h2 id="自定义Hook"><a href="#自定义Hook" class="headerlink" title="自定义Hook"></a>自定义Hook</h2><p>获取窗口尺寸</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">useWindowSize</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [size, setSize] = <span class="title class_">React</span>.<span class="title function_">useState</span>(&#123;</span><br><span class="line">        <span class="attr">width</span>: <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientWidth</span>,</span><br><span class="line">        <span class="attr">height</span>: <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientHeight</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">resizeHandler</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">        <span class="title function_">setSize</span>(&#123;</span><br><span class="line">            <span class="attr">width</span>: <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientWidth</span>,</span><br><span class="line">            <span class="attr">height</span>: <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientHeight</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title class_">React</span>.<span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;resize&quot;</span>, resizeHandler);</span><br><span class="line">        <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">window</span>.<span class="title function_">removeEventListener</span>(<span class="string">&quot;resize&quot;</span>, resizeHandler);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+    </section>
+</article>
+
+
+
+<a id="pagenext" href="/2023/04/13/interview/interview-browsercore/" class="article-next" title="interview_browsercore.md"><i class="icon-arrow-right"></i></a>
+
+
+<a id="pageprev" href="/2023/05/03/interview/interview-redux/" class="article-prev" title="前端面试题背诵纯享版（Redux）"><i class="icon-arrow-left"></i></a>
+
+
+
+
+            </div>
+        </div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+    
+        
+<script src="/js/scrollspy.min.js"></script>
+
+        <script type="text/javascript">
+        $(document.body).scrollspy({target: '#aside-inner'});
+
+        $(window).on('resize', function() {
+            var hw = $('#header').width();
+            var ww = $('#wrapper').width();
+            var space = ($(this).width() - hw - ww) / 2 / 2;
+
+            var pageprev = $('#pageprev');
+            var pagenext = $('#pagenext');
+            var avg = (pageprev.width() + pagenext.width()) / 2
+
+            if(space > avg) {
+                var len = space - avg / 2;
+                var styles = {position: 'fixed', top: '50%', marginTop: - (pageprev.width() + pagenext.width()) / 4}
+                pageprev.css($.extend({left: hw + len}, styles));
+                pagenext.css($.extend({right: len}, styles));
+            } else {
+                pageprev.removeAttr('style');
+                pagenext.removeAttr('style');
+            }
+        }).trigger('resize');
+        </script>
+    
+
+</body>
+</html>

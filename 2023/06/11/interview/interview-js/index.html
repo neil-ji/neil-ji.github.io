@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>前端面试题背诵纯享版（JS） | Neil&#39;s Blog</title>
+    <meta name="author" content="Neil Ji" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Javascript数据类型（ES6）什么是原型链？ 定义的函数、类或对象会自动创建原型对象，并通过prototype和constructor互相指向对方，原型之间通过__proto__构成原型链，实例调用某个方法时，会沿原型链寻找该方法，直到找到指定方法，或遍历完整个原型链后抛出异常； 借助单链表理解：针对实例调用某方法的角度来讲，原型链可以看作一个链表，每个节点都是原型对象，以__proto__属性指向下一节点，头节点是实例本身，尾节点是Object.prototype； 不同情况下的__p" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="Neil&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">Neil&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://neil-ji.github.io"></form> -->
+
+        
+            
+                
+                    
+
+                        
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Javascript"><span class="toc-number">1.</span> <span class="toc-text">Javascript</span></a></li></ol>
+                                
+    </div>
+</aside>
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            前端面试题背诵纯享版（JS）
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="https://neil-ji.github.io/2023/06/11/interview/interview-js/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-06-11T08:31:09.512Z" itemprop="datePublished">2023-06-11</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h2><ol>
+<li>数据类型（ES6）</li>
+</ol>
+<span id="more"></span>
+
+<ol start="2">
+<li><p>什么是原型链？</p>
+<p> 定义的函数、类或对象会自动创建原型对象，并通过<code>prototype</code>和<code>constructor</code>互相指向对方，原型之间通过<code>__proto__</code>构成原型链，实例调用某个方法时，会沿原型链寻找该方法，直到找到指定方法，或遍历完整个原型链后抛出异常；</p>
+<p> 借助单链表理解：针对实例调用某方法的角度来讲，原型链可以看作一个链表，每个节点都是原型对象，以<code>__proto__</code>属性指向下一节点，头节点是实例本身，尾节点是<code>Object.prototype</code>；</p>
+<p> 不同情况下的<code>__proto__</code>如下：</p>
+<ul>
+<li>function函数，箭头函数，其<code>__proto__</code>一定是<code>Function.prototype</code>，包括<code>Function</code>；</li>
+<li>实例的<code>__proto__</code>一定是其构造函数的原型；</li>
+<li>原型的<code>__proto__</code>一定是<code>Object.prototype</code>；</li>
+</ul>
+<p> 举个例子，画出下列代码执行过程中的所有相关对象，如下：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Person</span> () &#123;&#125; <span class="comment">// or like this: class Person &#123;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img1.imgtp.com/2023/03/16/Ok7Qp0OO.png" alt="原型链.png">
+ </p>
+</li>
+<li><p>箭头函数与function函数</p>
+<p> “An ArrowFunction does not define local bindings for <code>arguments, super, this, or new.target</code>. “ —— <a target="_blank" rel="noopener" href="https://tc39.es/ecma262/multipage/ecmascript-language-functions-and-classes.html#sec-arrow-function-definitions">ECMAScript Language Specification</a></p>
+<ul>
+<li>没有new.target，不能通过new实例化，也没有super；</li>
+<li>没有prototype，不能通过Object.create(prototype)实例化（虽然可以将参数设为箭头函数本身，但无意义，相当于箭头函数做返回值的原型，返回值的父级原型是Function.prototype，而非Object.prototype，）；</li>
+<li>没有arguments；</li>
+<li>不能通过call、apply、bind改变this指向；</li>
+</ul>
+<p> 注：非箭头函数，其new.target指向函数原型的constructor；</p>
+</li>
+<li><p>什么是属性描述符（property descriptor）</p>
+<p> 属性描述符是属性的配置，分为：</p>
+<ul>
+<li>数据描述符（configurable、enumerable、value、writable）</li>
+<li>存取描述符（configurable、enumerable、set、get）</li>
+</ul>
+<p> configurable标识描述符是否可配置，即属性是否可以通过delete删除，描述符是否可修改，默认为false，即不可再次修改描述符，且不能删除属性；</p>
+<p> enumerable标识属性是否可枚举，默认为false；</p>
+<p> value标识属性值，默认为undefined；</p>
+<p> writable标识value是否可以修改，默认为false，即不可再次修改属性值；</p>
+<p> get&#x2F;set标识属性的getter&#x2F;setter函数，默认为undefined；</p>
+</li>
+<li><p>什么是闭包？</p>
+<p> 简单回答：读取其他函数内部变量的函数；</p>
+<p> 详细回答：从现象上看，对于一个返回函数的函数，其第一次执行后，内部定义的变量将只能被返回的函数访问，这就形成了一个闭包；</p>
+<p> 作用：</p>
+<ul>
+<li><p>闭包内的变量无法被外部访问，可以实现私有属性；</p>
+</li>
+<li><p>for循环内，闭包及变量提升导致的回调函数无法正确捕捉到自增变量：</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">        <span class="comment">// 修改前</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">            <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(i).<span class="property">onClick</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                <span class="title function_">alert</span>(i); <span class="comment">// 所有元素点击后都提示9</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 借助匿名自执行函数实现的双重闭包技巧修改后</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)&#123;</span><br><span class="line">            <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(i).<span class="property">onClick</span> = (<span class="keyword">function</span> (<span class="params">msg</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">                    <span class="title function_">alert</span>(msg); <span class="comment">// 正确显示各自id</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="string">``</span><span class="string">``</span></span><br><span class="line">    </span><br><span class="line">    注：闭包需要维护一个词法作用域，将带来额外的性能开销，谨慎使用；</span><br><span class="line"></span><br><span class="line"><span class="number">6.</span> <span class="variable constant_">JS</span>有几种数据类型？</span><br><span class="line">    </span><br><span class="line">    <span class="variable constant_">JS</span>是一种动态类型（变量可以动态赋予任意类型的值）、弱类型（不检查类型一致性，允许隐式类型转换）语言；</span><br><span class="line"></span><br><span class="line">    原始类型有七种：</span><br><span class="line"></span><br><span class="line">    <span class="number">1.</span> <span class="literal">null</span>，<span class="string">`typeof null`</span> 显示 <span class="string">`object`</span>；</span><br><span class="line">    <span class="number">2.</span> <span class="literal">undefined</span>；</span><br><span class="line">    <span class="number">3.</span> boolean；</span><br><span class="line">    <span class="number">4.</span> number（<span class="title class_">Infinity</span>, <span class="title class_">NaN</span>）；</span><br><span class="line">    <span class="number">5.</span> bigint；</span><br><span class="line">    <span class="number">6.</span> string；</span><br><span class="line">    <span class="number">7.</span> symbol；</span><br><span class="line"></span><br><span class="line">    引用类型有一种：</span><br><span class="line"></span><br><span class="line">    <span class="number">1.</span> object，<span class="string">`typeof function () &#123;&#125;`</span>、<span class="string">`typeof class Person &#123;&#125;`</span>结果都为<span class="string">`function`</span>，但函数实际上是object类型；</span><br><span class="line"></span><br><span class="line">    注：原始值就是语言底层的不可变值，共有七种类型，称为原始类型；</span><br><span class="line"></span><br><span class="line"><span class="number">7.</span> <span class="keyword">typeof</span>有几种结果</span><br><span class="line"></span><br><span class="line">    <span class="number">1.</span> <span class="string">`typeof null is object`</span></span><br><span class="line">    <span class="number">2.</span> <span class="string">`typeof undefined is undefined`</span></span><br><span class="line">    <span class="number">3.</span> <span class="string">`typeof boolean is boolean`</span></span><br><span class="line">    <span class="number">4.</span> <span class="string">`typeof number is number`</span></span><br><span class="line">    <span class="number">5.</span> <span class="string">`typeof bigint is bigint`</span></span><br><span class="line">    <span class="number">6.</span> <span class="string">`typeof string is string`</span></span><br><span class="line">    <span class="number">7.</span> <span class="string">`typeof symbol is symbol`</span></span><br><span class="line">    <span class="number">8.</span> <span class="string">`typeof function is function`</span></span><br><span class="line"></span><br><span class="line"><span class="number">8.</span> <span class="literal">null</span>和<span class="literal">undefined</span>的区别</span><br><span class="line"></span><br><span class="line">    - <span class="keyword">typeof</span> <span class="literal">null</span>结果为object，<span class="keyword">typeof</span> <span class="literal">undefined</span>结果为<span class="literal">undefined</span>；</span><br><span class="line">    - <span class="literal">null</span>是关键字，<span class="literal">undefined</span>不是；</span><br><span class="line">    - <span class="literal">null</span>表示空对象或空指针，<span class="literal">undefined</span>表示空值，用途不同：</span><br><span class="line">        - 原型链的终点是<span class="literal">null</span>；</span><br><span class="line">        - 未赋值的变量或属性隐式初始化为<span class="literal">undefined</span>，没有<span class="keyword">return</span>语句的函数隐式返回<span class="literal">undefined</span>；</span><br><span class="line"></span><br><span class="line"><span class="number">9.</span> <span class="keyword">instanceof</span>作用与模拟</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">instanceof</span> 用于判断右值是否在左值的原型链上；</span><br><span class="line"></span><br><span class="line"><span class="number">10.</span> <span class="keyword">for</span> <span class="keyword">in</span> 与 <span class="keyword">for</span> <span class="keyword">of</span></span><br><span class="line"></span><br><span class="line">    - <span class="keyword">for</span> <span class="keyword">in</span> 遍历键（一般用于对象），<span class="keyword">for</span> <span class="keyword">of</span> 遍历值（一般用于数组）；</span><br><span class="line">    - <span class="keyword">for</span> <span class="keyword">of</span> 本质是遍历iterator，被遍历的目标必须实现<span class="string">`Symbol.iterator`</span>方法，<span class="keyword">for</span> <span class="keyword">in</span> 则不必；</span><br><span class="line">    - <span class="keyword">for</span> <span class="keyword">in</span> 遍历自身及原型链上的可枚举属性名，顺序无法保证，<span class="keyword">for</span> <span class="keyword">of</span> 循环调用iterator，顺序由iterator的实现决定；</span><br><span class="line"></span><br><span class="line"><span class="number">11.</span> <span class="title class_">Promise</span>用途与机制</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Promise</span>用于解决<span class="title class_">ES5</span>中的回调地狱问题，将层级嵌套结构改为链式结构，以提高代码可读性，降低维护成本；</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Promise</span>本质上是采用观察者模式，通过then收集回调函数，监听的是<span class="title class_">Promise</span>实例化时传入的executor函数，executor在<span class="title class_">Promise</span>实例化时执行，并且会获得两个参数resolve和reject，通过执行resolve/reject来触发then收集的回调函数；</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Promise</span>具有三种状态：pending，fulfilled，rejected；按照规范，只能由pending向fulfilled或rejected转化；</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Promise</span>能够链式调用是由于then方法会返回一个新的<span class="title class_">Promise</span>实例；</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Promise</span>.<span class="title function_">all</span>(iterable)在iterable全部fulfill或其中一个reject时，返回一个fulfilled或rejected <span class="title class_">Promise</span>；</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Promise</span>.<span class="title function_">any</span>(iterable)，任意一个fulfill或全部reject时，返回fulfilled或rejected <span class="title class_">Promise</span>；</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Promise</span>.<span class="title function_">race</span>(iterable)，第一个fulfill或reject时，返回fulfilled或rejected <span class="title class_">Promise</span>；</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(value)，返回fulfilled <span class="title class_">Promise</span>；</span><br><span class="line">    </span><br><span class="line">    <span class="title class_">Promise</span>.<span class="title function_">reject</span>(error)，返回rejected <span class="title class_">Promise</span>；</span><br><span class="line"></span><br><span class="line">    注：iterable是指可迭代对象，如数组；</span><br><span class="line"></span><br><span class="line"><span class="number">12.</span> <span class="title class_">Generator</span> <span class="title class_">Function</span>用途和机制</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Generator</span> <span class="title class_">Function</span>用<span class="keyword">function</span>*创建，执行后返回一个<span class="title class_">Iterator</span>，<span class="title class_">Iterator</span>的next方法用于执行被<span class="keyword">yield</span>分割的函数体的代码，并返回一个对象，该对象的value属性就是<span class="keyword">yield</span>右侧的值，done标识迭代是否完成；</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Generator</span> <span class="title class_">Function</span>常见于执行异步操作，<span class="keyword">yield</span>交出控制权，next交还控制权，并且next接受的参数会作为<span class="keyword">yield</span>表达式的值，这都是执行异步操作的关键点；</span><br><span class="line"></span><br><span class="line">    因为需要把next方法传递给异步操作，以便完成后调用next交还控制权，异步操作的流程控制不太方便，代码也不直观；</span><br><span class="line"></span><br><span class="line">    <span class="keyword">yield</span>*用于<span class="title class_">Generator</span> <span class="title class_">Function</span>内调用<span class="title class_">Generator</span> <span class="title class_">Function</span></span><br><span class="line"></span><br><span class="line">    <span class="string">``</span><span class="string">`js</span></span><br><span class="line"><span class="string">    function* a() &#123;</span></span><br><span class="line"><span class="string">        yield 3;</span></span><br><span class="line"><span class="string">        yield 4;</span></span><br><span class="line"><span class="string">    &#125;;</span></span><br><span class="line"><span class="string">    function* b() &#123;</span></span><br><span class="line"><span class="string">        yield 1;</span></span><br><span class="line"><span class="string">        yield 2;</span></span><br><span class="line"><span class="string">        yield* a();</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    // b 等同于 c</span></span><br><span class="line"><span class="string">    function* c() &#123;</span></span><br><span class="line"><span class="string">        yield 1;</span></span><br><span class="line"><span class="string">        yield 2;</span></span><br><span class="line"><span class="string">        yield 3;</span></span><br><span class="line"><span class="string">        yield 4;   </span></span><br><span class="line"><span class="string">    &#125;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>Async Function用途和机制</p>
+<p>Async Function可以视为Generator函数与Promise的语法糖，内置实现了Generator的自动执行，并将Generator的最终执行结果封装进Promise，下一步处理更方便；</p>
+<p>await可以看作yield的语法糖；</p>
+<p>Async Function与Generator Function、Promise的关系可以从伪造的代码中理解：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">boo</span> () &#123;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">         <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">             <span class="title function_">resolve</span>(<span class="number">11111</span>);</span><br><span class="line">         &#125;, <span class="number">3000</span>);</span><br><span class="line">     &#125;)</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">foo</span> () &#123;</span><br><span class="line">     <span class="keyword">const</span> a = <span class="keyword">await</span> <span class="title function_">boo</span>();</span><br><span class="line">     <span class="keyword">return</span> a;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="title function_">foo</span>().<span class="title function_">then</span>(<span class="function">(<span class="params">v</span>)=&gt;</span><span class="variable language_">console</span>.<span class="title function_">log</span>(v));<span class="comment">// 11111</span></span><br></pre></td></tr></table></figure>
+
+<p>相当于</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">boo</span> () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            <span class="title function_">resolve</span>(<span class="number">11111</span>);</span><br><span class="line">        &#125;, <span class="number">3000</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span> () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 此处相当于Async Function的函数体</span></span><br><span class="line">        <span class="keyword">function</span>* <span class="title function_">_foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">const</span> a = <span class="keyword">yield</span> boo;</span><br><span class="line">            <span class="keyword">return</span> a;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 自动执行Generator</span></span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">run</span> (genFunc) &#123;</span><br><span class="line">            <span class="keyword">const</span> gen = <span class="title function_">genFunc</span>();</span><br><span class="line">            <span class="keyword">function</span> <span class="title function_">next</span> (data)&#123;</span><br><span class="line">                <span class="keyword">const</span> result = gen.<span class="title function_">next</span>(data);</span><br><span class="line">                <span class="keyword">if</span> (result.<span class="property">done</span>) &#123;</span><br><span class="line">                    <span class="title function_">resolve</span>(result.<span class="property">value</span>);</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 注意这里！封装了then</span></span><br><span class="line">                result.<span class="title function_">value</span>().<span class="title function_">then</span>(next);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="title function_">next</span>();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">run</span>(_foo);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">foo</span>().<span class="title function_">then</span>(<span class="function">(<span class="params">v</span>)=&gt;</span><span class="variable language_">console</span>.<span class="title function_">log</span>(v));<span class="comment">// 11111</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ES6新特性汇总</p>
+<ol>
+<li>const，let</li>
+<li>解构赋值</li>
+<li>模板字符串</li>
+<li>参数默认值，剩余参数</li>
+<li>Arrow Function</li>
+<li>Generator Function</li>
+<li>Async Function</li>
+<li>新增数组方法：entries，keys，values，includes，from，find，findIndex等</li>
+<li>新增Object方法：assign，keys，values，entries等</li>
+<li>表达式定义的属性名</li>
+<li>Symbol</li>
+<li>Set，Map，WeakSet，WeakMap</li>
+<li>Promise</li>
+<li>Iterator</li>
+</ol>
+</li>
+<li><p>Iterator用途和机制</p>
+<p>Iterator就是符合迭代器协议（Iterator protocol）的对象，实现了如下方法（必须实现next）：</p>
+<ul>
+<li>next：用于遍历Iterator的一系列值，返回一个具有value和done属性的对象；</li>
+<li>return：结束迭代；</li>
+<li>throw：结束迭代并返回一个Error实例；</li>
+</ul>
+</li>
+<li><p>Symbol.Iterator用途和机制</p>
+<p>Symbol.Iterator就是可迭代对象必须实现的一个Symbol类型的方法名，实现该方法的对象可以：</p>
+<ul>
+<li>通过for…of遍历；</li>
+<li>解构赋值；</li>
+<li>通过Array.from(iterable)转化为数组；</li>
+<li>初始化Set，Map；</li>
+<li>作为Promise.all，Promise.race的参数；</li>
+<li>通过yield*把值导入到Generator Function；</li>
+</ul>
+<p>该方法名标识的方法要符合可迭代协议（Iterable protocol），该方法返回一个Iterator；</p>
+<p>显然，可以通过Generator Function实现该方法，因为Generator Function会返回一个Iterator；</p>
+</li>
+<li><p>WeakSet和WeakMap</p>
+<p>键只能存非空对象，且键与对象地址是一种弱引用关系，GC机制不关注弱引用，所以在没有强引用（如通过变量指向一个对象地址）存在的情况下，弱引用的对象将被回收；</p>
+<p>典型场景：保存Dom节点，被删除的节点会被GC正常回收，避免强引用导致内存泄漏；</p>
+</li>
+<li></li>
+</ol>
+
+        
+    </section>
+</article>
+
+
+
+<a id="pagenext" href="/2023/06/11/interview/interview-html/" class="article-next" title="前端面试题背诵纯享版（HTML）"><i class="icon-arrow-right"></i></a>
+
+
+<a id="pageprev" href="/2023/06/11/interview/interview-jsmock/" class="article-prev" title="前端面试题背诵纯享版（JS手写题）"><i class="icon-arrow-left"></i></a>
+
+
+
+
+            </div>
+        </div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+    
+        
+<script src="/js/scrollspy.min.js"></script>
+
+        <script type="text/javascript">
+        $(document.body).scrollspy({target: '#aside-inner'});
+
+        $(window).on('resize', function() {
+            var hw = $('#header').width();
+            var ww = $('#wrapper').width();
+            var space = ($(this).width() - hw - ww) / 2 / 2;
+
+            var pageprev = $('#pageprev');
+            var pagenext = $('#pagenext');
+            var avg = (pageprev.width() + pagenext.width()) / 2
+
+            if(space > avg) {
+                var len = space - avg / 2;
+                var styles = {position: 'fixed', top: '50%', marginTop: - (pageprev.width() + pagenext.width()) / 4}
+                pageprev.css($.extend({left: hw + len}, styles));
+                pagenext.css($.extend({right: len}, styles));
+            } else {
+                pageprev.removeAttr('style');
+                pagenext.removeAttr('style');
+            }
+        }).trigger('resize');
+        </script>
+    
+
+</body>
+</html>
