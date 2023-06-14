@@ -7,7 +7,7 @@
 
     
 
-    <title>前端面试题背诵纯享版（React） | Neil&#39;s Blog</title>
+    <title>前端进阶（React） | Neil&#39;s Blog</title>
     <meta name="author" content="Neil Ji" />
     <meta name="keywords" content="" />
     <meta name="description" content="React简单题ClassComponent生命周期Hooks如何模拟ClassComponent生命周期useEffect VS useLayoutEffectuseReducer VS useStatesetState是同步还是异步执行HOC在React中的作用受控组件 VS 非受控组件展示组件 VS 容器组件Props VS StateclassName VS style如何捕获ReactApp的错误及实现错误出现后的Fallback如何实现Panel（或抽屉，面板）组件（Portal）虚" />
@@ -95,7 +95,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            前端面试题背诵纯享版（React）
+            前端进阶（React）
         </h1>
         
         <div class="article-meta clearfix">
@@ -109,7 +109,7 @@
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -117,8 +117,13 @@
     </header>
     
     <section class="article-body markdown-body">
-        
-        <h2 id="React简单题"><a href="#React简单题" class="headerlink" title="React简单题"></a>React简单题</h2><ul>
+        <div>
+            
+            
+                
+            
+            
+                <h2 id="React简单题"><a href="#React简单题" class="headerlink" title="React简单题"></a>React简单题</h2><ul>
 <li>ClassComponent生命周期</li>
 <li>Hooks如何模拟ClassComponent生命周期</li>
 <li>useEffect VS useLayoutEffect</li>
@@ -203,16 +208,17 @@
 </ol>
 <h2 id="自定义Hook"><a href="#自定义Hook" class="headerlink" title="自定义Hook"></a>自定义Hook</h2><p>获取窗口尺寸</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">useWindowSize</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [size, setSize] = <span class="title class_">React</span>.<span class="title function_">useState</span>(&#123;</span><br><span class="line">        <span class="attr">width</span>: <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientWidth</span>,</span><br><span class="line">        <span class="attr">height</span>: <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientHeight</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">resizeHandler</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">        <span class="title function_">setSize</span>(&#123;</span><br><span class="line">            <span class="attr">width</span>: <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientWidth</span>,</span><br><span class="line">            <span class="attr">height</span>: <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientHeight</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title class_">React</span>.<span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;resize&quot;</span>, resizeHandler);</span><br><span class="line">        <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">window</span>.<span class="title function_">removeEventListener</span>(<span class="string">&quot;resize&quot;</span>, resizeHandler);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
+                </div>
+            
     </section>
 </article>
 
 
 
-<a id="pagenext" href="/2023/04/13/interview/interview-browsercore/" class="article-next" title="interview_browsercore.md"><i class="icon-arrow-right"></i></a>
+<a id="pagenext" href="/2023/04/13/interview/interview-browsercore/" class="article-next" title="前端进阶（浏览器内核）"><i class="icon-arrow-right"></i></a>
 
 
-<a id="pageprev" href="/2023/05/03/interview/interview-redux/" class="article-prev" title="前端面试题背诵纯享版（Redux）"><i class="icon-arrow-left"></i></a>
+<a id="pageprev" href="/2023/05/03/interview/interview-redux/" class="article-prev" title="前端进阶（Redux）"><i class="icon-arrow-left"></i></a>
 
 
 

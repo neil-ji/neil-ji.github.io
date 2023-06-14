@@ -7,7 +7,7 @@
 
     
 
-    <title>前端面试题背诵纯享版（react-router） | Neil&#39;s Blog</title>
+    <title>前端进阶（react-router） | Neil&#39;s Blog</title>
     <meta name="author" content="Neil Ji" />
     <meta name="keywords" content="" />
     <meta name="description" content="客户端路由（CSR）原理传统浏览器导航行为就是URL改变时直接向服务器发送请求，服务器响应对应资源，而客户端路由就是URL改变时不再发送请求，而是由客户端部署的App自行匹配URL并展示对应内容。remix&amp;#x2F;history (v5.3)是react-router实现CSR的核心库，其中CSR分为两种：URL HashBrowser History编码式导航：二者都是通过history.pushState&amp;#x2F;replaceState改变URL而不触发请求，只不过Hash路由中传递" />
@@ -95,7 +95,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            前端面试题背诵纯享版（react-router）
+            前端进阶（react-router）
         </h1>
         
         <div class="article-meta clearfix">
@@ -109,7 +109,7 @@
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -117,8 +117,13 @@
     </header>
     
     <section class="article-body markdown-body">
-        
-        <h2 id="客户端路由（CSR）原理"><a href="#客户端路由（CSR）原理" class="headerlink" title="客户端路由（CSR）原理"></a>客户端路由（CSR）原理</h2><p>传统浏览器导航行为就是URL改变时直接向服务器发送请求，服务器响应对应资源，而客户端路由就是URL改变时不再发送请求，而是由客户端部署的App自行匹配URL并展示对应内容。</p>
+        <div>
+            
+            
+                
+            
+            
+                <h2 id="客户端路由（CSR）原理"><a href="#客户端路由（CSR）原理" class="headerlink" title="客户端路由（CSR）原理"></a>客户端路由（CSR）原理</h2><p>传统浏览器导航行为就是URL改变时直接向服务器发送请求，服务器响应对应资源，而客户端路由就是URL改变时不再发送请求，而是由客户端部署的App自行匹配URL并展示对应内容。</p>
 <p>remix&#x2F;history (v5.3)是react-router实现CSR的核心库，其中CSR分为两种：</p>
 <ol>
 <li>URL Hash</li>
@@ -133,16 +138,17 @@
 <p>react-router v6新增<code>&lt;RouterProvider&gt;</code>组件，该组件订阅了URL的改变，URL改变时更新react state，触发app的重新渲染；</p>
 <h2 id="react-router-v5路由嵌套原理"><a href="#react-router-v5路由嵌套原理" class="headerlink" title="react-router v5路由嵌套原理"></a>react-router v5路由嵌套原理</h2><p><code>Route</code>是对<code>RouterContext.Consumer</code>与<code>RouterContext.Provider</code>的封装，该组件会获取最近的<code>RouterContext.Provider</code>的context value，并创建新的<code>RouterContext.Provider</code>，以便子路由获取其context value，这就实现了路由嵌套。</p>
 
-        
+                </div>
+            
     </section>
 </article>
 
 
 
-<a id="pagenext" href="/2023/05/19/interview/interview-mobx/" class="article-next" title="前端面试题背诵纯享版（Mobx）"><i class="icon-arrow-right"></i></a>
+<a id="pagenext" href="/2023/05/19/interview/interview-mobx/" class="article-next" title="前端进阶（Mobx）"><i class="icon-arrow-right"></i></a>
 
 
-<a id="pageprev" href="/2023/05/31/interview/interview-reactcode/" class="article-prev" title="前端面试题背诵纯享版（React源码）"><i class="icon-arrow-left"></i></a>
+<a id="pageprev" href="/2023/05/31/interview/interview-reactcode/" class="article-prev" title="前端进阶（React源码）"><i class="icon-arrow-left"></i></a>
 
 
 

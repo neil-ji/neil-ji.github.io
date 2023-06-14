@@ -7,7 +7,7 @@
 
     
 
-    <title>前端面试题背诵纯享版（React源码） | Neil&#39;s Blog</title>
+    <title>前端进阶（React源码） | Neil&#39;s Blog</title>
     <meta name="author" content="Neil Ji" />
     <meta name="keywords" content="" />
     <meta name="description" content="useState机制每个组件会维护一个state对数组，每次调用useState就向数组中添加一个state对，state对由state和setState函数组成，setState中维持对state对的引用，每个setState只能更新对应的state；当组件挂载时，useState会创建state对，并将其加入state对数组，索引递增，指向下一个位置；当组件更新时，索引置为0，再次调用useState只会移动state对数组的索引，并返回已经创建好的state对，因此，如果在if分支语句中使" />
@@ -95,7 +95,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            前端面试题背诵纯享版（React源码）
+            前端进阶（React源码）
         </h1>
         
         <div class="article-meta clearfix">
@@ -109,7 +109,7 @@
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -117,8 +117,13 @@
     </header>
     
     <section class="article-body markdown-body">
-        
-        <h2 id="useState机制"><a href="#useState机制" class="headerlink" title="useState机制"></a>useState机制</h2><p>每个组件会维护一个<code>state对</code>数组，每次调用useState就向数组中添加一个<code>state对</code>，<code>state对</code>由state和setState函数组成，setState中维持对<code>state对</code>的引用，每个setState只能更新对应的state；</p>
+        <div>
+            
+            
+                
+            
+            
+                <h2 id="useState机制"><a href="#useState机制" class="headerlink" title="useState机制"></a>useState机制</h2><p>每个组件会维护一个<code>state对</code>数组，每次调用useState就向数组中添加一个<code>state对</code>，<code>state对</code>由state和setState函数组成，setState中维持对<code>state对</code>的引用，每个setState只能更新对应的state；</p>
 <p>当组件挂载时，useState会创建<code>state对</code>，并将其加入<code>state对</code>数组，索引递增，指向下一个位置；</p>
 <p>当组件更新时，索引置为0，再次调用useState只会移动<code>state对</code>数组的索引，并返回已经创建好的<code>state对</code>，因此，如果在if分支语句中使用useState，将可能导致useState返回错误的<code>state对</code>；</p>
 <p>当调用<code>state对</code>的setState时，setState更新对应state的值，并调用React内部API，更新组件；</p>
@@ -126,13 +131,14 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> firstRender = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (firstRender) &#123;</span><br><span class="line">        <span class="keyword">const</span> [name, setName] = <span class="title class_">React</span>.<span class="title function_">useState</span>(<span class="string">&quot;Neil&quot;</span>);</span><br><span class="line">        firstRender = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> [gender， setGender] = <span class="title class_">React</span>.<span class="title function_">useState</span>(<span class="string">&quot;Male);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">// 首次挂载， 两次useState调用，state对 数组 like this</span></span><br><span class="line"><span class="string">[</span></span><br><span class="line"><span class="string">    [&quot;</span><span class="title class_">Neil</span><span class="string">&quot;, setName],</span></span><br><span class="line"><span class="string">    [&quot;</span><span class="title class_">Male</span><span class="string">&quot;, setGender]</span></span><br><span class="line"><span class="string">]</span></span><br><span class="line"><span class="string">// 组件更新，state对数组不变，但由于只有一次useState调用，索引初始为0，React.useState(&quot;</span><span class="title class_">Male</span><span class="string">&quot;)得到的state对是[&quot;</span><span class="title class_">Neil</span><span class="string">&quot;, setName]</span></span><br><span class="line"><span class="string">// 这就会导致setGender实际上修改的是name的值</span></span><br></pre></td></tr></table></figure>
 
 
-        
+                </div>
+            
     </section>
 </article>
 
 
 
-<a id="pagenext" href="/2023/05/28/interview/interview-reactrouter/" class="article-next" title="前端面试题背诵纯享版（react-router）"><i class="icon-arrow-right"></i></a>
+<a id="pagenext" href="/2023/05/28/interview/interview-reactrouter/" class="article-next" title="前端进阶（react-router）"><i class="icon-arrow-right"></i></a>
 
 
 <a id="pageprev" href="/2023/05/31/react/react16-8code-md/" class="article-prev" title="React16.8源码"><i class="icon-arrow-left"></i></a>

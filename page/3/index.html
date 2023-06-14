@@ -132,7 +132,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/05/03/interview/interview-redux/">前端面试题背诵纯享版（Redux）</a>
+            <a href="/2023/05/03/interview/interview-redux/">前端进阶（Redux）</a>
         </h1>
         
         <div class="article-meta clearfix">
@@ -146,7 +146,7 @@
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -154,95 +154,47 @@
     </header>
     
     <section class="article-body markdown-body">
-        
-        <h2 id="Redux简介"><a href="#Redux简介" class="headerlink" title="Redux简介"></a>Redux简介</h2><p>Redux是一个集中存储和管理全局状态的库，通过reducer纯函数来定义怎样更新state，然后通过dispatch action更新state，state每次更新都要返回一个新对象，也就是说state是不可变的。</p>
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="Redux简介"><a href="#Redux简介" class="headerlink" title="Redux简介"></a>Redux简介</h2><p>Redux是一个集中存储和管理全局状态的库，通过reducer纯函数来定义怎样更新state，然后通过dispatch action更新state，state每次更新都要返回一个新对象，也就是说state是不可变的。</p>
 <p>基于reducer纯函数和不可变state，redux应用可以实现时间旅行式的调试；</p>
 <p>特点：</p>
 <ul>
 <li>单一数据源store；</li>
-<li>纯函数reducer；</li>
-<li>不可变state；</li>
-</ul>
-<h2 id="标准（传统、Legacy）Redux"><a href="#标准（传统、Legacy）Redux" class="headerlink" title="标准（传统、Legacy）Redux"></a>标准（传统、Legacy）Redux</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.1 定义action</span></span><br><span class="line">enum <span class="title class_">ActionType</span> &#123;</span><br><span class="line">    <span class="variable constant_">INCREASE</span>,</span><br><span class="line">    <span class="variable constant_">DECREASE</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">increase</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="title class_">ActionType</span>.<span class="property">INCREASE</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">decrease</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="title class_">ActionType</span>.<span class="property">DECREASE</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.2 定义reducers</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reducer1</span> = (<span class="params">state, action</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (action.<span class="property">type</span> === <span class="title class_">ActionType</span>.<span class="property">INCREASE</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123; ...state, <span class="attr">count</span>: state.<span class="property">count</span> + <span class="number">1</span> &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (action.<span class="property">type</span> === <span class="title class_">ActionType</span>.<span class="property">DECREASE</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123; ...state, <span class="attr">count</span>: state.<span class="property">count</span> - <span class="number">1</span> &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> state;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reducer2</span> = (<span class="params">state, action</span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">//....</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> reducers = <span class="title function_">combineReducer</span>(&#123; <span class="attr">counter</span>: reducer1, <span class="attr">others</span>: reducer2 &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 创建store</span></span><br><span class="line"><span class="keyword">const</span> initialState = &#123; </span><br><span class="line">    <span class="attr">counter</span>: &#123;</span><br><span class="line">        <span class="attr">count</span>: <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">others</span>: &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> enhancer = <span class="title function_">compose</span>(</span><br><span class="line">    <span class="title function_">applyMiddleware</span>(thunk, logger),</span><br><span class="line">    <span class="title class_">DevTools</span>.<span class="title function_">instrument</span>()</span><br><span class="line">);</span><br><span class="line"><span class="keyword">const</span> store = <span class="title function_">createStore</span>(reducers, initialState, enhancer);</span><br><span class="line"></span><br><span class="line"><span class="comment">// React组件</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">ReactComponent</span> () &#123;</span><br><span class="line">    <span class="keyword">const</span> [num, setNum] = <span class="title class_">React</span>.<span class="title function_">useState</span>(state.<span class="title function_">getState</span>().<span class="property">counter</span>.<span class="property">count</span>);</span><br><span class="line"></span><br><span class="line">     <span class="keyword">const</span> <span class="title function_">handleClickEvent</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">        <span class="comment">// 4. dispatch action</span></span><br><span class="line">        store.<span class="title function_">dispatch</span>(<span class="title function_">increase</span>());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title class_">React</span>.<span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 3. 订阅更新</span></span><br><span class="line">        <span class="keyword">const</span> unsubscribe = store.<span class="title function_">subscribe</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 5. 更新React state</span></span><br><span class="line">            <span class="title function_">setNum</span>(store.<span class="title function_">getState</span>().<span class="property">count</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="comment">// 6. 组件卸载时，解除订阅</span></span><br><span class="line">        <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">unsubscribe</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, [store]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123; num &#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;handleClickEvent&#125;</span>&gt;</span>+ 1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="异步Action解决方案：redux-thunk，redux-promise"><a href="#异步Action解决方案：redux-thunk，redux-promise" class="headerlink" title="异步Action解决方案：redux-thunk，redux-promise"></a>异步Action解决方案：redux-thunk，redux-promise</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// redux-thunk</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">thunkActionCreator</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">thunkAction</span> (dispatch, getState) &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">dispatch</span>(someAction);</span><br><span class="line">        &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">dispatch</span>(<span class="title function_">thunkActionCreator</span>());</span><br><span class="line"><span class="comment">// dispatch会调用redux-thunk注入的逻辑：执行thunk函数，传入dispatch和getState，返回执行结果</span></span><br><span class="line"><span class="comment">// 所以dispatch(thunk)的执行结果就是thunk()的执行结果</span></span><br><span class="line"><span class="comment">// 进一步地，thunk如果返回一个Promise（或任何其他值），就可以链式调用Promise的一系列方法，或者通过async function编写流程化的action</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 例如</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">fetchBlogs</span> = (<span class="params">uid</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">async</span> (dispatch, getState) =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> userInfo = <span class="keyword">await</span> <span class="title function_">fetchUserInfo</span>(uid);</span><br><span class="line">        <span class="comment">// 用户详细数据还未加载，则加载进redux store</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="title function_">getState</span>().<span class="property">userInfo</span>) &#123;</span><br><span class="line">            <span class="title function_">dispatch</span>(&#123; <span class="attr">type</span>: <span class="string">&quot;USER_INFO&quot;</span>, <span class="attr">payload</span>: userInfo &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> blogs = <span class="keyword">await</span> <span class="title function_">fetchBlogsByUserInfo</span>(userInfo);</span><br><span class="line">        <span class="title function_">dispatch</span>(&#123; <span class="attr">type</span>: <span class="string">&quot;BLOGS_LISt&quot;</span>, <span class="attr">payload</span>: blogs &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// redux-promise</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// FSA，Flux Standard Action，只包含以下属性: type (required), payload, error, meta</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 第一种写法，Promise</span></span><br><span class="line"><span class="comment">// redux-promise通过then取得resolved value of Promise，然后dispatch resolved value of Promise</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">asyncActionCreator1</span> = (<span class="params"></span>) =&gt; <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">resolve</span>(&#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&quot;PROMISE&quot;</span>,</span><br><span class="line">            <span class="attr">value</span>: <span class="number">11111</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 2. 第二种，FSA</span></span><br><span class="line"><span class="comment">// 外层payload初始化时就会执行executor，然后redux-promise通过promise.then取得resolved value of Promise，然后dispatch一个对象&#123;...action, payload: resolved value of Promise&#125;</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">asyncActionCreator2</span> = (<span class="params"></span>) =&gt; (&#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&quot;FSA&quot;</span>,</span><br><span class="line">    <span class="attr">payload</span>: <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">resolve</span>(<span class="number">22222</span>);</span><br><span class="line">        &#125;, <span class="number">1000</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// reducer略有不同</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">reducer</span> = (<span class="params">state, action</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">switch</span> (action.<span class="property">type</span>) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;PROMISE&quot;</span>: <span class="keyword">return</span> &#123; ...state, <span class="attr">value</span>: action.<span class="property">value</span> &#125;;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&quot;FSA&quot;</span>: <span class="keyword">return</span> &#123; ...state, <span class="attr">value</span>: action.<span class="property">payload</span> &#125;;</span><br><span class="line">        <span class="attr">default</span>: <span class="keyword">return</span> state;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">dispatch</span>(<span class="title function_">asyncActionCreator1</span>());</span><br><span class="line"><span class="title function_">dispatch</span>(<span class="title function_">asyncActionCreator2</span>());</span><br></pre></td></tr></table></figure>
-
-<h2 id="简化react组件订阅redux-store的过程-——-react-redux"><a href="#简化react组件订阅redux-store的过程-——-react-redux" class="headerlink" title="简化react组件订阅redux store的过程 —— react-redux"></a>简化react组件订阅redux store的过程 —— react-redux</h2><p>Hooks：</p>
-<ul>
-<li>useSelector，构建redux state选择器，并订阅redux state的更新</li>
-<li>useDispatch，获取dispatch函数，用于分发action</li>
-<li>useStore，获取redux store实例</li>
-</ul>
-<p>Components：</p>
-<ul>
-<li>Provider，其实就是react内置组件Context.Provider</li>
-<li>connect(mapStateToProps?, mapDispatchToProps?, mergeProps?, options?)，是一个HOC组件，用于向react组件内注入redux state和dispatch函数，使组件订阅redux state的更新<ul>
-<li>mapStateToProps(state, ownProps?)，用于将redux state注入组件的props中，并使组件订阅redux state的更新，可以访问到ownProps（具体含义见下文<strong>细节</strong>）</li>
-<li>mapDispatchToProps<ul>
-<li>mapDispatchToProps(dispatch, ownProps?)用于将dispatch封装为各种action的派发函数，并注入connected component，同样可以访问到ownProps</li>
-<li>mapDispatchToPropsObj，作用相同，但是一个action creators构成的对象，这个对象会传递给bindActionCreators，将结果注入connected component，该形式更为简便，<strong>redux推荐使用该形式注入action派发函数</strong></li>
-</ul>
-</li>
-<li>mergeProps(stateProps，dispatchProps，ownProps)用于合并stateProps、dispatchProps和ownProps，默认返回<code>&#123; ...ownProps, ...stateProps, ...dispatchProps &#125;</code></li>
-<li>options<ul>
-<li>context，<strong>只有v6可用</strong>，用户可提供自定义的context</li>
-<li>areStatesEqual，默认为严格比较（&#x3D;&#x3D;&#x3D;），决定是否重新执行mapStateToProps；</li>
-<li>areOwnPropsEqual，默认为浅比较，决定ownProps前后是否一致</li>
-<li>areStatePropsEqual，默认为浅比较，决定stateProps前后是否一致</li>
-<li>areMergedPropsEqual，默认为浅比较，决定mergeProps前后是否一致</li>
-<li>forwardRef，<strong>只有v6可用</strong>，设为true，则connect执行后得到的HOC将ref转发到connected components</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>Utils：</p>
-<ul>
-<li>bindActionCreators()，第一个参数为action creator或action creators构成的对象，第二个参数为dispatch，对于单个action creator会返回一个绑定dispatch后的匿名函数，对于action creators对象会返回一个具有同样key的对象，其value是绑定dispatch后的函数；</li>
-<li>batch()，本质是react的unstable_batchedUpdates，将多次dispatch合并进一次组件渲染中，react18默认启用batched updates特性，所以不必使用该api；</li>
-</ul>
-<p>性能优化：</p>
-<ul>
-<li>通过selector缓存数据提取函数；</li>
-<li>mapStateToProps应当是纯函数，应该是同步执行的，尽量避免耗时操作或只在输入改变时执行耗时操作，只在必要时返回一个新的引用；</li>
-</ul>
-<p><strong>细节</strong>：</p>
-<ul>
-<li>ownProps即传递给connected component的props；</li>
-<li>对于mapStateToProps，state或ownProps发生改变会导致mapStateToProps的重新调用；</li>
-<li>connect实现了一个浅比较的shouldComponentUpdate，当stateProps或ownProps的引用改变或字段改变，会触发重渲染；</li>
-<li>若mapStateToProps未定义，则connected component不会订阅redux state的更新；</li>
-<li>若mapDispatchToProps未定义，connected component的props会接收到dispatch；若定义了，则不会传入dispatch；</li>
-</ul>
-<p><strong>重点</strong>：</p>
-<p>现代化的react-redux不推荐通过connect集成react与redux store，取而代之的是直接在函数组件中使用useSelector、useDispatch</p>
-<p>原理：</p>
-<ol>
-<li>数据传递</li>
-</ol>
-<p>Provider在顶层提供一个Context.Provider，并将store以context value形式提供给下层组件，connect从context中取到store，并对mapStateToProps、mapDispatchToProps、mergeProps进行一系列计算，将计算得到的props注入被connect的组件</p>
-<ol start="2">
-<li>组件更新</li>
-</ol>
-<p>7.0版本是通过connect执行后得到HOC，HOC内订阅store更新，并通过useReducer更新子组件；<br>8.0版本更新组件的方式改为使用useSyncExternalStore，通过redux store的subscribe订阅store的更新，dispatch action之后store发生变化，执行react通过subscribe注册进来的listener，然后react触发一次同步更新（其实之后在render和commit阶段还会进行store一致性检查，一旦此时store改变，就再触发一次同步更新）</p>
-<h2 id="现代Redux-——-Redux-Toolkit（RTK）"><a href="#现代Redux-——-Redux-Toolkit（RTK）" class="headerlink" title="现代Redux —— Redux Toolkit（RTK）"></a>现代Redux —— Redux Toolkit（RTK）</h2><p>API：</p>
-<ul>
-<li>configureStore，创建、初始化store，内置了redux-thunk等middleware</li>
-<li>createSlice，定义局部的reducer，自动生成action creator</li>
-<li>createAsyncThunk，创建thunk action creator</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// store.js</span></span><br><span class="line"><span class="keyword">const</span> store = <span class="title function_">configureStore</span>(&#123;</span><br><span class="line">    <span class="attr">user</span>: userSlice.<span class="property">reducer</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// userSlice.js</span></span><br><span class="line"><span class="keyword">const</span> name = <span class="string">&quot;user&quot;</span></span><br><span class="line"><span class="keyword">const</span> userSlice = <span class="title function_">createSlice</span>(&#123;</span><br><span class="line">    name,</span><br><span class="line">    <span class="attr">initialState</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;暂未登录&quot;</span></span><br><span class="line">        <span class="attr">uid</span>: <span class="literal">undefined</span>,</span><br><span class="line">        <span class="attr">status</span>: <span class="string">&quot;idle&quot;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">reducers</span>: &#123;</span><br><span class="line">        <span class="attr">resetUserInfo</span>: <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 一般处理thunk action的回调dispatch的action</span></span><br><span class="line">    <span class="attr">extraReducers</span>: <span class="function">(<span class="params">builder</span>) =&gt;</span> &#123;</span><br><span class="line">        builder</span><br><span class="line">            .<span class="title function_">addCase</span>(login.<span class="property">pending</span>, <span class="function">(<span class="params">state</span>) =&gt;</span> &#123;</span><br><span class="line">                state.<span class="property">status</span> = <span class="string">&quot;pending&quot;</span>;</span><br><span class="line">            &#125;)</span><br><span class="line">            .<span class="title function_">addCase</span>(login.<span class="property">fulfilled</span>, <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">                state.<span class="property">status</span> = <span class="string">&quot;fulfilled&quot;</span>;</span><br><span class="line">                state = &#123;...state, ...action.<span class="property">payload</span>&#125;;</span><br><span class="line">            &#125;)</span><br><span class="line">            .<span class="title function_">addCase</span>(login.<span class="property">rejected</span>, <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">                state.<span class="property">status</span> = <span class="string">&quot;rejected&quot;</span>;</span><br><span class="line">                state.<span class="property">error</span> = action.<span class="property">payload</span>;</span><br><span class="line">            &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> login = <span class="title function_">createAsyncThunk</span>(<span class="string">`<span class="subst">$&#123;name&#125;</span>/login`</span>, <span class="keyword">async</span> (args, thunkAPI) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;uname, pwd&#125; = args;</span><br><span class="line">    <span class="keyword">const</span> user = <span class="keyword">await</span> <span class="title function_">loginApi</span>(uname, pwd);</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Login.jsx</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Login</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> dispatch = <span class="title function_">useDispatch</span>();</span><br><span class="line">    <span class="keyword">const</span> isLoading = <span class="title function_">useSelector</span>(<span class="function">(<span class="params">state</span>) =&gt;</span> state.<span class="property">status</span> === <span class="string">&quot;pending&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> [name, setName] = <span class="title function_">useState</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line">    <span class="keyword">const</span> [pwd, setPwd] = <span class="title function_">useState</span>(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> &lt;div&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;label&gt;Name&lt;/label&gt;</span><br><span class="line">            &lt;input value=&#123;name&#125; onChange=&#123;(e) =&gt; &#123;</span><br><span class="line">                setName(e.currentTarget.value);</span><br><span class="line">            &#125;&#125;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;label&gt;Password&lt;/label&gt;</span><br><span class="line">            &lt;input value=&#123;pwd&#125; onChange=&#123;(e) =&gt; &#123;</span><br><span class="line">                setPwd(e.currentTarget.value);</span><br><span class="line">            &#125;&#125;&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">        &lt;button disabled=&#123;isLoading&#125; onClick=&#123;() =&gt; &#123; </span><br><span class="line">            dispatch(login(name, pwd))</span><br><span class="line">        &#125;&#125;&gt; Login &lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// UserInfo.jsx</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">UserInfo</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;name, pwd&#125; = <span class="title function_">useSelector</span>(<span class="function">(<span class="params">state</span>) =&gt;</span> state.<span class="property">user</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Name: &#123;name&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Password: &#123;pwd&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.jsx</span></span><br><span class="line"><span class="keyword">const</span> root = <span class="title class_">ReactDOM</span>.<span class="title function_">createRoot</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;root&quot;</span>));</span><br><span class="line">root.<span class="title function_">render</span>(</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Provider</span> <span class="attr">store</span>=<span class="string">&#123;store&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Login</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">UserInfo</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Provider</span>&gt;</span></span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-        
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/05/03/interview/interview-redux/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
     </section>
 </article>
 
@@ -252,7 +204,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/04/19/interview/interview-react/">前端面试题背诵纯享版（React）</a>
+            <a href="/2023/04/19/interview/interview-react/">前端进阶（React）</a>
         </h1>
         
         <div class="article-meta clearfix">
@@ -266,7 +218,7 @@
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -274,93 +226,47 @@
     </header>
     
     <section class="article-body markdown-body">
-        
-        <h2 id="React简单题"><a href="#React简单题" class="headerlink" title="React简单题"></a>React简单题</h2><ul>
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="React简单题"><a href="#React简单题" class="headerlink" title="React简单题"></a>React简单题</h2><ul>
 <li>ClassComponent生命周期</li>
 <li>Hooks如何模拟ClassComponent生命周期</li>
 <li>useEffect VS useLayoutEffect</li>
 <li>useReducer VS useState</li>
-<li>setState是同步还是异步执行</li>
-<li>HOC在React中的作用</li>
-<li>受控组件 VS 非受控组件</li>
-<li>展示组件 VS 容器组件</li>
-<li>Props VS State</li>
-<li>className VS style</li>
-<li>如何捕获ReactApp的错误及实现错误出现后的Fallback</li>
-<li>如何实现Panel（或抽屉，面板）组件（Portal）</li>
-<li>虚拟列表</li>
-<li>滚动加载</li>
-<li>自定义Hook（获取窗口尺寸，获取滚动偏移量）</li>
-</ul>
-<h2 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h2><p>JSX是React对JS的语法扩展，在打包后会被替换成createElement，在React App初始化时，createElement会构建一个ReactElement对象，这个对象就是虚拟DOM节点；</p>
-<h2 id="什么是React虚拟DOM"><a href="#什么是React虚拟DOM" class="headerlink" title="什么是React虚拟DOM"></a>什么是React虚拟DOM</h2><p>虚拟DOM就是React内部维护的一个树结构对象，在渲染时基于虚拟DOM进行Diff计算，，虚拟DOM，是为了解决频繁操作浏览器DOM开销大的问题，</p>
-<h2 id="Function-Component-VS-Class-Component"><a href="#Function-Component-VS-Class-Component" class="headerlink" title="Function Component VS Class Component"></a>Function Component VS Class Component</h2><p>React推荐使用函数组件和Hooks编写新的应用程序，函数组件优势主要体现在提高开发效率、维护成本降低，主要原因有以下几点：</p>
-<ol>
-<li>函数粒度更小：函数比Class更容易拆分，更容易复用，更好避免巨石组件的出现；</li>
-<li>纯函数增强程序稳定性，降低debug难度：将函数式编程思想应用到组件开发中，函数式编程的基础就是纯函数，相同输入一定得到相同输出；</li>
-<li>Effect Hooks降低了开发者的心智负担：函数组件中主要通过useEffect处理副作用，偶尔用到useLayoutEffect，而Class组件则要考虑选用哪个生命周期方法，且部分生命周期方法在Concurrent模式中是非安全的，React无法保证这些unsafe生命周期方法一定会执行到；</li>
-<li>React会减少甚至在未来版本移除Class组件部分特性的支持：如部分unsafe的生命周期方法；</li>
-</ol>
-<h2 id="React16-Hook"><a href="#React16-Hook" class="headerlink" title="React16 Hook"></a>React16 Hook</h2><ul>
-<li>useState(state)，useState(() &#x3D;&gt; state)</li>
-<li>useReducer(reducer, initialState, init?)，reducer接收上一个state和被dispatch的action，返回新state，init接收initialState，返回一个初始state，忽略后初始state默认为initialState；</li>
-<li>useMemo(value)；</li>
-<li>useCallback(callback)；</li>
-<li>useEffect()</li>
-<li>useLayoutEffect()</li>
-<li>useContext(context)</li>
-<li>useRef()</li>
-</ul>
-<h2 id="React18新增Hook"><a href="#React18新增Hook" class="headerlink" title="React18新增Hook"></a>React18新增Hook</h2><ul>
-<li>useTransition(timeoutMs): [loading, start]，标记一个过渡更新，紧急更新处理完再处理过渡更新，一旦超时则对其强制更新；</li>
-<li>useDeferredValue(value, {timeoutMs})&#96;，标记一个延迟更新的变量，紧急更新处理完再更新变量的值，一旦超时则强制更新变量的值；</li>
-<li>useId()，返回一个唯一id；</li>
-<li>useInsertionEffect(callback，dependencies)，在render结束，还不能访问DOM时执行；</li>
-<li>useExternalStore(subscribe:(setState)&#x3D;&gt;any，getExternalState)，同步外部数据源；</li>
-</ul>
-<p>注：</p>
-<ul>
-<li>对于useTransition，可看作useState和startTransition；</li>
-<li>对于useDeferredValue，可看作是useState、useEffect和startTransition；</li>
-</ul>
-<h2 id="useCallback最佳实践"><a href="#useCallback最佳实践" class="headerlink" title="useCallback最佳实践"></a>useCallback最佳实践</h2><p>综合来讲，useCallback用于缓存函数，指定若干依赖项，当依赖项变化时函数才会更新，其应用场景如下：</p>
-<ol>
-<li>缓存传递给子组件的函数，避免子组件频繁render；<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handleSomeEvent = <span class="title class_">React</span>.<span class="title function_">useCallback</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;, [...])</span><br><span class="line"></span><br><span class="line">&lt;<span class="title class_">SomeChild</span> onSomeEvent=&#123;handleSomeEvent&#125;&gt;</span><br></pre></td></tr></table></figure></li>
-<li>避免effect hooks频繁执行；<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> doSomething = <span class="title class_">React</span>.<span class="title function_">useCallback</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;, [...])</span><br><span class="line"></span><br><span class="line"><span class="comment">// doSomething的逻辑无需复用且代码较少的话，也可以将doSomething的逻辑移入useEffect，这样的好处是将依赖都放在一起，便于维护；</span></span><br><span class="line"><span class="title class_">React</span>.<span class="title function_">useEffect</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="title function_">doSomething</span>()</span><br><span class="line">    ...</span><br><span class="line">&#125;,[doSomething])</span><br></pre></td></tr></table></figure></li>
-<li>上述基础上，如果新状态依赖于上一个状态计算而来，可以通过updater函数移除对state的依赖<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> [n, setN] = <span class="title class_">React</span>.<span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"><span class="comment">// 常规写法：状态变化时更新函数</span></span><br><span class="line"><span class="keyword">const</span> handleSomeEvent = <span class="title class_">React</span>.<span class="title function_">useCallback</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setN</span>(n + <span class="number">1</span>);</span><br><span class="line">&#125;, [n])</span><br><span class="line"><span class="comment">// 优化写法：通过updater函数去指定state的更新，移除对state的依赖；</span></span><br><span class="line"><span class="keyword">const</span> handleSomeEvent = <span class="title class_">React</span>.<span class="title function_">useCallback</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setN</span>(<span class="function">(<span class="params">prev</span>) =&gt;</span> prev + <span class="number">1</span>);</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="React-Context"><a href="#React-Context" class="headerlink" title="React Context"></a>React Context</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建context对象</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">ThemeContext</span> = <span class="title class_">React</span>.<span class="title function_">createContext</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// hooks获取context value</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Article</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> theme = <span class="title class_">React</span>.<span class="title function_">useContext</span>(<span class="title class_">ThemeContext</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;theme&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Consumer组件获取context value</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Navigator</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">ThemeContext.Consumer</span>&gt;</span>&#123;</span></span><br><span class="line"><span class="language-xml">        (theme) =&gt; &#123;</span></span><br><span class="line"><span class="language-xml">            return <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;theme&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span>;</span></span><br><span class="line"><span class="language-xml">        &#125;</span></span><br><span class="line"><span class="language-xml">    &#125;<span class="tag">&lt;/<span class="name">ThemeContext.Consumer</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Provider提供context value</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [theme, setTheme] = <span class="title class_">React</span>.<span class="title function_">useState</span>(<span class="string">&quot;light&quot;</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">ThemeContext.Provider</span> <span class="attr">value</span>=<span class="string">&#123;theme&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>&#123;</span></span><br><span class="line"><span class="language-xml">            setTheme(&quot;dark&quot;);</span></span><br><span class="line"><span class="language-xml">        &#125;&#125;&gt;Dark Theme<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Article</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Navigator</span>/&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">ThemeContext.Provider</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="React组件类型"><a href="#React组件类型" class="headerlink" title="React组件类型"></a>React组件类型</h2><p>React内部分为以下几类：</p>
-<ol>
-<li>FunctionComponent &#x3D; 0;</li>
-<li>ClassComponent &#x3D; 1;</li>
-<li>IndeterminateComponent &#x3D; 2; &#x2F;&#x2F; Before we know whether it is function or class</li>
-<li>HostRoot &#x3D; 3; &#x2F;&#x2F; Root of a host tree. Could be nested inside another node.</li>
-<li>HostPortal &#x3D; 4; &#x2F;&#x2F; A subtree. Could be an entry point to a different renderer.</li>
-<li>HostComponent &#x3D; 5;</li>
-<li>HostText &#x3D; 6;</li>
-<li>Fragment &#x3D; 7;</li>
-<li>Mode &#x3D; 8;</li>
-<li>ContextConsumer &#x3D; 9;</li>
-<li>ContextProvider &#x3D; 10;</li>
-<li>ForwardRef &#x3D; 11;</li>
-<li>Profiler &#x3D; 12;</li>
-<li>SuspenseComponent &#x3D; 13;</li>
-<li>MemoComponent &#x3D; 14;</li>
-<li>SimpleMemoComponent &#x3D; 15;</li>
-<li>LazyComponent &#x3D; 16;</li>
-<li>IncompleteClassComponent &#x3D; 17;</li>
-<li>DehydratedFragment &#x3D; 18;</li>
-<li>SuspenseListComponent &#x3D; 19;</li>
-<li>ScopeComponent &#x3D; 21;</li>
-<li>OffscreenComponent &#x3D; 22;</li>
-<li>LegacyHiddenComponent &#x3D; 23;</li>
-<li>CacheComponent &#x3D; 24;</li>
-</ol>
-<h2 id="自定义Hook"><a href="#自定义Hook" class="headerlink" title="自定义Hook"></a>自定义Hook</h2><p>获取窗口尺寸</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">useWindowSize</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> [size, setSize] = <span class="title class_">React</span>.<span class="title function_">useState</span>(&#123;</span><br><span class="line">        <span class="attr">width</span>: <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientWidth</span>,</span><br><span class="line">        <span class="attr">height</span>: <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientHeight</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">resizeHandler</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">        <span class="title function_">setSize</span>(&#123;</span><br><span class="line">            <span class="attr">width</span>: <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientWidth</span>,</span><br><span class="line">            <span class="attr">height</span>: <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientHeight</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="title class_">React</span>.<span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;resize&quot;</span>, resizeHandler);</span><br><span class="line">        <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">window</span>.<span class="title function_">removeEventListener</span>(<span class="string">&quot;resize&quot;</span>, resizeHandler);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/04/19/interview/interview-react/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
     </section>
 </article>
 
@@ -370,7 +276,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/04/13/interview/interview-browsercore/">interview_browsercore.md</a>
+            <a href="/2023/04/13/interview/interview-browsercore/">前端进阶（浏览器内核）</a>
         </h1>
         
         <div class="article-meta clearfix">
@@ -384,7 +290,7 @@
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -392,48 +298,47 @@
     </header>
     
     <section class="article-body markdown-body">
-        
-        <ol>
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><ol>
 <li><p>JS解释编译过程简要回答</p>
 <p> 源代码通过解析器生成AST（Abstract syntax tree），然后生成字节码（介于高级语言与机器语言之间的中间代码），再通过解释器逐行解释并执行，借助JIT（Just in time）技术监测代码执行过程，根据代码执行频率从高到低将代码标记为不同等级，低等级的通过基线编译器编译，高等级的通过优化编译器编译，之后将执行编译后的代码，而一旦优化后代码不再满足优化条件，则将其降级到基线编译器或解释器中去处理，这就是去优化；</p>
 </li>
 <li><p>对JS单线程非阻塞的理解</p>
-<p> 单线程：JS代码一定是在单个线程中同步执行的（JS引擎线程）；<br> 非阻塞：异步操作不会阻塞同步代码的执行，异步操作实际是由浏览器代理，然后基于Event Loop机制，异步操作完成后的回调函数会由JS引擎执行；</p>
-</li>
-<li><p>现代浏览器有哪些进程和线程</p>
-<p> 浏览器包含以下进程：</p>
-<ul>
-<li>浏览器进程，控制整个浏览器，负责协调其他进程间的协同工作；</li>
-<li>GPU进程，负责浏览器界面的渲染；</li>
-<li>网络进程，处理网络请求或响应；</li>
-<li>渲染进程，解析并渲染标签页内容；</li>
-<li>插件进程，运行浏览器插件；</li>
-</ul>
-<p> 渲染进程包含以下线程：</p>
-<ul>
-<li>GUI渲染线程，解析html和CSS、构建DOM树、CSSOM树、渲染树、绘制页面；</li>
-<li>JS引擎线程，编译、解释JS代码，并进行优化或去优化，<strong>与GUI渲染线程互斥</strong>；</li>
-<li>定时器线程，提供计时功能，如setTimeout、setInterval；</li>
-<li>http线程，提供http处理能力；</li>
-<li>事件触发线程，控制Event Loop；</li>
-<li>合成线程，将GUI渲染线程生成的</li>
-</ul>
-</li>
-<li><p>Event Loop机制</p>
-<p> JS同步任务只在一个线程中执行，称之为主线程，主线程通过<strong>执行栈</strong>的机制顺序执行所有代码；</p>
-<p> 异步代码就将其交由浏览器其他线程代劳，JS线程继续执行同步代码，期间如果异步操作完成，则将对应的回调函数加入<strong>任务队列</strong>，最后等<strong>执行栈</strong>中的函数都执行完，此时将任务队列中的回调函数加入<strong>执行栈</strong>中继续执行，构成一个循环，即Event Loop；</p>
-<p> 如上所述，实际上异步操作会调用浏览器提供的WebAPI，由浏览器代理，浏览器通过其他线程（如HTTP线程，定时器线程等）处理异步操作，等到完成后再将异步操作的回调函数加入任务队列，注意，<strong>这个过程进行的同时，JS线程继续执行其他代码</strong>；</p>
-<p> 任务队列又分为两种——宏任务和微任务；</p>
-<ol>
-<li>宏任务：<code>&lt;script/&gt;</code>的所有代码，<code>setTimeout, setInterval, postMessage</code>的回调；</li>
-<li>微任务：<code>Promise.prototype.then</code>的回调，<code>MutationObserver</code>实例化时的回调；</li>
-</ol>
-<p> 处理任务队列时，优先处理微任务，最后处理宏任务；</p>
-<p> 一个宏任务处理完成后重新渲染UI，然后再处理下一个宏任务；</p>
-</li>
-</ol>
-
-        
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/04/13/interview/interview-browsercore/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
     </section>
 </article>
 
@@ -465,21 +370,27 @@
     </header>
     
     <section class="article-body markdown-body">
-        
-        <h2 id="常见内置对象及其属性、方法"><a href="#常见内置对象及其属性、方法" class="headerlink" title="常见内置对象及其属性、方法"></a>常见内置对象及其属性、方法</h2><ul>
+        <div>
+            
+            
+                
+                    
+                    <p><h2 id="常见内置对象及其属性、方法"><a href="#常见内置对象及其属性、方法" class="headerlink" title="常见内置对象及其属性、方法"></a>常见内置对象及其属性、方法</h2><ul>
 <li>Object<ul>
 <li><code>assign(target, ...sources)</code>，复制sources的<strong>自有可枚举属性</strong>到target，并返回target，复制过程用的是sources的[[Get]]与target的[[Set]]；</li>
 <li><code>create(proto, propertiesObject)</code>，使用指定的原型对象和<strong>自有可枚举属性</strong>创建一个<strong>新</strong>对象；</li>
-<li><code>defineProperty(target, propName, descriptor)</code>，给target添加或修改名为propName的属性，并指定属性描述符；
-        
-        <p class="article-more-link">
-            <a href="/2023/03/24/js/js_builtinobject/#more">
-                <span class="vm">阅读全文</span>
-                <i class="icon-arrow-double-right vm"></i>    
-            </a>
-        </p>
-        
-        
+<li><code>defineProperty(target, propName, descriptor)</code>，给target添加或修改名为propName的属性，并指定属性描述符；</p>
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/03/24/js/js_builtinobject/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
     </section>
 </article>
 
@@ -489,7 +400,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/03/20/interview/interview-oop/">前端面试题背诵纯享版（OOP）</a>
+            <a href="/2023/03/20/interview/interview-oop/">前端进阶（OOP）</a>
         </h1>
         
         <div class="article-meta clearfix">
@@ -503,7 +414,7 @@
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/OOP/" rel="tag">OOP</a>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -511,8 +422,12 @@
     </header>
     
     <section class="article-body markdown-body">
-        
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>OOP（Object Orient Programming）面向对象编程；</p>
+        <div>
+            
+            
+                
+                    
+                    <p><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>OOP（Object Orient Programming）面向对象编程；</p>
 <p>三大特征：</p>
 <ol>
 <li>封装，将功能封装进相对独立的模块；</li>
@@ -525,16 +440,18 @@
 <li>特设多态：函数重载、运算符重载；</li>
 <li>参数多态：泛型编程；</li>
 <li>子类型多态：父类型可替代子类型；</li>
-</ol>
-        
-        <p class="article-more-link">
-            <a href="/2023/03/20/interview/interview-oop/#more">
-                <span class="vm">阅读全文</span>
-                <i class="icon-arrow-double-right vm"></i>    
-            </a>
-        </p>
-        
-        
+</ol></p>
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/03/20/interview/interview-oop/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
     </section>
 </article>
 
@@ -566,17 +483,23 @@
     </header>
     
     <section class="article-body markdown-body">
-        
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>国内公司几乎不会考虑Web Accessibility，这与我们的法律有关，我国国内的法律并不强制要求Web Accessibility，但是世界上的部分国家如美国，则出台过508康复法案，制订了若干Accessibility标准，一旦某公司的产品不达标，就要面临法律风险。</p>
-        
-        <p class="article-more-link">
-            <a href="/2023/02/05/others/accessibility/#more">
-                <span class="vm">阅读全文</span>
-                <i class="icon-arrow-double-right vm"></i>    
-            </a>
-        </p>
-        
-        
+        <div>
+            
+            
+                
+                    
+                    <p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>国内公司几乎不会考虑Web Accessibility，这与我们的法律有关，我国国内的法律并不强制要求Web Accessibility，但是世界上的部分国家如美国，则出台过508康复法案，制订了若干Accessibility标准，一旦某公司的产品不达标，就要面临法律风险。</p></p>
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/02/05/others/accessibility/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
     </section>
 </article>
 

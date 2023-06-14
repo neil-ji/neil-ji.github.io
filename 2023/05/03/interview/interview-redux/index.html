@@ -7,7 +7,7 @@
 
     
 
-    <title>前端面试题背诵纯享版（Redux） | Neil&#39;s Blog</title>
+    <title>前端进阶（Redux） | Neil&#39;s Blog</title>
     <meta name="author" content="Neil Ji" />
     <meta name="keywords" content="" />
     <meta name="description" content="Redux简介Redux是一个集中存储和管理全局状态的库，通过reducer纯函数来定义怎样更新state，然后通过dispatch action更新state，state每次更新都要返回一个新对象，也就是说state是不可变的。基于reducer纯函数和不可变state，redux应用可以实现时间旅行式的调试；特点：单一数据源store；纯函数reducer；不可变state；标准（传统、Legacy）Redux12345678910111213141516171819202122232425" />
@@ -95,7 +95,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            前端面试题背诵纯享版（Redux）
+            前端进阶（Redux）
         </h1>
         
         <div class="article-meta clearfix">
@@ -109,7 +109,7 @@
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -117,8 +117,13 @@
     </header>
     
     <section class="article-body markdown-body">
-        
-        <h2 id="Redux简介"><a href="#Redux简介" class="headerlink" title="Redux简介"></a>Redux简介</h2><p>Redux是一个集中存储和管理全局状态的库，通过reducer纯函数来定义怎样更新state，然后通过dispatch action更新state，state每次更新都要返回一个新对象，也就是说state是不可变的。</p>
+        <div>
+            
+            
+                
+            
+            
+                <h2 id="Redux简介"><a href="#Redux简介" class="headerlink" title="Redux简介"></a>Redux简介</h2><p>Redux是一个集中存储和管理全局状态的库，通过reducer纯函数来定义怎样更新state，然后通过dispatch action更新state，state每次更新都要返回一个新对象，也就是说state是不可变的。</p>
 <p>基于reducer纯函数和不可变state，redux应用可以实现时间旅行式的调试；</p>
 <p>特点：</p>
 <ul>
@@ -205,16 +210,17 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// UserInfo.jsx</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">UserInfo</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;name, pwd&#125; = <span class="title function_">useSelector</span>(<span class="function">(<span class="params">state</span>) =&gt;</span> state.<span class="property">user</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Name: &#123;name&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>Password: &#123;pwd&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.jsx</span></span><br><span class="line"><span class="keyword">const</span> root = <span class="title class_">ReactDOM</span>.<span class="title function_">createRoot</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;root&quot;</span>));</span><br><span class="line">root.<span class="title function_">render</span>(</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Provider</span> <span class="attr">store</span>=<span class="string">&#123;store&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Login</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">UserInfo</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Provider</span>&gt;</span></span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-        
+                </div>
+            
     </section>
 </article>
 
 
 
-<a id="pagenext" href="/2023/04/19/interview/interview-react/" class="article-next" title="前端面试题背诵纯享版（React）"><i class="icon-arrow-right"></i></a>
+<a id="pagenext" href="/2023/04/19/interview/interview-react/" class="article-next" title="前端进阶（React）"><i class="icon-arrow-right"></i></a>
 
 
-<a id="pageprev" href="/2023/05/19/interview/interview-mobx/" class="article-prev" title="前端面试题背诵纯享版（Mobx）"><i class="icon-arrow-left"></i></a>
+<a id="pageprev" href="/2023/05/19/interview/interview-mobx/" class="article-prev" title="前端进阶（Mobx）"><i class="icon-arrow-left"></i></a>
 
 
 

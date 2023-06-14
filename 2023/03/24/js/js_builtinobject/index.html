@@ -117,8 +117,13 @@
     </header>
     
     <section class="article-body markdown-body">
-        
-        <h2 id="常见内置对象及其属性、方法"><a href="#常见内置对象及其属性、方法" class="headerlink" title="常见内置对象及其属性、方法"></a>常见内置对象及其属性、方法</h2><ul>
+        <div>
+            
+            
+                
+            
+            
+                <h2 id="常见内置对象及其属性、方法"><a href="#常见内置对象及其属性、方法" class="headerlink" title="常见内置对象及其属性、方法"></a>常见内置对象及其属性、方法</h2><ul>
 <li>Object<ul>
 <li><code>assign(target, ...sources)</code>，复制sources的<strong>自有可枚举属性</strong>到target，并返回target，复制过程用的是sources的[[Get]]与target的[[Set]]；</li>
 <li><code>create(proto, propertiesObject)</code>，使用指定的原型对象和<strong>自有可枚举属性</strong>创建一个<strong>新</strong>对象；</li>
@@ -208,16 +213,17 @@
 <p>注5：<code>Object.prototype, window, location</code>的原型都是不可变的，无法通过<code>setPrototypeOf</code>修改；</p>
 <p>注6：<code>new Function(&quot;...&quot;)</code>只能创建全局作用域下的函数，函数内只能访问全局作用域或自身作用域，即使被封装进某个function funcA，也无法访问到funcA的作用域，例如：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createFunction1</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Function</span>(<span class="string">&#x27;return x;&#x27;</span>); <span class="comment">// 这里的 x 指向最上面全局作用域内的 x</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
+                </div>
+            
     </section>
 </article>
 
 
 
-<a id="pagenext" href="/2023/03/20/interview/interview-oop/" class="article-next" title="前端面试题背诵纯享版（OOP）"><i class="icon-arrow-right"></i></a>
+<a id="pagenext" href="/2023/03/20/interview/interview-oop/" class="article-next" title="前端进阶（OOP）"><i class="icon-arrow-right"></i></a>
 
 
-<a id="pageprev" href="/2023/04/13/interview/interview-browsercore/" class="article-prev" title="interview_browsercore.md"><i class="icon-arrow-left"></i></a>
+<a id="pageprev" href="/2023/04/13/interview/interview-browsercore/" class="article-prev" title="前端进阶（浏览器内核）"><i class="icon-arrow-left"></i></a>
 
 
 

@@ -117,8 +117,13 @@
     </header>
     
     <section class="article-body markdown-body">
-        
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS引擎只确保Execution Context描述的机制，但不确保采用什么手段去实现。</p>
+        <div>
+            
+            
+                
+            
+            
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS引擎只确保Execution Context描述的机制，但不确保采用什么手段去实现。</p>
 <p>首先，Execution Context是ECMAScript语言规范中的抽象概念，它旨在建立一种易于描述和实现的ECMAScript运行机制，JavaScript是ECMAScript的一种实现，而JavaScript引擎，例如V8、SpiderMonkey、Carakan等，在实现JavaScript运行环境时，并不一定会采用固定方式实现Execution Context，更不会强调哪些类、方法或函数是与Execution Context有关的，也许其实现有关的代码到处都是。</p>
 <p>但了解Execution Context仍然是有意义的，概念可以帮助我们理解现象。</p>
 <span id="more"></span>
@@ -174,7 +179,8 @@
 <h2 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h2><p>进入执行阶段，将GEC压入ECS，然后顺序执行代码，执行到赋值语句时就更新GO中的变量或函数声明，此时变量才可以取到值。</p>
 <p>特别的，执行到函数调用时，为该函数创建FEC，然后将其压入ECS，并设为active，设为active的执行上下文最先开始执行，如果函数体包含嵌套的函数调用，则如法炮制——创建FEC并入栈，直到没有嵌套的函数调用，执行完栈顶函数后，对应FEC出栈，再重复该过程直到所有函数调用完。</p>
 
-        
+                </div>
+            
     </section>
 </article>
 

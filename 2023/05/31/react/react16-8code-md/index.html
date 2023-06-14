@@ -112,8 +112,13 @@
     </header>
     
     <section class="article-body markdown-body">
-        
-        <h2 id="React-Fiber"><a href="#React-Fiber" class="headerlink" title="React Fiber"></a>React Fiber</h2><p>React Fiber是为了实现Virtual DOM的树结构，每个节点通return指向其父节点，sibling指向其兄弟节点，child指向其首个子节点，在Render和Commit阶段实际操作的就是React Fiber Tree，这种树的表示方式也称为树的<strong>孩子-兄弟表示法</strong>，这种表示法可将树转化为二叉树，左孩子就是首个子节点，右孩子就是首个兄弟节点，然后Fiber Tree的构建和Commit顺序就可以看作是二叉树的先根（序）遍历，不考虑这些的话，就是单纯的树的DFS.</p>
+        <div>
+            
+            
+                
+            
+            
+                <h2 id="React-Fiber"><a href="#React-Fiber" class="headerlink" title="React Fiber"></a>React Fiber</h2><p>React Fiber是为了实现Virtual DOM的树结构，每个节点通return指向其父节点，sibling指向其兄弟节点，child指向其首个子节点，在Render和Commit阶段实际操作的就是React Fiber Tree，这种树的表示方式也称为树的<strong>孩子-兄弟表示法</strong>，这种表示法可将树转化为二叉树，左孩子就是首个子节点，右孩子就是首个兄弟节点，然后Fiber Tree的构建和Commit顺序就可以看作是二叉树的先根（序）遍历，不考虑这些的话，就是单纯的树的DFS.</p>
 <p>React会维护两棵Fiber Tree，current对应当前页面，workInProgress对应正在处理、将要展示的页面，两棵树的节点之间互相通过alternate属性指向彼此，以便通过Diff算法得出节点变化，并在Commit阶段更新对应的浏览器DOM。</p>
 <p>Fiber Node是以ReactElement为基础构建的。</p>
 <p>Fiber Node还有一些其他属性：</p>
@@ -209,16 +214,17 @@
 <p>useState</p>
 <p>useReducer</p>
 
-        
+                </div>
+            
     </section>
 </article>
 
 
 
-<a id="pagenext" href="/2023/05/31/interview/interview-reactcode/" class="article-next" title="前端面试题背诵纯享版（React源码）"><i class="icon-arrow-right"></i></a>
+<a id="pagenext" href="/2023/05/31/interview/interview-reactcode/" class="article-next" title="前端进阶（React源码）"><i class="icon-arrow-right"></i></a>
 
 
-<a id="pageprev" href="/2023/06/01/interview/interview-ts-md/" class="article-prev" title="前端面试题背诵纯享版（Typescript）"><i class="icon-arrow-left"></i></a>
+<a id="pageprev" href="/2023/06/01/interview/interview-ts/" class="article-prev" title="前端进阶（Typescript）"><i class="icon-arrow-left"></i></a>
 
 
 
