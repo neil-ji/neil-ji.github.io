@@ -129,6 +129,85 @@
                 
     <article class="article" itemscope itemprop="blogPost">
     
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/06/13/interview/interview-git/">前端面试题背诵纯享版（Git）</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="https://neil-ji.github.io/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-06-13T07:50:39.934Z" itemprop="datePublished">2023-06-13</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E9%9D%A2%E8%AF%95/" rel="tag">面试</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        
+        <h2 id="Git基本概念"><a href="#Git基本概念" class="headerlink" title="Git基本概念"></a>Git基本概念</h2><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/28/16b9d385970c7b6c~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image" alt="Git原理"></p>
+<h2 id="基本工作流程"><a href="#基本工作流程" class="headerlink" title="基本工作流程"></a>基本工作流程</h2><ol>
+<li><code>git add .</code>：将工作区修改添加到暂存区；</li>
+<li><code>git commit -m &#39;...&#39;</code>：将暂存区修改提交到本地仓库，并添加描述；</li>
+<li><code>git remote add origin https://...git</code>：第一次提交需设置远程仓库地址，以后无需设置；</li>
+<li><code>git pull origin branch</code>：从远程仓库指定分支拉取最新代码；</li>
+<li>处理冲突，然后重新add、commit；</li>
+<li><code>git push origin branch</code>：向远程仓库推送本地仓库的改动；</li>
+</ol>
+<h2 id="撤回或修改"><a href="#撤回或修改" class="headerlink" title="撤回或修改"></a>撤回或修改</h2><ol>
+<li>撤销上次提交（revert）：<code>git revert HEAD</code>，加上<code>-n</code>避免自动commit；</li>
+<li>撤销上次提交（reset）：<code>git reset HEAD</code>；</li>
+<li>撤回到指定提交（reset）：<code>git reset commit-id</code>；</li>
+<li>修改commit：<code>git commit --amend &quot;...&quot;</code>，假如期间有新的暂存区改动，将合并到一个commit中；</li>
+</ol>
+<p>注：reset会丢弃指定id之后的所有commit记录，可能导致本地仓库不能直接push到远程仓库，此时可以加-f强制push，<strong>但有风险</strong>。</p>
+<h2 id="revert-x2F-reset"><a href="#revert-x2F-reset" class="headerlink" title="revert&#x2F;reset"></a>revert&#x2F;reset</h2><ul>
+<li><code>git revert id</code>，revert只会影响指定id的commit记录，默认会提交一个新的commit，加上-n可以避免该默认行为；</li>
+<li><code>git reset --hard id</code>，Hard模式，指定id之后的所有commit记录都会丢失；</li>
+<li><code>git reset</code>，默认为Mixed模式，指定id之后的commit会放到暂存区；</li>
+</ul>
+<p>注：revert后可以直接push，而reset后可能导致本地仓库与远程仓库不一致，须加上-f以强制push；</p>
+<h2 id="merge-x2F-rebase"><a href="#merge-x2F-rebase" class="headerlink" title="merge&#x2F;rebase"></a>merge&#x2F;rebase</h2><ul>
+<li><code>git merge topic</code>对当前分支和topic分支，以及它们的最近共同祖先，进行三方合并；</li>
+<li><code>git rebase master topic</code>将topic分支与master、topic的最近共同祖先进行比较，得到所有临时改动，并重新应用到master分支上；</li>
+<li><code>git pull</code>默认为fetch + merge；</li>
+<li><code>git pull --rebase</code>为fetch + rebase；</li>
+</ul>
+<p>Fast-forward：当前分支是合并进来的分支的祖先节点，则二者之间不存在冲突，git直接移动Head指针到最新commit记录上，这称为快进；</p>
+<p>注：merge和rebase的结果是相同的，但commit时间线不同，rebase是一条直线，且更简洁；</p>
+<h2 id="tag"><a href="#tag" class="headerlink" title="tag"></a>tag</h2><ul>
+<li>标签列表：<code>git tag</code>；</li>
+<li>通配符匹配的标签列表：<code>git tag -l &#39;v1.2*&#39;</code>，-l可替换为–list；</li>
+<li>生成轻量标签：<code>git tag tag-name</code>；</li>
+<li>生成附注标签：<code>git tag -a tag-name -m &#39;...&#39;</code>，附注标签包含额外信息，且可被GNU Privacy Guard （GPG）签名、校验，以保证标签不被篡改；</li>
+<li>为指定commit生成标签：<code>git tag tag-name commit-id</code>；</li>
+<li>删除标签：<code>git tag -d tag-name</code>；</li>
+<li>推送标签：<code>git push origin --tags</code>；</li>
+</ul>
+<h2 id="branch"><a href="#branch" class="headerlink" title="branch"></a>branch</h2><ul>
+<li>创建并切换分支：<code>git checkout -b branch-name</code>；</li>
+<li>创建分支：<code>git branch branch-name</code>；</li>
+<li>切换分支：<code>git checkout branch-name</code>；</li>
+<li>删除分支：<code>git branch -d branch-name</code>；</li>
+</ul>
+
+        
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
     <section class="article-body markdown-body">
         
         
@@ -490,50 +569,6 @@
         
         <p class="article-more-link">
             <a href="/2023/06/11/algorithm/leetcode/#more">
-                <span class="vm">阅读全文</span>
-                <i class="icon-arrow-double-right vm"></i>    
-            </a>
-        </p>
-        
-        
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/06/11/js/js_executioncontext/">Execution Context</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="https://neil-ji.github.io/index.html">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-06-11T08:31:09.487Z" itemprop="datePublished">2023-06-11</time>
-</a>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8/" rel="tag">浏览器内核</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS引擎只确保Execution Context描述的机制，但不确保采用什么手段去实现。</p>
-<p>首先，Execution Context是ECMAScript语言规范中的抽象概念，它旨在建立一种易于描述和实现的ECMAScript运行机制，JavaScript是ECMAScript的一种实现，而JavaScript引擎，例如V8、SpiderMonkey、Carakan等，在实现JavaScript运行环境时，并不一定会采用固定方式实现Execution Context，更不会强调哪些类、方法或函数是与Execution Context有关的，也许其实现有关的代码到处都是。</p>
-<p>但了解Execution Context仍然是有意义的，概念可以帮助我们理解现象。</p>
-        
-        <p class="article-more-link">
-            <a href="/2023/06/11/js/js_executioncontext/#more">
                 <span class="vm">阅读全文</span>
                 <i class="icon-arrow-double-right vm"></i>    
             </a>
