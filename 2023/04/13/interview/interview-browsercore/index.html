@@ -187,7 +187,7 @@
 <li>合成线程，将GUI渲染线程生成的</li>
 </ul>
 </li>
-<li><p>Event Loop机制</p>
+<li><p>Browser Event Loop</p>
 <p> JS同步任务只在一个线程中执行，称之为主线程，主线程通过<strong>执行栈</strong>的机制顺序执行所有代码；</p>
 <p> 异步代码就将其交由浏览器其他线程代劳，JS线程继续执行同步代码，期间如果异步操作完成，则将对应的回调函数加入<strong>任务队列</strong>，最后等<strong>执行栈</strong>中的函数都执行完，此时将任务队列中的回调函数加入<strong>执行栈</strong>中继续执行，构成一个循环，即Event Loop；</p>
 <p> 如上所述，实际上异步操作会调用浏览器提供的WebAPI，由浏览器代理，浏览器通过其他线程（如HTTP线程，定时器线程等）处理异步操作，等到完成后再将异步操作的回调函数加入任务队列，注意，<strong>这个过程进行的同时，JS线程继续执行其他代码</strong>；</p>
@@ -198,6 +198,24 @@
 </ol>
 <p> 处理任务队列时，优先处理微任务，最后处理宏任务；</p>
 <p> 一个宏任务处理完成后重新渲染UI，然后再处理下一个宏任务；</p>
+</li>
+<li><p>Node.js Event Loop</p>
+<p> Node Event Loop与Browser一样，都是在单个线程中运行的，Node将异步操作交给系统处理，Browser则是交给浏览器处理，当操作完成时再去执行对应的回调函数，但机制又有所不同，Node Event Loop分为以下几个阶段：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">   ┌───────────────────────────┐</span><br><span class="line">┌─&gt;│           timers          │</span><br><span class="line">│  └─────────────┬─────────────┘</span><br><span class="line">│  ┌─────────────┴─────────────┐</span><br><span class="line">│  │     pending callbacks     │</span><br><span class="line">│  └─────────────┬─────────────┘</span><br><span class="line">│  ┌─────────────┴─────────────┐</span><br><span class="line">│  │       idle, prepare       │</span><br><span class="line">│  └─────────────┬─────────────┘      ┌───────────────┐</span><br><span class="line">│  ┌─────────────┴─────────────┐      │   incoming:   │</span><br><span class="line">│  │           poll            │&lt;─────┤  connections, │</span><br><span class="line">│  └─────────────┬─────────────┘      │   data, etc.  │</span><br><span class="line">│  ┌─────────────┴─────────────┐      └───────────────┘</span><br><span class="line">│  │           check           │</span><br><span class="line">│  └─────────────┬─────────────┘</span><br><span class="line">│  ┌─────────────┴─────────────┐</span><br><span class="line">└──┤      close callbacks      │</span><br><span class="line">   └───────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Timers：setTimeout，setInterval；</li>
+<li>Pending callbacks：执行上一阶段被延迟的I&#x2F;O回调；</li>
+<li>Idle &amp; Prepare：Node内部使用；</li>
+<li>Poll：触发新的I&#x2F;O事件，执行I&#x2F;O相关的回调；</li>
+<li>Check：setImmediate</li>
+<li>Close callbacks：主线程结束时的回调；</li>
+</ol>
+<p> Event Loop将执行特定于该阶段的任何操作，然后执行该阶段队列中的回调，直到队列为空或超过最大回调数，然后进入下一阶段，如此循环；</p>
+<p> Poll阶段会同步执行队列中的所有回调，且每个回调都可能触发更多事件，引入更多回调，除非超过最大回调数，因此Poll阶段可能会执行很长时间，进而导致Timers阶段的回调函数不能在精确的时间点上触发；</p>
+<p> Poll阶段队列空时，如果有setImmediate回调，才会进入Check阶段，否则将一直在该阶段，等待queue注册进新回调函数并立刻执行；</p>
+<p> 每轮循环之间，会检查是否还有需要等待的异步事件（I&#x2F;O或定时器），如果没有则结束循环；</p>
+<p> process.nextTick(callback, arg)不属于Event Loop机制，它被确保在当前执行栈结束，进入下一个Tick之前执行，它不受当前Event Loop所在阶段限制；</p>
 </li>
 </ol>
 
