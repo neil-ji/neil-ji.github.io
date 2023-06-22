@@ -3202,6 +3202,10 @@ body {
   float: left;
   display: block;
 }
+.article .article-updated {
+  float: left;
+  display: block;
+}
 .article .article-tag-list {
   float: left;
   margin-left: 32px;
@@ -3255,6 +3259,14 @@ body {
   color: var(--color-primary);
 }
 .article-date time {
+  margin-left: 6px;
+}
+.article-updated {
+  color: #999;
+  color: var(--color-muted);
+  margin-left: 32px;
+}
+.article-updated time {
   margin-left: 6px;
 }
 .article-tag-list {
@@ -3411,6 +3423,11 @@ body {
   }
   .article .article-date {
     float: none;
+  }
+  .article .article-updated {
+    float: none;
+    margin-left: 0;
+    margin-top: 8px;
   }
   .article .article-tag-list {
     float: none;
