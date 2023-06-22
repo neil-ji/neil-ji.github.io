@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>前端进阶（网络安全） | Neil&#39;s Blog</title>
+    <meta name="author" content="Neil Ji" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="XSS(Cross-Site Scripting)漏洞：当用户输入的内容发送到服务器，服务器动态生成的页面中会将输入内容拼接进去，而不加任何非法字符验证或过滤；攻击原理：可以在输入中编写攻击代码（&amp;lt;script&amp;gt;攻击代码&amp;lt;script/&amp;gt;），服务器返回被注入恶意代码的HTML后，浏览器解析该HTML时将直接执行其中的攻击代码。注：本该为CSS，但该缩写已经被占用（Cascading Style Sheet），所以改为XSS；反射型常见场景：查询；注入恶意代码的输入信息，提" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="Neil&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">Neil&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://neil-ji.github.io"></form> -->
+
+        
+            
+                
+                    
+
+                        
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS-Cross-Site-Scripting"><span class="toc-number">1.</span> <span class="toc-text">XSS(Cross-Site Scripting)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%B0%84%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">反射型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%9E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">存储型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DOM%E5%9E%8B"><span class="toc-number">1.3.</span> <span class="toc-text">DOM型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSRF-Cross-Site-Request-Forgeries"><span class="toc-number">2.</span> <span class="toc-text">CSRF(Cross-Site Request Forgeries)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Clicking-hijack"><span class="toc-number">3.</span> <span class="toc-text">Clicking hijack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MITM-Man-in-the-Middle"><span class="toc-number">4.</span> <span class="toc-text">MITM(Man-in-the-Middle)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DDOS-Distributed-Denial-of-Service"><span class="toc-number">5.</span> <span class="toc-text">DDOS(Distributed Denial of Service)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SYN-Flood"><span class="toc-number">5.1.</span> <span class="toc-text">SYN Flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS-Flood"><span class="toc-number">5.2.</span> <span class="toc-text">DNS Flood</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP-Flood"><span class="toc-number">5.3.</span> <span class="toc-text">UDP Flood</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">6.</span> <span class="toc-text">其他</span></a></li></ol>
+                                
+    </div>
+</aside>
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            前端进阶（网络安全）
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="https://neil-ji.github.io/2023/06/20/interview/interview-websecurity/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-06-20T07:10:05.000Z" itemprop="datePublished">2023-06-20</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+            
+            
+                <h2 id="XSS-Cross-Site-Scripting"><a href="#XSS-Cross-Site-Scripting" class="headerlink" title="XSS(Cross-Site Scripting)"></a>XSS(Cross-Site Scripting)</h2><p>漏洞：当用户输入的内容发送到服务器，服务器动态生成的页面中会将输入内容拼接进去，而不加任何非法字符验证或过滤；</p>
+<p>攻击原理：可以在输入中编写攻击代码（<code>&lt;script&gt;攻击代码&lt;script/&gt;</code>），服务器返回被注入恶意代码的HTML后，浏览器解析该HTML时将直接执行其中的攻击代码。</p>
+<p>注：本该为CSS，但该缩写已经被占用（Cascading Style Sheet），所以改为XSS；</p>
+<h3 id="反射型"><a href="#反射型" class="headerlink" title="反射型"></a>反射型</h3><p>常见场景：查询；</p>
+<p>注入恶意代码的输入信息，提交到服务器后，服务器将返回一个包含恶意代码的动态生成的HTML，浏览器解析过程中将执行该恶意代码，整个过程中，恶意代码经过服务器的反射达到攻击目的；</p>
+<p>防御：</p>
+<ol>
+<li>严格处理用户输入（白名单过滤，转码特殊字符，如<code>&lt;&gt;</code>）；</li>
+<li>服务器生成动态页面时，避免使用<code>document.innerHTML, eval, new Function, document.create</code>等api；</li>
+<li>服务器端通过set-cookie：httponly，通知浏览器cookie仅允许通过http传输，禁止脚本读写；</li>
+</ol>
+<h3 id="存储型"><a href="#存储型" class="headerlink" title="存储型"></a>存储型</h3><p>常见场景：各种需持久化用户输入的场景，如发帖，评论等；</p>
+<p>提交含恶意代码的信息，服务器端将该信息持久化到数据库中，假如该信息会被插入到某个页面中，那么任何访问该页面的用户都将遭受攻击。</p>
+<p>防御：同反射型；</p>
+<h3 id="DOM型"><a href="#DOM型" class="headerlink" title="DOM型"></a>DOM型</h3><p>常见场景：JS直接从浏览器本地可更改的数据（如URL）中获取信息；</p>
+<p>对于由前端控制的页面，如果直接将任何可被用户修改的信息注入到当前页面，例如从URL中获取参数，然后使用document.innerHTML等API动态改变当前页面，将导致恶意代码的执行；</p>
+<p>防御：同上；</p>
+<h2 id="CSRF-Cross-Site-Request-Forgeries"><a href="#CSRF-Cross-Site-Request-Forgeries" class="headerlink" title="CSRF(Cross-Site Request Forgeries)"></a>CSRF(Cross-Site Request Forgeries)</h2><p>首先用户需要登陆过正常网站A并生成了cookie，然后攻击者伪造一个超链接或页面B，诱骗用户点击，然后该超链接或页面B将会向A发起一个跨域请求，浏览器会自动携带上A创建的cookie，而由于服务器对cookie的信任，直接执行了相关操作，实际上该操作是攻击者伪造用户本人发起的请求。</p>
+<p>防御：</p>
+<ol>
+<li>严格验证http首部referer；</li>
+<li>禁止第三方cookie：<code>set-cookie：SameSite=strict</code>；</li>
+<li>网站请求必须携带<code>authorization：&lt;token&gt;</code>；</li>
+<li>终极解决方案：验证码；</li>
+</ol>
+<p>注：localStorage中存储的token虽然可以避免单一的CSRF攻击，但仍会被XSS攻击非法获取，进而发起CSRF攻击；</p>
+<h2 id="Clicking-hijack"><a href="#Clicking-hijack" class="headerlink" title="Clicking hijack"></a>Clicking hijack</h2><p>通过iframe引入正常网页，将其设置为透明，再构建一个虚假的页面，覆盖正常网页的内容，添加一个位于特定位置的诱导用户点击的按钮或链接，用户点击虚假按钮，将会同时点击到正常网页中的按钮，从而执行一些超出用户预期的操作；</p>
+<p>防御：响应正常网页时，添加X-FRAME-OPTIONS：DENY（或SAMEORIGIN）首部，符合规范的浏览器将会根据该首部，决定是否允许将正常网页以iframe的形式插入到当前网页中；</p>
+<p>注：x-frame-options首部已经被Content-Security-Policy替代；</p>
+<h2 id="MITM-Man-in-the-Middle"><a href="#MITM-Man-in-the-Middle" class="headerlink" title="MITM(Man-in-the-Middle)"></a>MITM(Man-in-the-Middle)</h2><p>用户与服务器的通信不是直接通信，而是经过若干代理、服务器的中转，因此明文发送的数据可以被任何中间服务器读写，这就是中间人攻击。</p>
+<p>防御：避免使用http这种明文的协议，转而使用https；</p>
+<h2 id="DDOS-Distributed-Denial-of-Service"><a href="#DDOS-Distributed-Denial-of-Service" class="headerlink" title="DDOS(Distributed Denial of Service)"></a>DDOS(Distributed Denial of Service)</h2><p>DOS攻击是向被攻击方发送大量数据，使被攻击方网络拥塞甚至瘫痪，是一种同时消耗攻击者与被攻击者带宽的攻击方式，DOS与DDOS的区别是规模大小，DDOS是基于海量主机发起的DOS攻击。</p>
+<h3 id="SYN-Flood"><a href="#SYN-Flood" class="headerlink" title="SYN Flood"></a>SYN Flood</h3><p>由于TCP建立连接需要客户端发送SYN报文，服务器需要回应一个SYN-ACK报文来确认，并等待客户端再次发送一个ACK报文二次确认。基于该机制，攻击者发送大量SYN报文，而不回应ACK报文，服务器在一段时间内一直占用资源，从而导致服务器资源耗尽，无法处理正常请求。</p>
+<p>防御：</p>
+<ol>
+<li>高性能防火墙：借助防火墙的性能优势，充当客户端与服务器之间的代理；</li>
+<li>源认证：发送一个错误的SYN-ACK包，正常客户端会回应一个RST包，以此辨别正常用户与攻击者；</li>
+<li>首包丢弃：即丢掉第一个SYN包，正常客户端会重发一个SYN包，此时再处理；</li>
+</ol>
+<h3 id="DNS-Flood"><a href="#DNS-Flood" class="headerlink" title="DNS Flood"></a>DNS Flood</h3><p>通过发送大量虚构域名的DNS查询包，耗尽DNS服务器的资源；</p>
+<p>防御：</p>
+<ol>
+<li>将DNS报文TC标志置为1，然后再进行回应，要求客户端以TCP方式重发DNS包，然后进行源认证；</li>
+<li>首包丢弃；</li>
+</ol>
+<h3 id="UDP-Flood"><a href="#UDP-Flood" class="headerlink" title="UDP Flood"></a>UDP Flood</h3><ol>
+<li>UDP Flood：发送大量UDP包，耗尽服务器资源；</li>
+<li>UDP反射放大：源地址伪造为被攻击地址，向NTP服务器发送Monist请求，NTP服务器会向被攻击地址发送大量响应报文，耗尽服务器资源；</li>
+</ol>
+<p>防御：特征过滤；</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>SQL注入：将客户端的请求参数直接拼接到SQL语句中，进而执行攻击者写入的SQL；</p>
+
+                </div>
+            
+    </section>
+</article>
+
+
+
+<a id="pagenext" href="/2023/06/13/interview/interview-git/" class="article-next" title="前端进阶（Git）"><i class="icon-arrow-right"></i></a>
+
+
+
+
+
+            </div>
+        </div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+    
+        
+<script src="/js/scrollspy.min.js"></script>
+
+        <script type="text/javascript">
+        $(document.body).scrollspy({target: '#aside-inner'});
+
+        $(window).on('resize', function() {
+            var hw = $('#header').width();
+            var ww = $('#wrapper').width();
+            var space = ($(this).width() - hw - ww) / 2 / 2;
+
+            var pageprev = $('#pageprev');
+            var pagenext = $('#pagenext');
+            var avg = (pageprev.width() + pagenext.width()) / 2
+
+            if(space > avg) {
+                var len = space - avg / 2;
+                var styles = {position: 'fixed', top: '50%', marginTop: - (pageprev.width() + pagenext.width()) / 4}
+                pageprev.css($.extend({left: hw + len}, styles));
+                pagenext.css($.extend({right: len}, styles));
+            } else {
+                pageprev.removeAttr('style');
+                pagenext.removeAttr('style');
+            }
+        }).trigger('resize');
+        </script>
+    
+
+</body>
+</html>

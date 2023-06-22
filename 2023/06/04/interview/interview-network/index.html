@@ -348,7 +348,7 @@
 <li>安全：<ul>
 <li><code>Secure</code>：只允许通过https携带cookie；</li>
 <li><code>HttpOnly</code>：禁止js读写cookie；</li>
-<li><code>SameSite=&lt;option&gt;</code>：B对A网站发起的请求是否允许携带A创建的cookie，可选项如下：<ul>
+<li><code>SameSite=&lt;option&gt;</code>：是否允许以第三方cookie形式发送，可选项如下：<ul>
 <li><code>strict</code>：完全禁止；</li>
 <li><code>lax</code>：大部分禁止，只允许Get请求携带（超链接、Get表单、资源预加载）；</li>
 <li><code>none</code>：不禁止；</li>
@@ -357,7 +357,7 @@
 </ul>
 </li>
 </ul>
-<p>注：浏览器禁止cookie跨域访问（读写），但允许跨域请求，即B不能读写A的cookie，但B对A可以发送请求，这个请求可以携带A的cookie，B相对于A来说是第三方网站，所以这个cookie也叫做第三方cookie，<strong>注意第三方cookie并不是第三方网站创建的cookie</strong>；</p>
+<p>注：浏览器禁止cookie跨域读写，但允许跨域请求，即B不能读写A的cookie，但B对A可发送请求，这个请求可以携带A的cookie，由于B页面和用户是第一二方，A属于第三方，A的cookie也就是第三方cookie；</p>
 <h2 id="HTTP-1-1"><a href="#HTTP-1-1" class="headerlink" title="HTTP 1.1"></a>HTTP 1.1</h2><ol>
 <li>长连接：通过<code>Connection: keep-alive</code>维持连接状态，避免1.0中每次发送、接收报文都要重新建立连接；</li>
 <li>管道化：请求可以连续发送，而不必等待响应，解决了客户端队首阻塞问题，但服务器仍存在队首阻塞问题，因为1.1要求服务器必须按顺序响应请求；</li>
@@ -384,7 +384,7 @@
 
 
 
-<a id="pagenext" href="/2023/06/04/interview/interview-websecurity/" class="article-next" title="前端进阶（网络安全）"><i class="icon-arrow-right"></i></a>
+<a id="pagenext" href="/2023/06/01/interview/interview-ts/" class="article-next" title="前端进阶（Typescript）"><i class="icon-arrow-right"></i></a>
 
 
 <a id="pageprev" href="/2023/06/11/algorithm/algorithm_leetcode32/" class="article-prev" title="LeetCode Hard 32. 最长有效括号"><i class="icon-arrow-left"></i></a>

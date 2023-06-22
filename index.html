@@ -132,6 +132,78 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2023/06/20/interview/interview-websecurity/">前端进阶（网络安全）</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="https://neil-ji.github.io/index.html">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-06-20T07:10:05.000Z" itemprop="datePublished">2023-06-20</time>
+</a>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="XSS-Cross-Site-Scripting"><a href="#XSS-Cross-Site-Scripting" class="headerlink" title="XSS(Cross-Site Scripting)"></a>XSS(Cross-Site Scripting)</h2><p>漏洞：当用户输入的内容发送到服务器，服务器动态生成的页面中会将输入内容拼接进去，而不加任何非法字符验证或过滤；</p>
+<p>攻击原理：可以在输入中编写攻击代码（<code>&lt;script&gt;攻击代码&lt;script/&gt;</code>），服务器返回被注入恶意代码的HTML后，浏览器解析该HTML时将直接执行其中的攻击代码。</p>
+<p>注：本该为CSS，但该缩写已经被占用（Cascading Style Sheet），所以改为XSS；</p>
+<h3 id="反射型"><a href="#反射型" class="headerlink" title="反射型"></a>反射型</h3><p>常见场景：查询；</p>
+<p>注入恶意代码的输入信息，提交到服务器后，服务器将返回一个包含恶意代码的动态生成的HTML，浏览器解析过程中将执行该恶意代码，整个过程中，恶意代码经过服务器的反射达到攻击目的；</p>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/06/20/interview/interview-websecurity/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2023/06/13/interview/interview-git/">前端进阶（Git）</a>
         </h1>
         
@@ -604,54 +676,6 @@
                 </div>   
                 <div class="article-more-link">
                     <a href="/2023/06/11/prose/prose_1/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/06/11/algorithm/leetcode/">Leetcode 刷题套路</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="https://neil-ji.github.io/index.html">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-06-11T08:31:09.490Z" itemprop="datePublished">2023-06-11</time>
-</a>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    <p><h2 id="数组类技巧"><a href="#数组类技巧" class="headerlink" title="数组类技巧"></a>数组类技巧</h2></p>
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/06/11/algorithm/leetcode/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
