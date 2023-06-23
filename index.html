@@ -132,6 +132,87 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2023/06/11/interview/interview-js/">前端进阶（JS）</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2023/06/11/interview/interview-js/">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-06-11T08:31:09.512Z" itemprop="datePublished">2023-06-11</time>
+    <span class="vm">(Created)</span>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-06-23T08:09:57.785Z" itemprop="datePublished">2023-06-23</time>
+    <span class="vm">(Modified)</span>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="什么是原型链？"><a href="#什么是原型链？" class="headerlink" title="什么是原型链？"></a>什么是原型链？</h2><p>定义的函数、类或对象会自动创建原型对象，并通过<code>prototype</code>和<code>constructor</code>互相指向对方，原型之间通过<code>__proto__</code>构成原型链，实例调用某个方法时，会沿原型链寻找该方法，直到找到指定方法，或遍历完整个原型链后抛出异常；</p>
+<p>借助单链表理解：针对实例调用某方法的角度来讲，原型链可以看作一个链表，每个节点都是原型对象，以<code>__proto__</code>属性指向下一节点，头节点是实例本身，尾节点是<code>Object.prototype</code>；</p>
+<p>不同情况下的<code>__proto__</code>如下：</p>
+<ul>
+<li>function函数，箭头函数，其<code>__proto__</code>一定是<code>Function.prototype</code>，包括<code>Function</code>；</li>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/06/11/interview/interview-js/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2023/04/19/interview/interview-react/">前端进阶（React）</a>
         </h1>
         
@@ -361,87 +442,6 @@
                 </div>   
                 <div class="article-more-link">
                     <a href="/2023/03/24/js/js_builtinobject/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/06/11/interview/interview-js/">前端进阶（JS）</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2023/06/11/interview/interview-js/">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-06-11T08:31:09.512Z" itemprop="datePublished">2023-06-11</time>
-    <span class="vm">(Created)</span>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-06-22T08:55:03.687Z" itemprop="datePublished">2023-06-22</time>
-    <span class="vm">(Modified)</span>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="什么是原型链？"><a href="#什么是原型链？" class="headerlink" title="什么是原型链？"></a>什么是原型链？</h2><p>定义的函数、类或对象会自动创建原型对象，并通过<code>prototype</code>和<code>constructor</code>互相指向对方，原型之间通过<code>__proto__</code>构成原型链，实例调用某个方法时，会沿原型链寻找该方法，直到找到指定方法，或遍历完整个原型链后抛出异常；</p>
-<p>借助单链表理解：针对实例调用某方法的角度来讲，原型链可以看作一个链表，每个节点都是原型对象，以<code>__proto__</code>属性指向下一节点，头节点是实例本身，尾节点是<code>Object.prototype</code>；</p>
-<p>不同情况下的<code>__proto__</code>如下：</p>
-<ul>
-<li>function函数，箭头函数，其<code>__proto__</code>一定是<code>Function.prototype</code>，包括<code>Function</code>；</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/06/11/interview/interview-js/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
