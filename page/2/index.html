@@ -132,6 +132,249 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2023/06/20/interview/interview-websecurity/">前端进阶（网络安全）</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2023/06/20/interview/interview-websecurity/">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-06-20T07:10:05.000Z" itemprop="datePublished">2023-06-20</time>
+    <span class="vm">(Created)</span>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-06-22T08:00:38.191Z" itemprop="datePublished">2023-06-22</time>
+    <span class="vm">(Modified)</span>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="XSS-Cross-Site-Scripting"><a href="#XSS-Cross-Site-Scripting" class="headerlink" title="XSS(Cross-Site Scripting)"></a>XSS(Cross-Site Scripting)</h2><p>漏洞：当用户输入的内容发送到服务器，服务器动态生成的页面中会将输入内容拼接进去，而不加任何非法字符验证或过滤；</p>
+<p>攻击原理：可以在输入中编写攻击代码（<code>&lt;script&gt;攻击代码&lt;script/&gt;</code>），服务器返回被注入恶意代码的HTML后，浏览器解析该HTML时将直接执行其中的攻击代码。</p>
+<p>注：本该为CSS，但该缩写已经被占用（Cascading Style Sheet），所以改为XSS；</p>
+<h3 id="反射型"><a href="#反射型" class="headerlink" title="反射型"></a>反射型</h3><p>常见场景：查询；</p>
+<p>注入恶意代码的输入信息，提交到服务器后，服务器将返回一个包含恶意代码的动态生成的HTML，浏览器解析过程中将执行该恶意代码，整个过程中，恶意代码经过服务器的反射达到攻击目的；</p>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/06/20/interview/interview-websecurity/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/06/04/interview/interview-network/">前端进阶（网络协议）</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2023/06/04/interview/interview-network/">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-06-04T07:10:05.000Z" itemprop="datePublished">2023-06-04</time>
+    <span class="vm">(Created)</span>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-06-22T07:10:56.409Z" itemprop="datePublished">2023-06-22</time>
+    <span class="vm">(Modified)</span>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="通用问题"><a href="#通用问题" class="headerlink" title="通用问题"></a>通用问题</h2><h3 id="网络分层模型"><a href="#网络分层模型" class="headerlink" title="网络分层模型"></a>网络分层模型</h3><p>TCP&#x2F;IP四层模型：应用、传输、网络、网络接口；</p>
+<p>TCP&#x2F;IP五层模型（主流）：应用、传输、网络、数据链路、物理；</p>
+<p>OSI七层模型：</p>
+<ul>
+<li>应用：http、ftp</li>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/06/04/interview/interview-network/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/04/13/interview/interview-browsercore/">前端进阶（浏览器内核）</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2023/04/13/interview/interview-browsercore/">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-04-13T06:08:50.000Z" itemprop="datePublished">2023-04-13</time>
+    <span class="vm">(Created)</span>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-06-14T10:28:00.275Z" itemprop="datePublished">2023-06-14</time>
+    <span class="vm">(Modified)</span>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><ol>
+<li><p>JS解释编译过程简要回答</p>
+<p> 源代码通过解析器生成AST（Abstract syntax tree），然后生成字节码（介于高级语言与机器语言之间的中间代码），再通过解释器逐行解释并执行，借助JIT（Just in time）技术监测代码执行过程，根据代码执行频率从高到低将代码标记为不同等级，低等级的通过基线编译器编译，高等级的通过优化编译器编译，之后将执行编译后的代码，而一旦优化后代码不再满足优化条件，则将其降级到基线编译器或解释器中去处理，这就是去优化；</p>
+</li>
+<li><p>对JS单线程非阻塞的理解</p>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/04/13/interview/interview-browsercore/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2023/06/01/interview/interview-ts/">前端进阶（Typescript）</a>
         </h1>
         
@@ -266,249 +509,6 @@
                 </div>   
                 <div class="article-more-link">
                     <a href="/2023/05/03/interview/interview-redux/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/05/28/interview/interview-reactrouter/">前端进阶（react-router）</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2023/05/28/interview/interview-reactrouter/">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-05-28T10:29:26.000Z" itemprop="datePublished">2023-05-28</time>
-    <span class="vm">(Created)</span>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-06-14T08:01:26.402Z" itemprop="datePublished">2023-06-14</time>
-    <span class="vm">(Modified)</span>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="客户端路由（CSR）原理"><a href="#客户端路由（CSR）原理" class="headerlink" title="客户端路由（CSR）原理"></a>客户端路由（CSR）原理</h2><p>传统浏览器导航行为就是URL改变时直接向服务器发送请求，服务器响应对应资源，而客户端路由就是URL改变时不再发送请求，而是由客户端部署的App自行匹配URL并展示对应内容。</p>
-<p>remix&#x2F;history (v5.3)是react-router实现CSR的核心库，其中CSR分为两种：</p>
-<ol>
-<li>URL Hash</li>
-<li>Browser History</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/05/28/interview/interview-reactrouter/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/05/31/interview/interview-reactcode/">前端进阶（React源码）</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2023/05/31/interview/interview-reactcode/">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-05-31T07:11:19.000Z" itemprop="datePublished">2023-05-31</time>
-    <span class="vm">(Created)</span>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-06-14T08:01:20.902Z" itemprop="datePublished">2023-06-14</time>
-    <span class="vm">(Modified)</span>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="useState机制"><a href="#useState机制" class="headerlink" title="useState机制"></a>useState机制</h2><p>每个组件会维护一个<code>state对</code>数组，每次调用useState就向数组中添加一个<code>state对</code>，<code>state对</code>由state和setState函数组成，setState中维持对<code>state对</code>的引用，每个setState只能更新对应的state；</p>
-<p>当组件挂载时，useState会创建<code>state对</code>，并将其加入<code>state对</code>数组，索引递增，指向下一个位置；</p>
-<p>当组件更新时，索引置为0，再次调用useState只会移动<code>state对</code>数组的索引，并返回已经创建好的<code>state对</code>，因此，如果在if分支语句中使用useState，将可能导致useState返回错误的<code>state对</code>；</p>
-<p>当调用<code>state对</code>的setState时，setState更新对应state的值，并调用React内部API，更新组件；</p>
-<p>错误例子如下：</p>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/05/31/interview/interview-reactcode/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/04/19/interview/interview-react/">前端进阶（React）</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2023/04/19/interview/interview-react/">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-04-19T05:57:58.000Z" itemprop="datePublished">2023-04-19</time>
-    <span class="vm">(Created)</span>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-06-14T08:01:18.030Z" itemprop="datePublished">2023-06-14</time>
-    <span class="vm">(Modified)</span>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="React简单题"><a href="#React简单题" class="headerlink" title="React简单题"></a>React简单题</h2><ul>
-<li>ClassComponent生命周期</li>
-<li>Hooks如何模拟ClassComponent生命周期</li>
-<li>useEffect VS useLayoutEffect</li>
-<li>useReducer VS useState</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/04/19/interview/interview-react/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>

@@ -7,10 +7,10 @@
 
     
 
-    <title>js_builtinobject.md | Neil&#39;s Blog</title>
+    <title>常见内置对象及其属性、方法 | Neil&#39;s Blog</title>
     <meta name="author" content="Neil Ji" />
     <meta name="keywords" content="" />
-    <meta name="description" content="常见内置对象及其属性、方法Objectassign(target, ...sources)，复制sources的自有可枚举属性到target，并返回target，复制过程用的是sources的[[Get]]与target的[[Set]]；create(proto, propertiesObject)，使用指定的原型对象和自有可枚举属性创建一个新对象；defineProperty(target, propName, descriptor)，给target添加或修改名为propName的属性，并指定" />
+    <meta name="description" content="Objectassign(target, ...sources)，复制sources的自有可枚举属性到target，并返回target，复制过程用的是sources的[[Get]]与target的[[Set]]；create(proto, propertiesObject)，使用指定的原型对象和自有可枚举属性创建一个新对象；defineProperty(target, propName, descriptor)，给target添加或修改名为propName的属性，并指定属性描述符；entries" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
 
@@ -82,7 +82,7 @@
                     
 
                         
-                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E5%8F%8A%E5%85%B6%E5%B1%9E%E6%80%A7%E3%80%81%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">常见内置对象及其属性、方法</span></a></li></ol>
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Object"><span class="toc-number">1.</span> <span class="toc-text">Object</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Function"><span class="toc-number">2.</span> <span class="toc-text">Function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Array"><span class="toc-number">3.</span> <span class="toc-text">Array</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String"><span class="toc-number">4.</span> <span class="toc-text">String</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise"><span class="toc-number">5.</span> <span class="toc-text">Promise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Proxy"><span class="toc-number">6.</span> <span class="toc-text">Proxy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reflect"><span class="toc-number">7.</span> <span class="toc-text">Reflect</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RegExp"><span class="toc-number">8.</span> <span class="toc-text">RegExp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Set"><span class="toc-number">9.</span> <span class="toc-text">Set</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map"><span class="toc-number">10.</span> <span class="toc-text">Map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WeakSet"><span class="toc-number">11.</span> <span class="toc-text">WeakSet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WeakMap"><span class="toc-number">12.</span> <span class="toc-text">WeakMap</span></a></li></ol>
                                 
     </div>
 </aside>
@@ -95,7 +95,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            js_builtinobject.md
+            常见内置对象及其属性、方法
         </h1>
         
         <div class="article-meta clearfix">
@@ -111,7 +111,7 @@
     
     <i class="icon-calendar vm"></i>
     
-    <time class="vm" datetime="2023-03-28T11:12:42.332Z" itemprop="datePublished">2023-03-28</time>
+    <time class="vm" datetime="2023-06-23T06:29:39.983Z" itemprop="datePublished">2023-06-23</time>
     <span class="vm">(Modified)</span>
 </div>
 
@@ -132,11 +132,10 @@
                 
             
             
-                <h2 id="常见内置对象及其属性、方法"><a href="#常见内置对象及其属性、方法" class="headerlink" title="常见内置对象及其属性、方法"></a>常见内置对象及其属性、方法</h2><ul>
-<li>Object<ul>
+                <h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><ul>
 <li><code>assign(target, ...sources)</code>，复制sources的<strong>自有可枚举属性</strong>到target，并返回target，复制过程用的是sources的[[Get]]与target的[[Set]]；</li>
 <li><code>create(proto, propertiesObject)</code>，使用指定的原型对象和<strong>自有可枚举属性</strong>创建一个<strong>新</strong>对象；</li>
-<li><code>defineProperty(target, propName, descriptor)</code>，给target添加或修改名为propName的属性，并指定属性描述符；  <span id="more"></span></li>
+<li><code>defineProperty(target, propName, descriptor)</code>，给target添加或修改名为propName的属性，并指定属性描述符；</li>
 <li><code>entries(target)</code>返回target的<strong>自有可枚举属性</strong>的键值对数组，形如<code>[ [&#39;propA&#39;, &#39;1&#39;], [&#39;propB&#39;, 2] ]</code>；</li>
 <li><code>keys(target)</code>返回target的<strong>自有可枚举属性</strong>的名称数组，形如<code>[&#39;propA&#39;, &#39;propB&#39;]</code>；</li>
 <li><code>values(target)</code>返回target的<strong>自有可枚举属性</strong>的值数组，形如<code>[&#39;1&#39;, &#39;2&#39;]</code>；</li>
@@ -157,22 +156,31 @@
 <li><code>prototype.isPrototypeOf(target)</code>，实例是否在target的原型链上；</li>
 <li><code>prototype.propertyIsEnumerable(propName)</code>，实例的propName属性是否是可枚举的；</li>
 </ul>
-</li>
-<li>Function<ul>
+<p>注1：可借助<code>new Map(Object.entries())</code>快速便捷地构造一个Map；</p>
+<p>注2：带有OwnProperty的方法，操作的都是自有属性；</p>
+<p>注3：</p>
+<ul>
+<li>不可扩展（non-extensible）：不能再添加新属性；</li>
+<li>密封（sealed）：不能再添加新属性，已有属性标记为不可配置；</li>
+<li>冻结（frozen）：不能再添加新属性，已有属性标记为不可配置，属性值不可写；</li>
+</ul>
+<p>注4：<code>is()</code>不同于<code>==</code>：is不做强制转换；<code>is()</code>不同于<code>===</code>：is认为<code>NaN</code>等于<code>NaN</code>，<code>+0</code>不等于<code>-0</code>；</p>
+<p>注5：<code>Object.prototype, window, location</code>的原型都是不可变的，无法通过<code>setPrototypeOf</code>修改；</p>
+<h2 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h2><ul>
 <li><code>arguments</code>，函数实参组成的<strong>类数组</strong>对象；</li>
 <li><code>length</code>，函数形参数量，不包括剩余参数和有默认值的参数；</li>
 <li><code>prototype.bind(thisArg，arg1, arg2, ...)</code>，返回一个新函数，调用新函数时将this指向thisArg，并将arg1，arg2等作为参数传入新函数；</li>
 <li><code>prototype.call(thisArg, arg1, arg2, ...)</code>，调用函数，将this指向thisArg，将arg1，arg2等作为参数传入；</li>
 <li><code>prototype.apply(thisArg，argsArray)</code>，调用函数，将this指向thisArg，以数组或类数组形式传入参数argsArray；</li>
-</ul>
-</li>
-<li>Symbol<ul>
+<li>Symbol</li>
 <li><code>for(key)</code>找到并返回全局symbol表中键为key的symbol，若不存在则新建一个再返回；</li>
 <li><code>keyFor(sym)</code>找到并返回全局symbol表中sym的key；</li>
 <li>其他还包含各种内置对象的方法名的Symbol版本，它们各自标识的方法或属性，将被内置对象的方法调用时（此处断句）调用，例如<code>obj</code>的自定义方法<code>obj[Symbol.split] = function () &#123;...&#125;</code>会被<code>String.prototype.split(obj)</code>调用，简单来说，某些Symbol版本的方法将覆盖同名方法；</li>
 </ul>
-</li>
-<li>Array<ul>
+<p>注：<code>new Function(&quot;...&quot;)</code>只能创建全局作用域下的函数，函数内只能访问全局作用域或自身作用域，即使被封装进某个function funcA，也无法访问到funcA的作用域，例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createFunction1</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Function</span>(<span class="string">&#x27;return x;&#x27;</span>); <span class="comment">// 这里的 x 指向最上面全局作用域内的 x</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h2><ul>
 <li><code>prototype.at(index)</code>，返回index索引处的元素；</li>
 <li><code>prototype.indexOf(item)</code>，按索引的低到高顺序，查找并返回指定数组元素的索引；</li>
 <li><code>prototype.lastIndexOf(item)</code>，按索引的高到低顺序，查找并返回指定数组元素的索引；</li>
@@ -199,29 +207,7 @@
 <li><code>prototype.reduce((pre, cur, curInx), initialValue)</code>，调用给定函数将元素减少到一个，initialValue有值，则初始时，pre取initialValue，cur取第一个，否则初始时pre取第一个，cur取第二个，初始执行后，给定函数返回值作pre，下一个元素做cur；</li>
 <li><code>prototype.join(separator)</code>，返回以separator连接起来的所有元素组成的字符串；</li>
 </ul>
-</li>
-<li>String</li>
-<li>Promise</li>
-<li>Proxy</li>
-<li>Reflect</li>
-<li>RegExp</li>
-<li>Set</li>
-<li>Map</li>
-<li>WeakSet</li>
-<li>WeakMap</li>
-</ul>
-<p>注1：可借助<code>new Map(Object.entries())</code>快速便捷地构造一个Map；</p>
-<p>注2：带有OwnProperty的方法，操作的都是自有属性；</p>
-<p>注3：</p>
-<ul>
-<li>不可扩展（non-extensible）：不能再添加新属性；</li>
-<li>密封（sealed）：不能再添加新属性，已有属性标记为不可配置；</li>
-<li>冻结（frozen）：不能再添加新属性，已有属性标记为不可配置，属性值不可写；</li>
-</ul>
-<p>注4：<code>is()</code>不同于<code>==</code>：is不做强制转换；<code>is()</code>不同于<code>===</code>：is认为<code>NaN</code>等于<code>NaN</code>，<code>+0</code>不等于<code>-0</code>；</p>
-<p>注5：<code>Object.prototype, window, location</code>的原型都是不可变的，无法通过<code>setPrototypeOf</code>修改；</p>
-<p>注6：<code>new Function(&quot;...&quot;)</code>只能创建全局作用域下的函数，函数内只能访问全局作用域或自身作用域，即使被封装进某个function funcA，也无法访问到funcA的作用域，例如：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createFunction1</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> x = <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Function</span>(<span class="string">&#x27;return x;&#x27;</span>); <span class="comment">// 这里的 x 指向最上面全局作用域内的 x</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><h2 id="Proxy"><a href="#Proxy" class="headerlink" title="Proxy"></a>Proxy</h2><h2 id="Reflect"><a href="#Reflect" class="headerlink" title="Reflect"></a>Reflect</h2><h2 id="RegExp"><a href="#RegExp" class="headerlink" title="RegExp"></a>RegExp</h2><h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><h2 id="WeakSet"><a href="#WeakSet" class="headerlink" title="WeakSet"></a>WeakSet</h2><h2 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h2>
                 </div>
             
     </section>

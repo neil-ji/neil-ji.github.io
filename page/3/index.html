@@ -132,6 +132,168 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2023/05/28/interview/interview-reactrouter/">前端进阶（react-router）</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2023/05/28/interview/interview-reactrouter/">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-05-28T10:29:26.000Z" itemprop="datePublished">2023-05-28</time>
+    <span class="vm">(Created)</span>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-06-14T08:01:26.402Z" itemprop="datePublished">2023-06-14</time>
+    <span class="vm">(Modified)</span>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="客户端路由（CSR）原理"><a href="#客户端路由（CSR）原理" class="headerlink" title="客户端路由（CSR）原理"></a>客户端路由（CSR）原理</h2><p>传统浏览器导航行为就是URL改变时直接向服务器发送请求，服务器响应对应资源，而客户端路由就是URL改变时不再发送请求，而是由客户端部署的App自行匹配URL并展示对应内容。</p>
+<p>remix&#x2F;history (v5.3)是react-router实现CSR的核心库，其中CSR分为两种：</p>
+<ol>
+<li>URL Hash</li>
+<li>Browser History</li>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/05/28/interview/interview-reactrouter/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/05/31/interview/interview-reactcode/">前端进阶（React源码）</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            <a class="article-date" href="/2023/05/31/interview/interview-reactcode/">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-05-31T07:11:19.000Z" itemprop="datePublished">2023-05-31</time>
+    <span class="vm">(Created)</span>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    <time class="vm" datetime="2023-06-14T08:01:20.902Z" itemprop="datePublished">2023-06-14</time>
+    <span class="vm">(Modified)</span>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="useState机制"><a href="#useState机制" class="headerlink" title="useState机制"></a>useState机制</h2><p>每个组件会维护一个<code>state对</code>数组，每次调用useState就向数组中添加一个<code>state对</code>，<code>state对</code>由state和setState函数组成，setState中维持对<code>state对</code>的引用，每个setState只能更新对应的state；</p>
+<p>当组件挂载时，useState会创建<code>state对</code>，并将其加入<code>state对</code>数组，索引递增，指向下一个位置；</p>
+<p>当组件更新时，索引置为0，再次调用useState只会移动<code>state对</code>数组的索引，并返回已经创建好的<code>state对</code>，因此，如果在if分支语句中使用useState，将可能导致useState返回错误的<code>state对</code>；</p>
+<p>当调用<code>state对</code>的setState时，setState更新对应state的值，并调用React内部API，更新组件；</p>
+<p>错误例子如下：</p>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/05/31/interview/interview-reactcode/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2023/03/20/interview/interview-oop/">前端进阶（OOP）</a>
         </h1>
         
@@ -283,87 +445,6 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/06/11/interview/interview-jsmock/">前端进阶（JS手写题）</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2023/06/11/interview/interview-jsmock/">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-06-11T08:31:09.514Z" itemprop="datePublished">2023-06-11</time>
-    <span class="vm">(Created)</span>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-06-14T08:00:51.510Z" itemprop="datePublished">2023-06-14</time>
-    <span class="vm">(Modified)</span>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// from MDN</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">type</span>(<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;null&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> baseType = <span class="keyword">typeof</span> value;</span><br><span class="line">    <span class="comment">// 基本类型</span></span><br><span class="line">    <span class="keyword">if</span> (![<span class="string">&quot;object&quot;</span>, <span class="string">&quot;function&quot;</span>].<span class="title function_">includes</span>(baseType)) &#123;</span><br><span class="line">        <span class="keyword">return</span> baseType;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Symbol.toStringTag 通常指定对象类的“display name”</span></span><br><span class="line">    <span class="comment">// 它在 Object.prototype.toString() 中使用。</span></span><br><span class="line">    <span class="keyword">const</span> tag = value[<span class="title class_">Symbol</span>.<span class="property">toStringTag</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> tag === <span class="string">&quot;string&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> tag;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果它是一个函数，其源代码以 &quot;class&quot; 关键字开头</span></span><br><span class="line">    <span class="keyword">if</span> (</span><br><span class="line">        baseType === <span class="string">&quot;function&quot;</span> &amp;&amp;</span><br><span class="line">        <span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(value).<span class="title function_">startsWith</span>(<span class="string">&quot;class&quot;</span>)</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;class&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数的名称；例如 `Array`、`GeneratorFunction`、`Number`、`String`、`Boolean` 或 `MyCustomClass`</span></span><br><span class="line">    <span class="keyword">const</span> className = value.<span class="property">constructor</span>.<span class="property">name</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> className === <span class="string">&quot;string&quot;</span> &amp;&amp; className !== <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> className;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在这一点上，没有合适的方法来获取值的类型，因此我们使用基本实现。 </span></span><br><span class="line">    <span class="keyword">return</span> baseType;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">instanceOf</span>(<span class="params">left, right</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> target = right.<span class="property"><span class="keyword">prototype</span></span>;</span><br><span class="line">    <span class="keyword">let</span> proto = left.<span class="property">__proto__</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(proto !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (target === proto) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        proto = proto.<span class="property">__proto__</span>; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><p>首先创建了一个新的空对象<br>设置原型，将对象的原型设置为函数的prototype对象。<br>让函数的this指向这个对象，执行构造函数的代码（为这个新对象添加属性）<br>判断函数的返回值类型，如果是值类型，返回创建的对象。如果是引用类型，就返回这个引用类型的对象。</p>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/06/11/interview/interview-jsmock/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
             <a href="/2023/06/11/interview/interview-html/">前端进阶（HTML）</a>
         </h1>
         
@@ -414,87 +495,6 @@
                 </div>   
                 <div class="article-more-link">
                     <a href="/2023/06/11/interview/interview-html/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/06/13/interview/interview-git/">前端进阶（Git）</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            <a class="article-date" href="/2023/06/13/interview/interview-git/">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-06-13T07:50:39.934Z" itemprop="datePublished">2023-06-13</time>
-    <span class="vm">(Created)</span>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    <time class="vm" datetime="2023-06-14T08:00:35.612Z" itemprop="datePublished">2023-06-14</time>
-    <span class="vm">(Modified)</span>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="Git基本概念"><a href="#Git基本概念" class="headerlink" title="Git基本概念"></a>Git基本概念</h2><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/28/16b9d385970c7b6c~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image" alt="Git原理"></p>
-<h2 id="基本工作流程"><a href="#基本工作流程" class="headerlink" title="基本工作流程"></a>基本工作流程</h2><ol>
-<li><code>git add .</code>：将工作区修改添加到暂存区；</li>
-<li><code>git commit -m &#39;...&#39;</code>：将暂存区修改提交到本地仓库，并添加描述；</li>
-<li><code>git remote add origin https://...git</code>：第一次提交需设置远程仓库地址，以后无需设置；</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/06/13/interview/interview-git/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
