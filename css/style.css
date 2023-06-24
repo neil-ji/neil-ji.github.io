@@ -3439,6 +3439,9 @@ body {
     font-size: 13px;
   }
 }
+.archive-year-wrap {
+  margin-bottom: 16px;
+}
 .archives {
   padding-left: 1.75em;
 }
