@@ -3442,6 +3442,10 @@ body {
 .archives {
   padding-left: 1.75em;
 }
+.archives .archive-article-header {
+  display: flex;
+  justify-content: space-between;
+}
 .archives .archive-article-link {
   color: #585858;
   color: var(--color-secondary);
