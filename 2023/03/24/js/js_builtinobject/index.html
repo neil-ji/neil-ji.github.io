@@ -220,10 +220,12 @@
 
 
 
-<a id="pagenext" href="/2023/03/20/interview/interview-oop/" class="article-next" title="前端进阶（OOP）"><i class="icon-arrow-right"></i></a>
+
+    <a id="pagenext" href="/2023/03/20/interview/interview-oop/" class="article-next" title="前端进阶（OOP）"><i class="icon-arrow-right"></i></a>
 
 
-<a id="pageprev" href="/2023/04/13/interview/interview-browsercore/" class="article-prev" title="前端进阶（浏览器内核）"><i class="icon-arrow-left"></i></a>
+    <a id="pageprev" href="/2023/04/13/interview/interview-browsercore/" class="article-prev" title="前端进阶（浏览器内核）"><i class="icon-arrow-left"></i></a>
+
 
 
 
@@ -291,34 +293,6 @@
         });
     });
     </script>
-    
-        
-<script src="/js/scrollspy.min.js"></script>
-
-        <script type="text/javascript">
-        $(document.body).scrollspy({target: '#aside-inner'});
-
-        $(window).on('resize', function() {
-            var hw = $('#header').width();
-            var ww = $('#wrapper').width();
-            var space = ($(this).width() - hw - ww) / 2 / 2;
-
-            var pageprev = $('#pageprev');
-            var pagenext = $('#pagenext');
-            var avg = (pageprev.width() + pagenext.width()) / 2
-
-            if(space > avg) {
-                var len = space - avg / 2;
-                var styles = {position: 'fixed', top: '50%', marginTop: - (pageprev.width() + pagenext.width()) / 4}
-                pageprev.css($.extend({left: hw + len}, styles));
-                pagenext.css($.extend({right: len}, styles));
-            } else {
-                pageprev.removeAttr('style');
-                pagenext.removeAttr('style');
-            }
-        }).trigger('resize');
-        </script>
-    
 
 </body>
 </html>
