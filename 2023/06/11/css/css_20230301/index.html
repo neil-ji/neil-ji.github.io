@@ -117,7 +117,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-03-01T12:04:37.031Z" itemprop="datePublished">2023-03-01</time>
+    <time class="vm" datetime="2023-06-26T04:48:40.107Z" itemprop="datePublished">2023-06-26</time>
 </div>
 
             
@@ -139,8 +139,6 @@
             
                 <h2 id="正常文档流布局（兼容所有浏览器）"><a href="#正常文档流布局（兼容所有浏览器）" class="headerlink" title="正常文档流布局（兼容所有浏览器）"></a>正常文档流布局（兼容所有浏览器）</h2><p>按照元素在文档中的出现顺序与书写方向（write-mode），搭配盒模型进行布局。</p>
 <h2 id="基于position-的布局（IE-不兼容position：sticky）"><a href="#基于position-的布局（IE-不兼容position：sticky）" class="headerlink" title="基于position 的布局（IE 不兼容position：sticky）"></a>基于position 的布局（IE 不兼容position：sticky）</h2><p>通过修改元素的position 来实现一些特殊布局效果。</p>
-<span id="more"></span>
-
 <h2 id="基于float-的Multicol-布局（几乎兼容所有浏览器）"><a href="#基于float-的Multicol-布局（几乎兼容所有浏览器）" class="headerlink" title="基于float 的Multicol 布局（几乎兼容所有浏览器）"></a>基于float 的Multicol 布局（几乎兼容所有浏览器）</h2><ul>
 <li>float：none&#x2F;left&#x2F;right 用于指定浮动方向，元素会朝对应方向移动，直到碰到容器边缘或另一个float 元素；float 元素会脱离正常文档流，并创建BFC；float 元素的display 可能被强制改为block，且对flex&#x2F;inline-flex 元素无效。</li>
 <li>clear：none&#x2F;left&#x2F;right&#x2F;both 用于清除当前BFC 中的前置float 元素的影响，且该元素为非float 元素时，垂直方向的外边距将会折叠；</li>
@@ -169,6 +167,20 @@
 <li>flex：flex-grow flex-shrink flex-basis 的简写属性，none（0 0 auto），initial（0 1 auto），auto（1 1 auto）；</li>
 <li>order：number 用于控制flex item 的排列顺序，值越小越靠近main start，默认为0；</li>
 </ul>
+<p>注：flex的简写语法有三种：</p>
+<ol>
+<li>单值：<ol>
+<li>number：设置flex-grow的值，默认shrink：1，basis：0；</li>
+<li>width（如10px）：flex-basis的值，默认grow：1，shrink：1；</li>
+</ol>
+</li>
+<li>双值：<ol>
+<li>number number：依次为grow、shrink；</li>
+<li>number width：依次为grow、basis，默认shrink：1；</li>
+</ol>
+</li>
+<li>三值：依次为flex-grow、flex-shrink、flex-basis；</li>
+</ol>
 <h2 id="Multicol-布局（IE-10-）"><a href="#Multicol-布局（IE-10-）" class="headerlink" title="Multicol 布局（IE 10 +）"></a>Multicol 布局（IE 10 +）</h2><ul>
 <li>column-count：number 用于指定列的数量；</li>
 <li>column-width：length 用于指定列的最小宽度，剩余空间将被所有列平分；</li>

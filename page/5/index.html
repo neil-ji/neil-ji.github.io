@@ -132,6 +132,136 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2023/06/11/prose/prose_1/">随想（1）</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/06/11">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-06-11T08:31:09.493Z" itemprop="datePublished">2023-06-11</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-05-17T07:11:01.237Z" itemprop="datePublished">2023-05-17</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E9%9A%8F%E6%83%B3/" rel="tag">随想</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    <p><p>当陷入消极情绪的日复一日的循环中时，如何寻求解脱呢？答案蕴藏在生活中一件件力所能及的小事中，也许是逛一次街，也许是饭后慵懒的散步，也许是公园跑道上的肆意狂奔，也许是某本书的某段文字，也许是背下来10个单词，总之，改变的契机不局限于宏大高远的事物中，哪怕做好一件小事，也会有心灵上的自我奖赏——心之满足与愉悦。</p></p>
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/06/11/prose/prose_1/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/06/11/react/react_scrollauto/">滚动加载</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/06/11">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-06-11T08:31:09.498Z" itemprop="datePublished">2023-06-11</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-04-27T08:25:15.585Z" itemprop="datePublished">2023-04-27</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                
+            
+            
+                <p>一个简单的滚动加载实现：通过Web API IntersectionObserver观察最后一个列表元素，当它出现在可视区域时，解除观察，同时异步地加载数据，并展示一个loading，在加载数据的回调中取消loading，并更新数据，这时ScrollLoad中state.data改变，重新渲染，原尾元素被卸载，断开IntersectionObserver的连接，新的尾元素挂载为ObservableScrollItem，其他元素渲染为BaseScrollItem，如此循环；</p>
+<p>每次加载数据会导致整个列表重新渲染，可以优化；</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">fetchMockData</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">setTImeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">resolve</span>(<span class="keyword">new</span> <span class="title class_">Array</span>(<span class="number">1</span>).<span class="title function_">fill</span>(<span class="string">&quot;sssssssssssss&quot;</span>));</span><br><span class="line">        &#125;, <span class="number">2000</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BaseScrollItem</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;scrollitem&quot;</span> <span class="attr">ref</span>=<span class="string">&#123;this.props.internalRef&#125;</span>&gt;</span>&#123;this.props.children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ObservableScrollItem</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>(props);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ref</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>(<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">componentDidMount</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> node = <span class="variable language_">this</span>.<span class="property">ref</span>.<span class="property">current</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">observer</span> = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">[entry], observer</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">                observer.<span class="title function_">unobserve</span>(node);</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">props</span>.<span class="title function_">loadItems</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">observer</span>.<span class="title function_">observe</span>(node);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">componentWillUnmount</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">observer</span>.<span class="title function_">disconnect</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">BaseScrollItem</span> <span class="attr">internalRef</span>=<span class="string">&#123;this.ref&#125;</span>&gt;</span>&#123;this.props.children&#125;<span class="tag">&lt;/<span class="name">BaseScrollItem</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">ScrollLoad</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>(props);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">state</span> = &#123;</span><br><span class="line">            <span class="attr">loading</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">data</span>: <span class="keyword">new</span> <span class="title class_">Array</span>(<span class="number">5</span>).<span class="title function_">fill</span>(<span class="string">&quot;sdasadsadsads&quot;</span>)</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    loadItems = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">setState</span>(&#123; <span class="attr">loading</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">        <span class="keyword">const</span> value = <span class="keyword">await</span> <span class="title function_">fetchMockData</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">setState</span>(&#123; <span class="attr">loading</span>: <span class="literal">false</span>, <span class="attr">data</span>: [...<span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">data</span>, ...value] &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;</span></span><br><span class="line"><span class="language-xml">                this.state.data.map((item, index, arr) =&gt; &#123;</span></span><br><span class="line"><span class="language-xml">                    return index === arr.length - 1</span></span><br><span class="line"><span class="language-xml">                        ? <span class="tag">&lt;<span class="name">ObservableScrollItem</span> <span class="attr">loadItems</span>=<span class="string">&#123;this.loadItems&#125;</span>&gt;</span>&#123;index&#125;-----&#123;item&#125;<span class="tag">&lt;/<span class="name">ObservableScrollItem</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                        // 其实React默认会为Array Children挨个添加值为index的key，这里写不写无所谓</span></span><br><span class="line"><span class="language-xml">                        : <span class="tag">&lt;<span class="name">BaseScrollItem</span> <span class="attr">key</span>=<span class="string">&#123;index&#125;</span>&gt;</span>&#123;index&#125;-----&#123;item&#125;<span class="tag">&lt;/<span class="name">BaseScrollItem</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                &#125;)</span></span><br><span class="line"><span class="language-xml">            &#125;</span></span><br><span class="line"><span class="language-xml">            &#123;</span></span><br><span class="line"><span class="language-xml">                this.state.loading &amp;&amp; <span class="tag">&lt;<span class="name">BaseScrollItem</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">BaseScrollItem</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2023/06/11/react/react_virtuallist/">列表虚拟化</a>
         </h1>
         
@@ -345,135 +475,10 @@
 </article>
 
 
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/06/11/css/css_20230301/">常见Web布局</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/06/11">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-06-11T08:31:09.480Z" itemprop="datePublished">2023-06-11</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-03-01T12:04:37.031Z" itemprop="datePublished">2023-03-01</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/css/" rel="tag">css</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    <p><h2 id="正常文档流布局（兼容所有浏览器）"><a href="#正常文档流布局（兼容所有浏览器）" class="headerlink" title="正常文档流布局（兼容所有浏览器）"></a>正常文档流布局（兼容所有浏览器）</h2><p>按照元素在文档中的出现顺序与书写方向（write-mode），搭配盒模型进行布局。</p>
-<h2 id="基于position-的布局（IE-不兼容position：sticky）"><a href="#基于position-的布局（IE-不兼容position：sticky）" class="headerlink" title="基于position 的布局（IE 不兼容position：sticky）"></a>基于position 的布局（IE 不兼容position：sticky）</h2><p>通过修改元素的position 来实现一些特殊布局效果。</p></p>
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/06/11/css/css_20230301/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/02/05/others/accessibility/">What is Web Accessibility?</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/02/05">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-02-05T09:29:17.000Z" itemprop="datePublished">2023-02-05</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-02-05T10:14:20.664Z" itemprop="datePublished">2023-02-05</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/Accessibility/" rel="tag">Accessibility</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    <p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>国内公司几乎不会考虑Web Accessibility，这与我们的法律有关，我国国内的法律并不强制要求Web Accessibility，但是世界上的部分国家如美国，则出台过508康复法案，制订了若干Accessibility标准，一旦某公司的产品不达标，就要面临法律风险。</p></p>
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/02/05/others/accessibility/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
 
 
 <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
 </nav>
 
 
