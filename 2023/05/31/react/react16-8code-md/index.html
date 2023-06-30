@@ -10,7 +10,7 @@
     <title>React16.8源码 | Neil&#39;s Blog</title>
     <meta name="author" content="Neil Ji" />
     <meta name="keywords" content="" />
-    <meta name="description" content="React FiberReact Fiber是为了实现Virtual DOM的树结构，每个节点通return指向其父节点，sibling指向其兄弟节点，child指向其首个子节点，在Render和Commit阶段实际操作的就是React Fiber Tree，这种树的表示方式也称为树的孩子-兄弟表示法，这种表示法可将树转化为二叉树，左孩子就是首个子节点，右孩子就是首个兄弟节点，然后Fiber Tree的构建和Commit顺序就可以看作是二叉树的先根（序）遍历，不考虑这些的话，就是单纯的树的DFS" />
+    <meta name="description" content="React Fiberv16以前，ReactElement被称为React DOM，其Diff、更新、渲染都是同步的，此时由于JS引擎线程被占用，那么响应用户事件所要调用的回调函数就得不到执行，观感上就是UI的卡顿。为了解决该问题，引入了Fiber的架构，简单来说，scheduler库是实现任务调度的核心库，React Fiber Node是最小任务单元，通过scheduler调度每个Fiber Node的构建、Diff等等，scheduler每执行若干任务就将控制权交还浏览器，于是原本同步的、" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
 
@@ -82,7 +82,7 @@
                     
 
                         
-                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Fiber"><span class="toc-number">1.</span> <span class="toc-text">React Fiber</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Update-Queue"><span class="toc-number">2.</span> <span class="toc-text">React Update Queue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Work-Loop"><span class="toc-number">3.</span> <span class="toc-text">React Work Loop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Lane"><span class="toc-number">4.</span> <span class="toc-text">React Lane</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Expiration-Time"><span class="toc-number">5.</span> <span class="toc-text">React Expiration Time</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Scheduler"><span class="toc-number">6.</span> <span class="toc-text">React Scheduler</span></a></li></ol>
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Fiber"><span class="toc-number">1.</span> <span class="toc-text">React Fiber</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fiber-Node%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.1.</span> <span class="toc-text">Fiber Node详解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Update-Queue"><span class="toc-number">2.</span> <span class="toc-text">React Update Queue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Work-Loop"><span class="toc-number">3.</span> <span class="toc-text">React Work Loop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Lane"><span class="toc-number">4.</span> <span class="toc-text">React Lane</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Expiration-Time"><span class="toc-number">5.</span> <span class="toc-text">React Expiration Time</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Scheduler"><span class="toc-number">6.</span> <span class="toc-text">React Scheduler</span></a></li></ol>
                                 
     </div>
 </aside>
@@ -117,7 +117,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-05-31T07:14:15.932Z" itemprop="datePublished">2023-05-31</time>
+    <time class="vm" datetime="2023-06-30T07:53:04.446Z" itemprop="datePublished">2023-06-30</time>
 </div>
 
             
@@ -132,22 +132,39 @@
                 
             
             
-                <h2 id="React-Fiber"><a href="#React-Fiber" class="headerlink" title="React Fiber"></a>React Fiber</h2><p>React Fiber是为了实现Virtual DOM的树结构，每个节点通return指向其父节点，sibling指向其兄弟节点，child指向其首个子节点，在Render和Commit阶段实际操作的就是React Fiber Tree，这种树的表示方式也称为树的<strong>孩子-兄弟表示法</strong>，这种表示法可将树转化为二叉树，左孩子就是首个子节点，右孩子就是首个兄弟节点，然后Fiber Tree的构建和Commit顺序就可以看作是二叉树的先根（序）遍历，不考虑这些的话，就是单纯的树的DFS.</p>
-<p>React会维护两棵Fiber Tree，current对应当前页面，workInProgress对应正在处理、将要展示的页面，两棵树的节点之间互相通过alternate属性指向彼此，以便通过Diff算法得出节点变化，并在Commit阶段更新对应的浏览器DOM。</p>
-<p>Fiber Node是以ReactElement为基础构建的。</p>
-<p>Fiber Node还有一些其他属性：</p>
+                <h2 id="React-Fiber"><a href="#React-Fiber" class="headerlink" title="React Fiber"></a>React Fiber</h2><p>v16以前，ReactElement被称为React DOM，其Diff、更新、渲染都是同步的，此时由于JS引擎线程被占用，那么响应用户事件所要调用的回调函数就得不到执行，观感上就是UI的卡顿。</p>
+<p>为了解决该问题，引入了Fiber的架构，简单来说，scheduler库是实现任务调度的核心库，React Fiber Node是最小任务单元，通过scheduler调度每个Fiber Node的构建、Diff等等，scheduler每执行若干任务就将控制权交还浏览器，于是原本同步的、完整的一个任务被切分成一个个子任务，这类似于操作系统中经典的时间分片概念；</p>
+<p>可见这是一个协调调度的过程，称为reconcile，分为两步：render和commit，具体过程见下文；</p>
+<p>注：React中<code>workInProgress</code>循环中的<code>unitOfWork</code>指的其实就是一个Fiber Node，所以上文说<strong>React Fiber Node是最小任务单元</strong>。</p>
+<h3 id="Fiber-Node详解"><a href="#Fiber-Node详解" class="headerlink" title="Fiber Node详解"></a>Fiber Node详解</h3><p>作为树结构，它有三种基础属性（或称指针）：</p>
+<ol>
+<li>return指向其父节点；</li>
+<li>sibling指向其兄弟节点；</li>
+<li>child指向其首个子节点；</li>
+</ol>
+<p>Fiber Node是以ReactElement为基础构建的，又是最小任务单元，因此还有一些其他重要属性：</p>
 <ol>
 <li>tag，标识组件类型；</li>
 <li>stateNode，指向对应的浏览器DOM节点或者组件实例（ClassComponent）；</li>
 <li>type，FunctionComponent指向对应函数，ClassComponent指向对应类，HostComponent存对应的HTML标签；</li>
+</ol>
+<p>Diff算法相关（详见下文）：</p>
+<ol>
 <li>flags，存二进制数，用于记录Diff后对应的浏览器DOM需要做什么改变，取值Placement代表新增或替换，Deletion代表删除（<code>flags |= Deletion</code>增，<code>flags &amp;Deletion </code>验，<code>flags &amp;= ~Deletion</code>删）；</li>
 <li>deletions，Diff后发现要删除的Fiber节点；</li>
+</ol>
+<p>Effect List相关（详见下文）：</p>
+<ol>
 <li>effectTag，副作用类型；</li>
 <li>nextEffect，DFS顺序下，下一个有副作用的Fiber节点，构成一个单链表Effect List；</li>
 <li>firstEffect，Effect List的头节点；</li>
 <li>lastEffect，Effect List的尾节点；</li>
-<li>lane，也是二进制数，表示Fiber Node的处理优先级，低优先级任务可能被打断，然后在下一次Reconcile处理（Reconcile就是Render+Commit）；</li>
 </ol>
+<p>调度优先级（详见下文）：：</p>
+<ol>
+<li>lane，也是二进制数，表示Fiber Node的处理优先级，低优先级任务可能被打断，然后在下一次Reconcile处理；</li>
+</ol>
+<p>知识点扩展：这种树的表示方式也称为树的<strong>孩子-兄弟表示法</strong>，这种表示法可将树转化为二叉树，左孩子就是首个子节点，右孩子就是首个兄弟节点，然后Fiber Tree的构建和Commit顺序就可以看作是二叉树的先根（序）遍历，不考虑这些的话，就是单纯的树的DFS.</p>
 <h2 id="React-Update-Queue"><a href="#React-Update-Queue" class="headerlink" title="React Update Queue"></a>React Update Queue</h2><p>每个组件会维护一个update queue，所有</p>
 <h2 id="React-Work-Loop"><a href="#React-Work-Loop" class="headerlink" title="React Work Loop"></a>React Work Loop</h2><h2 id="React-Lane"><a href="#React-Lane" class="headerlink" title="React Lane"></a>React Lane</h2><h2 id="React-Expiration-Time"><a href="#React-Expiration-Time" class="headerlink" title="React Expiration Time"></a>React Expiration Time</h2><h2 id="React-Scheduler"><a href="#React-Scheduler" class="headerlink" title="React Scheduler"></a>React Scheduler</h2><pre><code>render
     legacyRenderSubtreeIntoContainer

@@ -132,6 +132,92 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2023/06/04/interview/interview-network/">前端进阶（网络协议）</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/06/04">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-06-04T07:10:05.000Z" itemprop="datePublished">2023-06-04</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-06-22T07:10:56.409Z" itemprop="datePublished">2023-06-22</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="通用问题"><a href="#通用问题" class="headerlink" title="通用问题"></a>通用问题</h2><h3 id="网络分层模型"><a href="#网络分层模型" class="headerlink" title="网络分层模型"></a>网络分层模型</h3><p>TCP&#x2F;IP四层模型：应用、传输、网络、网络接口；</p>
+<p>TCP&#x2F;IP五层模型（主流）：应用、传输、网络、数据链路、物理；</p>
+<p>OSI七层模型：</p>
+<ul>
+<li>应用：http、ftp</li>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/06/04/interview/interview-network/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2023/04/13/interview/interview-browsercore/">前端进阶（浏览器内核）</a>
         </h1>
         
@@ -448,92 +534,6 @@
                 </div>   
                 <div class="article-more-link">
                     <a href="/2023/05/28/interview/interview-reactrouter/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/05/31/interview/interview-reactcode/">前端进阶（React源码）</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/05/31">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-05-31T07:11:19.000Z" itemprop="datePublished">2023-05-31</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-06-14T08:01:20.902Z" itemprop="datePublished">2023-06-14</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="useState机制"><a href="#useState机制" class="headerlink" title="useState机制"></a>useState机制</h2><p>每个组件会维护一个<code>state对</code>数组，每次调用useState就向数组中添加一个<code>state对</code>，<code>state对</code>由state和setState函数组成，setState中维持对<code>state对</code>的引用，每个setState只能更新对应的state；</p>
-<p>当组件挂载时，useState会创建<code>state对</code>，并将其加入<code>state对</code>数组，索引递增，指向下一个位置；</p>
-<p>当组件更新时，索引置为0，再次调用useState只会移动<code>state对</code>数组的索引，并返回已经创建好的<code>state对</code>，因此，如果在if分支语句中使用useState，将可能导致useState返回错误的<code>state对</code>；</p>
-<p>当调用<code>state对</code>的setState时，setState更新对应state的值，并调用React内部API，更新组件；</p>
-<p>错误例子如下：</p>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/05/31/interview/interview-reactcode/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
