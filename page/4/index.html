@@ -132,19 +132,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/05/31/interview/interview-reactcode/">前端进阶（React源码）</a>
+            <a href="/2023/05/28/interview/interview-reactrouter/">前端进阶（react-router）</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/05/31">
+            <a class="article-date" href="/archives/2023/05/28">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-05-31T07:11:19.000Z" itemprop="datePublished">2023-05-31</time>
+    <time class="vm" datetime="2023-05-28T10:29:26.000Z" itemprop="datePublished">2023-05-28</time>
 </a>
 
             <div class="article-updated">
@@ -154,7 +154,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-06-14T08:01:20.902Z" itemprop="datePublished">2023-06-14</time>
+    <time class="vm" datetime="2023-06-14T08:01:26.402Z" itemprop="datePublished">2023-06-14</time>
 </div>
 
             
@@ -191,11 +191,11 @@
                     
                     
                         
-                        <p><h2 id="useState机制"><a href="#useState机制" class="headerlink" title="useState机制"></a>useState机制</h2><p>每个组件会维护一个<code>state对</code>数组，每次调用useState就向数组中添加一个<code>state对</code>，<code>state对</code>由state和setState函数组成，setState中维持对<code>state对</code>的引用，每个setState只能更新对应的state；</p>
-<p>当组件挂载时，useState会创建<code>state对</code>，并将其加入<code>state对</code>数组，索引递增，指向下一个位置；</p>
-<p>当组件更新时，索引置为0，再次调用useState只会移动<code>state对</code>数组的索引，并返回已经创建好的<code>state对</code>，因此，如果在if分支语句中使用useState，将可能导致useState返回错误的<code>state对</code>；</p>
-<p>当调用<code>state对</code>的setState时，setState更新对应state的值，并调用React内部API，更新组件；</p>
-<p>错误例子如下：</p>
+                        <p><h2 id="客户端路由（CSR）原理"><a href="#客户端路由（CSR）原理" class="headerlink" title="客户端路由（CSR）原理"></a>客户端路由（CSR）原理</h2><p>传统浏览器导航行为就是URL改变时直接向服务器发送请求，服务器响应对应资源，而客户端路由就是URL改变时不再发送请求，而是由客户端部署的App自行匹配URL并展示对应内容。</p>
+<p>remix&#x2F;history (v5.3)是react-router实现CSR的核心库，其中CSR分为两种：</p>
+<ol>
+<li>URL Hash</li>
+<li>Browser History</li>
 <p>
                     
                 
@@ -203,7 +203,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/05/31/interview/interview-reactcode/#more">
+                    <a href="/2023/05/28/interview/interview-reactrouter/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>

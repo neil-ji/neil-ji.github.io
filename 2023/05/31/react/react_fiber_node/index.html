@@ -7,10 +7,10 @@
 
     
 
-    <title>前端进阶（react-router） | Neil&#39;s Blog</title>
+    <title>React v17.0.2源码（Fiber Node） | Neil&#39;s Blog</title>
     <meta name="author" content="Neil Ji" />
     <meta name="keywords" content="" />
-    <meta name="description" content="客户端路由（CSR）原理传统浏览器导航行为就是URL改变时直接向服务器发送请求，服务器响应对应资源，而客户端路由就是URL改变时不再发送请求，而是由客户端部署的App自行匹配URL并展示对应内容。remix&amp;#x2F;history (v5.3)是react-router实现CSR的核心库，其中CSR分为两种：URL HashBrowser History编码式导航：二者都是通过history.pushState&amp;#x2F;replaceState改变URL而不触发请求，只不过Hash路由中传递" />
+    <meta name="description" content="React FiberReact v16以前，ReactElement被称为React DOM，其Diff、更新、渲染都是同步的，此时由于JS引擎线程被占用，那么响应用户事件所要调用的回调函数就得不到执行，观感上就是UI的卡顿。为了解决该问题，引入了Fiber架构，将React DOM拆分为Fiber Node，通过scheduler调度每个Fiber Node的构建、Diff等等，scheduler每执行若干任务就将控制权交还浏览器，原本同步的、完整的一个任务被切分成一个个子任务，类似于操作系" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
 
@@ -82,7 +82,7 @@
                     
 
                         
-                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B7%AF%E7%94%B1%EF%BC%88CSR%EF%BC%89%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">客户端路由（CSR）原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#react-router-v5%E8%B7%AF%E7%94%B1%E5%B5%8C%E5%A5%97%E5%8E%9F%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">react-router v5路由嵌套原理</span></a></li></ol>
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React-Fiber"><span class="toc-number">1.</span> <span class="toc-text">React Fiber</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fiber-Node%E8%AF%A6%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">Fiber Node详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%E6%89%A9%E5%B1%95%EF%BC%88%E6%A0%91%E7%9A%84%E5%AD%A9%E5%AD%90-%E5%85%84%E5%BC%9F%E8%A1%A8%E7%A4%BA%E6%B3%95%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">知识点扩展（树的孩子-兄弟表示法）</span></a></li></ol></li></ol>
                                 
     </div>
 </aside>
@@ -95,19 +95,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            前端进阶（react-router）
+            React v17.0.2源码（Fiber Node）
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/05/28">
+            <a class="article-date" href="/archives/2023/05/31">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-05-28T10:29:26.000Z" itemprop="datePublished">2023-05-28</time>
+    <time class="vm" datetime="2023-05-31T07:13:51.000Z" itemprop="datePublished">2023-05-31</time>
 </a>
 
             <div class="article-updated">
@@ -117,13 +117,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-06-14T08:01:26.402Z" itemprop="datePublished">2023-06-14</time>
+    <time class="vm" datetime="2023-07-02T09:13:24.151Z" itemprop="datePublished">2023-07-02</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>
 </div>
 
 
@@ -137,20 +137,38 @@
                 
             
             
-                <h2 id="客户端路由（CSR）原理"><a href="#客户端路由（CSR）原理" class="headerlink" title="客户端路由（CSR）原理"></a>客户端路由（CSR）原理</h2><p>传统浏览器导航行为就是URL改变时直接向服务器发送请求，服务器响应对应资源，而客户端路由就是URL改变时不再发送请求，而是由客户端部署的App自行匹配URL并展示对应内容。</p>
-<p>remix&#x2F;history (v5.3)是react-router实现CSR的核心库，其中CSR分为两种：</p>
+                <h2 id="React-Fiber"><a href="#React-Fiber" class="headerlink" title="React Fiber"></a>React Fiber</h2><p>React v16以前，ReactElement被称为React DOM，其Diff、更新、渲染都是同步的，此时由于JS引擎线程被占用，那么响应用户事件所要调用的回调函数就得不到执行，观感上就是UI的卡顿。</p>
+<p>为了解决该问题，引入了Fiber架构，将React DOM拆分为Fiber Node，通过scheduler调度每个Fiber Node的构建、Diff等等，scheduler每执行若干任务就将控制权交还浏览器，原本同步的、完整的一个任务被切分成一个个子任务，类似于操作系统中时间分片的概念。</p>
+<p>可见这是一个协调调度的过程，称为reconcile，分为两步：render和commit。</p>
+<h2 id="Fiber-Node详解"><a href="#Fiber-Node详解" class="headerlink" title="Fiber Node详解"></a>Fiber Node详解</h2><p>作为树结构，它有三种基础属性：</p>
 <ol>
-<li>URL Hash</li>
-<li>Browser History</li>
+<li>return指向其父节点；</li>
+<li>sibling指向其兄弟节点；</li>
+<li>child指向其首个子节点；</li>
 </ol>
-<p><strong>编码式导航</strong>：二者都是通过history.pushState&#x2F;replaceState改变URL而不触发请求，只不过Hash路由中传递URL Hash，Browser history路由中传递URL；</p>
-<p><strong>浏览器交互式导航</strong>（如back、forward或手动输入URL）：浏览器发起的导航通过<code>popstate, hashchange</code>事件来监听，进而触发所有listener，具体如下：</p>
+<p>Fiber Node是以ReactElement为基础构建的，又是最小任务单元，因此还有一些其他重要属性：</p>
 <ol>
-<li>Hash：通过popstate事件来监听URL Hash变化，由于IE11中URL Hash改变不会触发popstate事件，所以也会监听hashchange事件；</li>
-<li>Browser history：通过popstate事件来监听URL变化；</li>
+<li>tag，标识组件类型；</li>
+<li>stateNode，指向对应的浏览器DOM节点或者组件实例（ClassComponent）；</li>
+<li>type，FunctionComponent指向对应函数，ClassComponent指向对应类，HostComponent存对应的HTML标签；</li>
 </ol>
-<p>react-router v6新增<code>&lt;RouterProvider&gt;</code>组件，该组件订阅了URL的改变，URL改变时更新react state，触发app的重新渲染；</p>
-<h2 id="react-router-v5路由嵌套原理"><a href="#react-router-v5路由嵌套原理" class="headerlink" title="react-router v5路由嵌套原理"></a>react-router v5路由嵌套原理</h2><p><code>Route</code>是对<code>RouterContext.Consumer</code>与<code>RouterContext.Provider</code>的封装，该组件会获取最近的<code>RouterContext.Provider</code>的context value，并创建新的<code>RouterContext.Provider</code>，以便子路由获取其context value，这就实现了路由嵌套。</p>
+<p>Diff算法相关：</p>
+<ol>
+<li>flags，存二进制数，用于记录Diff后对应的浏览器DOM需要做什么改变，取值Placement代表新增或替换，Deletion代表删除（<code>flags |= Deletion</code>增，<code>flags &amp;Deletion </code>验，<code>flags &amp;= ~Deletion</code>删）；</li>
+<li>deletions，Diff后发现要删除的Fiber节点；</li>
+</ol>
+<p>Effect List相关：</p>
+<ol>
+<li>effectTag，副作用类型；</li>
+<li>nextEffect，DFS顺序下，下一个有副作用的Fiber节点，构成一个单链表Effect List；</li>
+<li>firstEffect，Effect List的头节点；</li>
+<li>lastEffect，Effect List的尾节点；</li>
+</ol>
+<p>调度优先级：</p>
+<ol>
+<li>lane，也是二进制数，表示Fiber Node的处理优先级，低优先级任务可能被打断，然后在下一次Reconcile处理；</li>
+</ol>
+<h3 id="知识点扩展（树的孩子-兄弟表示法）"><a href="#知识点扩展（树的孩子-兄弟表示法）" class="headerlink" title="知识点扩展（树的孩子-兄弟表示法）"></a>知识点扩展（树的孩子-兄弟表示法）</h3><p>React Fiber Tree实现了孩子-兄弟表示法，将树转化为二叉树，左孩子就是首个子节点，右孩子就是首个兄弟节点，然后Fiber Tree的构建和Commit顺序就可以看作是二叉树的先根（序）遍历。</p>
 
                 </div>
             
@@ -160,10 +178,10 @@
 
 
 
-    <a id="pagenext" href="/2023/05/19/interview/interview-mobx/" class="article-next" title="前端进阶（Mobx）"><i class="icon-arrow-right"></i></a>
+    <a id="pagenext" href="/2023/05/31/interview/interview-reactcode/" class="article-next" title="前端进阶（React v17.0.2源码）"><i class="icon-arrow-right"></i></a>
 
 
-    <a id="pageprev" href="/2023/05/31/interview/interview-reactcode/" class="article-prev" title="前端进阶（React v17.0.2源码）"><i class="icon-arrow-left"></i></a>
+    <a id="pageprev" href="/2023/06/01/interview/interview-ts/" class="article-prev" title="前端进阶（Typescript）"><i class="icon-arrow-left"></i></a>
 
 
 

@@ -132,7 +132,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/05/31/react/react16-8code-md/">React16.8源码</a>
+            <a href="/2023/05/31/interview/interview-reactcode/">前端进阶（React v17.0.2源码）</a>
         </h1>
         
         <div class="article-meta clearfix">
@@ -144,7 +144,7 @@
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-05-31T07:13:51.000Z" itemprop="datePublished">2023-05-31</time>
+    <time class="vm" datetime="2023-05-31T07:11:19.000Z" itemprop="datePublished">2023-05-31</time>
 </a>
 
             <div class="article-updated">
@@ -154,10 +154,15 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-06-30T07:53:04.446Z" itemprop="datePublished">2023-06-30</time>
+    <time class="vm" datetime="2023-07-02T11:03:48.403Z" itemprop="datePublished">2023-07-02</time>
 </div>
 
             
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
 
         </div>
     </header>
@@ -186,11 +191,11 @@
                     
                     
                         
-                        <p><h2 id="React-Fiber"><a href="#React-Fiber" class="headerlink" title="React Fiber"></a>React Fiber</h2><p>v16以前，ReactElement被称为React DOM，其Diff、更新、渲染都是同步的，此时由于JS引擎线程被占用，那么响应用户事件所要调用的回调函数就得不到执行，观感上就是UI的卡顿。</p>
-<p>为了解决该问题，引入了Fiber的架构，简单来说，scheduler库是实现任务调度的核心库，React Fiber Node是最小任务单元，通过scheduler调度每个Fiber Node的构建、Diff等等，scheduler每执行若干任务就将控制权交还浏览器，于是原本同步的、完整的一个任务被切分成一个个子任务，这类似于操作系统中经典的时间分片概念；</p>
-<p>可见这是一个协调调度的过程，称为reconcile，分为两步：render和commit，具体过程见下文；</p>
-<p>注：React中<code>workInProgress</code>循环中的<code>unitOfWork</code>指的其实就是一个Fiber Node，所以上文说<strong>React Fiber Node是最小任务单元</strong>。</p>
-<h3 id="Fiber-Node详解"><a href="#Fiber-Node详解" class="headerlink" title="Fiber Node详解"></a>Fiber Node详解</h3><p>作为树结构，它有三种基础属性（或称指针）：</p>
+                        <p><h2 id="资源一览"><a href="#资源一览" class="headerlink" title="资源一览"></a>资源一览</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github1s.com/neil-ji/react/blob/HEAD/packages/">React v17.0.2源码在线编辑器（vscode）</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/neil-ji/react/blob/HEAD/packages/">React v17.0.2源码仓库（github）</a></li>
+</ul>
+<h2 id="React内部函数调用关系草图"><a href="#React内部函数调用关系草图" class="headerlink" title="React内部函数调用关系草图"></a>React内部函数调用关系草图</h2><p>Mount阶段大致如下，可供参考，缩进意为被上一层调用，标记<code>!!!</code>的注释意为核心代码。</p>
 <p>
                     
                 
@@ -198,7 +203,93 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/05/31/react/react16-8code-md/#more">
+                    <a href="/2023/05/31/interview/interview-reactcode/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/05/31/react/react_fiber_node/">React v17.0.2源码（Fiber Node）</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/05/31">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-05-31T07:13:51.000Z" itemprop="datePublished">2023-05-31</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-02T09:13:24.151Z" itemprop="datePublished">2023-07-02</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="React-Fiber"><a href="#React-Fiber" class="headerlink" title="React Fiber"></a>React Fiber</h2><p>React v16以前，ReactElement被称为React DOM，其Diff、更新、渲染都是同步的，此时由于JS引擎线程被占用，那么响应用户事件所要调用的回调函数就得不到执行，观感上就是UI的卡顿。</p>
+<p>为了解决该问题，引入了Fiber架构，将React DOM拆分为Fiber Node，通过scheduler调度每个Fiber Node的构建、Diff等等，scheduler每执行若干任务就将控制权交还浏览器，原本同步的、完整的一个任务被切分成一个个子任务，类似于操作系统中时间分片的概念。</p>
+<p>可见这是一个协调调度的过程，称为reconcile，分为两步：render和commit。</p>
+<h2 id="Fiber-Node详解"><a href="#Fiber-Node详解" class="headerlink" title="Fiber Node详解"></a>Fiber Node详解</h2><p>作为树结构，它有三种基础属性：</p>
+<ol>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/05/31/react/react_fiber_node/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -235,7 +326,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-06-30T07:13:33.676Z" itemprop="datePublished">2023-06-30</time>
+    <time class="vm" datetime="2023-07-01T06:30:35.593Z" itemprop="datePublished">2023-07-01</time>
 </div>
 
             
@@ -457,92 +548,6 @@
                 </div>   
                 <div class="article-more-link">
                     <a href="/2023/06/26/review/%E5%8C%97%E4%BA%AC%E5%BB%BA%E8%AE%BE%E9%93%B6%E8%A1%8C%E9%9D%A2%E7%BB%8F/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/06/11/css/css_20230301/">常见Web布局</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/06/11">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-06-11T08:31:09.480Z" itemprop="datePublished">2023-06-11</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-06-26T04:48:40.107Z" itemprop="datePublished">2023-06-26</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/css/" rel="tag">css</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="正常文档流布局（兼容所有浏览器）"><a href="#正常文档流布局（兼容所有浏览器）" class="headerlink" title="正常文档流布局（兼容所有浏览器）"></a>正常文档流布局（兼容所有浏览器）</h2><p>按照元素在文档中的出现顺序与书写方向（write-mode），搭配盒模型进行布局。</p>
-<h2 id="基于position-的布局（IE-不兼容position：sticky）"><a href="#基于position-的布局（IE-不兼容position：sticky）" class="headerlink" title="基于position 的布局（IE 不兼容position：sticky）"></a>基于position 的布局（IE 不兼容position：sticky）</h2><p>通过修改元素的position 来实现一些特殊布局效果。</p>
-<h2 id="基于float-的Multicol-布局（几乎兼容所有浏览器）"><a href="#基于float-的Multicol-布局（几乎兼容所有浏览器）" class="headerlink" title="基于float 的Multicol 布局（几乎兼容所有浏览器）"></a>基于float 的Multicol 布局（几乎兼容所有浏览器）</h2><ul>
-<li>float：none&#x2F;left&#x2F;right 用于指定浮动方向，元素会朝对应方向移动，直到碰到容器边缘或另一个float 元素；float 元素会脱离正常文档流，并创建BFC；float 元素的display 可能被强制改为block，且对flex&#x2F;inline-flex 元素无效。</li>
-<li>clear：none&#x2F;left&#x2F;right&#x2F;both 用于清除当前BFC 中的前置float 元素的影响，且该元素为非float 元素时，垂直方向的外边距将会折叠；</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/06/11/css/css_20230301/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
