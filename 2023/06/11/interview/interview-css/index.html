@@ -117,7 +117,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-03T08:24:22.518Z" itemprop="datePublished">2023-07-03</time>
+    <time class="vm" datetime="2023-07-03T08:29:22.273Z" itemprop="datePublished">2023-07-03</time>
 </div>
 
             
@@ -361,12 +361,12 @@
 <li>pointer：none&#x2F;fine&#x2F;coarse，媒体支持的指针设备精度如何，fine 为高精度指针（如鼠标），coarse 为低精度指针（如触摸屏）；</li>
 </ul>
 <p>排版：使用em&#x2F;rem&#x2F;vw&#x2F;vh 等相对单位。</p>
-<p>元标签：使用<meta name="viewport" content="width=device-width,initial-scale=1"> 覆盖移动端浏览器的viewport 的某些属性，例如width&#x2F;height&#x2F;initial-scale 等，来使移动端浏览器的viewport 属性符合我们的预期。</p>
-<p>响应式图片实现技巧：为不同设备的用户提供不同的图片，借助srcset&#x2F;sizes&#x2F;<picture> 实现图片尺寸&#x2F;分辨率的自适应，IE 不支持srcset&#x2F;picture，实现方式有如下几种。</p>
+<p>元标签：使用<code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;</code>覆盖移动端浏览器的viewport 的某些属性，例如width&#x2F;height&#x2F;initial-scale 等，来使移动端浏览器的viewport 属性符合我们的预期。</p>
+<p>响应式图片实现技巧：为不同设备的用户提供不同的图片，借助<code>srcset</code>&#x2F;<code>sizes</code>&#x2F;<code>&lt;picture&gt;</code> 实现图片尺寸&#x2F;分辨率的自适应，IE 不支持<code>srcset</code>&#x2F;<code>picture</code>，实现方式有如下几种。</p>
 <ol>
-<li>srcset + sizes：srcset 设置图片集，url + 像素宽（单位w），之间以逗号分隔，每个url 对应一张图片，像素宽就是该图片的像素宽度，sizes 设置多个媒体条件，格式为 (media condition) + 图片槽宽度，以逗号分隔，当媒体条件为真时图像将要填充指定宽度的图片槽，特别的是最后一条应当省略媒体条件，以作为所有条件都不匹配时的默认值。浏览器根据sizes 获取图片槽宽度，选择srcset 中最接近的一张图片加载。</li>
-<li>srcset：设置图片集，url + css 像素&#x2F;device 像素 + x，例如(<a target="_blank" rel="noopener" href="https://test.com/1.jpg">https://test.com/1.jpg</a> 1.5x)，设备大小相同，但是发光点数量可能不同，所以可能出现两个发光点来渲染出一个css 像素点的情况，这时可以用语法2x表示，此时将会选择对应的图片加载。特别的是1x 可以省略。</li>
-<li><picture>：设置其子元素<source>，source 的media 属性可以设置一个媒体条件，srcset 属性可以设置为url + 像素宽，当媒体条件匹配时，该图片才会加载，最后一个子元素应当是一个<img>标签作为默认图片。</li>
+<li><code>srcset + sizes</code>：srcset 设置图片集，url + 像素宽（单位w），之间以逗号分隔，每个url 对应一张图片，像素宽就是该图片的像素宽度，sizes 设置多个媒体条件，格式为 (media condition) + 图片槽宽度，以逗号分隔，当媒体条件为真时图像将要填充指定宽度的图片槽，特别的是最后一条应当省略媒体条件，以作为所有条件都不匹配时的默认值。浏览器根据sizes 获取图片槽宽度，选择srcset 中最接近的一张图片加载。</li>
+<li><code>srcset</code>：设置图片集，url + css 像素&#x2F;device 像素 + x，例如(<a target="_blank" rel="noopener" href="https://test.com/1.jpg">https://test.com/1.jpg</a> 1.5x)，设备大小相同，但是发光点数量可能不同，所以可能出现两个发光点来渲染出一个css 像素点的情况，这时可以用语法2x表示，此时将会选择对应的图片加载。特别的是1x 可以省略。</li>
+<li><code>&lt;picture&gt;</code>：设置其子元素<code>&lt;source&gt;</code>，source 的media 属性可以设置一个媒体条件，srcset 属性可以设置为url + 像素宽，当媒体条件匹配时，该图片才会加载，最后一个子元素应当是一个<code>&lt;img&gt;</code>标签作为默认图片。</li>
 </ol>
 <h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><h3 id="Transition"><a href="#Transition" class="headerlink" title="Transition"></a>Transition</h3><p>添加厂商前缀（如-ms，-webkit等）可以增强其兼容性，但一般通过类库统一处理</p>
 <ul>
