@@ -3439,8 +3439,15 @@ body {
     font-size: 13px;
   }
 }
+.github-contribution-chart {
+  width: 100%;
+  transition: opacity 0.3s;
+}
+.github-contribution-chart:hover {
+  opacity: 0.7;
+}
 .archive-year-wrap {
-  margin-bottom: 16px;
+  margin: 16px 0;
 }
 .archives {
   padding-left: 1.75em;
