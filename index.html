@@ -132,6 +132,92 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2023/06/01/interview/interview-ts/">前端进阶（Typescript）</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/06/01">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-06-01T07:10:05.000Z" itemprop="datePublished">2023-06-01</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-04T09:49:06.346Z" itemprop="datePublished">2023-07-04</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="变型：协变、逆变、不变性"><a href="#变型：协变、逆变、不变性" class="headerlink" title="变型：协变、逆变、不变性"></a>变型：协变、逆变、不变性</h2><p><a target="_blank" rel="noopener" href="https://jkchao.github.io/typescript-book-chinese/tips/covarianceAndContravariance.html#%E5%8D%8F%E5%8F%98%E4%B8%8E%E9%80%86%E5%8F%98">讲的最好的协变、逆变</a></p>
+<h2 id="条件类型"><a href="#条件类型" class="headerlink" title="条件类型"></a>条件类型</h2><p><code>T extends U ? T : never</code>，T如果可以分配给U，则返回类型T，否则返回never；</p>
+<p>注意，当T是联合类型时，相当于对T的每种子类型单独应用条件类型，然后再把结果联合，如：</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> a = <span class="number">1</span> | <span class="number">2</span> | <span class="string">&quot;3&quot;</span> | <span class="string">&quot;4&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> b&lt;T&gt; = T <span class="keyword">extends</span> <span class="built_in">number</span> ? T : <span class="built_in">never</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> c = b&lt;a&gt;; <span class="comment">// 1 | 2</span></span><br></pre></td></tr></table></figure>
+
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/06/01/interview/interview-ts/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2023/06/11/interview/interview-css/">前端进阶（CSS）</a>
         </h1>
         
@@ -462,92 +548,6 @@
                 </div>   
                 <div class="article-more-link">
                     <a href="/2023/05/31/react/react_fiber_node/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/04/19/interview/interview-react/">前端进阶（React）</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/04/19">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-04-19T05:57:58.000Z" itemprop="datePublished">2023-04-19</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-07-01T06:30:35.593Z" itemprop="datePublished">2023-07-01</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="React常见知识点"><a href="#React常见知识点" class="headerlink" title="React常见知识点"></a>React常见知识点</h2><p>基础API或特性：</p>
-<ul>
-<li>ClassComponent生命周期（含unsafe）</li>
-<li>Hooks如何模拟ClassComponent生命周期</li>
-<li>useEffect VS useLayoutEffect</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/04/19/interview/interview-react/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
