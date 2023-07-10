@@ -132,7 +132,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/06/11/interview/interview-js/">前端进阶（JS）</a>
+            <a href="/2023/06/11/css/css%E5%9F%BA%E7%A1%80/">CSS基础</a>
         </h1>
         
         <div class="article-meta clearfix">
@@ -144,7 +144,7 @@
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-06-11T08:31:09.512Z" itemprop="datePublished">2023-06-11</time>
+    <time class="vm" datetime="2023-06-11T08:31:09.508Z" itemprop="datePublished">2023-06-11</time>
 </a>
 
             <div class="article-updated">
@@ -154,13 +154,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-10T06:27:52.148Z" itemprop="datePublished">2023-07-10</time>
+    <time class="vm" datetime="2023-07-10T07:16:05.828Z" itemprop="datePublished">2023-07-10</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+    <a class="article-tag-link" href="/tags/css/" rel="tag">css</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -191,11 +191,11 @@
                     
                     
                         
-                        <p><h2 id="什么是原型链？"><a href="#什么是原型链？" class="headerlink" title="什么是原型链？"></a>什么是原型链？</h2><p>定义的函数、类或对象会自动创建原型对象，并通过<code>prototype</code>和<code>constructor</code>互相指向对方，原型之间通过<code>__proto__</code>构成原型链，实例调用某个方法时，会沿原型链寻找该方法，直到找到指定方法，或遍历完整个原型链后抛出异常；</p>
-<p>借助单链表理解：针对实例调用某方法的角度来讲，原型链可以看作一个链表，每个节点都是原型对象，以<code>__proto__</code>属性指向下一节点，头节点是实例本身，尾节点是<code>Object.prototype</code>；</p>
-<p>不同情况下的<code>__proto__</code>如下：</p>
+                        <p><h2 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h2><p>盒模型分为四部分：</p>
 <ul>
-<li>function函数，箭头函数，其<code>__proto__</code>一定是<code>Function.prototype</code>，包括<code>Function</code>；</li>
+<li>margin box</li>
+<li>border box</li>
+<li>padding box</li>
 <p>
                     
                 
@@ -203,7 +203,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/06/11/interview/interview-js/#more">
+                    <a href="/2023/06/11/css/css%E5%9F%BA%E7%A1%80/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -218,7 +218,70 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/03/24/js/js_builtinobject/">常见内置对象及其属性、方法</a>
+            <a href="/2023/06/11/html/html%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">HTML基础</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/06/11">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-06-11T08:31:09.510Z" itemprop="datePublished">2023-06-11</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-10T07:13:27.582Z" itemprop="datePublished">2023-07-10</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/html/" rel="tag">html</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    <p><h2 id="HTML语义化有什么用"><a href="#HTML语义化有什么用" class="headerlink" title="HTML语义化有什么用"></a>HTML语义化有什么用</h2><p>三点：无需编写CSS就可以保持良好的文档结构、有助于SEO、有助于Web Accessibility；</p>
+<h2 id="前端页面分层"><a href="#前端页面分层" class="headerlink" title="前端页面分层"></a>前端页面分层</h2><p>三层：结构层（HTML）、表示层（CSS）、行为层（JS）；</p></p>
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/06/11/html/html%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/03/24/js/Javascript%E5%B8%B8%E8%A7%81%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/">Javascript常见内置对象</a>
         </h1>
         
         <div class="article-meta clearfix">
@@ -240,7 +303,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-10T04:56:16.018Z" itemprop="datePublished">2023-07-10</time>
+    <time class="vm" datetime="2023-07-10T07:10:00.959Z" itemprop="datePublished">2023-07-10</time>
 </div>
 
             
@@ -289,7 +352,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/03/24/js/js_builtinobject/#more">
+                    <a href="/2023/03/24/js/Javascript%E5%B8%B8%E8%A7%81%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -304,19 +367,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/05/31/react/reactcode17.0.2/">React v17.0.2源码</a>
+            <a href="/2023/06/11/js/js%E8%BF%9B%E9%98%B6/">Javascript进阶</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/05/31">
+            <a class="article-date" href="/archives/2023/06/11">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-05-31T07:11:19.000Z" itemprop="datePublished">2023-05-31</time>
+    <time class="vm" datetime="2023-06-11T08:31:09.512Z" itemprop="datePublished">2023-06-11</time>
 </a>
 
             <div class="article-updated">
@@ -326,13 +389,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-10T04:52:32.552Z" itemprop="datePublished">2023-07-10</time>
+    <time class="vm" datetime="2023-07-10T07:09:33.143Z" itemprop="datePublished">2023-07-10</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>
+    <a class="article-tag-link" href="/tags/javascript/" rel="tag">javascript</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -363,97 +426,11 @@
                     
                     
                         
-                        <p><h2 id="资源一览"><a href="#资源一览" class="headerlink" title="资源一览"></a>资源一览</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://github1s.com/neil-ji/react/blob/HEAD/packages/">React v17.0.2源码在线编辑器（vscode）</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/neil-ji/react/blob/HEAD/packages/">React v17.0.2源码仓库（github）</a></li>
-</ul>
-<h2 id="React内部函数调用关系草图"><a href="#React内部函数调用关系草图" class="headerlink" title="React内部函数调用关系草图"></a>React内部函数调用关系草图</h2><p>Mount阶段大致如下，可供参考，缩进意为被上一层调用，标记<code>!!!</code>的注释意为核心代码。</p>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/05/31/react/reactcode17.0.2/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/07/09/algorithm/leetcode124/">LeetCode Easy 124. 二叉树中的最大路径和</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/07/09">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-07-09T08:56:37.097Z" itemprop="datePublished">2023-07-09</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-07-09T09:38:00.329Z" itemprop="datePublished">2023-07-09</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-maximum-path-sum/">124. 二叉树中的最大路径和</a></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>粗略思路：从叶子节点开始，以贪心策略求得局部最大路径和，叶子节点计算完之后，回到父节点，再以同样的贪心策略求得局部最大路径和，重复该过程，<strong>显然这是二叉树的后序遍历</strong>。</p>
-<p>技巧总结：</p>
+                        <p><h2 id="什么是原型链？"><a href="#什么是原型链？" class="headerlink" title="什么是原型链？"></a>什么是原型链？</h2><p>定义的函数、类或对象会自动创建原型对象，并通过<code>prototype</code>和<code>constructor</code>互相指向对方，原型之间通过<code>__proto__</code>构成原型链，实例调用某个方法时，会沿原型链寻找该方法，直到找到指定方法，或遍历完整个原型链后抛出异常；</p>
+<p>借助单链表理解：针对实例调用某方法的角度来讲，原型链可以看作一个链表，每个节点都是原型对象，以<code>__proto__</code>属性指向下一节点，头节点是实例本身，尾节点是<code>Object.prototype</code>；</p>
+<p>不同情况下的<code>__proto__</code>如下：</p>
 <ul>
-<li>假如以递归实现，思路上要从最深或次深一层的调用考虑要做的操作，先忽略上层调用；</li>
+<li>function函数，箭头函数，其<code>__proto__</code>一定是<code>Function.prototype</code>，包括<code>Function</code>；</li>
 <p>
                     
                 
@@ -461,7 +438,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/07/09/algorithm/leetcode124/#more">
+                    <a href="/2023/06/11/js/js%E8%BF%9B%E9%98%B6/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -476,19 +453,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/07/09/algorithm/leetcode121/">LeetCode Easy 121. 买卖股票的最佳时机</a>
+            <a href="/2023/06/26/interview/%E5%8C%97%E4%BA%AC%E5%BB%BA%E8%AE%BE%E9%93%B6%E8%A1%8C%E9%9D%A2%E7%BB%8F/">北京建设银行一面-前端工程师</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/07/09">
+            <a class="article-date" href="/archives/2023/06/26">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-07-09T07:24:23.970Z" itemprop="datePublished">2023-07-09</time>
+    <time class="vm" datetime="2023-06-26T04:23:04.412Z" itemprop="datePublished">2023-06-26</time>
 </a>
 
             <div class="article-updated">
@@ -498,13 +475,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-09T07:44:49.790Z" itemprop="datePublished">2023-07-09</time>
+    <time class="vm" datetime="2023-07-10T07:07:55.900Z" itemprop="datePublished">2023-07-10</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
+    <a class="article-tag-link" href="/tags/interview/" rel="tag">interview</a>
 </div>
 
 
@@ -535,11 +512,11 @@
                     
                     
                         
-                        <p><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>题目要求只能在某一天买，之后的某天卖，利润 &#x3D; 卖的价格 - 买的价格，让卖的价格最高，买的价格最低，则利润最大，且附加限制条件：先买后卖；</p>
-<p>以这样的顺序迭代：</p>
-<ol>
-<li>第一天买入，第二天卖出；</li>
+                        <p><ol>
+<li>自我介绍</li>
+<li>js闭包，优缺点</li>
+<li>es6新特性</li>
+<li>for…in与for…of</li>
 <p>
                     
                 
@@ -547,7 +524,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/07/09/algorithm/leetcode121/#more">
+                    <a href="/2023/06/26/interview/%E5%8C%97%E4%BA%AC%E5%BB%BA%E8%AE%BE%E9%93%B6%E8%A1%8C%E9%9D%A2%E7%BB%8F/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>

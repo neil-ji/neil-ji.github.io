@@ -132,19 +132,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/06/11/algorithm/leetcode32/">LeetCode Hard 32. 最长有效括号</a>
+            <a href="/2023/05/28/libs/reactrouter/">react-router详解</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/06/11">
+            <a class="article-date" href="/archives/2023/05/28">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-06-11T08:31:09.478Z" itemprop="datePublished">2023-06-11</time>
+    <time class="vm" datetime="2023-05-28T10:29:26.000Z" itemprop="datePublished">2023-05-28</time>
 </a>
 
             <div class="article-updated">
@@ -154,13 +154,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-09T07:26:07.167Z" itemprop="datePublished">2023-07-09</time>
+    <time class="vm" datetime="2023-07-10T07:07:26.007Z" itemprop="datePublished">2023-07-10</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
+    <a class="article-tag-link" href="/tags/react-router/" rel="tag">react-router</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -191,11 +191,11 @@
                     
                     
                         
-                        <p><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-valid-parentheses/">32. 最长有效括号</a></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>注释比较长，耐心看，<strong>重点一</strong>是看懂dp[i]表示的是什么，那就是从j到i的合法子串长度，0 &lt;&#x3D; j &lt;&#x3D; i，<strong>重点二</strong>是j可由等式dp[i] &#x3D; i - j + 1变形求得，<strong>重点三</strong>是对贪心法的理解，只取局部最优，按这个思路考虑，每次迭代尾字符要么是<code>(</code>要么是<code>)</code>，则：</p>
+                        <p><h2 id="客户端路由（CSR）原理"><a href="#客户端路由（CSR）原理" class="headerlink" title="客户端路由（CSR）原理"></a>客户端路由（CSR）原理</h2><p>传统浏览器导航行为就是URL改变时直接向服务器发送请求，服务器响应对应资源，而客户端路由就是URL改变时不再发送请求，而是由客户端部署的App自行匹配URL并展示对应内容。</p>
+<p>remix&#x2F;history (v5.3)是react-router实现CSR的核心库，其中CSR分为两种：</p>
 <ol>
-<li><code>...(</code>一定不合法</li>
-<li><code>...)</code>要分情况讨论：<ol>
+<li>URL Hash</li>
+<li>Browser History</li>
 <p>
                     
                 
@@ -203,7 +203,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/06/11/algorithm/leetcode32/#more">
+                    <a href="/2023/05/28/libs/reactrouter/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -218,93 +218,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/06/11/interview/interview-css/">前端进阶（CSS）</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/06/11">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-06-11T08:31:09.508Z" itemprop="datePublished">2023-06-11</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-07-04T09:50:57.735Z" itemprop="datePublished">2023-07-04</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h2><p>盒模型分为四部分：</p>
-<ul>
-<li>margin box</li>
-<li>border box</li>
-<li>padding box</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/06/11/interview/interview-css/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/06/01/interview/interview-ts/">前端进阶（Typescript）</a>
+            <a href="/2023/06/01/js/ts%E8%BF%9B%E9%98%B6/">Typescript进阶</a>
         </h1>
         
         <div class="article-meta clearfix">
@@ -326,13 +240,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-04T09:49:06.346Z" itemprop="datePublished">2023-07-04</time>
+    <time class="vm" datetime="2023-07-10T07:06:46.155Z" itemprop="datePublished">2023-07-10</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+    <a class="article-tag-link" href="/tags/typescript/" rel="tag">typescript</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -375,7 +289,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/06/01/interview/interview-ts/#more">
+                    <a href="/2023/06/01/js/ts%E8%BF%9B%E9%98%B6/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -390,19 +304,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/04/13/interview/interview-browsercore/">前端进阶（浏览器内核）</a>
+            <a href="/2023/05/03/libs/redux/">Redux详解</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/04/13">
+            <a class="article-date" href="/archives/2023/05/03">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-04-13T06:08:50.000Z" itemprop="datePublished">2023-04-13</time>
+    <time class="vm" datetime="2023-05-02T16:00:00.000Z" itemprop="datePublished">2023-05-03</time>
 </a>
 
             <div class="article-updated">
@@ -412,13 +326,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-03T08:06:08.639Z" itemprop="datePublished">2023-07-03</time>
+    <time class="vm" datetime="2023-07-10T07:05:29.975Z" itemprop="datePublished">2023-07-10</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+    <a class="article-tag-link" href="/tags/redux/" rel="tag">redux</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -449,11 +363,11 @@
                     
                     
                         
-                        <p><ol>
-<li><p>JS解释编译过程简要回答</p>
-<p> 源代码通过解析器生成AST（Abstract syntax tree），然后生成字节码（介于高级语言与机器语言之间的中间代码），再通过解释器逐行解释并执行，借助JIT（Just in time）技术监测代码执行过程，根据代码执行频率从高到低将代码标记为不同等级，低等级的通过基线编译器编译，高等级的通过优化编译器编译，之后将执行编译后的代码，而一旦优化后代码不再满足优化条件，则将其降级到基线编译器或解释器中去处理，这就是去优化；</p>
-</li>
-<li><p>对JS单线程非阻塞的理解</p>
+                        <p><h2 id="Redux简介"><a href="#Redux简介" class="headerlink" title="Redux简介"></a>Redux简介</h2><p>Redux是一个集中存储和管理全局状态的库，通过reducer纯函数来定义怎样更新state，然后通过dispatch action更新state，state每次更新都要返回一个新对象，也就是说state是不可变的。</p>
+<p>基于reducer纯函数和不可变state，redux应用可以实现时间旅行式的调试；</p>
+<p>特点：</p>
+<ul>
+<li>单一数据源store；</li>
 <p>
                     
                 
@@ -461,7 +375,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/04/13/interview/interview-browsercore/#more">
+                    <a href="/2023/05/03/libs/redux/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -476,7 +390,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/04/19/interview/interview-react/">前端进阶（React）</a>
+            <a href="/2023/04/19/react/react%E5%9F%BA%E7%A1%80/">React基础知识</a>
         </h1>
         
         <div class="article-meta clearfix">
@@ -498,13 +412,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-01T06:30:35.593Z" itemprop="datePublished">2023-07-01</time>
+    <time class="vm" datetime="2023-07-10T07:04:14.904Z" itemprop="datePublished">2023-07-10</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -547,7 +461,93 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/04/19/interview/interview-react/#more">
+                    <a href="/2023/04/19/react/react%E5%9F%BA%E7%A1%80/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/05/19/libs/mobx/">Mobx</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/05/19">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-05-19T06:31:16.000Z" itemprop="datePublished">2023-05-19</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-10T07:02:47.931Z" itemprop="datePublished">2023-07-10</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/mobx/" rel="tag">mobx</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="Mobx简介"><a href="#Mobx简介" class="headerlink" title="Mobx简介"></a>Mobx简介</h2><ul>
+<li>非单一数据源</li>
+<li>单向数据流</li>
+</ul>
+<h2 id="Mobx核心概念"><a href="#Mobx核心概念" class="headerlink" title="Mobx核心概念"></a>Mobx核心概念</h2><ul>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/05/19/libs/mobx/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>

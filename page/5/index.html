@@ -132,7 +132,7 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/06/11/interview/interview-html/">前端进阶（HTML）</a>
+            <a href="/2023/06/11/algorithm/leetcode32/">LeetCode Hard 32. 最长有效括号</a>
         </h1>
         
         <div class="article-meta clearfix">
@@ -144,7 +144,7 @@
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-06-11T08:31:09.510Z" itemprop="datePublished">2023-06-11</time>
+    <time class="vm" datetime="2023-06-11T08:31:09.478Z" itemprop="datePublished">2023-06-11</time>
 </a>
 
             <div class="article-updated">
@@ -154,13 +154,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-06-14T08:00:38.728Z" itemprop="datePublished">2023-06-14</time>
+    <time class="vm" datetime="2023-07-09T07:26:07.167Z" itemprop="datePublished">2023-07-09</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
 </div>
 
 
@@ -173,20 +173,37 @@
             
                 
                     
-                    <p><h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><ol>
-<li><p>HTML语义化有什么用</p>
-<p> 三点：无需编写CSS就可以保持良好的文档结构、有助于SEO、有助于Web Accessibility；</p>
-</li>
-<li><p>前端页面分层</p>
-<p> 三层：结构层（HTML）、表示层（CSS）、行为层（JS）；</p>
-</li>
-</ol></p>
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-valid-parentheses/">32. 最长有效括号</a></p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>注释比较长，耐心看，<strong>重点一</strong>是看懂dp[i]表示的是什么，那就是从j到i的合法子串长度，0 &lt;&#x3D; j &lt;&#x3D; i，<strong>重点二</strong>是j可由等式dp[i] &#x3D; i - j + 1变形求得，<strong>重点三</strong>是对贪心法的理解，只取局部最优，按这个思路考虑，每次迭代尾字符要么是<code>(</code>要么是<code>)</code>，则：</p>
+<ol>
+<li><code>...(</code>一定不合法</li>
+<li><code>...)</code>要分情况讨论：<ol>
+<p>
+                    
                 
             
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/06/11/interview/interview-html/#more">
+                    <a href="/2023/06/11/algorithm/leetcode32/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -201,19 +218,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/06/13/interview/interview-git/">前端进阶（Git）</a>
+            <a href="/2023/06/11/css/%E5%B8%B8%E8%A7%81%E5%B8%83%E5%B1%80/">常见Web布局</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/06/13">
+            <a class="article-date" href="/archives/2023/06/11">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-06-13T07:50:39.934Z" itemprop="datePublished">2023-06-13</time>
+    <time class="vm" datetime="2023-06-11T08:31:09.480Z" itemprop="datePublished">2023-06-11</time>
 </a>
 
             <div class="article-updated">
@@ -223,13 +240,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-06-14T08:00:35.612Z" itemprop="datePublished">2023-06-14</time>
+    <time class="vm" datetime="2023-06-26T04:48:40.107Z" itemprop="datePublished">2023-06-26</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+    <a class="article-tag-link" href="/tags/css/" rel="tag">css</a>
 </div>
 
 
@@ -260,11 +277,11 @@
                     
                     
                         
-                        <p><h2 id="Git基本概念"><a href="#Git基本概念" class="headerlink" title="Git基本概念"></a>Git基本概念</h2><p><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/6/28/16b9d385970c7b6c~tplv-t2oaga2asx-zoom-in-crop-mark:4536:0:0:0.image" alt="Git原理"></p>
-<h2 id="基本工作流程"><a href="#基本工作流程" class="headerlink" title="基本工作流程"></a>基本工作流程</h2><ol>
-<li><code>git add .</code>：将工作区修改添加到暂存区；</li>
-<li><code>git commit -m &#39;...&#39;</code>：将暂存区修改提交到本地仓库，并添加描述；</li>
-<li><code>git remote add origin https://...git</code>：第一次提交需设置远程仓库地址，以后无需设置；</li>
+                        <p><h2 id="正常文档流布局（兼容所有浏览器）"><a href="#正常文档流布局（兼容所有浏览器）" class="headerlink" title="正常文档流布局（兼容所有浏览器）"></a>正常文档流布局（兼容所有浏览器）</h2><p>按照元素在文档中的出现顺序与书写方向（write-mode），搭配盒模型进行布局。</p>
+<h2 id="基于position-的布局（IE-不兼容position：sticky）"><a href="#基于position-的布局（IE-不兼容position：sticky）" class="headerlink" title="基于position 的布局（IE 不兼容position：sticky）"></a>基于position 的布局（IE 不兼容position：sticky）</h2><p>通过修改元素的position 来实现一些特殊布局效果。</p>
+<h2 id="基于float-的Multicol-布局（几乎兼容所有浏览器）"><a href="#基于float-的Multicol-布局（几乎兼容所有浏览器）" class="headerlink" title="基于float 的Multicol 布局（几乎兼容所有浏览器）"></a>基于float 的Multicol 布局（几乎兼容所有浏览器）</h2><ul>
+<li>float：none&#x2F;left&#x2F;right 用于指定浮动方向，元素会朝对应方向移动，直到碰到容器边缘或另一个float 元素；float 元素会脱离正常文档流，并创建BFC；float 元素的display 可能被强制改为block，且对flex&#x2F;inline-flex 元素无效。</li>
+<li>clear：none&#x2F;left&#x2F;right&#x2F;both 用于清除当前BFC 中的前置float 元素的影响，且该元素为非float 元素时，垂直方向的外边距将会折叠；</li>
 <p>
                     
                 
@@ -272,7 +289,93 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/06/13/interview/interview-git/#more">
+                    <a href="/2023/06/11/css/%E5%B8%B8%E8%A7%81%E5%B8%83%E5%B1%80/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/06/11/algorithm/leetcode/">Leetcode 刷题套路</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/06/11">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-06-11T08:31:09.490Z" itemprop="datePublished">2023-06-11</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-06-22T08:14:08.815Z" itemprop="datePublished">2023-06-22</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="数组类技巧"><a href="#数组类技巧" class="headerlink" title="数组类技巧"></a>数组类技巧</h2><ol>
+<li>滑动窗口；</li>
+<li>双指针;</li>
+<li>巧用排序；</li>
+<li>巧用数据结构（Hash Map&#x2F;Set，Stack，Priority Queue）</li>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/06/11/algorithm/leetcode/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -412,70 +515,6 @@
                 <p>列表虚拟化就是只渲染部分列表项，具体思路：两层容器，外层控制可见区域大小，内层计算一个高度（<code>列表项数量 * 列表项高度</code>，或<code>列表项高度累加</code>），内层超高会使外层出现滚动条，监听外层容器滚动事件，通过<code>event.currentTarget.scrollTop / 列表项高度</code>得到可视区域的列表项的起始下标start，从start开始遍历列表数据，取若干条数据渲染，注意列表项的key设为列表数据下标，列表项为绝对定位，top通过<code>下标 * 列表项高度</code>动态计算而来； </p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./index.css&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">ListItem</span>(<span class="params">&#123; top, children &#125;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;listItem&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">top</span> &#125;&#125;&gt;</span>&#123;children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">ITEM_HEIGHT</span> = <span class="number">35</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">VirtualList</span>(<span class="params">&#123; sourceData, itemCount = <span class="number">8</span> &#125;</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> [start, setStart] = <span class="title class_">React</span>.<span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> scrollHandler = <span class="title class_">React</span>.<span class="title function_">useCallback</span>(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newStart = <span class="title class_">Math</span>.<span class="title function_">ceil</span>(e.<span class="property">target</span>.<span class="property">scrollTop</span> / <span class="variable constant_">ITEM_HEIGHT</span>);</span><br><span class="line">        <span class="keyword">if</span> (newStart !== start) &#123;</span><br><span class="line">            <span class="title function_">setStart</span>(newStart);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, [start, setStart]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> renderedItems = <span class="title class_">React</span>.<span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> end = start + itemCount;</span><br><span class="line">        <span class="keyword">const</span> items = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = start; i &lt; end &amp;&amp; i &lt; sourceData.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            items.<span class="title function_">push</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">ListItem</span> <span class="attr">key</span>=<span class="string">&#123;i&#125;</span> <span class="attr">top</span>=<span class="string">&#123;i</span> * <span class="attr">ITEM_HEIGHT</span>&#125;&gt;</span>&#123;sourceData[i]&#125;<span class="tag">&lt;/<span class="name">ListItem</span>&gt;</span></span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> items;</span><br><span class="line">    &#125;, [start, itemCount, sourceData]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;listContainer&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">height:</span> <span class="attr">itemCount</span> * <span class="attr">ITEM_HEIGHT</span> &#125;&#125; <span class="attr">onScroll</span>=<span class="string">&#123;scrollHandler&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;list&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">height:</span> <span class="attr">sourceData.length</span> * <span class="attr">ITEM_HEIGHT</span> &#125;&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">                &#123;renderedItems&#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">MockVirtualList</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="variable constant_">LEN</span> = <span class="number">100000</span>;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">new</span> <span class="title class_">Array</span>(<span class="variable constant_">LEN</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable constant_">LEN</span>; i++) &#123;</span><br><span class="line">        data[i] = <span class="string">`<span class="subst">$&#123;i&#125;</span>-------<span class="subst">$&#123;<span class="built_in">Math</span>.random() * i&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">VirtualList</span> <span class="attr">sourceData</span>=<span class="string">&#123;data&#125;</span> /&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.listContainer</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">overflow</span>: auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.listItem</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid blue;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">35px</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/06/11/js/js_executioncontext/">Execution Context</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/06/11">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-06-11T08:31:09.487Z" itemprop="datePublished">2023-06-11</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-03-28T09:50:11.308Z" itemprop="datePublished">2023-03-28</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8/" rel="tag">浏览器内核</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    <p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS引擎只确保Execution Context描述的机制，但不确保采用什么手段去实现。</p>
-<p>首先，Execution Context是ECMAScript语言规范中的抽象概念，它旨在建立一种易于描述和实现的ECMAScript运行机制，JavaScript是ECMAScript的一种实现，而JavaScript引擎，例如V8、SpiderMonkey、Carakan等，在实现JavaScript运行环境时，并不一定会采用固定方式实现Execution Context，更不会强调哪些类、方法或函数是与Execution Context有关的，也许其实现有关的代码到处都是。</p>
-<p>但了解Execution Context仍然是有意义的，概念可以帮助我们理解现象。</p></p>
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/06/11/js/js_executioncontext/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
                 </div>
             
     </section>
