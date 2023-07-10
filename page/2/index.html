@@ -476,19 +476,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/05/31/react/react_fiber_node/">React v17.0.2源码（Fiber Node）</a>
+            <a href="/2023/04/19/interview/interview-react/">前端进阶（React）</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/05/31">
+            <a class="article-date" href="/archives/2023/04/19">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-05-31T07:13:51.000Z" itemprop="datePublished">2023-05-31</time>
+    <time class="vm" datetime="2023-04-19T05:57:58.000Z" itemprop="datePublished">2023-04-19</time>
 </a>
 
             <div class="article-updated">
@@ -498,13 +498,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-02T09:13:24.151Z" itemprop="datePublished">2023-07-02</time>
+    <time class="vm" datetime="2023-07-01T06:30:35.593Z" itemprop="datePublished">2023-07-01</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -535,11 +535,11 @@
                     
                     
                         
-                        <p><h2 id="React-Fiber"><a href="#React-Fiber" class="headerlink" title="React Fiber"></a>React Fiber</h2><p>React v16以前，ReactElement被称为React DOM，其Diff、更新、渲染都是同步的，此时由于JS引擎线程被占用，那么响应用户事件所要调用的回调函数就得不到执行，观感上就是UI的卡顿。</p>
-<p>为了解决该问题，引入了Fiber架构，将React DOM拆分为Fiber Node，通过scheduler调度每个Fiber Node的构建、Diff等等，scheduler每执行若干任务就将控制权交还浏览器，原本同步的、完整的一个任务被切分成一个个子任务，类似于操作系统中时间分片的概念。</p>
-<p>可见这是一个协调调度的过程，称为reconcile，分为两步：render和commit。</p>
-<h2 id="Fiber-Node详解"><a href="#Fiber-Node详解" class="headerlink" title="Fiber Node详解"></a>Fiber Node详解</h2><p>作为树结构，它有三种基础属性：</p>
-<ol>
+                        <p><h2 id="React常见知识点"><a href="#React常见知识点" class="headerlink" title="React常见知识点"></a>React常见知识点</h2><p>基础API或特性：</p>
+<ul>
+<li>ClassComponent生命周期（含unsafe）</li>
+<li>Hooks如何模拟ClassComponent生命周期</li>
+<li>useEffect VS useLayoutEffect</li>
 <p>
                     
                 
@@ -547,7 +547,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/05/31/react/react_fiber_node/#more">
+                    <a href="/2023/04/19/interview/interview-react/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
