@@ -117,7 +117,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-10T06:50:30.306Z" itemprop="datePublished">2023-07-10</time>
+    <time class="vm" datetime="2023-07-11T03:27:50.504Z" itemprop="datePublished">2023-07-11</time>
 </div>
 
             
@@ -151,8 +151,8 @@
 <h3 id="存储型"><a href="#存储型" class="headerlink" title="存储型"></a>存储型</h3><p>常见场景：各种需持久化用户输入的场景，如发帖，评论等；</p>
 <p>提交含恶意代码的信息，服务器端将该信息持久化到数据库中，假如该信息会被插入到某个页面中，那么任何访问该页面的用户都将遭受攻击。</p>
 <p>防御：同反射型；</p>
-<h3 id="DOM型"><a href="#DOM型" class="headerlink" title="DOM型"></a>DOM型</h3><p>常见场景：JS直接从浏览器本地可更改的数据（如URL）中获取信息；</p>
-<p>对于由前端控制的页面，如果直接将任何可被用户修改的信息注入到当前页面，例如从URL中获取参数，然后使用document.innerHTML等API动态改变当前页面，将导致恶意代码的执行；</p>
+<h3 id="DOM型"><a href="#DOM型" class="headerlink" title="DOM型"></a>DOM型</h3><p>常见场景：页面提交的内容直接插入到当前DOM Tree中；</p>
+<p>对于由前端控制的页面，如果直接将任何可被用户修改的信息，利用ajax技术直接插入到当前HTML文档中，而无需经过服务器反射，将导致恶意代码躲避服务器端检测而直接执行，例如从URL中获取参数，然后使用document.innerHTML等API动态改变当前页面；</p>
 <p>防御：同上；</p>
 <h2 id="CSRF-Cross-Site-Request-Forgeries"><a href="#CSRF-Cross-Site-Request-Forgeries" class="headerlink" title="CSRF(Cross-Site Request Forgeries)"></a>CSRF(Cross-Site Request Forgeries)</h2><p>首先用户需要登陆过正常网站A并生成了cookie，然后攻击者伪造一个超链接或页面B，诱骗用户点击，然后该超链接或页面B将会向A发起一个跨域请求，浏览器会自动携带上A创建的cookie，而由于服务器对cookie的信任，直接执行了相关操作，实际上该操作是攻击者伪造用户本人发起的请求。</p>
 <p>防御：</p>
