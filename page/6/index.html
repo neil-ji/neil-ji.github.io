@@ -132,6 +132,74 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2023/06/11/react/react_virtuallist/">列表虚拟化</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/06/11">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-06-11T08:31:09.501Z" itemprop="datePublished">2023-06-11</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-04-27T08:23:09.239Z" itemprop="datePublished">2023-04-27</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                
+            
+            
+                <p>列表虚拟化就是只渲染部分列表项，具体思路：两层容器，外层控制可见区域大小，内层计算一个高度（<code>列表项数量 * 列表项高度</code>，或<code>列表项高度累加</code>），内层超高会使外层出现滚动条，监听外层容器滚动事件，通过<code>event.currentTarget.scrollTop / 列表项高度</code>得到可视区域的列表项的起始下标start，从start开始遍历列表数据，取若干条数据渲染，注意列表项的key设为列表数据下标，列表项为绝对定位，top通过<code>下标 * 列表项高度</code>动态计算而来； </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./index.css&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">ListItem</span>(<span class="params">&#123; top, children &#125;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;listItem&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">top</span> &#125;&#125;&gt;</span>&#123;children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">ITEM_HEIGHT</span> = <span class="number">35</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">VirtualList</span>(<span class="params">&#123; sourceData, itemCount = <span class="number">8</span> &#125;</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> [start, setStart] = <span class="title class_">React</span>.<span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> scrollHandler = <span class="title class_">React</span>.<span class="title function_">useCallback</span>(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newStart = <span class="title class_">Math</span>.<span class="title function_">ceil</span>(e.<span class="property">target</span>.<span class="property">scrollTop</span> / <span class="variable constant_">ITEM_HEIGHT</span>);</span><br><span class="line">        <span class="keyword">if</span> (newStart !== start) &#123;</span><br><span class="line">            <span class="title function_">setStart</span>(newStart);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, [start, setStart]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> renderedItems = <span class="title class_">React</span>.<span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> end = start + itemCount;</span><br><span class="line">        <span class="keyword">const</span> items = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = start; i &lt; end &amp;&amp; i &lt; sourceData.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            items.<span class="title function_">push</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">ListItem</span> <span class="attr">key</span>=<span class="string">&#123;i&#125;</span> <span class="attr">top</span>=<span class="string">&#123;i</span> * <span class="attr">ITEM_HEIGHT</span>&#125;&gt;</span>&#123;sourceData[i]&#125;<span class="tag">&lt;/<span class="name">ListItem</span>&gt;</span></span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> items;</span><br><span class="line">    &#125;, [start, itemCount, sourceData]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;listContainer&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">height:</span> <span class="attr">itemCount</span> * <span class="attr">ITEM_HEIGHT</span> &#125;&#125; <span class="attr">onScroll</span>=<span class="string">&#123;scrollHandler&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;list&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">height:</span> <span class="attr">sourceData.length</span> * <span class="attr">ITEM_HEIGHT</span> &#125;&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">                &#123;renderedItems&#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">MockVirtualList</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="variable constant_">LEN</span> = <span class="number">100000</span>;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">new</span> <span class="title class_">Array</span>(<span class="variable constant_">LEN</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable constant_">LEN</span>; i++) &#123;</span><br><span class="line">        data[i] = <span class="string">`<span class="subst">$&#123;i&#125;</span>-------<span class="subst">$&#123;<span class="built_in">Math</span>.random() * i&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">VirtualList</span> <span class="attr">sourceData</span>=<span class="string">&#123;data&#125;</span> /&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.listContainer</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">overflow</span>: auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.listItem</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid blue;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">35px</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2023/02/05/others/accessibility/">What is Web Accessibility?</a>
         </h1>
         

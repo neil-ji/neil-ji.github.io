@@ -132,6 +132,70 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2023/06/11/browser/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/">Execution Context</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/06/11">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-06-11T08:31:09.487Z" itemprop="datePublished">2023-06-11</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-10T06:57:35.357Z" itemprop="datePublished">2023-07-10</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>, <a class="article-tag-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    <p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS引擎只确保Execution Context描述的机制，但不确保采用什么手段去实现。</p>
+<p>首先，Execution Context是ECMAScript语言规范中的抽象概念，它旨在建立一种易于描述和实现的ECMAScript运行机制，JavaScript是ECMAScript的一种实现，而JavaScript引擎，例如V8、SpiderMonkey、Carakan等，在实现JavaScript运行环境时，并不一定会采用固定方式实现Execution Context，更不会强调哪些类、方法或函数是与Execution Context有关的，也许其实现有关的代码到处都是。</p>
+<p>但了解Execution Context仍然是有意义的，概念可以帮助我们理解现象。</p></p>
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/06/11/browser/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2023/04/13/browser/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8/">浏览器内核</a>
         </h1>
         
@@ -462,92 +526,6 @@
                 </div>   
                 <div class="article-more-link">
                     <a href="/2023/07/09/algorithm/leetcode124/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/07/09/algorithm/leetcode121/">LeetCode Easy 121. 买卖股票的最佳时机</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/07/09">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-07-09T07:24:23.970Z" itemprop="datePublished">2023-07-09</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-07-09T07:44:49.790Z" itemprop="datePublished">2023-07-09</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>题目要求只能在某一天买，之后的某天卖，利润 &#x3D; 卖的价格 - 买的价格，让卖的价格最高，买的价格最低，则利润最大，且附加限制条件：先买后卖；</p>
-<p>以这样的顺序迭代：</p>
-<ol>
-<li>第一天买入，第二天卖出；</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/07/09/algorithm/leetcode121/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
