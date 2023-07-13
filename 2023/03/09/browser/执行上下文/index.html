@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>Execution Context | Neil&#39;s Blog</title>
+    <meta name="author" content="Neil Ji" />
+    <meta name="keywords" content="react,js,javascript,react17.0.2,ts,typescript,redux,mobx" />
+    <meta name="description" content="前言JS引擎只确保Execution Context描述的机制，但不确保采用什么手段去实现。首先，Execution Context是ECMAScript语言规范中的抽象概念，它旨在建立一种易于描述和实现的ECMAScript运行机制，JavaScript是ECMAScript的一种实现，而JavaScript引擎，例如V8、SpiderMonkey、Carakan等，在实现JavaScript运行环境时，并不一定会采用固定方式实现Execution Context，更不会强调哪些类、方法或函数" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="Neil&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">Neil&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://neil-ji.github.io"></form> -->
+
+        
+            
+                
+                    
+
+                        
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Basic"><span class="toc-number">2.</span> <span class="toc-text">Basic</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%98%B6%E6%AE%B5"><span class="toc-number">3.</span> <span class="toc-text">创建阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1"><span class="toc-number">3.1.</span> <span class="toc-text">创建变量对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE"><span class="toc-number">3.2.</span> <span class="toc-text">创建作用域链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%91%E5%AE%9Athis%E6%8C%87%E9%92%88"><span class="toc-number">3.3.</span> <span class="toc-text">绑定this指针</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E9%98%B6%E6%AE%B5"><span class="toc-number">4.</span> <span class="toc-text">执行阶段</span></a></li></ol>
+                                
+    </div>
+</aside>
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            Execution Context
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/03/09">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-03-09T16:00:00.000Z" itemprop="datePublished">2023-03-10</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-13T10:06:32.394Z" itemprop="datePublished">2023-07-13</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>, <a class="article-tag-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+            
+            
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>JS引擎只确保Execution Context描述的机制，但不确保采用什么手段去实现。</p>
+<p>首先，Execution Context是ECMAScript语言规范中的抽象概念，它旨在建立一种易于描述和实现的ECMAScript运行机制，JavaScript是ECMAScript的一种实现，而JavaScript引擎，例如V8、SpiderMonkey、Carakan等，在实现JavaScript运行环境时，并不一定会采用固定方式实现Execution Context，更不会强调哪些类、方法或函数是与Execution Context有关的，也许其实现有关的代码到处都是。</p>
+<p>但了解Execution Context仍然是有意义的，概念可以帮助我们理解现象。</p>
+<span id="more"></span>
+<p>最后，Execution Context的<strong>流行解释</strong>有两种，共同点是JS执行都要经历两个阶段：创建执行上下文，执行代码；不同点主要在于创建阶段，一种是偏向于ECMAScript中的抽象描述——Execution Context创建词法环境组件与变量环境组件，另一种未找到来源，猜测是个人构思的实现方式，或早期JS引擎的实现方式——Execution Context创建变量对象与作用域链。</p>
+<p>二者殊途同归，方式不同，但效果相同，本文主要介绍后者——变量对象与作用域链说，参考自 <a target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/execution-context-how-javascript-works-behind-the-scenes/">JavaScript Execution Context – How JS Works Behind The Scenes</a></p>
+<h2 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h2><p>执行JS代码总体分为两步：</p>
+<ol>
+<li>创建阶段；</li>
+<li>执行阶段；</li>
+</ol>
+<p>执行上下文（Execution Context）是JS得以执行的环境，简称EC，其中包含参数、变量、函数的定义、作用域链以及this绑定的对象等，参数、变量的赋值将在执行代码时完成；</p>
+<p>其中EC有两种：</p>
+<ol>
+<li>Global Execution Context，简称GEC，默认创建的全局执行上下文；</li>
+<li>Function Execution Context，简称FEC，为函数创建的函数执行上下文；</li>
+</ol>
+<p>显然函数需要按照一定的顺序执行，FEC也要按照同样的顺序被访问，执行上下文栈（Execution Context Stack，or Execution Stack，Call Stack）就是保证EC按顺序访问的栈结构，GEC总是位于栈底；</p>
+<h2 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h2><p>创建阶段会构造执行上下文，而执行上下文以对象的形式存在，即Execution Context Object，简称ECO，然后主要做三件事：</p>
+<ol>
+<li>创建变量对象（Variable Object），简称VO；</li>
+<li>创建作用域链（Scope Chain）；</li>
+<li>绑定this指针；</li>
+</ol>
+<p>上述VO、Scope Chain、this以属性的形式存在于ECO上；</p>
+<p>首先创建全局执行上下文对象，它的VO作为全局函数和全局属性的宿主，也称为全局对象（Global Object，GO），GO在浏览器环境中以<code>window</code>形式出现，Node.js环境中有相同作用的<code>global</code>；</p>
+<h3 id="创建变量对象"><a href="#创建变量对象" class="headerlink" title="创建变量对象"></a>创建变量对象</h3><p>VO的创建包含如下内容：</p>
+<ol>
+<li>变量声明，初值为undefined，已有同名声明则不再赋初值；</li>
+<li>函数声明，初值为对应函数的引用（Reference of Function），值会覆盖同名声明（变量或函数）；</li>
+</ol>
+<p><strong>重点</strong>，基于上述规则，会有如下现象：</p>
+<ol>
+<li><p>按顺序执行代码，首行调用func()时，<strong>变量</strong>func值为undefined，抛出异常；</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// func(); throw an error, func is undefined</span></span><br><span class="line"><span class="keyword">var</span> func = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello v8&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">func</span>(); <span class="comment">// print &quot;hello v8&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按顺序执行代码，首行调用func()时，<strong>函数</strong>func值为func的引用，代码正常运行；</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">func</span>(); <span class="comment">// print &quot;hello v8&quot;</span></span><br><span class="line"><span class="keyword">var</span> func = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello v8&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">func</span>(); <span class="comment">// print &quot;hello v8&quot;</span></span><br></pre></td></tr></table></figure>
+<p>这就是变量提升（Variable Hoisting）与函数提升（Function Hoisting）的区别与根源；</p>
+</li>
+</ol>
+<p>注1：let和const定义的变量，在其赋值语句出现之前访问该变量，将抛出错误，这是ECMAScript规定的——在let、const赋值之前，该变量无法访问，这段时间该变量处于暂存死区（Temporal Dead Zone）；</p>
+<p>注2：函数参数是通过类数组arguments存储的，并不是同变量、函数一同保存在VO中；</p>
+<h3 id="创建作用域链"><a href="#创建作用域链" class="headerlink" title="创建作用域链"></a>创建作用域链</h3><p>JS中的代码受词法作用域限制，块内部可访问外部变量，反之则不行，Scope Chain就是对词法作用域的实现，假如以单链表模拟，则每个节点代表执行上下文的VO，当前执行上下文的VO作为头节点，全局执行上下文的VO作为尾节点，在解析某个变量时遍历Scope Chain；</p>
+<p>Scope Chain导致的现象就是闭包（Closure），即当前执行上下文总是可以通过Scope Chain访问到父执行上下文中定义的变量；</p>
+<h3 id="绑定this指针"><a href="#绑定this指针" class="headerlink" title="绑定this指针"></a>绑定this指针</h3><p>全局执行上下文的this指向GO，函数执行上下文的this指向函数定义时的环境，这句话这样理解：</p>
+<ol>
+<li>全局函数：在全局定义，this指向GO；</li>
+<li>对象的方法：在对象中定义，this指向该对象；</li>
+</ol>
+<p>例子如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">print</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">a</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">print</span>(); <span class="comment">// 1, print是在全局定义的</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">2</span>,</span><br><span class="line">    print</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">obj.<span class="title function_">print</span>(); <span class="comment">// 2，print是在obj中定义的</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> parentObj = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">3</span>,</span><br><span class="line">    obj</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">parentObj.<span class="property">obj</span>.<span class="title function_">print</span>(); <span class="comment">// 2，print是在obj中定义的；</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h2><p>进入执行阶段，将GEC压入ECS，然后顺序执行代码，执行到赋值语句时就更新GO中的变量或函数声明，此时变量才可以取到值。</p>
+<p>特别的，执行到函数调用时，为该函数创建FEC，然后将其压入ECS，并设为active，设为active的执行上下文最先开始执行，如果函数体包含嵌套的函数调用，则如法炮制——创建FEC并入栈，直到没有嵌套的函数调用，执行完栈顶函数后，对应FEC出栈，再重复该过程直到所有函数调用完。</p>
+
+                </div>
+            
+    </section>
+</article>
+
+
+
+
+    <a id="pagenext" href="/2023/02/25/algorithm/leetcode/" class="article-next" title="Leetcode 刷题套路"><i class="icon-arrow-right"></i></a>
+
+
+    <a id="pageprev" href="/2023/03/15/js/js%E8%BF%9B%E9%98%B6/" class="article-prev" title="Javascript进阶"><i class="icon-arrow-left"></i></a>
+
+
+
+
+
+            </div>
+        </div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>

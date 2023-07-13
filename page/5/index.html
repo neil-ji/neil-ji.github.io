@@ -132,19 +132,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/05/19/libs/mobx/">Mobx</a>
+            <a href="/2023/07/08/algorithm/leetcode121/">LeetCode Easy 121. 买卖股票的最佳时机</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/05/19">
+            <a class="article-date" href="/archives/2023/07/09">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-05-19T06:31:16.000Z" itemprop="datePublished">2023-05-19</time>
+    <time class="vm" datetime="2023-07-08T16:00:00.000Z" itemprop="datePublished">2023-07-09</time>
 </a>
 
             <div class="article-updated">
@@ -154,13 +154,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-13T09:50:02.685Z" itemprop="datePublished">2023-07-13</time>
+    <time class="vm" datetime="2023-07-13T10:06:32.394Z" itemprop="datePublished">2023-07-13</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/mobx/" rel="tag">mobx</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
 </div>
 
 
@@ -191,11 +191,11 @@
                     
                     
                         
-                        <p><h2 id="Mobx简介"><a href="#Mobx简介" class="headerlink" title="Mobx简介"></a>Mobx简介</h2><ul>
-<li>非单一数据源</li>
-<li>单向数据流</li>
-</ul>
-<h2 id="Mobx核心概念"><a href="#Mobx核心概念" class="headerlink" title="Mobx核心概念"></a>Mobx核心概念</h2><ul>
+                        <p><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a></p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>题目要求只能在某一天买，之后的某天卖，利润 &#x3D; 卖的价格 - 买的价格，让卖的价格最高，买的价格最低，则利润最大，且附加限制条件：先买后卖；</p>
+<p>以这样的顺序迭代：</p>
+<ol>
+<li>第一天买入，第二天卖出；</li>
 <p>
                     
                 
@@ -203,7 +203,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/05/19/libs/mobx/#more">
+                    <a href="/2023/07/08/algorithm/leetcode121/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -218,19 +218,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/05/02/libs/redux/">Redux详解</a>
+            <a href="/2023/07/08/algorithm/leetcode124/">LeetCode Easy 124. 二叉树中的最大路径和</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/05/03">
+            <a class="article-date" href="/archives/2023/07/09">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-05-02T16:00:00.000Z" itemprop="datePublished">2023-05-03</time>
+    <time class="vm" datetime="2023-07-08T16:00:00.000Z" itemprop="datePublished">2023-07-09</time>
 </a>
 
             <div class="article-updated">
@@ -240,13 +240,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-13T09:50:02.685Z" itemprop="datePublished">2023-07-13</time>
+    <time class="vm" datetime="2023-07-13T10:06:32.394Z" itemprop="datePublished">2023-07-13</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/redux/" rel="tag">redux</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
 </div>
 
 
@@ -277,11 +277,11 @@
                     
                     
                         
-                        <p><h2 id="Redux简介"><a href="#Redux简介" class="headerlink" title="Redux简介"></a>Redux简介</h2><p>Redux是一个集中存储和管理全局状态的库，通过reducer纯函数来定义怎样更新state，然后通过dispatch action更新state，state每次更新都要返回一个新对象，也就是说state是不可变的。</p>
-<p>基于reducer纯函数和不可变state，redux应用可以实现时间旅行式的调试；</p>
-<p>特点：</p>
+                        <p><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-maximum-path-sum/">124. 二叉树中的最大路径和</a></p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>粗略思路：从叶子节点开始，以贪心策略求得局部最大路径和，叶子节点计算完之后，回到父节点，再以同样的贪心策略求得局部最大路径和，重复该过程，<strong>显然这是二叉树的后序遍历</strong>。</p>
+<p>技巧总结：</p>
 <ul>
-<li>单一数据源store；</li>
+<li>假如以递归实现，思路上要从最深或次深一层的调用考虑要做的操作，先忽略上层调用；</li>
 <p>
                     
                 
@@ -289,7 +289,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/05/02/libs/redux/#more">
+                    <a href="/2023/07/08/algorithm/leetcode124/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -304,19 +304,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/04/19/react/react%E5%9F%BA%E7%A1%80/">React基础知识</a>
+            <a href="/2023/06/24/interview/%E5%8C%97%E4%BA%AC%E5%BB%BA%E8%AE%BE%E9%93%B6%E8%A1%8C%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98/">北京建设银行面试复盘</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/04/19">
+            <a class="article-date" href="/archives/2023/06/25">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-04-19T05:57:58.000Z" itemprop="datePublished">2023-04-19</time>
+    <time class="vm" datetime="2023-06-24T16:00:00.000Z" itemprop="datePublished">2023-06-25</time>
 </a>
 
             <div class="article-updated">
@@ -326,13 +326,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-13T09:50:02.685Z" itemprop="datePublished">2023-07-13</time>
+    <time class="vm" datetime="2023-07-13T10:06:32.394Z" itemprop="datePublished">2023-07-13</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+    <a class="article-tag-link" href="/tags/interview/" rel="tag">interview</a>
 </div>
 
 
@@ -363,11 +363,11 @@
                     
                     
                         
-                        <p><h2 id="React常见知识点"><a href="#React常见知识点" class="headerlink" title="React常见知识点"></a>React常见知识点</h2><p>基础API或特性：</p>
-<ul>
-<li>ClassComponent生命周期（含unsafe）</li>
-<li>Hooks如何模拟ClassComponent生命周期</li>
-<li>useEffect VS useLayoutEffect</li>
+                        <p><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>一面：</p>
+<ol>
+<li>自我介绍</li>
+<li>js闭包，优缺点</li>
+<li>es6新特性</li>
 <p>
                     
                 
@@ -375,7 +375,93 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/04/19/react/react%E5%9F%BA%E7%A1%80/#more">
+                    <a href="/2023/06/24/interview/%E5%8C%97%E4%BA%AC%E5%BB%BA%E8%AE%BE%E9%93%B6%E8%A1%8C%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/04/23/algorithm/leetcode32/">LeetCode Hard 32. 最长有效括号</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/04/24">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-04-23T16:00:00.000Z" itemprop="datePublished">2023-04-24</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-13T10:06:32.394Z" itemprop="datePublished">2023-07-13</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-valid-parentheses/">32. 最长有效括号</a></p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>注释比较长，耐心看，<strong>重点一</strong>是看懂dp[i]表示的是什么，那就是从j到i的合法子串长度，0 &lt;&#x3D; j &lt;&#x3D; i，<strong>重点二</strong>是j可由等式dp[i] &#x3D; i - j + 1变形求得，<strong>重点三</strong>是对贪心法的理解，只取局部最优，按这个思路考虑，每次迭代尾字符要么是<code>(</code>要么是<code>)</code>，则：</p>
+<ol>
+<li><code>...(</code>一定不合法</li>
+<li><code>...)</code>要分情况讨论：<ol>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/04/23/algorithm/leetcode32/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -412,7 +498,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-13T09:50:02.685Z" itemprop="datePublished">2023-07-13</time>
+    <time class="vm" datetime="2023-07-13T10:06:32.394Z" itemprop="datePublished">2023-07-13</time>
 </div>
 
             
@@ -462,92 +548,6 @@
                 </div>   
                 <div class="article-more-link">
                     <a href="/2023/04/13/browser/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/03/24/js/Javascript%E5%B8%B8%E8%A7%81%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/">Javascript常见内置对象</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/03/24">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-03-24T09:54:41.000Z" itemprop="datePublished">2023-03-24</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-07-13T09:50:02.685Z" itemprop="datePublished">2023-07-13</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/javascript/" rel="tag">javascript</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><ul>
-<li><code>assign(target, ...sources)</code>，复制sources的<strong>自有可枚举属性</strong>到target，并返回target，复制过程用的是sources的[[Get]]与target的[[Set]]；</li>
-<li><code>create(proto, propertiesObject)</code>，使用指定的原型对象和<strong>自有可枚举属性</strong>创建一个<strong>新</strong>对象；</li>
-<li><code>defineProperty(target, propName, descriptor)</code>，给target添加或修改名为propName的属性，并指定属性描述符；</li>
-<li><code>entries(target)</code>返回target的<strong>自有可枚举属性</strong>的键值对数组，形如<code>[ [&#39;propA&#39;, &#39;1&#39;], [&#39;propB&#39;, 2] ]</code>；</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/03/24/js/Javascript%E5%B8%B8%E8%A7%81%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
