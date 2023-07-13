@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>浏览器内核 | Neil&#39;s Blog</title>
+    <meta name="author" content="Neil Ji" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="JS解释编译简要过程 源代码通过解析器生成AST（Abstract syntax tree），然后生成字节码（介于高级语言与机器语言之间的中间代码），再通过解释器逐行解释并执行，借助JIT（Just in time）技术监测代码执行过程，根据代码执行频率从高到低将代码标记为不同等级，低等级的通过基线编译器编译，高等级的通过优化编译器编译，之后将执行编译后的代码，而一旦优化后代码不再满足优化条件，则将其降级到基线编译器或解释器中去处理，这就是去优化；对JS单线程非阻塞的理解 单线程：JS代码一定是" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="Neil&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">Neil&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://neil-ji.github.io"></form> -->
+
+        
+            
+                
+                    
+
+                        
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Html%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text">Html解析过程</span></a></li></ol>
+                                
+    </div>
+</aside>
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            浏览器内核
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/04/13">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-04-13T14:08:50.000Z" itemprop="datePublished">2023-04-13</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-13T08:20:15.244Z" itemprop="datePublished">2023-07-13</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>, <a class="article-tag-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+            
+            
+                <ol>
+<li><p>JS解释编译简要过程</p>
+<p> 源代码通过解析器生成AST（Abstract syntax tree），然后生成字节码（介于高级语言与机器语言之间的中间代码），再通过解释器逐行解释并执行，借助JIT（Just in time）技术监测代码执行过程，根据代码执行频率从高到低将代码标记为不同等级，低等级的通过基线编译器编译，高等级的通过优化编译器编译，之后将执行编译后的代码，而一旦优化后代码不再满足优化条件，则将其降级到基线编译器或解释器中去处理，这就是去优化；</p>
+</li>
+<li><p>对JS单线程非阻塞的理解</p>
+<p> 单线程：JS代码一定是在单个线程中同步执行的（JS引擎线程）；<br> 非阻塞：异步操作不会阻塞同步代码的执行，异步操作实际是由浏览器代理，然后基于Event Loop机制，异步操作完成后的回调函数会由JS引擎执行；</p>
+</li>
+<li><p>现代浏览器有哪些进程和线程</p>
+<p> 浏览器包含以下进程：</p>
+<ul>
+<li>浏览器进程，控制整个浏览器，负责协调其他进程间的协同工作；</li>
+<li>GPU进程，负责浏览器界面的渲染；</li>
+<li>网络进程，处理网络请求或响应；</li>
+<li>渲染进程，解析并渲染标签页内容；</li>
+<li>插件进程，运行浏览器插件；</li>
+</ul>
+<p> 渲染进程包含以下线程：</p>
+<ul>
+<li>GUI渲染线程，解析html和CSS、构建DOM树、CSSOM树、渲染树、绘制页面；</li>
+<li>JS引擎线程，编译、解释JS代码，并进行优化或去优化，<strong>与GUI渲染线程互斥</strong>；</li>
+<li>定时器线程，提供计时功能，如setTimeout、setInterval；</li>
+<li>http线程，提供http处理能力；</li>
+<li>事件触发线程，控制Event Loop；</li>
+<li>合成线程，将GUI渲染线程生成的</li>
+</ul>
+</li>
+<li><p>Browser Event Loop</p>
+<p> JS同步任务只在一个线程中执行，称之为主线程，主线程通过<strong>执行栈</strong>的机制顺序执行所有代码；</p>
+<p> 异步代码就将其交由浏览器其他线程代劳，JS线程继续执行同步代码，期间如果异步操作完成，则将对应的回调函数加入<strong>任务队列</strong>，最后等<strong>执行栈</strong>中的函数都执行完，此时将任务队列中的回调函数加入<strong>执行栈</strong>中继续执行，构成一个循环，即Event Loop；</p>
+<p> 如上所述，实际上异步操作会调用浏览器提供的WebAPI，由浏览器代理，浏览器通过其他线程（如HTTP线程，定时器线程等）处理异步操作，等到完成后再将异步操作的回调函数加入任务队列，注意，<strong>这个过程进行的同时，JS线程继续执行其他代码</strong>；</p>
+<p> 任务队列又分为两种——宏任务和微任务；</p>
+<ol>
+<li>宏任务：<code>&lt;script/&gt;</code>的所有代码，<code>setTimeout, setInterval, postMessage</code>的回调；</li>
+<li>微任务：<code>Promise.prototype.then</code>的回调，<code>MutationObserver</code>实例化时的回调；</li>
+</ol>
+<p> 处理任务队列时，优先处理微任务，最后处理宏任务；</p>
+<p> 一个宏任务处理完成后重新渲染UI，然后再处理下一个宏任务；</p>
+</li>
+<li><p>Node.js Event Loop</p>
+<p> Node Event Loop与Browser一样，都是在单个线程中运行的，Node将异步操作交给系统处理，Browser则是交给浏览器处理，当操作完成时再去执行对应的回调函数，但机制又有所不同，Node Event Loop分为以下几个阶段：</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">   ┌───────────────────────────┐</span><br><span class="line">┌─&gt;│           timers          │</span><br><span class="line">│  └─────────────┬─────────────┘</span><br><span class="line">│  ┌─────────────┴─────────────┐</span><br><span class="line">│  │     pending callbacks     │</span><br><span class="line">│  └─────────────┬─────────────┘</span><br><span class="line">│  ┌─────────────┴─────────────┐</span><br><span class="line">│  │       idle, prepare       │</span><br><span class="line">│  └─────────────┬─────────────┘      ┌───────────────┐</span><br><span class="line">│  ┌─────────────┴─────────────┐      │   incoming:   │</span><br><span class="line">│  │           poll            │&lt;─────┤  connections, │</span><br><span class="line">│  └─────────────┬─────────────┘      │   data, etc.  │</span><br><span class="line">│  ┌─────────────┴─────────────┐      └───────────────┘</span><br><span class="line">│  │           check           │</span><br><span class="line">│  └─────────────┬─────────────┘</span><br><span class="line">│  ┌─────────────┴─────────────┐</span><br><span class="line">└──┤      close callbacks      │</span><br><span class="line">   └───────────────────────────┘</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Timers：setTimeout，setInterval；</li>
+<li>Pending callbacks：执行上一阶段被延迟的I&#x2F;O回调；</li>
+<li>Idle &amp; Prepare：Node内部使用；</li>
+<li>Poll：触发新的I&#x2F;O事件，执行I&#x2F;O相关的回调；</li>
+<li>Check：setImmediate</li>
+<li>Close callbacks：主线程结束时的回调；</li>
+</ol>
+<p> Event Loop将执行特定于该阶段的任何操作，然后执行该阶段队列中的回调，直到队列为空或超过最大回调数，然后进入下一阶段，如此循环；</p>
+<p> Poll阶段会同步执行队列中的所有回调，且每个回调都可能触发更多事件，引入更多回调，除非超过最大回调数，因此Poll阶段可能会执行很长时间，进而导致Timers阶段的回调函数不能在精确的时间点上触发；</p>
+<p> Poll阶段队列空时，如果有setImmediate回调，才会进入Check阶段，否则将一直在该阶段，等待queue注册进新回调函数并立刻执行；</p>
+<p> 每轮循环之间，会检查是否还有需要等待的异步事件（I&#x2F;O或定时器），如果没有则结束循环；</p>
+<p> process.nextTick(callback, arg)不属于Event Loop机制，它被确保在当前执行栈结束，进入下一个Tick之前执行，它不受当前Event Loop所在阶段限制；</p>
+</li>
+</ol>
+<h2 id="Html解析过程"><a href="#Html解析过程" class="headerlink" title="Html解析过程"></a>Html解析过程</h2><p>整体流程：</p>
+<ol>
+<li>字节流转码成字符串；</li>
+<li>字符串解析成Token；</li>
+<li>根据Token 生成DOM 节点；<br> a. 解析到script 元素，会阻塞DOM 节点的生成；<br> b. 解析到link 元素，会加载CSS 资源；</li>
+<li>构建DOM Tree，待CSS 加载完毕，同时开始构建CSSOM Tree（互不影响）；</li>
+<li>合并DOM Tree 和CSSOM Tree 为Render Tree；</li>
+<li>Layout；</li>
+<li>Paint；</li>
+</ol>
+<p>优化策略：</p>
+<ul>
+<li>script 元素设置属性async 或defer，避免阻塞DOM 构建（async 是异步加载，defer 是延迟执行）；</li>
+<li>link 元素设置rel 属性为preload，预加载其他页面可能用到的样式；</li>
+<li>减少回流和重绘：</li>
+</ul>
+<p>Script 阻塞DOM 构建：解析到普通script 元素，需要等获取到资源且CSSOM 构建完成，才会立即执行脚本，这个过程会阻塞DOM 的构建；</p>
+<p>Script async &amp; defer：async 是异步加载，获取资源这个过程将不再阻塞DOM 构建，但是获取之后效果同普通script 元素是一样的，会阻塞DOM 的构建（本质是因为渲染线程与JS引擎线程互斥）；无序加载脚本；<br>defer 是延迟执行，浏览器DOM 构建完毕，且JS 资源获取完毕之后再执行JS；可以有序加载脚本；</p>
+<p>Layout &amp; Paint：根据Render Tree 计算每个元素在页面上的位置、尺寸，称为Layout（布局）阶段；<br>将每个元素渲染到页面上，称为Paint（绘制）阶段；</p>
+<p>Repaint：元素颜色、背景等改变，会重复进入Paint 阶段，称为重绘；</p>
+<p>Re-layout：元素位置、尺寸改变，会重复进入Layout 阶段，称为回流，回流之后一定会发生重绘；</p>
+<p>导致发生回流的操作：</p>
+<ol>
+<li>添加、删除页面元素；</li>
+<li>使用display 控制页面元素的显隐；</li>
+<li>改变width，height，margin，border，padding，content；</li>
+<li>窗口Resize；</li>
+<li>读写offsetWidth&#x2F;offsetHeight；</li>
+<li>写style；</li>
+</ol>
+<p>导致发生重绘的操作：改变color，background，outline，text-decoration，border-radius，box-shadow 等；</p>
+<p>减少回流和重绘的方法：</p>
+<ol>
+<li>动画使用requestAnimationFrame 控制；</li>
+<li>尽量少读写offsetWidth 等属性；</li>
+<li>使频繁重绘&#x2F;回流的节点脱离文档流，避免其他节点受其影响也发生回流&#x2F;重绘；</li>
+</ol>
+
+                </div>
+            
+    </section>
+</article>
+
+
+
+
+    <a id="pagenext" href="/2023/03/24/js/Javascript%E5%B8%B8%E8%A7%81%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/" class="article-next" title="Javascript常见内置对象"><i class="icon-arrow-right"></i></a>
+
+
+    <a id="pageprev" href="/2023/04/19/react/react%E5%9F%BA%E7%A1%80/" class="article-prev" title="React基础知识"><i class="icon-arrow-left"></i></a>
+
+
+
+
+
+            </div>
+        </div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>Mobx | Neil&#39;s Blog</title>
+    <meta name="author" content="Neil Ji" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="Mobx简介非单一数据源单向数据流Mobx核心概念StateActionDerivationComputed value：是一个无参纯函数，输入相同时将直接返回上次缓存的值Reaction：当State改变时，需要执行的副作用Mobx数据流通过action改变state，进而触发derivation更新Mobx observerobserver是一个HOC，当可观测State改变时负责重渲染传入的组件123export default observer(function MyComponent(" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="Neil&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">Neil&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://neil-ji.github.io"></form> -->
+
+        
+            
+                
+                    
+
+                        
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mobx%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">Mobx简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mobx%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">2.</span> <span class="toc-text">Mobx核心概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mobx%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-number">3.</span> <span class="toc-text">Mobx数据流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mobx-observer"><span class="toc-number">4.</span> <span class="toc-text">Mobx observer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%8A%B6%E6%80%81%E5%8F%AF%E8%A7%82%E6%B5%8B"><span class="toc-number">5.</span> <span class="toc-text">使状态可观测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#observable%E4%B8%8Emake-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">6.</span> <span class="toc-text">observable与make*的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mobx-action"><span class="toc-number">7.</span> <span class="toc-text">Mobx action</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mobx-%E5%BC%82%E6%AD%A5action"><span class="toc-number">8.</span> <span class="toc-text">Mobx 异步action</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mobx-computed-value"><span class="toc-number">9.</span> <span class="toc-text">Mobx computed value</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mobx-reaction"><span class="toc-number">10.</span> <span class="toc-text">Mobx reaction</span></a></li></ol>
+                                
+    </div>
+</aside>
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            Mobx
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/05/19">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-05-19T14:31:16.000Z" itemprop="datePublished">2023-05-19</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-13T08:20:15.244Z" itemprop="datePublished">2023-07-13</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/mobx/" rel="tag">mobx</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+            
+            
+                <h2 id="Mobx简介"><a href="#Mobx简介" class="headerlink" title="Mobx简介"></a>Mobx简介</h2><ul>
+<li>非单一数据源</li>
+<li>单向数据流</li>
+</ul>
+<h2 id="Mobx核心概念"><a href="#Mobx核心概念" class="headerlink" title="Mobx核心概念"></a>Mobx核心概念</h2><ul>
+<li>State</li>
+<li>Action</li>
+<li>Derivation<ul>
+<li>Computed value：是一个无参纯函数，输入相同时将直接返回上次缓存的值</li>
+<li>Reaction：当State改变时，需要执行的副作用</li>
+</ul>
+</li>
+</ul>
+<h2 id="Mobx数据流"><a href="#Mobx数据流" class="headerlink" title="Mobx数据流"></a>Mobx数据流</h2><p><img src="https://www.mobxjs.com/assets/images/action-state-view-c1db5d4253bd84302606d4dfed9c4eb2.png" alt="Mobx数据流"></p>
+<p>通过action改变state，进而触发derivation更新</p>
+<h2 id="Mobx-observer"><a href="#Mobx-observer" class="headerlink" title="Mobx observer"></a>Mobx observer</h2><p>observer是一个HOC，当可观测State改变时<strong>负责重渲染传入的组件</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title function_">observer</span>(<span class="keyword">function</span> <span class="title function_">MyComponent</span>(<span class="params">&#123;someObservableState&#125;</span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="使状态可观测"><a href="#使状态可观测" class="headerlink" title="使状态可观测"></a>使状态可观测</h2><ol>
+<li>observable</li>
+<li>makeObservable</li>
+<li>makeAutoObservable</li>
+</ol>
+<p>注：</p>
+<ul>
+<li>observable用于不能使原始值、实例变为可观测；</li>
+<li>observable作为函数可单独使用，也可以在类中作为注解或make*第二参数中的标记使用；</li>
+<li>makeObservable和makeAutoObservable只能在类中使用；</li>
+<li>makeAutoObservable不能在子类中使用；</li>
+</ul>
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数式</span></span><br><span class="line"><span class="keyword">const</span> store = <span class="title function_">observable</span>(&#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="number">1</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">const</span> increase = <span class="title function_">action</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    store.<span class="property">value</span>++;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注解（装饰器语法，截至2023年5月25日，尚未成为ES标准）</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Store</span> &#123;</span><br><span class="line">    @observable value</span><br><span class="line">    @action (v) =&gt; &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// makeObservable</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Doubler</span> &#123;</span><br><span class="line">    value</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">value</span>) &#123;</span><br><span class="line">        <span class="title function_">makeObservable</span>(<span class="variable language_">this</span>, &#123;</span><br><span class="line">            <span class="attr">value</span>: observable,</span><br><span class="line">            <span class="attr">double</span>: computed,</span><br><span class="line">            <span class="attr">increment</span>: action,</span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = value</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">get</span> <span class="title function_">double</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">value</span> * <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span>++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// makeAutoObservable</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Doubler</span> &#123;</span><br><span class="line">    value</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">value</span>) &#123;</span><br><span class="line">        <span class="comment">// 更方便、简洁</span></span><br><span class="line">        <span class="title function_">makeObservable</span>(<span class="variable language_">this</span>)</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = value</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">get</span> <span class="title function_">double</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">value</span> * <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span>++</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="observable与make-的区别"><a href="#observable与make-的区别" class="headerlink" title="observable与make*的区别"></a>observable与make*的区别</h2><ul>
+<li>observable不改变传入的对象，而是克隆该对象再转换为可观察对象；make*改变传入的对象，直接将其转换为可观察对象；</li>
+<li>observable使用Proxy实现对象代理，make*</li>
+</ul>
+<h2 id="Mobx-action"><a href="#Mobx-action" class="headerlink" title="Mobx action"></a>Mobx action</h2><ul>
+<li>action是改变可观察state的唯一方式；</li>
+<li>action是纯函数；</li>
+<li>action在transactions内执行，因而是同步的，期间不完整的state是不能获取到的（原子性）；</li>
+<li>嵌套的action会合并在一个事务中；</li>
+<li>平行的action会各自产生一个事务；</li>
+<li>只有定义在原型上的action可被子类覆盖；</li>
+</ul>
+<p>action.bound用于正确绑定this指针，避免字面量方式定义的对象在使用时this指向错误对象，可以代替箭头函数；</p>
+<h2 id="Mobx-异步action"><a href="#Mobx-异步action" class="headerlink" title="Mobx 异步action"></a>Mobx 异步action</h2><ol>
+<li>基本方式：异步操作的回调中需要改变state时，要包装为action；</li>
+<li>runInAction方式：在runInAction中改变state，是基本方式的简化；</li>
+<li>flow方式：将异步操作定义在generator function中，并将其标记为flow，mobx会负责generator的自动执行，并将其包装成Promise；</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基本</span></span><br><span class="line"><span class="keyword">async</span> fetchA () &#123;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">await</span> <span class="title function_">fetch</span>(...);</span><br><span class="line">    <span class="title function_">action</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = data;</span><br><span class="line">    &#125;)();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// runInAction</span></span><br><span class="line"><span class="keyword">async</span> fetchA () &#123;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">await</span> <span class="title function_">fetch</span>(...);</span><br><span class="line">    <span class="title function_">runInAction</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = data;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// flow</span></span><br><span class="line">@flow</span><br><span class="line">* <span class="title function_">fetchA</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">yield</span> <span class="title function_">fetch</span>(...);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">value</span> = data;</span><br><span class="line">    &#125; <span class="keyword">catch</span>() &#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注：</p>
+<ul>
+<li>makeAutoObservable会自动将生成器函数标记为flow；</li>
+<li>flow返回的Promise被添加了一个cancel()，用于取消生成器的执行，但try、finally仍会执行；</li>
+</ul>
+<h2 id="Mobx-computed-value"><a href="#Mobx-computed-value" class="headerlink" title="Mobx computed value"></a>Mobx computed value</h2><ul>
+<li>惰性求值；</li>
+<li>输出会被缓存，依赖的可观察对象改变时，才会重新求值；</li>
+<li>未被观察时将暂时停用；</li>
+</ul>
+<p>computed做注解或函数使用时都可以传入options对象，其中比较有价值的一个属性是equals，用于控制如何比较输出是否相等，除了自定义比较函数以外，mobx内置了四种比较方式：</p>
+<ol>
+<li>comparer.identity，即全等号<code>===</code>；</li>
+<li>comparer.default，除了NaN等于NaN，其他与comparer.identity相同；</li>
+<li>comparer.shallow，浅比较；</li>
+<li>comparer.structural，结构比较；</li>
+</ol>
+<p>其余属性：</p>
+<ol>
+<li>name，用于debug时提供一个有意义的标识；</li>
+<li>requiresReaction，为昂贵计算设为true；</li>
+<li>keepAlive，设为true则未被观察时也不会停用；</li>
+</ol>
+<p>注：2、3实际应用场景暂不清楚。</p>
+<h2 id="Mobx-reaction"><a href="#Mobx-reaction" class="headerlink" title="Mobx reaction"></a>Mobx reaction</h2><p>可观测对象变化时，reaction用于执行副作用，简单来说就是执行一些不纯的函数，例如日志打印。</p>
+<ol>
+<li>autorun((reaction) &#x3D;&gt; effect, options?)</li>
+<li>reaction(() &#x3D;&gt; data, (data, preData, reaction) &#x3D;&gt; effect, options?)</li>
+<li>when<ol>
+<li>when(predicate: () &#x3D;&gt; boolean, effect?: () &#x3D;&gt; void, options?)</li>
+<li>when(predicate: () &#x3D;&gt; boolean, options?): Promise</li>
+</ol>
+</li>
+</ol>
+<p>以上三个api都会监测可观测对象，当可观测对象改变时执行副作用，并各自提供了一种方式清理掉副作用；</p>
+<p>总结一下Reaction就是以某种方式实现三种行为：</p>
+<ol>
+<li>监测（或订阅、消费）可观测对象；</li>
+<li>可观测对象改变时执行副作用；</li>
+<li>清理副作用；</li>
+</ol>
+<p>autorun，第一个参数实现1和2，该参数的参数是一个reaction对象，reaction.dispose实现3，<strong>会在初始时执行一次</strong>；</p>
+<p>reaction，第一个参数实现1，第二个参数实现2，第二参数的reaction参数实现3；</p>
+<p>when，第一个参数实现1和3，predicate的Boolean返回值会被监测，返回true时自动执行并清理副作用，第二个参数实现2，未提供时返回一个Promise，通过Promise.cancel手动清理副作用；</p>
+<p>根据执行时机的不同：</p>
+<ul>
+<li>autorun初始时执行一次，之后每当观测值改变都将再次执行；</li>
+<li>when在条件为true时执行一次副作用；</li>
+<li>reaction初始时不执行，之后每当观测值改变都将再次执行；</li>
+</ul>
+<p>注：Reactions和Computed Value的一个重要区别就是是否产生新的值，避免滥用Reactions！</p>
+
+                </div>
+            
+    </section>
+</article>
+
+
+
+
+    <a id="pagenext" href="/2023/05/03/libs/redux/" class="article-next" title="Redux详解"><i class="icon-arrow-right"></i></a>
+
+
+    <a id="pageprev" href="/2023/05/28/libs/reactrouter/" class="article-prev" title="react-router详解"><i class="icon-arrow-left"></i></a>
+
+
+
+
+
+            </div>
+        </div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>
