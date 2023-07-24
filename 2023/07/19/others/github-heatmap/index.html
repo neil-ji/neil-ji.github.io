@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>基于cheerio实现的github contributions crawler | Neil&#39;s Blog</title>
+    <meta name="author" content="Neil Ji" />
+    <meta name="keywords" content="react,js,javascript,react17.0.2,ts,typescript,redux,mobx" />
+    <meta name="description" content="  github-contribution NPMgithub-contribution Github前言起因是想在博客上加一个类似 github contribution heatmap 的小组件，用来展示博客更新频率，但社区没有这种高度定制（集成 github api）的组件，大体符合需求的开源项目，只有githubchart-api，但它只能生成 heatmap 的图片 url，然后只能以 img 元素的形式插入到博客 DOM 中，缺乏交互能力，而且也不够灵活。githubchart-ap" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="Neil&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">Neil&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://neil-ji.github.io"></form> -->
+
+        
+            
+                
+                    
+
+                        
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E8%A1%8C%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">可行性分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E5%9C%BA%E6%99%AF%E7%89%B9%E5%8C%96"><span class="toc-number">4.</span> <span class="toc-text">当前场景特化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%96%BD"><span class="toc-number">5.</span> <span class="toc-text">实施</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Crawler-%E6%A0%B8%E5%BF%83%E9%80%BB%E8%BE%91"><span class="toc-number">6.</span> <span class="toc-text">Crawler 核心逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fetch-%E6%9B%BF%E6%8D%A2%E5%8F%8A%E6%B3%A8%E5%85%A5-Proxy"><span class="toc-number">7.</span> <span class="toc-text">fetch 替换及注入 Proxy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CLI-%E5%AE%9E%E7%8E%B0"><span class="toc-number">8.</span> <span class="toc-text">CLI 实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Webpack-config"><span class="toc-number">9.</span> <span class="toc-text">Webpack config</span></a></li></ol>
+                                
+    </div>
+</aside>
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            基于cheerio实现的github contributions crawler
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/07/19">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-07-19T04:00:00.000Z" itemprop="datePublished">2023-07-19</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-24T11:22:06.855Z" itemprop="datePublished">2023-07-24</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/app/" rel="tag">app</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+            
+            
+                <p><a target="_blank" rel="noopener" href="https://badge.fury.io/js/github-contribution"><img src="https://img.shields.io/npm/v/github-contribution" alt="npm"></a> <img src="https://img.shields.io/github/languages/top/neil-ji/github-contribution" alt="GitHub top language"> <a target="_blank" rel="noopener" href="https://github.com/neil-ji/github-contribution"><img src="https://img.shields.io/github/stars/neil-ji/github-contribution?label=Github%20stars" alt="GitHub Repo stars">
+</a></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/github-contribution">github-contribution NPM</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/neil-ji/github-contribution">github-contribution Github</a></li>
+</ul>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>起因是想在博客上加一个类似 github contribution heatmap 的小组件，用来展示博客更新频率，但社区没有这种高度定制（集成 github api）的组件，大体符合需求的开源项目，只有<a target="_blank" rel="noopener" href="https://github.com/2016rshah/githubchart-api">githubchart-api</a>，但它只能生成 heatmap 的图片 url，然后只能以 img 元素的形式插入到博客 DOM 中，缺乏交互能力，而且也不够灵活。</p>
+<p>githubchart-api 获取 contributions 依赖于<a target="_blank" rel="noopener" href="https://github.com/akerl/githubstats">githubstats</a>——一个 ruby 实现的爬取 github contribution 数据的库，核心就是访问<code>https://github.com/users/&#123;user_name&#125;/contributions</code></p>
+<p>总之多方调研发现并没有可以直接满足需求的类库，所以尝试自己写一个开源类库，核心功能就是爬取 github contributions，至于 heatmap 已经有很多成熟实现了，可以直接拿来用。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>构思了以下几套方案：</p>
+<ol>
+<li>cheerio.js：访问上述的 URL，拿到 html，通过 cheerio 解析并获取相关的数据；</li>
+<li>nodejs + ruby：通过 node.js child_process 模块执行 ruby 指令，直接复用 gem module <code>githubstats</code>；</li>
+<li>octokit.js：通过 github 开源的 octokit.js 直接调用 Github RESTful Api；</li>
+</ol>
+<p>获取数据后可以：</p>
+<ol>
+<li>组件运行时调用，直接获取动态数据；</li>
+<li>在后台生成静态 json 文件，组件获取静态数据；</li>
+</ol>
+<h2 id="可行性分析"><a href="#可行性分析" class="headerlink" title="可行性分析"></a>可行性分析</h2><p>对于稳定性来说，方案 1、2，都存在一个问题，那就是以爬虫的形式去获取数据，一旦源文档改变结构，爬虫程序就要跟着改，不够稳定，而方案 3 直接从 github server 获取数据显然是最稳定的。</p>
+<p>对于开发成本来说，方案 1 需要实现一整套代码，方案 2 存在 ruby 的学习成本，方案 3 成本最少。</p>
+<p>对于入参来说，方案 1、2 都只需要 username，方案 3 却需要 github personal token，显然是不够方便的。</p>
+<p>调研过程中发现的其他相关细节：</p>
+<ol>
+<li>github.com 设置了严格的 CSP，只要是现代浏览器，从一个跨源的站点对 github.com 的资源发起请求，这个请求就会被浏览器拦截，这就意味着爬虫方案只能实现在 Nodejs 或服务器等非现代浏览器环境中。</li>
+<li>国内使用，还需要实现一个 proxy，否则不能保证每次都能连接到 github.com</li>
+<li>Github Api 没有提供获取 contributions 的接口，contributions 派生自 commits、opened issues、created repository 等，同理 octokit 就得实现一套同样的 contributions 计算逻辑。</li>
+<li>Github Api 有速率限制，则 octokit 在浏览器端的实时获取数据就有问题了，而且实时获取的话，token 也存在安全问题。</li>
+</ol>
+<p>综合来看，octokit 是最优的，但由于必须传入 token，那就不能写进组件里在运行时获取数据了，这是因为别人打开 devtools 直接就能从 authentication 首部拿到我的 token，虽然可以设置该 token 的权限为 readonly，但由于 Github Api 速率限制，拿到我的 token 就意味着可以调用 Github Api，进而直接耗光调用次数。</p>
+<p>至此可以确定，这三套方案都<strong>只能实现在 Node.js 或服务器上</strong>，<strong>获取数据后只能先持久化为静态数据</strong>。</p>
+<p>考虑到使用上，octokit 需要 token，其他方案不需要，显然对于用户来说更容易接受其他方案，既然要开源，就要优先考虑用户习惯，所以直接排除方案 3.</p>
+<p>ruby 方案看似简单，实则实现过程有很多坑，首先就是<code>githubstats</code>库没有提供设置 proxy 的接口，本地调试不易，其次 ruby 与我学过的语言语法差别很大，学习成本并不像其宣称的那么低，排除方案 2.</p>
+<p>最终敲定方案 1：访问上述的 URL，拿到 html，通过 cheerio 解析并获取相关的数据，持久化为静态数据；</p>
+<h2 id="当前场景特化"><a href="#当前场景特化" class="headerlink" title="当前场景特化"></a>当前场景特化</h2><p>数据的更新比较简单，contributions 时效性要求不高，可以起一个任务每天跑一次就行，至于数据怎么传递到组件是有必要考虑的：</p>
+<ol>
+<li>高成本：数据持久化到数据库中，起一个服务器，定时 job 更新数据，实现一个获取数据的 api；</li>
+<li>低成本：数据持久化为 json 文件，利用 Github Action 定时执行脚本以更新数据，json 可以推送到任意地方；</li>
+</ol>
+<p>由于不想买服务器，我只好考虑低成本方案 QAQ，当前场景下，我已经实现博客 push 后 github action 自动 build 并推送到 github page，只需要在 build 时把获取数据集成进来就行，然后生成的 json 文件同样推送到 github page，组件本身也在 github page，这样也不存在跨域问题。</p>
+<h2 id="实施"><a href="#实施" class="headerlink" title="实施"></a>实施</h2><p>开发环境脚手架基本配置：</p>
+<ol>
+<li>webpack</li>
+<li>ts</li>
+</ol>
+<p>需要使用的开源类库：</p>
+<ol>
+<li>cheerio（解析 html）</li>
+<li>arg（解析命令行参数，主要是为了构建一个简单的 cli 程序，便于集成到 hexo 里）</li>
+<li>node-fetch（替换 nodejs 原生 fetch，搭配 http-proxy-agent 实现请求代理，便于本地调试）</li>
+</ol>
+<h2 id="Crawler-核心逻辑"><a href="#Crawler-核心逻辑" class="headerlink" title="Crawler 核心逻辑"></a>Crawler 核心逻辑</h2><p>contributions 的 html 结构如下，暂称之为数据项（省略祖先节点 table tbody tr）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">td</span></span></span><br><span class="line"><span class="tag">  <span class="attr">tabindex</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">data-ix</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">aria-selected</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">style</span>=<span class="string">&quot;width: 11px&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">&quot;ContributionCalendar-day&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">data-date</span>=<span class="string">&quot;2022-07-24&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">data-level</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;sr-only&quot;</span>&gt;</span>19 contributions on Sunday, July 24, 2022<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- or --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">td</span></span></span><br><span class="line"><span class="tag">  <span class="attr">tabindex</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">data-ix</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">aria-selected</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">style</span>=<span class="string">&quot;width: 11px&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">class</span>=<span class="string">&quot;ContributionCalendar-day&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">data-date</span>=<span class="string">&quot;2022-07-24&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">data-level</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;sr-only&quot;</span>&gt;</span>No contributions on Sunday, July 24, 2022<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>还存在干扰项：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">td</span> <span class="attr">class</span>=<span class="string">&quot;ContributionCalendar-label&quot;</span> <span class="attr">style</span>=<span class="string">&quot;position: relative&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;sr-only&quot;</span>&gt;</span>Sunday<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span></span></span><br><span class="line"><span class="tag">    <span class="attr">aria-hidden</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">style</span>=<span class="string">&quot;clip-path: Circle(0); position: absolute; bottom: -4px&quot;</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">    Sun</span><br><span class="line">  <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">td</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>cheerio 的 <code>load</code> 方法加载并解析 html，然后选择器定为<code>table tbody tr td</code>，其实 cheerio 选择器就是通过 css selector 实现，这里直接看作 css 选择器就可以了。</p>
+<p>由于这里会选中干扰项——标明周几的单元格，所以需要根据二者差异过滤掉干扰项，这里选用数据属性<code>data-ix</code>，通过 cheerio element 的<code>data</code>方法获取数据属性，注意省略<code>data-</code>前缀，这点与 Element 原生属性<code>dataset</code>行为一致。</p>
+<p>接下来就是从 span 元素中提取第一个数字作为 contributions 值，提取第一个数字只需要一个简单的正则表达式<code>/^\d*/</code>，再从 td 的<code>data-date</code>提取日期。</p>
+<p>最后注意由于文档流中表格 cell 的顺序并非按时间顺序排列，还需要做一次排序。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">extractContributions</span>(<span class="params">html: <span class="built_in">string</span></span>): <span class="title class_">ContributionItem</span>[] &#123;</span><br><span class="line">  <span class="keyword">const</span> pattern = <span class="regexp">/^\d*/</span>;</span><br><span class="line">  <span class="keyword">const</span> $ = <span class="title function_">load</span>(html);</span><br><span class="line">  <span class="keyword">const</span> <span class="attr">contributions</span>: <span class="title class_">ContributionItem</span>[] = $(<span class="string">&quot;table tbody tr td&quot;</span>)</span><br><span class="line">    .<span class="title function_">filter</span>(<span class="function">(<span class="params">_, el</span>) =&gt;</span> $(el).<span class="title function_">data</span>(<span class="string">&quot;ix&quot;</span>) !== <span class="literal">undefined</span>)</span><br><span class="line">    .<span class="title function_">map</span>(<span class="function">(<span class="params">_, el</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> date = $(el).<span class="title function_">data</span>(<span class="string">&quot;date&quot;</span>) <span class="keyword">as</span> <span class="built_in">string</span>;</span><br><span class="line">      <span class="keyword">const</span> matchedValue = $(el, <span class="string">&quot;span&quot;</span>).<span class="title function_">text</span>().<span class="title function_">match</span>(pattern);</span><br><span class="line">      <span class="keyword">const</span> value =</span><br><span class="line">        matchedValue &amp;&amp; matchedValue[<span class="number">0</span>] !== <span class="string">&quot;&quot;</span> ? matchedValue[<span class="number">0</span>] : <span class="string">&quot;0&quot;</span>;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">date</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(date),</span><br><span class="line">        value,</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;)</span><br><span class="line">    .<span class="title function_">toArray</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// default sort as asc</span></span><br><span class="line">  <span class="title function_">sortByDate</span>(contributions, <span class="function">(<span class="params">item</span>) =&gt;</span> item.<span class="property">date</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> contributions;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="fetch-替换及注入-Proxy"><a href="#fetch-替换及注入-Proxy" class="headerlink" title="fetch 替换及注入 Proxy"></a>fetch 替换及注入 Proxy</h2><p>由于以下两点</p>
+<ol>
+<li>发布 npm module 时，不要把无关依赖打到一个包里</li>
+<li>不是所有人都需要请求代理才能正常获取 github.com 数据</li>
+</ol>
+<p>fetch 不能直接使用 node-fetch，这里我的实现不算优雅，加一个 Monkey patch，调用<code>fetchHtml</code>之前通过<code>injectFetch</code>用<code>node-fetch</code>替换原生<code>fetch</code>.</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">fetchFunc</span>: <span class="title class_">FetchFunc</span> = fetch;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">injectFetch</span>(<span class="params">_fetch: FetchFunc</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">  fetchFunc = _fetch || fetch;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">__fetch</span>: <span class="title class_">FetchFunc</span> = <span class="function">(<span class="params">input, init</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="title function_">fetchFunc</span>(input, init);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">fetchHtml</span>(<span class="params">url: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">__fetch</span>(url);</span><br><span class="line">  <span class="keyword">return</span> res.<span class="title function_">text</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>node-fetch</code>中设置 proxy，这里是一种代理模式的实现。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">HttpsProxyAgent</span> &#125; <span class="keyword">from</span> <span class="string">&quot;https-proxy-agent&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> fetch <span class="keyword">from</span> <span class="string">&quot;node-fetch&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">applyProxyAgent</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> agent = <span class="keyword">new</span> <span class="title class_">HttpsProxyAgent</span>(<span class="string">&quot;http://127.0.0.1:7890&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">myFetch</span>(<span class="params">input: <span class="built_in">any</span>, init: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">fetch</span>(input, &#123;</span><br><span class="line">      ...init,</span><br><span class="line">      agent,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">injectFetch</span>(myFetch <span class="keyword">as</span> <span class="built_in">any</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如此一来，可以把<code>node-fetch, https-proxy-agent</code>排除到 dependencies 之外，只在本地调试时执行（即 devDependencies），打包时也可以完全排除掉（按 webpack 的概念讲，连 externals 都不算）。</p>
+<h2 id="CLI-实现"><a href="#CLI-实现" class="headerlink" title="CLI 实现"></a>CLI 实现</h2><p>目标是写一个简单的 CLI 应用，调用 crawler 并把数据持久化为 json 文件。</p>
+<p>首行注释<code>#!/usr/bin/env node</code>声明执行环境为 nodejs.</p>
+<p>然后，参数指令解析比较麻烦，没必要造轮子，小脚本也没必要使用<code>commander</code>，通过轻量级的<code>arg</code>实现即可。定义了三个指令<code>--username --years --path</code>，分别是 github 用户名、时间范围及 json 文件路径。</p>
+<p>为了简化<code>--years</code>指令的参数格式，约定以逗号<code>,</code>分割每一年，这样可以把<code>-y 2021 -y 2022 -y 2023</code>简化为<code>-y 2021,2022,2023</code>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env node</span></span><br><span class="line"><span class="keyword">const</span> &#123; run &#125; = <span class="built_in">require</span>(<span class="string">&quot;../dist/scripts.js&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> arg = <span class="built_in">require</span>(<span class="string">&quot;arg&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// parse the arguments passed by user</span></span><br><span class="line"><span class="keyword">const</span> args = <span class="title function_">arg</span>(</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// Types</span></span><br><span class="line">    <span class="string">&quot;--username&quot;</span>: <span class="title class_">String</span>,</span><br><span class="line">    <span class="string">&quot;--years&quot;</span>: <span class="title class_">String</span>,</span><br><span class="line">    <span class="string">&quot;--path&quot;</span>: <span class="title class_">String</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Aliases</span></span><br><span class="line">    <span class="string">&quot;-u&quot;</span>: <span class="string">&quot;--username&quot;</span>,</span><br><span class="line">    <span class="string">&quot;-y&quot;</span>: <span class="string">&quot;--years&quot;</span>,</span><br><span class="line">    <span class="string">&quot;-p&quot;</span>: <span class="string">&quot;--path&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; <span class="attr">argv</span>: process.<span class="property">argv</span> &#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!args[<span class="string">&quot;--username&quot;</span>]) &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&quot;missing required argument: --username or -u&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">args[<span class="string">&quot;--years&quot;</span>] = args[<span class="string">&quot;--years&quot;</span>]?.<span class="title function_">split</span>(<span class="string">&quot;,&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; [<span class="string">&quot;--username&quot;</span>]: username, [<span class="string">&quot;--years&quot;</span>]: years, [<span class="string">&quot;--path&quot;</span>]: path &#125; = args;</span><br><span class="line"></span><br><span class="line"><span class="title function_">run</span>(&#123; username, years, path &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在<code>package.json</code>中定义 js 脚本文件与 CLI 指令的映射。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;bin&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;crawl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;bin/cli.js&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<p>OK，全局安装的情况下就可以通过<code>crawl -u &quot;user-name&quot;</code>来执行该脚本了，本地安装则需要配置 npm script，这是 nodejs 查找模块、命令的规则限制的。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;crawl&quot;</span><span class="punctuation">:</span> <span class="string">&quot;crawl&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<p>具体来说，本地安装的模块，package.json 的 bin 字段会指示 npm 在当前项目的 node_modules&#x2F;.bin 中添加一条命令，但直接调用<code>crawl</code>命令却是从全局的 node_modules 中查找的，显然是找不到的，而编写进 npm script 后，执行<code>npm run crawl</code>，此时查找范围就是当前项目的 node_modules，所以可以找到。</p>
+<h2 id="Webpack-config"><a href="#Webpack-config" class="headerlink" title="Webpack config"></a>Webpack config</h2><p>将项目发布为 npm module 之前需要做一些额外工作：</p>
+<ol>
+<li>依赖分析；</li>
+<li>排除外部依赖；</li>
+<li>确定打包后资源的模块类型；</li>
+<li>入口分离，chunk 分割；</li>
+<li>打包成生产版本；</li>
+</ol>
+<p>为了实现目标 1，引入了<code>webpack-bundle-analyzer</code>插件；</p>
+<p>为了实现目标 2，做以下配置，把 dependencies 统统排除，并且指定这些外部依赖的模块类型<code>externalsType</code>为<code>commonjs</code>，这个会影响打包后资源中导入这些模块的方式，由于运行在 nodejs，直接定义为<code>commonjs</code>即可；<code>externalsPresets.node</code>用于标明 nodejs built-in module 为外部依赖，运行时导入即可，无需打包。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">externals</span>: [<span class="string">&quot;arg&quot;</span>, <span class="string">&quot;cheerio&quot;</span>, <span class="string">&quot;signale&quot;</span>],</span><br><span class="line"><span class="attr">externalsType</span>: <span class="string">&quot;commonjs&quot;</span>,</span><br><span class="line"><span class="attr">externalsPresets</span>: &#123;</span><br><span class="line">    <span class="attr">node</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>为了实现目标 3，做以下配置，注意 index 是一切核心逻辑的入口，scripts 是 CLI 所需逻辑的入口，是在核心逻辑的基础上构建的，因此指定 dependOn 为 index，避免两个入口打包后的资源中各包含一份重复的核心逻辑；另外对于以发布 lib 为目标的项目，必须指定 library 的 type，否则默认为<code>&quot;var&quot;</code>，也就是导出模块会被视为变量，显然在 nodejs 中就没办法通过 require 导入了，因为按照 commonjs 规范定义，导出模块的标准语句是<code>exports</code>。</p>
+<p>顺带说一下初始的<code>commonjs</code>规范只定义了 exports，而 nodejs 及很多其他 commonjs 的实现都引入了 module.exports，而只把 exports 实现为 module.exports 的引用，这就是为什么 webpack 加了一种<code>commonjs2</code>的构建类型，因为这二者在 build 后的代码是截然不同的，具体可以看这个<a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/issues/1114#issuecomment-462240689">例子</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">entry</span>: &#123;</span><br><span class="line">    <span class="attr">index</span>: &#123;</span><br><span class="line">      <span class="attr">import</span>: <span class="string">&quot;./src/index.ts&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// split run function as single chunk</span></span><br><span class="line">    <span class="attr">scripts</span>: &#123;</span><br><span class="line">      <span class="attr">import</span>: <span class="string">&quot;./src/scripts/index.ts&quot;</span>,</span><br><span class="line">      <span class="attr">dependOn</span>: <span class="string">&quot;index&quot;</span>, <span class="comment">// remove shard dependencies</span></span><br><span class="line">      <span class="attr">library</span>: &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&quot;commonjs2&quot;</span>, <span class="comment">// export run function as module.exports.run</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>剩下的没什么可说的，都是基础用法，最后看一下<code>github-contribution</code>的项目依赖图，相对来说是比较小巧的。</p>
+<p><img src="https://dsm01pap001files.storage.live.com/y4mc-FEK0Sf2XqwDeLgkdJsDsrqjZILcWNRIfLPxuhRkeO7vQJoTmrupdcZMdSgkUnTHO5GZTdZov_jjT1871N9smkCGerUayN-DBCxgv66QWiJKnsLAc5AgCTriun3hJwo2Kyu9yWv2yEfLQmsKv5tCH5WKcCkWQWQdI0jC9tJxB3TOMiJXdR85mFaCnwS48MS?encodeFailures=1&width=1585&height=892" alt="github-contribution dependencies report"></p>
+
+                </div>
+            
+    </section>
+</article>
+
+
+
+
+    <a id="pagenext" href="/2023/07/11/interview/%E4%B8%8A%E6%B5%B7%E5%A5%87%E6%99%AE%E4%B9%90%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98/" class="article-next" title="上海奇普乐面试复盘"><i class="icon-arrow-right"></i></a>
+
+
+
+
+
+
+            </div>
+        </div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>
