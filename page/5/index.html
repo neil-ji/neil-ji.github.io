@@ -132,6 +132,178 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2023/04/04/js/jsmock/">JS手撕代码</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/04/05">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-04-04T16:00:00.000Z" itemprop="datePublished">2023-04-05</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-25T13:11:33.381Z" itemprop="datePublished">2023-07-25</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/javascript/" rel="tag">javascript</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// from MDN</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">type</span>(<span class="params">value</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (value === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;null&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">const</span> baseType = <span class="keyword">typeof</span> value;</span><br><span class="line">    <span class="comment">// 基本类型</span></span><br><span class="line">    <span class="keyword">if</span> (![<span class="string">&quot;object&quot;</span>, <span class="string">&quot;function&quot;</span>].<span class="title function_">includes</span>(baseType)) &#123;</span><br><span class="line">        <span class="keyword">return</span> baseType;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Symbol.toStringTag 通常指定对象类的“display name”</span></span><br><span class="line">    <span class="comment">// 它在 Object.prototype.toString() 中使用。</span></span><br><span class="line">    <span class="keyword">const</span> tag = value[<span class="title class_">Symbol</span>.<span class="property">toStringTag</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> tag === <span class="string">&quot;string&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> tag;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果它是一个函数，其源代码以 &quot;class&quot; 关键字开头</span></span><br><span class="line">    <span class="keyword">if</span> (</span><br><span class="line">        baseType === <span class="string">&quot;function&quot;</span> &amp;&amp;</span><br><span class="line">        <span class="title class_">Function</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">toString</span>.<span class="title function_">call</span>(value).<span class="title function_">startsWith</span>(<span class="string">&quot;class&quot;</span>)</span><br><span class="line">    ) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;class&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数的名称；例如 `Array`、`GeneratorFunction`、`Number`、`String`、`Boolean` 或 `MyCustomClass`</span></span><br><span class="line">    <span class="keyword">const</span> className = value.<span class="property">constructor</span>.<span class="property">name</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> className === <span class="string">&quot;string&quot;</span> &amp;&amp; className !== <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> className;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 在这一点上，没有合适的方法来获取值的类型，因此我们使用基本实现。 </span></span><br><span class="line">    <span class="keyword">return</span> baseType;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">instanceOf</span>(<span class="params">left, right</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> target = right.<span class="property"><span class="keyword">prototype</span></span>;</span><br><span class="line">    <span class="keyword">let</span> proto = left.<span class="property">__proto__</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(proto !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (target === proto) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        proto = proto.<span class="property">__proto__</span>; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="new"><a href="#new" class="headerlink" title="new"></a>new</h2><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">__new</span>(<span class="params">constructor, ...args: <span class="built_in">any</span>[]</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> obj = &#123;&#125;;</span><br><span class="line">    <span class="keyword">const</span> result = constructor.<span class="title function_">apply</span>(obj, args);</span><br><span class="line">    <span class="comment">// function或非空object将被直接返回</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> result === <span class="string">&quot;function&quot;</span> || (<span class="keyword">typeof</span> result === <span class="string">&quot;object&quot;</span> &amp;&amp; result !== <span class="literal">null</span>)) &#123;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/04/04/js/jsmock/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/03/24/js/Javascript%E5%B8%B8%E8%A7%81%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/">Javascript常见内置对象</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/03/24">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-03-24T09:54:41.000Z" itemprop="datePublished">2023-03-24</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-25T13:11:33.381Z" itemprop="datePublished">2023-07-25</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/javascript/" rel="tag">javascript</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h2><ul>
+<li><code>assign(target, ...sources)</code>，复制sources的<strong>自有可枚举属性</strong>到target，并返回target，复制过程用的是sources的[[Get]]与target的[[Set]]；</li>
+<li><code>create(proto, propertiesObject)</code>，使用指定的原型对象和<strong>自有可枚举属性</strong>创建一个<strong>新</strong>对象；</li>
+<li><code>defineProperty(target, propName, descriptor)</code>，给target添加或修改名为propName的属性，并指定属性描述符；</li>
+<li><code>entries(target)</code>返回target的<strong>自有可枚举属性</strong>的键值对数组，形如<code>[ [&#39;propA&#39;, &#39;1&#39;], [&#39;propB&#39;, 2] ]</code>；</li>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/03/24/js/Javascript%E5%B8%B8%E8%A7%81%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2023/03/20/others/oop/">面向对象编程</a>
         </h1>
         
@@ -154,7 +326,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-24T11:22:06.855Z" itemprop="datePublished">2023-07-24</time>
+    <time class="vm" datetime="2023-07-25T13:11:33.381Z" itemprop="datePublished">2023-07-25</time>
 </div>
 
             
@@ -229,7 +401,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-24T11:22:06.855Z" itemprop="datePublished">2023-07-24</time>
+    <time class="vm" datetime="2023-07-25T13:11:33.381Z" itemprop="datePublished">2023-07-25</time>
 </div>
 
             
@@ -315,7 +487,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-24T11:22:06.855Z" itemprop="datePublished">2023-07-24</time>
+    <time class="vm" datetime="2023-07-25T13:11:33.381Z" itemprop="datePublished">2023-07-25</time>
 </div>
 
             
@@ -343,178 +515,6 @@
                 </div>   
                 <div class="article-more-link">
                     <a href="/2023/03/09/browser/%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/03/01/css/css%E5%9F%BA%E7%A1%80/">CSS基础</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/03/01">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-03-01T12:10:00.000Z" itemprop="datePublished">2023-03-01</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-07-24T11:22:06.855Z" itemprop="datePublished">2023-07-24</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/css/" rel="tag">css</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h2><p>盒模型分为四部分：</p>
-<ul>
-<li>margin box</li>
-<li>border box</li>
-<li>padding box</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/03/01/css/css%E5%9F%BA%E7%A1%80/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/03/01/css/%E5%B8%B8%E8%A7%81%E5%B8%83%E5%B1%80/">常见Web布局</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/03/01">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-03-01T12:00:00.000Z" itemprop="datePublished">2023-03-01</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-07-24T11:22:06.855Z" itemprop="datePublished">2023-07-24</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/css/" rel="tag">css</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="正常文档流布局（兼容所有浏览器）"><a href="#正常文档流布局（兼容所有浏览器）" class="headerlink" title="正常文档流布局（兼容所有浏览器）"></a>正常文档流布局（兼容所有浏览器）</h2><p>按照元素在文档中的出现顺序与书写方向（write-mode），搭配盒模型进行布局。</p>
-<h2 id="基于position-的布局（IE-不兼容position：sticky）"><a href="#基于position-的布局（IE-不兼容position：sticky）" class="headerlink" title="基于position 的布局（IE 不兼容position：sticky）"></a>基于position 的布局（IE 不兼容position：sticky）</h2><p>通过修改元素的position 来实现一些特殊布局效果。</p>
-<h2 id="基于float-的Multicol-布局（几乎兼容所有浏览器）"><a href="#基于float-的Multicol-布局（几乎兼容所有浏览器）" class="headerlink" title="基于float 的Multicol 布局（几乎兼容所有浏览器）"></a>基于float 的Multicol 布局（几乎兼容所有浏览器）</h2><ul>
-<li>float：none&#x2F;left&#x2F;right 用于指定浮动方向，元素会朝对应方向移动，直到碰到容器边缘或另一个float 元素；float 元素会脱离正常文档流，并创建BFC；float 元素的display 可能被强制改为block，且对flex&#x2F;inline-flex 元素无效。</li>
-<li>clear：none&#x2F;left&#x2F;right&#x2F;both 用于清除当前BFC 中的前置float 元素的影响，且该元素为非float 元素时，垂直方向的外边距将会折叠；</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/03/01/css/%E5%B8%B8%E8%A7%81%E5%B8%83%E5%B1%80/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
