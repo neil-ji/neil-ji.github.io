@@ -132,19 +132,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/07/08/algorithm/leetcode121/">LeetCode Easy 121. 买卖股票的最佳时机</a>
+            <a href="/2023/04/26/react/react_virtuallist/">列表虚拟化</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/07/09">
+            <a class="article-date" href="/archives/2023/04/27">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-07-08T16:00:00.000Z" itemprop="datePublished">2023-07-09</time>
+    <time class="vm" datetime="2023-04-26T16:00:00.000Z" itemprop="datePublished">2023-04-27</time>
 </a>
 
             <div class="article-updated">
@@ -154,13 +154,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-25T13:14:06.086Z" itemprop="datePublished">2023-07-25</time>
+    <time class="vm" datetime="2023-07-25T13:18:11.111Z" itemprop="datePublished">2023-07-25</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>
 </div>
 
 
@@ -183,30 +183,12 @@
                         
                         
                     
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>题目要求只能在某一天买，之后的某天卖，利润 &#x3D; 卖的价格 - 买的价格，让卖的价格最高，买的价格最低，则利润最大，且附加限制条件：先买后卖；</p>
-<p>以这样的顺序迭代：</p>
-<ol>
-<li>第一天买入，第二天卖出；</li>
-<p>
-                    
                 
             
             
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/07/08/algorithm/leetcode121/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
+                <p>列表虚拟化就是只渲染部分列表项，具体思路：两层容器，外层控制可见区域大小，内层计算一个高度（<code>列表项数量 * 列表项高度</code>，或<code>列表项高度累加</code>），内层超高会使外层出现滚动条，监听外层容器滚动事件，通过<code>event.currentTarget.scrollTop / 列表项高度</code>得到可视区域的列表项的起始下标start，从start开始遍历列表数据，取若干条数据渲染，注意列表项的key设为列表数据下标，列表项为绝对定位，top通过<code>下标 * 列表项高度</code>动态计算而来； </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./index.css&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">ListItem</span>(<span class="params">&#123; top, children &#125;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;listItem&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">top</span> &#125;&#125;&gt;</span>&#123;children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">ITEM_HEIGHT</span> = <span class="number">35</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">VirtualList</span>(<span class="params">&#123; sourceData, itemCount = <span class="number">8</span> &#125;</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> [start, setStart] = <span class="title class_">React</span>.<span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> scrollHandler = <span class="title class_">React</span>.<span class="title function_">useCallback</span>(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newStart = <span class="title class_">Math</span>.<span class="title function_">ceil</span>(e.<span class="property">target</span>.<span class="property">scrollTop</span> / <span class="variable constant_">ITEM_HEIGHT</span>);</span><br><span class="line">        <span class="keyword">if</span> (newStart !== start) &#123;</span><br><span class="line">            <span class="title function_">setStart</span>(newStart);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, [start, setStart]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> renderedItems = <span class="title class_">React</span>.<span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> end = start + itemCount;</span><br><span class="line">        <span class="keyword">const</span> items = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = start; i &lt; end &amp;&amp; i &lt; sourceData.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            items.<span class="title function_">push</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">ListItem</span> <span class="attr">key</span>=<span class="string">&#123;i&#125;</span> <span class="attr">top</span>=<span class="string">&#123;i</span> * <span class="attr">ITEM_HEIGHT</span>&#125;&gt;</span>&#123;sourceData[i]&#125;<span class="tag">&lt;/<span class="name">ListItem</span>&gt;</span></span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> items;</span><br><span class="line">    &#125;, [start, itemCount, sourceData]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;listContainer&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">height:</span> <span class="attr">itemCount</span> * <span class="attr">ITEM_HEIGHT</span> &#125;&#125; <span class="attr">onScroll</span>=<span class="string">&#123;scrollHandler&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;list&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">height:</span> <span class="attr">sourceData.length</span> * <span class="attr">ITEM_HEIGHT</span> &#125;&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">                &#123;renderedItems&#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">MockVirtualList</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="variable constant_">LEN</span> = <span class="number">100000</span>;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">new</span> <span class="title class_">Array</span>(<span class="variable constant_">LEN</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable constant_">LEN</span>; i++) &#123;</span><br><span class="line">        data[i] = <span class="string">`<span class="subst">$&#123;i&#125;</span>-------<span class="subst">$&#123;<span class="built_in">Math</span>.random() * i&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">VirtualList</span> <span class="attr">sourceData</span>=<span class="string">&#123;data&#125;</span> /&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.listContainer</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">overflow</span>: auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.listItem</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid blue;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">35px</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
                 </div>
             
     </section>
@@ -218,19 +200,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/07/08/algorithm/leetcode124/">LeetCode Easy 124. 二叉树中的最大路径和</a>
+            <a href="/2023/04/19/react/react%E5%9F%BA%E7%A1%80/">React基础知识</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/07/09">
+            <a class="article-date" href="/archives/2023/04/19">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-07-08T16:00:00.000Z" itemprop="datePublished">2023-07-09</time>
+    <time class="vm" datetime="2023-04-19T05:57:58.000Z" itemprop="datePublished">2023-04-19</time>
 </a>
 
             <div class="article-updated">
@@ -240,13 +222,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-25T13:14:06.086Z" itemprop="datePublished">2023-07-25</time>
+    <time class="vm" datetime="2023-07-25T13:18:11.111Z" itemprop="datePublished">2023-07-25</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -277,11 +259,11 @@
                     
                     
                         
-                        <p><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-maximum-path-sum/">124. 二叉树中的最大路径和</a></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>粗略思路：从叶子节点开始，以贪心策略求得局部最大路径和，叶子节点计算完之后，回到父节点，再以同样的贪心策略求得局部最大路径和，重复该过程，<strong>显然这是二叉树的后序遍历</strong>。</p>
-<p>技巧总结：</p>
+                        <p><h2 id="React常见知识点"><a href="#React常见知识点" class="headerlink" title="React常见知识点"></a>React常见知识点</h2><p>基础API或特性：</p>
 <ul>
-<li>假如以递归实现，思路上要从最深或次深一层的调用考虑要做的操作，先忽略上层调用；</li>
+<li>ClassComponent生命周期（含unsafe）</li>
+<li>Hooks如何模拟ClassComponent生命周期</li>
+<li>useEffect VS useLayoutEffect</li>
 <p>
                     
                 
@@ -289,7 +271,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/07/08/algorithm/leetcode124/#more">
+                    <a href="/2023/04/19/react/react%E5%9F%BA%E7%A1%80/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -304,19 +286,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/06/24/interview/%E5%8C%97%E4%BA%AC%E5%BB%BA%E8%AE%BE%E9%93%B6%E8%A1%8C%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98/">北京建设银行面试复盘</a>
+            <a href="/2023/03/20/others/oop/">面向对象编程</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/06/25">
+            <a class="article-date" href="/archives/2023/03/20">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-06-24T16:00:00.000Z" itemprop="datePublished">2023-06-25</time>
+    <time class="vm" datetime="2023-03-20T09:28:26.000Z" itemprop="datePublished">2023-03-20</time>
 </a>
 
             <div class="article-updated">
@@ -326,13 +308,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-25T13:14:06.086Z" itemprop="datePublished">2023-07-25</time>
+    <time class="vm" datetime="2023-07-25T13:18:11.111Z" itemprop="datePublished">2023-07-25</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/interview/" rel="tag">interview</a>
+    <a class="article-tag-link" href="/tags/OOP/" rel="tag">OOP</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -345,37 +327,26 @@
             
                 
                     
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>一面：</p>
+                    <p><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>OOP（Object Orient Programming）面向对象编程；</p>
+<p>三大特征：</p>
 <ol>
-<li>自我介绍</li>
-<li>js闭包，优缺点</li>
-<li>es6新特性</li>
-<p>
-                    
+<li>封装，将功能封装进相对独立的模块；</li>
+<li>多态，同一接口、类型，却可以做不同的事，代表不同的涵义；</li>
+<li>继承，属性、方法可被继承或扩展；</li>
+</ol>
+<p>注1：JS是一种多范式语言，支持面向对象的编程思想，其原型模型中，多态体现在：实例本身的属性或方法的优先级高于其原型对象上的同名属性或方法；</p>
+<p>注2：根据Wikipedia的词条定义，多态并非OOP独有，分为</p>
+<ol>
+<li>特设多态：函数重载、运算符重载；</li>
+<li>参数多态：泛型编程；</li>
+<li>子类型多态：父类型可替代子类型；</li>
+</ol></p>
                 
             
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/06/24/interview/%E5%8C%97%E4%BA%AC%E5%BB%BA%E8%AE%BE%E9%93%B6%E8%A1%8C%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98/#more">
+                    <a href="/2023/03/20/others/oop/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -390,19 +361,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/06/20/network/websecurity/">网络安全</a>
+            <a href="/2023/03/15/js/js%E8%BF%9B%E9%98%B6/">Javascript进阶</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/06/20">
+            <a class="article-date" href="/archives/2023/03/16">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-06-20T07:10:05.000Z" itemprop="datePublished">2023-06-20</time>
+    <time class="vm" datetime="2023-03-15T16:00:00.000Z" itemprop="datePublished">2023-03-16</time>
 </a>
 
             <div class="article-updated">
@@ -412,13 +383,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-25T13:14:06.086Z" itemprop="datePublished">2023-07-25</time>
+    <time class="vm" datetime="2023-07-25T13:18:11.111Z" itemprop="datePublished">2023-07-25</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>, <a class="article-tag-link" href="/tags/%E8%AE%A1%E7%AE%97%E5%99%A8%E7%BD%91%E7%BB%9C/" rel="tag">计算器网络</a>
+    <a class="article-tag-link" href="/tags/javascript/" rel="tag">javascript</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -449,97 +420,11 @@
                     
                     
                         
-                        <p><h2 id="XSS-Cross-Site-Scripting"><a href="#XSS-Cross-Site-Scripting" class="headerlink" title="XSS(Cross-Site Scripting)"></a>XSS(Cross-Site Scripting)</h2><p>漏洞：当用户输入的内容发送到服务器，服务器动态生成的页面中会将输入内容拼接进去，而不加任何非法字符验证或过滤；</p>
-<p>攻击原理：可以在输入中编写攻击代码（<code>&lt;script&gt;攻击代码&lt;script/&gt;</code>），服务器返回被注入恶意代码的HTML后，浏览器解析该HTML时将直接执行其中的攻击代码。</p>
-<p>注：本该为CSS，但该缩写已经被占用（Cascading Style Sheet），所以改为XSS；</p>
-<h3 id="反射型"><a href="#反射型" class="headerlink" title="反射型"></a>反射型</h3><p>常见场景：查询；</p>
-<p>注入恶意代码的输入信息，提交到服务器后，服务器将返回一个包含恶意代码的动态生成的HTML，浏览器解析过程中将执行该恶意代码，整个过程中，恶意代码经过服务器的反射达到攻击目的；</p>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/06/20/network/websecurity/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/06/04/network/protocols/">网络协议</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/06/04">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-06-04T07:10:05.000Z" itemprop="datePublished">2023-06-04</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-07-25T13:14:06.086Z" itemprop="datePublished">2023-07-25</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>, <a class="article-tag-link" href="/tags/%E8%AE%A1%E7%AE%97%E5%99%A8%E7%BD%91%E7%BB%9C/" rel="tag">计算器网络</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="通用问题"><a href="#通用问题" class="headerlink" title="通用问题"></a>通用问题</h2><h3 id="网络分层模型"><a href="#网络分层模型" class="headerlink" title="网络分层模型"></a>网络分层模型</h3><p>TCP&#x2F;IP四层模型：应用、传输、网络、网络接口；</p>
-<p>TCP&#x2F;IP五层模型（主流）：应用、传输、网络、数据链路、物理；</p>
-<p>OSI七层模型：</p>
+                        <p><h2 id="什么是原型链？"><a href="#什么是原型链？" class="headerlink" title="什么是原型链？"></a>什么是原型链？</h2><p>定义的函数、类或对象会自动创建原型对象，并通过<code>prototype</code>和<code>constructor</code>互相指向对方，原型之间通过<code>__proto__</code>构成原型链，实例调用某个方法时，会沿原型链寻找该方法，直到找到指定方法，或遍历完整个原型链后抛出异常；</p>
+<p>借助单链表理解：针对实例调用某方法的角度来讲，原型链可以看作一个链表，每个节点都是原型对象，以<code>__proto__</code>属性指向下一节点，头节点是实例本身，尾节点是<code>Object.prototype</code>；</p>
+<p>不同情况下的<code>__proto__</code>如下：</p>
 <ul>
-<li>应用：http、ftp</li>
+<li>function函数，箭头函数，其<code>__proto__</code>一定是<code>Function.prototype</code>，包括<code>Function</code>；</li>
 <p>
                     
                 
@@ -547,7 +432,69 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/06/04/network/protocols/#more">
+                    <a href="/2023/03/15/js/js%E8%BF%9B%E9%98%B6/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/02/05/others/accessibility/">What is Web Accessibility?</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/02/05">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-02-05T09:29:17.000Z" itemprop="datePublished">2023-02-05</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-25T13:18:11.111Z" itemprop="datePublished">2023-07-25</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/Accessibility/" rel="tag">Accessibility</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    <p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>国内公司几乎不会考虑Web Accessibility，这与我们的法律有关，我国国内的法律并不强制要求Web Accessibility，但是世界上的部分国家如美国，则出台过508康复法案，制订了若干Accessibility标准，一旦某公司的产品不达标，就要面临法律风险。</p></p>
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/02/05/others/accessibility/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
