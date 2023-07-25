@@ -132,6 +132,92 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2023/04/13/browser/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8/">浏览器内核</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/04/13">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-04-13T06:08:50.000Z" itemprop="datePublished">2023-04-13</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-25T13:14:06.086Z" itemprop="datePublished">2023-07-25</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>, <a class="article-tag-link" href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/" rel="tag">浏览器</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><ol>
+<li><p>JS解释编译简要过程</p>
+<p> 源代码通过解析器生成AST（Abstract syntax tree），然后生成字节码（介于高级语言与机器语言之间的中间代码），再通过解释器逐行解释并执行，借助JIT（Just in time）技术监测代码执行过程，根据代码执行频率从高到低将代码标记为不同等级，低等级的通过基线编译器编译，高等级的通过优化编译器编译，之后将执行编译后的代码，而一旦优化后代码不再满足优化条件，则将其降级到基线编译器或解释器中去处理，这就是去优化；</p>
+</li>
+<li><p>对JS单线程非阻塞的理解</p>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/04/13/browser/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%86%85%E6%A0%B8/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2023/04/04/js/jsmock/">JS手撕代码</a>
         </h1>
         
@@ -154,7 +240,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-25T13:11:33.381Z" itemprop="datePublished">2023-07-25</time>
+    <time class="vm" datetime="2023-07-25T13:14:06.086Z" itemprop="datePublished">2023-07-25</time>
 </div>
 
             
@@ -240,7 +326,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-25T13:11:33.381Z" itemprop="datePublished">2023-07-25</time>
+    <time class="vm" datetime="2023-07-25T13:14:06.086Z" itemprop="datePublished">2023-07-25</time>
 </div>
 
             
@@ -304,81 +390,6 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/03/20/others/oop/">面向对象编程</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/03/20">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-03-20T09:28:26.000Z" itemprop="datePublished">2023-03-20</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-07-25T13:11:33.381Z" itemprop="datePublished">2023-07-25</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/OOP/" rel="tag">OOP</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    <p><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>OOP（Object Orient Programming）面向对象编程；</p>
-<p>三大特征：</p>
-<ol>
-<li>封装，将功能封装进相对独立的模块；</li>
-<li>多态，同一接口、类型，却可以做不同的事，代表不同的涵义；</li>
-<li>继承，属性、方法可被继承或扩展；</li>
-</ol>
-<p>注1：JS是一种多范式语言，支持面向对象的编程思想，其原型模型中，多态体现在：实例本身的属性或方法的优先级高于其原型对象上的同名属性或方法；</p>
-<p>注2：根据Wikipedia的词条定义，多态并非OOP独有，分为</p>
-<ol>
-<li>特设多态：函数重载、运算符重载；</li>
-<li>参数多态：泛型编程；</li>
-<li>子类型多态：父类型可替代子类型；</li>
-</ol></p>
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/03/20/others/oop/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
             <a href="/2023/03/15/js/js%E8%BF%9B%E9%98%B6/">Javascript进阶</a>
         </h1>
         
@@ -401,7 +412,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-25T13:11:33.381Z" itemprop="datePublished">2023-07-25</time>
+    <time class="vm" datetime="2023-07-25T13:14:06.086Z" itemprop="datePublished">2023-07-25</time>
 </div>
 
             
@@ -487,7 +498,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-25T13:11:33.381Z" itemprop="datePublished">2023-07-25</time>
+    <time class="vm" datetime="2023-07-25T13:14:06.086Z" itemprop="datePublished">2023-07-25</time>
 </div>
 
             
