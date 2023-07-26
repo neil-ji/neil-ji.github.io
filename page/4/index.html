@@ -132,19 +132,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/06/24/interview/%E5%8C%97%E4%BA%AC%E5%BB%BA%E8%AE%BE%E9%93%B6%E8%A1%8C%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98/">北京建设银行面试复盘</a>
+            <a href="/2023/05/02/libs/redux/">Redux详解</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/06/25">
+            <a class="article-date" href="/archives/2023/05/03">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-06-24T16:00:00.000Z" itemprop="datePublished">2023-06-25</time>
+    <time class="vm" datetime="2023-05-02T16:00:00.000Z" itemprop="datePublished">2023-05-03</time>
 </a>
 
             <div class="article-updated">
@@ -154,13 +154,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-26T07:49:10.078Z" itemprop="datePublished">2023-07-26</time>
+    <time class="vm" datetime="2023-07-26T07:54:43.331Z" itemprop="datePublished">2023-07-26</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/interview/" rel="tag">interview</a>
+    <a class="article-tag-link" href="/tags/redux/" rel="tag">redux</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -191,97 +191,11 @@
                     
                     
                         
-                        <p><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>一面：</p>
-<ol>
-<li>自我介绍</li>
-<li>js闭包，优缺点</li>
-<li>es6新特性</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/06/24/interview/%E5%8C%97%E4%BA%AC%E5%BB%BA%E8%AE%BE%E9%93%B6%E8%A1%8C%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/06/04/network/protocols/">网络协议</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/06/04">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-06-04T07:10:05.000Z" itemprop="datePublished">2023-06-04</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-07-26T07:49:10.078Z" itemprop="datePublished">2023-07-26</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>, <a class="article-tag-link" href="/tags/%E8%AE%A1%E7%AE%97%E5%99%A8%E7%BD%91%E7%BB%9C/" rel="tag">计算器网络</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="通用问题"><a href="#通用问题" class="headerlink" title="通用问题"></a>通用问题</h2><h3 id="网络分层模型"><a href="#网络分层模型" class="headerlink" title="网络分层模型"></a>网络分层模型</h3><p>TCP&#x2F;IP四层模型：应用、传输、网络、网络接口；</p>
-<p>TCP&#x2F;IP五层模型（主流）：应用、传输、网络、数据链路、物理；</p>
-<p>OSI七层模型：</p>
+                        <p><h2 id="Redux简介"><a href="#Redux简介" class="headerlink" title="Redux简介"></a>Redux简介</h2><p>Redux是一个集中存储和管理全局状态的库，通过reducer纯函数来定义怎样更新state，然后通过dispatch action更新state，state每次更新都要返回一个新对象，也就是说state是不可变的。</p>
+<p>基于reducer纯函数和不可变state，redux应用可以实现时间旅行式的调试；</p>
+<p>特点：</p>
 <ul>
-<li>应用：http、ftp</li>
+<li>单一数据源store；</li>
 <p>
                     
                 
@@ -289,7 +203,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/06/04/network/protocols/#more">
+                    <a href="/2023/05/02/libs/redux/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -304,19 +218,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/06/01/js/ts%E8%BF%9B%E9%98%B6/">Typescript进阶</a>
+            <a href="/2023/04/26/react/react_scrollauto/">滚动加载</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/06/01">
+            <a class="article-date" href="/archives/2023/04/27">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-06-01T07:10:05.000Z" itemprop="datePublished">2023-06-01</time>
+    <time class="vm" datetime="2023-04-26T16:00:00.000Z" itemprop="datePublished">2023-04-27</time>
 </a>
 
             <div class="article-updated">
@@ -326,13 +240,149 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-26T07:49:10.078Z" itemprop="datePublished">2023-07-26</time>
+    <time class="vm" datetime="2023-07-26T07:54:43.331Z" itemprop="datePublished">2023-07-26</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/typescript/" rel="tag">typescript</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                
+            
+            
+                <p>一个简单的滚动加载实现：通过Web API IntersectionObserver观察最后一个列表元素，当它出现在可视区域时，解除观察，同时异步地加载数据，并展示一个loading，在加载数据的回调中取消loading，并更新数据，这时ScrollLoad中state.data改变，重新渲染，原尾元素被卸载，断开IntersectionObserver的连接，新的尾元素挂载为ObservableScrollItem，其他元素渲染为BaseScrollItem，如此循环；</p>
+<p>每次加载数据会导致整个列表重新渲染，可以优化；</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">fetchMockData</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">setTImeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="title function_">resolve</span>(<span class="keyword">new</span> <span class="title class_">Array</span>(<span class="number">1</span>).<span class="title function_">fill</span>(<span class="string">&quot;sssssssssssss&quot;</span>));</span><br><span class="line">        &#125;, <span class="number">2000</span>);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BaseScrollItem</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;scrollitem&quot;</span> <span class="attr">ref</span>=<span class="string">&#123;this.props.internalRef&#125;</span>&gt;</span>&#123;this.props.children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ObservableScrollItem</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>(props);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ref</span> = <span class="title class_">React</span>.<span class="title function_">createRef</span>(<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">componentDidMount</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> node = <span class="variable language_">this</span>.<span class="property">ref</span>.<span class="property">current</span>;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">observer</span> = <span class="keyword">new</span> <span class="title class_">IntersectionObserver</span>(<span class="function">(<span class="params">[entry], observer</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (entry.<span class="property">isIntersecting</span>) &#123;</span><br><span class="line">                observer.<span class="title function_">unobserve</span>(node);</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">props</span>.<span class="title function_">loadItems</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">observer</span>.<span class="title function_">observe</span>(node);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">componentWillUnmount</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">observer</span>.<span class="title function_">disconnect</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">BaseScrollItem</span> <span class="attr">internalRef</span>=<span class="string">&#123;this.ref&#125;</span>&gt;</span>&#123;this.props.children&#125;<span class="tag">&lt;/<span class="name">BaseScrollItem</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">ScrollLoad</span> <span class="keyword">extends</span> <span class="title class_ inherited__">React.Component</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">props</span>) &#123;</span><br><span class="line">        <span class="variable language_">super</span>(props);</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">state</span> = &#123;</span><br><span class="line">            <span class="attr">loading</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">data</span>: <span class="keyword">new</span> <span class="title class_">Array</span>(<span class="number">5</span>).<span class="title function_">fill</span>(<span class="string">&quot;sdasadsadsads&quot;</span>)</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    loadItems = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">setState</span>(&#123; <span class="attr">loading</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">        <span class="keyword">const</span> value = <span class="keyword">await</span> <span class="title function_">fetchMockData</span>();</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">setState</span>(&#123; <span class="attr">loading</span>: <span class="literal">false</span>, <span class="attr">data</span>: [...<span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">data</span>, ...value] &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#123;</span></span><br><span class="line"><span class="language-xml">                this.state.data.map((item, index, arr) =&gt; &#123;</span></span><br><span class="line"><span class="language-xml">                    return index === arr.length - 1</span></span><br><span class="line"><span class="language-xml">                        ? <span class="tag">&lt;<span class="name">ObservableScrollItem</span> <span class="attr">loadItems</span>=<span class="string">&#123;this.loadItems&#125;</span>&gt;</span>&#123;index&#125;-----&#123;item&#125;<span class="tag">&lt;/<span class="name">ObservableScrollItem</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                        // 其实React默认会为Array Children挨个添加值为index的key，这里写不写无所谓</span></span><br><span class="line"><span class="language-xml">                        : <span class="tag">&lt;<span class="name">BaseScrollItem</span> <span class="attr">key</span>=<span class="string">&#123;index&#125;</span>&gt;</span>&#123;index&#125;-----&#123;item&#125;<span class="tag">&lt;/<span class="name">BaseScrollItem</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">                &#125;)</span></span><br><span class="line"><span class="language-xml">            &#125;</span></span><br><span class="line"><span class="language-xml">            &#123;</span></span><br><span class="line"><span class="language-xml">                this.state.loading &amp;&amp; <span class="tag">&lt;<span class="name">BaseScrollItem</span>&gt;</span>Loading...<span class="tag">&lt;/<span class="name">BaseScrollItem</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            &#125;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/04/26/react/react_virtuallist/">列表虚拟化</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/04/27">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-04-26T16:00:00.000Z" itemprop="datePublished">2023-04-27</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-26T07:54:43.331Z" itemprop="datePublished">2023-07-26</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                
+            
+            
+                <p>列表虚拟化就是只渲染部分列表项，具体思路：两层容器，外层控制可见区域大小，内层计算一个高度（<code>列表项数量 * 列表项高度</code>，或<code>列表项高度累加</code>），内层超高会使外层出现滚动条，监听外层容器滚动事件，通过<code>event.currentTarget.scrollTop / 列表项高度</code>得到可视区域的列表项的起始下标start，从start开始遍历列表数据，取若干条数据渲染，注意列表项的key设为列表数据下标，列表项为绝对定位，top通过<code>下标 * 列表项高度</code>动态计算而来； </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./index.css&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">ListItem</span>(<span class="params">&#123; top, children &#125;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;listItem&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">top</span> &#125;&#125;&gt;</span>&#123;children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">ITEM_HEIGHT</span> = <span class="number">35</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">VirtualList</span>(<span class="params">&#123; sourceData, itemCount = <span class="number">8</span> &#125;</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> [start, setStart] = <span class="title class_">React</span>.<span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> scrollHandler = <span class="title class_">React</span>.<span class="title function_">useCallback</span>(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newStart = <span class="title class_">Math</span>.<span class="title function_">ceil</span>(e.<span class="property">target</span>.<span class="property">scrollTop</span> / <span class="variable constant_">ITEM_HEIGHT</span>);</span><br><span class="line">        <span class="keyword">if</span> (newStart !== start) &#123;</span><br><span class="line">            <span class="title function_">setStart</span>(newStart);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, [start, setStart]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> renderedItems = <span class="title class_">React</span>.<span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> end = start + itemCount;</span><br><span class="line">        <span class="keyword">const</span> items = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = start; i &lt; end &amp;&amp; i &lt; sourceData.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            items.<span class="title function_">push</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">ListItem</span> <span class="attr">key</span>=<span class="string">&#123;i&#125;</span> <span class="attr">top</span>=<span class="string">&#123;i</span> * <span class="attr">ITEM_HEIGHT</span>&#125;&gt;</span>&#123;sourceData[i]&#125;<span class="tag">&lt;/<span class="name">ListItem</span>&gt;</span></span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> items;</span><br><span class="line">    &#125;, [start, itemCount, sourceData]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;listContainer&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">height:</span> <span class="attr">itemCount</span> * <span class="attr">ITEM_HEIGHT</span> &#125;&#125; <span class="attr">onScroll</span>=<span class="string">&#123;scrollHandler&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;list&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">height:</span> <span class="attr">sourceData.length</span> * <span class="attr">ITEM_HEIGHT</span> &#125;&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">                &#123;renderedItems&#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">MockVirtualList</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="variable constant_">LEN</span> = <span class="number">100000</span>;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">new</span> <span class="title class_">Array</span>(<span class="variable constant_">LEN</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable constant_">LEN</span>; i++) &#123;</span><br><span class="line">        data[i] = <span class="string">`<span class="subst">$&#123;i&#125;</span>-------<span class="subst">$&#123;<span class="built_in">Math</span>.random() * i&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">VirtualList</span> <span class="attr">sourceData</span>=<span class="string">&#123;data&#125;</span> /&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.listContainer</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">overflow</span>: auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.listItem</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid blue;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">35px</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/04/23/algorithm/leetcode32/">LeetCode Hard 32. 最长有效括号</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/04/24">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-04-23T16:00:00.000Z" itemprop="datePublished">2023-04-24</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-26T07:54:43.331Z" itemprop="datePublished">2023-07-26</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
 </div>
 
 
@@ -363,97 +413,11 @@
                     
                     
                         
-                        <p><h2 id="变型：协变、逆变、不变性"><a href="#变型：协变、逆变、不变性" class="headerlink" title="变型：协变、逆变、不变性"></a>变型：协变、逆变、不变性</h2><p><a target="_blank" rel="noopener" href="https://jkchao.github.io/typescript-book-chinese/tips/covarianceAndContravariance.html#%E5%8D%8F%E5%8F%98%E4%B8%8E%E9%80%86%E5%8F%98">讲的最好的协变、逆变</a></p>
-<h2 id="条件类型"><a href="#条件类型" class="headerlink" title="条件类型"></a>条件类型</h2><p><code>T extends U ? T : never</code>，T如果可以分配给U，则返回类型T，否则返回never；</p>
-<p>注意，当T是联合类型时，相当于对T的每种子类型单独应用条件类型，然后再把结果联合，如：</p>
-<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> a = <span class="number">1</span> | <span class="number">2</span> | <span class="string">&quot;3&quot;</span> | <span class="string">&quot;4&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> b&lt;T&gt; = T <span class="keyword">extends</span> <span class="built_in">number</span> ? T : <span class="built_in">never</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> c = b&lt;a&gt;; <span class="comment">// 1 | 2</span></span><br></pre></td></tr></table></figure>
-
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/06/01/js/ts%E8%BF%9B%E9%98%B6/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/05/28/libs/reactrouter/">react-router详解</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/05/28">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-05-28T10:29:26.000Z" itemprop="datePublished">2023-05-28</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-07-26T07:49:10.078Z" itemprop="datePublished">2023-07-26</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/react-router/" rel="tag">react-router</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="客户端路由（CSR）原理"><a href="#客户端路由（CSR）原理" class="headerlink" title="客户端路由（CSR）原理"></a>客户端路由（CSR）原理</h2><p>传统浏览器导航行为就是URL改变时直接向服务器发送请求，服务器响应对应资源，而客户端路由就是URL改变时不再发送请求，而是由客户端部署的App自行匹配URL并展示对应内容。</p>
-<p>remix&#x2F;history (v5.3)是react-router实现CSR的核心库，其中CSR分为两种：</p>
+                        <p><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-valid-parentheses/">32. 最长有效括号</a></p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>注释比较长，耐心看，<strong>重点一</strong>是看懂dp[i]表示的是什么，那就是从j到i的合法子串长度，0 &lt;&#x3D; j &lt;&#x3D; i，<strong>重点二</strong>是j可由等式dp[i] &#x3D; i - j + 1变形求得，<strong>重点三</strong>是对贪心法的理解，只取局部最优，按这个思路考虑，每次迭代尾字符要么是<code>(</code>要么是<code>)</code>，则：</p>
 <ol>
-<li>URL Hash</li>
-<li>Browser History</li>
+<li><code>...(</code>一定不合法</li>
+<li><code>...)</code>要分情况讨论：<ol>
 <p>
                     
                 
@@ -461,7 +425,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/05/28/libs/reactrouter/#more">
+                    <a href="/2023/04/23/algorithm/leetcode32/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
@@ -476,19 +440,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/05/19/libs/mobx/">Mobx</a>
+            <a href="/2023/04/19/react/react%E5%9F%BA%E7%A1%80/">React基础知识</a>
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/05/19">
+            <a class="article-date" href="/archives/2023/04/19">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-05-19T06:31:16.000Z" itemprop="datePublished">2023-05-19</time>
+    <time class="vm" datetime="2023-04-19T05:57:58.000Z" itemprop="datePublished">2023-04-19</time>
 </a>
 
             <div class="article-updated">
@@ -498,13 +462,13 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-26T07:49:10.078Z" itemprop="datePublished">2023-07-26</time>
+    <time class="vm" datetime="2023-07-26T07:54:43.331Z" itemprop="datePublished">2023-07-26</time>
 </div>
 
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/mobx/" rel="tag">mobx</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
 </div>
 
 
@@ -535,11 +499,11 @@
                     
                     
                         
-                        <p><h2 id="Mobx简介"><a href="#Mobx简介" class="headerlink" title="Mobx简介"></a>Mobx简介</h2><ul>
-<li>非单一数据源</li>
-<li>单向数据流</li>
-</ul>
-<h2 id="Mobx核心概念"><a href="#Mobx核心概念" class="headerlink" title="Mobx核心概念"></a>Mobx核心概念</h2><ul>
+                        <p><h2 id="React常见知识点"><a href="#React常见知识点" class="headerlink" title="React常见知识点"></a>React常见知识点</h2><p>基础API或特性：</p>
+<ul>
+<li>ClassComponent生命周期（含unsafe）</li>
+<li>Hooks如何模拟ClassComponent生命周期</li>
+<li>useEffect VS useLayoutEffect</li>
 <p>
                     
                 
@@ -547,7 +511,7 @@
             
                 </div>   
                 <div class="article-more-link">
-                    <a href="/2023/05/19/libs/mobx/#more">
+                    <a href="/2023/04/19/react/react%E5%9F%BA%E7%A1%80/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
