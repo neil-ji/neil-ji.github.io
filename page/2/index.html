@@ -132,92 +132,6 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            <a href="/2023/07/25/algorithm/leetcode-btree2/">数算再回顾（二）二叉树常见算法</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/07/25">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-07-25T07:00:00.000Z" itemprop="datePublished">2023-07-25</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2023-07-27T06:41:01.895Z" itemprop="datePublished">2023-07-27</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>数（据结构）算（法）再回顾，加深记忆抗遗忘。</p>
-<h2 id="前序遍历"><a href="#前序遍历" class="headerlink" title="前序遍历"></a>前序遍历</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-preorder-traversal/">144. 二叉树的前序遍历</a></p>
-<p>基本规律：二叉树前序遍历结果一定是<code>[root, left, right]</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 递归</span></span><br><span class="line"><span class="keyword">var</span> preorderTraversal = <span class="keyword">function</span> (<span class="params">root</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!root) <span class="keyword">return</span> [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> r1 = <span class="title function_">preorderTraversal</span>(root.<span class="property">left</span>);</span><br><span class="line">  <span class="keyword">const</span> r2 = <span class="title function_">preorderTraversal</span>(root.<span class="property">right</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> [root.<span class="property">val</span>].<span class="title function_">concat</span>(r1).<span class="title function_">concat</span>(r2);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/07/25/algorithm/leetcode-btree2/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
             <a href="/2023/07/25/algorithm/leetcode-btree1/">数算再回顾（一）二叉树性质</a>
         </h1>
         
@@ -240,7 +154,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-27T06:41:01.895Z" itemprop="datePublished">2023-07-27</time>
+    <time class="vm" datetime="2023-07-27T08:16:01.422Z" itemprop="datePublished">2023-07-27</time>
 </div>
 
             
@@ -326,7 +240,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-27T06:41:01.895Z" itemprop="datePublished">2023-07-27</time>
+    <time class="vm" datetime="2023-07-27T08:16:01.422Z" itemprop="datePublished">2023-07-27</time>
 </div>
 
             
@@ -412,7 +326,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-27T06:41:01.895Z" itemprop="datePublished">2023-07-27</time>
+    <time class="vm" datetime="2023-07-27T08:16:01.422Z" itemprop="datePublished">2023-07-27</time>
 </div>
 
             
@@ -498,7 +412,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2023-07-27T06:41:01.895Z" itemprop="datePublished">2023-07-27</time>
+    <time class="vm" datetime="2023-07-27T08:16:01.422Z" itemprop="datePublished">2023-07-27</time>
 </div>
 
             
@@ -548,6 +462,92 @@
                 </div>   
                 <div class="article-more-link">
                     <a href="/2023/07/08/algorithm/leetcode121/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2023/07/08/algorithm/leetcode124/">LeetCode Easy 124. 二叉树中的最大路径和</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/07/09">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-07-08T16:00:00.000Z" itemprop="datePublished">2023-07-09</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2023-07-27T08:16:01.422Z" itemprop="datePublished">2023-07-27</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-maximum-path-sum/">124. 二叉树中的最大路径和</a></p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>粗略思路：从叶子节点开始，以贪心策略求得局部最大路径和，叶子节点计算完之后，回到父节点，再以同样的贪心策略求得局部最大路径和，重复该过程，<strong>显然这是二叉树的后序遍历</strong>。</p>
+<p>技巧总结：</p>
+<ul>
+<li>假如以递归实现，思路上要从最深或次深一层的调用考虑要做的操作，先忽略上层调用；</li>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/07/08/algorithm/leetcode124/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
