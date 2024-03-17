@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>Webpack 常识 | Neil&#39;s Blog</title>
+    <meta name="author" content="Neil Ji" />
+    <meta name="keywords" content="react,js,javascript,react17.0.2,ts,typescript,redux,mobx" />
+    <meta name="description" content="Loader vs PluginLoader 用于加载并解析各类文件，如 css &amp;#x2F; sass &amp;#x2F; ts &amp;#x2F; markdown &amp;#x2F; png 等；Plugin 用于扩展 Webpack 的能力，实现各种 webpack 本身并不具备的功能，比如清理文件，代码压缩等；常用 Loaderbabel-loader &amp;#x2F; ts-loader &amp;#x2F; vue-loader：将各类 js-like 文件解析为 js；sass-loader &amp;#x2F; l" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="Neil&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">Neil&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://neil-ji.github.io"></form> -->
+
+        
+            
+                
+                    
+
+                        
+                                    <div class="author-meta">
+                                        
+                                            <div class="author-avatar">
+                                                <a href="/">
+                                                    <img src="/images/avatar.png"
+                                                        title="Neil">
+                                                </a>
+                                            </div>
+                                            
+                                                <div class="author-name">
+                                                    Neil
+                                                </div>
+                                                <div class="author-work">Web Developer</div>
+                                                <div class="author-location">
+                                                    <i class="icon-location vm"></i>
+                                                    <span class="vm">
+                                                        China
+                                                    </span>
+                                                </div>
+                                                
+                                                    <div class="author-thread-wrap">
+                                                        <div class="author-threads clearfix">
+                                                            
+                                                                <a class="thread-item" href="https://github.com/neil-ji"
+                                                                    target="_blank" rel="noopener">
+                                                                    <!-- Generated by IcoMoon.io -->
+<svg viewBox="0 0 1024 1024" width="38" height="38" fill="currentColor">
+<path d="M512 32.12c-265.004 0-479.88 220.23-479.88 492.090 0 217.446 137.536 401.684 328.202 466.81 23.994 4.498 32.778-10.712 32.778-23.78 0-11.782-0.428-42.632-0.642-83.764-133.466 29.778-161.744-65.984-161.744-65.984-21.852-56.772-53.344-71.982-53.344-71.982-43.49-30.636 3.214-29.992 3.214-29.992 48.202 3.428 73.482 50.772 73.482 50.772 42.846 75.196 112.258 53.558 139.68 40.918 4.284-31.706 16.71-53.558 30.42-65.77-106.474-12.426-218.516-54.63-218.516-243.152 0-53.772 18.638-97.69 49.274-131.966-4.928-12.426-21.424-62.556 4.714-130.252 0 0 40.276-13.282 131.966 50.344 38.348-10.926 79.266-16.282 120.184-16.496 40.704 0.214 81.836 5.57 120.184 16.496 91.692-63.626 131.752-50.344 131.752-50.344 26.136 67.698 9.64 117.828 4.714 130.252 30.636 34.492 49.274 78.408 49.274 131.966 0 188.952-112.258 230.514-219.16 242.724 17.138 15.21 32.564 45.202 32.564 91.048 0 65.77-0.642 118.898-0.642 134.966 0 13.068 8.57 28.492 32.992 23.566 191.094-64.912 328.418-249.152 328.418-466.382 0-271.86-214.874-492.090-479.88-492.090z"></path>
+</svg>
+
+                                                                </a>
+                                                                
+                                                        </div>
+                                                    </div>
+                                                    <div class="author-description">
+                                                        做一个Azad，自由的人，像柏树一样——希克·萨迪《花园》
+                                                    </div>
+                                                    
+                                    </div>
+                                    
+    </div>
+</aside>
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            Webpack 常识
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2024/03/16">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2024-03-16T16:00:00.000Z" itemprop="datePublished">2024-03-17</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2024-03-17T11:13:23.320Z" itemprop="datePublished">2024-03-17</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/webpack/" rel="tag">webpack</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+            
+            
+                <ol>
+<li>Loader vs Plugin</li>
+</ol>
+<ul>
+<li>Loader 用于加载并解析各类文件，如 css &#x2F; sass &#x2F; ts &#x2F; markdown &#x2F; png 等；</li>
+<li>Plugin 用于扩展 Webpack 的能力，实现各种 webpack 本身并不具备的功能，比如清理文件，代码压缩等；</li>
+</ul>
+<ol start="2">
+<li>常用 Loader</li>
+</ol>
+<ul>
+<li>babel-loader &#x2F; ts-loader &#x2F; vue-loader：将各类 js-like 文件解析为 js；</li>
+<li>sass-loader &#x2F; less-loader &#x2F; css-loader &#x2F; style-loader：解析各类样式文件；</li>
+<li>file-loader： 文件批处理；</li>
+<li>url-loader：将文件内容转换为 data-url；</li>
+</ul>
+<ol start="3">
+<li>常用 Plugin</li>
+</ol>
+<ul>
+<li>HtmlWebpackPlugin 生成 HTML 并自动注入 css 和 js，webpack 5 通过 <code>output.clean: true</code> 代替；</li>
+<li>MiniCssExtractPlugin 从 js 中分离 css 并生成单独文件；</li>
+<li>SplitChunksPlugin 自动分割 multi-entry 文件之间的共享模块（内置插件）；</li>
+<li>OptimizeCssAssetsWebpackPlugin 压缩 css；</li>
+<li>CompressionWebpackPlugin 压缩 js；</li>
+<li>CleanWebpackPlugin 清理文件；</li>
+<li>CopyWebpackPlugin 复制文件；</li>
+<li>BundleAnalyzerPlugin 可视化构建结果分析；</li>
+<li>HotModuleReplacementPlugin 启动 HMR；</li>
+</ul>
+<ol start="4">
+<li>代码分割</li>
+</ol>
+<ul>
+<li>Multiple entry + SplitChunksPlugin</li>
+<li>ES6 新语法 Dynamic import</li>
+</ul>
+<p>配置多个入口时，要手动声明公共模块，通过 dependOn 标记入口之间的依赖关系，避免将公共依赖重复打包到每个入口文件中（依赖重复）。</p>
+<p>SplitChunksPlugin 是 webpack 内置模块，通过以下选项配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">optimization</span>: &#123;</span><br><span class="line">    <span class="comment">// Enable SplitChunksPlugin</span></span><br><span class="line">    <span class="attr">splitChunks</span>: &#123;</span><br><span class="line">      <span class="attr">chunks</span>: <span class="string">&quot;all&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，分离代码并非粒度越细越好，因为粒度越细，则 bundles 越多，在 http2 没有普及之前，每个 bundle 都意味着一个独立的 tcp 连接，大量的 tcp 连接也会成为性能瓶颈。可通过以下属性精细化控制代码分割粒度：</p>
+<ul>
+<li>chunks：指定哪些类型的 chunk 参与拆分（如 ‘initial’、’async’、’all’）。</li>
+<li>minSize：指定一个模块的最小体积，只有超过这个体积的模块才会被拆分。</li>
+<li>minChunks：指定一个模块被引用的最小次数，只有被引用次数超过这个值的模块才会被拆分。</li>
+<li>maxAsyncRequests：指定按需加载的 chunk 的最大数量。</li>
+<li>maxInitialRequests：指定初始加载的 chunk 的最大数量。</li>
+<li>cacheGroups：允许你自定义规则来匹配模块并将其拆分到指定的组中。</li>
+</ul>
+<p>注：initial 指 entry 中声明的模块，async 指异步加载模块（如动态 import）；</p>
+<ol start="5">
+<li>本地缓存</li>
+</ol>
+<p>Loader 输出结果缓存：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">rules</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">      <span class="attr">use</span>: [<span class="string">&quot;babel-loader&quot;</span>],</span><br><span class="line">      <span class="attr">options</span>: &#123;</span><br><span class="line">        <span class="attr">cache</span>: <span class="literal">true</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>构建结果缓存分为两种——memory 和 filesystem，区别如下：</p>
+<ul>
+<li>memory：输出资源放入内存，是默认行为，速度更快，但内存容量一般较小，适合小项目；</li>
+<li>filesystem：输出资源放入文件系统中，可以理解为放硬盘上，速度略慢，但可以跨多次构建复用，且硬盘空间较大，因此适合大型项目；</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">cache</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&quot;filesystem&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过以下属性精细化控制 cache：</p>
+<ul>
+<li>cacheDirectory：指定 filesystem 类型的缓存结果的存放目录；</li>
+<li>version：静态指定缓存结果版本号，版本改变，则重新构建；</li>
+<li>buildDependencies.config：指定一个依赖数组，内部元素改变时将重新构建；</li>
+<li>buildDependencies.webpack：指定 webpack 依赖版本，版本改变时重新构建；</li>
+</ul>
+<ol start="6">
+<li>长效缓存</li>
+</ol>
+<p>目标：通过浏览器缓存策略提高模块加载速度；</p>
+<p>第一步，设置唯一文件名：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;[name][contentHash].js&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">clean</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第二步，提取 runtime 和 manifest：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;[name][contentHash].js&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">clean</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">runtimeChunk</span>: <span class="string">&#x27;single&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第三步，提取很少改变的外部依赖，并改用稳定的 moduleId 生成方式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;[name][contentHash].js&quot;</span>,</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>),</span><br><span class="line">        <span class="attr">clean</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="attr">moduleIds</span>: <span class="string">&#x27;deterministic&#x27;</span>,</span><br><span class="line">        <span class="attr">runtimeChunk</span>: <span class="string">&#x27;single&#x27;</span>,</span><br><span class="line">        <span class="attr">splitChunks</span>: &#123;</span><br><span class="line">            <span class="attr">catchGroups</span>:&#123;</span><br><span class="line">                <span class="attr">vendor</span>: &#123;</span><br><span class="line">                    <span class="attr">test</span>: <span class="regexp">/[\\/]node_modules[\\/]/</span>,</span><br><span class="line">                    <span class="attr">name</span>: <span class="string">&quot;vendors&quot;</span>,</span><br><span class="line">                    <span class="attr">chunks</span>: <span class="string">&quot;all&quot;</span>,</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>SPA 场景下的 HTTP 缓存策略</li>
+</ol>
+<p>首先，入口 HTML 文件必须禁用强缓存：cache-control: no-store；</p>
+<p>其次，JS、CSS 文件则可以使用强缓存：</p>
+<ul>
+<li>每次验证有效性，cache-control：no-cache；</li>
+<li>有效期内无需验证，除非过期，cache-control：max-age&#x3D;3600, must-revalidate</li>
+</ul>
+<p>此时，假如 JS、CSS 有更新，则基于上文中的构建策略，bundle 文件名将改变，HTML 中对应资源的 URL 也就发生改变，因此会及时响应更新。</p>
+<p>当然，JS、CSS 文件也可以使用协商缓存，但需要服务器端进行额外配置（响应条件请求），与之相比，前端通过简单的配置即可实现类似效果，免去与后端开发沟通的过程。</p>
+
+                </div>
+            
+    </section>
+</article>
+
+
+
+
+    <a id="pagenext" href="/2023/07/26/algorithm/leetcode-btree3/" class="article-next" title="数算再回顾（三）二叉树常见算法"><i class="icon-arrow-right"></i></a>
+
+
+
+
+
+
+            </div>
+        </div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>
