@@ -132,6 +132,92 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2023/05/28/libs/reactrouter/">react-router详解</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2023/05/28">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2023-05-28T10:29:26.000Z" itemprop="datePublished">2023-05-28</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2024-03-18T10:35:22.490Z" itemprop="datePublished">2024-03-18</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/react-router/" rel="tag">react-router</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h2 id="客户端路由（CSR）原理"><a href="#客户端路由（CSR）原理" class="headerlink" title="客户端路由（CSR）原理"></a>客户端路由（CSR）原理</h2><p>传统浏览器导航行为就是URL改变时直接向服务器发送请求，服务器响应对应资源，而客户端路由就是URL改变时不再发送请求，而是由客户端部署的App自行匹配URL并展示对应内容。</p>
+<p>remix&#x2F;history (v5.3)是react-router实现CSR的核心库，其中CSR分为两种：</p>
+<ol>
+<li>URL Hash</li>
+<li>Browser History</li>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2023/05/28/libs/reactrouter/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2023/05/19/libs/mobx/">Mobx</a>
         </h1>
         
@@ -154,7 +240,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2024-03-17T11:13:23.320Z" itemprop="datePublished">2024-03-17</time>
+    <time class="vm" datetime="2024-03-18T10:35:22.490Z" itemprop="datePublished">2024-03-18</time>
 </div>
 
             
@@ -240,7 +326,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2024-03-17T11:13:23.320Z" itemprop="datePublished">2024-03-17</time>
+    <time class="vm" datetime="2024-03-18T10:35:22.490Z" itemprop="datePublished">2024-03-18</time>
 </div>
 
             
@@ -326,7 +412,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2024-03-17T11:13:23.320Z" itemprop="datePublished">2024-03-17</time>
+    <time class="vm" datetime="2024-03-18T10:35:22.490Z" itemprop="datePublished">2024-03-18</time>
 </div>
 
             
@@ -394,7 +480,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2024-03-17T11:13:23.320Z" itemprop="datePublished">2024-03-17</time>
+    <time class="vm" datetime="2024-03-18T10:35:22.490Z" itemprop="datePublished">2024-03-18</time>
 </div>
 
             
@@ -429,92 +515,6 @@
                 <p>列表虚拟化就是只渲染部分列表项，具体思路：两层容器，外层控制可见区域大小，内层计算一个高度（<code>列表项数量 * 列表项高度</code>，或<code>列表项高度累加</code>），内层超高会使外层出现滚动条，监听外层容器滚动事件，通过<code>event.currentTarget.scrollTop / 列表项高度</code>得到可视区域的列表项的起始下标start，从start开始遍历列表数据，取若干条数据渲染，注意列表项的key设为列表数据下标，列表项为绝对定位，top通过<code>下标 * 列表项高度</code>动态计算而来； </p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./index.css&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">ListItem</span>(<span class="params">&#123; top, children &#125;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;listItem&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">top</span> &#125;&#125;&gt;</span>&#123;children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">ITEM_HEIGHT</span> = <span class="number">35</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">VirtualList</span>(<span class="params">&#123; sourceData, itemCount = <span class="number">8</span> &#125;</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> [start, setStart] = <span class="title class_">React</span>.<span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> scrollHandler = <span class="title class_">React</span>.<span class="title function_">useCallback</span>(<span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> newStart = <span class="title class_">Math</span>.<span class="title function_">ceil</span>(e.<span class="property">target</span>.<span class="property">scrollTop</span> / <span class="variable constant_">ITEM_HEIGHT</span>);</span><br><span class="line">        <span class="keyword">if</span> (newStart !== start) &#123;</span><br><span class="line">            <span class="title function_">setStart</span>(newStart);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, [start, setStart]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> renderedItems = <span class="title class_">React</span>.<span class="title function_">useMemo</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> end = start + itemCount;</span><br><span class="line">        <span class="keyword">const</span> items = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = start; i &lt; end &amp;&amp; i &lt; sourceData.<span class="property">length</span>; i++) &#123;</span><br><span class="line">            items.<span class="title function_">push</span>(<span class="language-xml"><span class="tag">&lt;<span class="name">ListItem</span> <span class="attr">key</span>=<span class="string">&#123;i&#125;</span> <span class="attr">top</span>=<span class="string">&#123;i</span> * <span class="attr">ITEM_HEIGHT</span>&#125;&gt;</span>&#123;sourceData[i]&#125;<span class="tag">&lt;/<span class="name">ListItem</span>&gt;</span></span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> items;</span><br><span class="line">    &#125;, [start, itemCount, sourceData]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;listContainer&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">height:</span> <span class="attr">itemCount</span> * <span class="attr">ITEM_HEIGHT</span> &#125;&#125; <span class="attr">onScroll</span>=<span class="string">&#123;scrollHandler&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;list&quot;</span> <span class="attr">style</span>=<span class="string">&#123;&#123;</span> <span class="attr">height:</span> <span class="attr">sourceData.length</span> * <span class="attr">ITEM_HEIGHT</span> &#125;&#125;&gt;</span></span></span><br><span class="line"><span class="language-xml">                &#123;renderedItems&#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">MockVirtualList</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="variable constant_">LEN</span> = <span class="number">100000</span>;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">new</span> <span class="title class_">Array</span>(<span class="variable constant_">LEN</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="variable constant_">LEN</span>; i++) &#123;</span><br><span class="line">        data[i] = <span class="string">`<span class="subst">$&#123;i&#125;</span>-------<span class="subst">$&#123;<span class="built_in">Math</span>.random() * i&#125;</span>`</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">VirtualList</span> <span class="attr">sourceData</span>=<span class="string">&#123;data&#125;</span> /&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.listContainer</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">overflow</span>: auto;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.listItem</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid blue;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">35px</span>;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/04/26/server/sso/">常见业务之单点登录（SSO）</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/04/27">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-04-26T16:00:00.000Z" itemprop="datePublished">2023-04-27</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2024-03-17T11:13:23.320Z" itemprop="datePublished">2024-03-17</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/%E4%B8%9A%E5%8A%A1%E5%AE%9E%E7%8E%B0/" rel="tag">业务实现</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>SSO 是 single sign-on 的缩写，国内统称单点登录，其实翻译为单一登录更为准确，因为其内涵就是对于多系统的场景下，只进行一次登录即可访问所有子系统资源。</p>
-<p>[注]：阅读前需掌握前置知识 JWT，Session 和 Cookie。</p>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>SSO 的标准实现包含以下几类角色：</p>
-<ol>
-<li>认证中心（Central Authentication Server）</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/04/26/server/sso/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
                 </div>
             
     </section>

@@ -7,10 +7,10 @@
 
     
 
-    <title>关于博主 | Neil&#39;s Blog</title>
+    <title>字节跳动直播线面试复盘 | Neil&#39;s Blog</title>
     <meta name="author" content="Neil Ji" />
     <meta name="keywords" content="react,js,javascript,react17.0.2,ts,typescript,redux,mobx" />
-    <meta name="description" content="Welcome to Neil&#39;s Blog" />
+    <meta name="description" content="自我介绍两列布局，左定宽，右适应重排和重绘是什么，如何降低重排重绘的性能开销？如何判断一个变量是 Array？宏任务和微任务是什么？说出给定异步代码的输出结果（setTimeout+Promise）Typescript 常用泛型（似乎是想问内置工具泛型）Typescript 语法：keyof typeof objReact ErrorBoundary 是什么？为什么 React Hooks 必须保证有序性和确定性（不能放进分支语句）？对 React 组件性能调优的认识开放性问题：说一下做项目过程" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
 
@@ -64,7 +64,7 @@
                 <span class="nav-text">归档</span>
             </a>
         
-            <a class="nav-item active" href="/about">
+            <a class="nav-item" href="/about">
                 <span class="nav-text">关于</span>
             </a>
         
@@ -78,6 +78,8 @@
 
         
             
+                
+                    
 
                         
                                     <div class="author-meta">
@@ -131,19 +133,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            关于博主
+            字节跳动直播线面试复盘
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/07/09">
+            <a class="article-date" href="/archives/2024/03/17">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-07-09T16:00:00.000Z" itemprop="datePublished">2023-07-10</time>
+    <time class="vm" datetime="2024-03-17T16:00:00.000Z" itemprop="datePublished">2024-03-18</time>
 </a>
 
             <div class="article-updated">
@@ -157,6 +159,11 @@
 </div>
 
             
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/interview/" rel="tag">interview</a>
+</div>
+
 
         </div>
     </header>
@@ -168,62 +175,41 @@
                 
             
             
-                <h2 id="博客介绍"><a href="#博客介绍" class="headerlink" title="博客介绍"></a>博客介绍</h2><p>该博客是基于<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo">hexo</a>搭建的，主题是基于<a target="_blank" rel="noopener" href="https://github.com/sanonz/hexo-theme-concise">concise</a>魔改的，一部分内容是搬运自我在掘金、知乎、CSDN等平台的账号，后续更新将主要发布在这里。</p>
-<!-- ## 个人经历
+                <ol>
+<li>自我介绍</li>
+<li>两列布局，左定宽，右适应</li>
+<li>重排和重绘是什么，如何降低重排重绘的性能开销？</li>
+<li>如何判断一个变量是 Array？</li>
+<li>宏任务和微任务是什么？说出给定异步代码的输出结果（setTimeout+Promise）</li>
+<li>Typescript 常用泛型（似乎是想问内置工具泛型）</li>
+<li>Typescript 语法：keyof typeof obj</li>
+<li>React ErrorBoundary 是什么？</li>
+<li>为什么 React Hooks 必须保证有序性和确定性（不能放进分支语句）？</li>
+<li>对 React 组件性能调优的认识</li>
+<li>开放性问题：说一下做项目过程中遇到过哪些难点，是如何解决的</li>
+<li>代码实现：写一个自定义 Hook，实现 forceUpdate 的功能</li>
+<li>代码实现：数组拍平</li>
+</ol>
+<p>setTimeout + Promise 异步代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">0</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>);</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="number">2</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>);</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function">(<span class="params">o</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(o));</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">4</span>);</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="number">5</span>);</span><br><span class="line">&#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">o</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(o))</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">6</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1342560</span></span><br></pre></td></tr></table></figure>
 
-- 2019/10 - 2022/05：曾先后任职于AvePoint、婚礼纪，主要负责Web前端开发；
-- 2022/05 - 2023/02：离职后选择考研，不幸未能通过初试；
-- 2023/04 - 至今：深化技术学习，目前在积极寻求回归职场的机会；
+<p>类似于 forceUpdate 的自定义 Hook：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">useForceUpdate</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [state, setState] = <span class="title class_">React</span>.<span class="title function_">useState</span>(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setState</span>(!state);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-## 技能
+<p>数组拍平</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 递归实现</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">flat_1</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> result = [];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> item <span class="keyword">of</span> arr) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title class_">Array</span>.<span class="title function_">isArray</span>(item)) &#123;</span><br><span class="line">      result.<span class="title function_">push</span>(...<span class="title function_">flat</span>(item));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result.<span class="title function_">push</span>(item);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 借助toString</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">flat_2</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> arr.<span class="title function_">toString</span>().<span class="title function_">split</span>(<span class="string">&quot;,&quot;</span>).<span class="title function_">map</span>(<span class="title class_">Number</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-个人简介：熟悉常用数据结构、算法、网络协议等底层知识，具有较广的前端知识储备和丰富的React开发经验，对一些常用类库有较深入的理解（阅读过react等源码），有良好的英文读写能力，能流畅阅读英文技术文档。
-
-详细技能：
-- 熟悉HTML5及CSS3的语法特性，熟练掌握现代布局技术并了解其兼容性，能熟练使用CSS预编译技术sass/less，熟悉Web Accessibility，熟悉浏览器工作原理及前端性能优化；
-- 熟悉Javascript语法特性、常用内置对象及API，熟悉ES6规范，熟悉Typescript常用内置类型；
-- 熟悉React，阅读过17.0.2源码，熟悉底层实现与组件性能优化；
-- 熟悉状态管理库，阅读过源码，熟悉底层实现：redux / mobx，react-redux；
-- 熟悉客户端路由库（CSR），阅读过源码，熟悉底层实现：react-router，react-router-dom；
-- 熟悉Git常用操作及基本工作流程；
-- 熟悉常用数据结构及算法；
-- 熟悉常用计算机网络协议，对网络安全有良好认知；
-- 熟悉Node.js，npm，webpack，es-lint等基本特性、常用指令或常用配置；
-
-## 联系方式
-
-如果您有兴趣进一步沟通，欢迎通过邮件或微信联系我，我将发送一份详细简历给您。
-
-1. Email（base64 utf-8）：`bGl1YmFpbWFpbEAxNjMuY29t`
-2. 微信（base64 utf-8）：`Z2Vla25laWw=`
-
-## 空窗期
-
-2022/05至今，离职后选择考研，所以存在一年的空窗期，简单来说，就是为了重新夯实计科基础以及提高未来职业生涯发展的上限，具体来说，原因如下。
-
-以下是我当初选择考研时的个人分析（408是计算机基础统考的考试编号）：
-1. 重学408及复试机考（数据结构与算法）利于下一步晋升或跳槽，并有助于未来的职业发展（底层很重要），提高上限；
-2. 年龄方面，30前能毕业还可以接受；
-3. 既然是为了梦想，那就要够纯粹，不考虑非全，学硕还是专硕看复习和经济状况；
-4. 全日制脱产，职业生涯风险大，双非甚至部分 211 院校的学历加持收益有限，所以目标定成发达地区985；
-5. 身体、抗压、学习、逻辑思维各项能力已经是人生巅峰，不希望给自己留遗憾；
-6. 半年脱离职场，风险仍然可以接受，简历不完美，但还算好看，对技术有信心，对市场暂时没信心，停一停思考思考，对未来发展应该是有帮助的，失败后可以继续求职；
-7. 有近三年工作实践，408与上机考试问题不大，外企期间英语能力提高不小，思政目前来看不是问题，数学是唯一重点。
-
-经过近半年的备考，9月报考目标院校浙大软院，由于考试期间新冠阳性等其他多种原因综合，最终总分334，政治未达院线，不幸未能通过初试。
-
-成绩确认后，调整心态，深思熟虑之下决定放弃二战，决心回归职场，期望尽快步入职业生涯的快速发展期，具体如下：
-1. 考研失败我没败：经历备考期之后，深觉个人能力有较大提高，也许并未质变，但已经足以支撑我下一步在职场中的发展；
-2. 殊途同归：就目的来看，即使上岸，我最终也将回归职场，因为我仍热爱职场，并享受teamwork的过程；
-3. 认知进步：要看到本质，也就是能力的提高，而非表面——学历的提高；
-4. 风险骤增：二战风险更大，经济上、职业发展上都已无法承受再次失败的风险，与之相比，职场的稳定收益对我吸引更大；
-5. 时间成本：目前阶段本应处于职业的快速发展期，每一年都极为重要，除了看得见的成本——脱产失去收入来源，还有更多看不见的成本；
-
-为了尽快回归职场，我开始重新复习之前的笔记、博客，定期输出新的技术博客到[Neil's Blog](https://neil-ji.github.io/)，有必要声明的是，其中大部分是对过去知识的复习，是经过重新排版编辑后发布在这里的，带有较深的理解或在工作中实践过，只有少部分是对过去盲点的查缺补漏，并非临时死记硬背的八股文。 -->
                 </div>
             
     </section>
 </article>
+
+
+
+
+    <a id="pagenext" href="/2024/03/16/webpack/webpack/" class="article-next" title="Webpack 常识"><i class="icon-arrow-right"></i></a>
+
+
 
 
 
