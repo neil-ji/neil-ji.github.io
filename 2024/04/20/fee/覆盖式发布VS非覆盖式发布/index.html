@@ -7,10 +7,10 @@
 
     
 
-    <title>LeetCode Easy 121. 买卖股票的最佳时机 | Neil&#39;s Blog</title>
+    <title>覆盖式发布VS非覆盖式发布 | Neil&#39;s Blog</title>
     <meta name="author" content="Neil Ji" />
     <meta name="keywords" content="react,js,javascript,react17.0.2,ts,typescript,redux,mobx" />
-    <meta name="description" content="121. 买卖股票的最佳时机解题思路题目要求只能在某一天买，之后的某天卖，利润 &amp;#x3D; 卖的价格 - 买的价格，让卖的价格最高，买的价格最低，则利润最大，且附加限制条件：先买后卖；以这样的顺序迭代：第一天买入，第二天卖出；前两天的某天以最低价买入，第三天卖出；前三天的某天以最低价买入，第四天卖出；…细节：可见每次迭代需要计算当天以前（不包含当天）的最低价格，可以用变量min记忆并逐步更新最低价；最润终需要返回最大利，由于利润每次迭代都要计算，可用变量profit记忆并逐步更新最大利润；由于" />
+    <meta name="description" content="定义覆盖式：新版本会覆盖上一个版本；非覆盖式：每个版本共存；优缺点覆盖式：节省存储空间，但不容易做版本回退；非覆盖式：占用大量存储空间，无缝切换版本；适用场景覆盖式：强调系统一致性，不接受特定版本的定制、维护；非覆盖式：强调风险控制，或者有版本定制的需求；实现方式覆盖式发布比较常见，一般是新版本验收后，推送到远端仓库，通过CI&amp;#x2F;CD或手动部署的方式，先清理服务器静态文件托管目录，再将构建后的资源移动到该目录。非覆盖式的重点是多版本共存，一般以版本号来区分，确定用户想访问的版本的常见实现" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
 
@@ -82,7 +82,7 @@
                     
 
                         
-                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="toc-number">1.</span> <span class="toc-text">解题思路</span></a></li></ol>
+                            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-number">2.</span> <span class="toc-text">优缺点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">3.</span> <span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">实现方式</span></a></li></ol>
                                 
     </div>
 </aside>
@@ -95,19 +95,19 @@
     <header class="article-header">
         
         <h1 itemprop="name">
-            LeetCode Easy 121. 买卖股票的最佳时机
+            覆盖式发布VS非覆盖式发布
         </h1>
         
         <div class="article-meta clearfix">
             
-            <a class="article-date" href="/archives/2023/07/08">
+            <a class="article-date" href="/archives/2024/04/20">
     
     <i class="icon-calendar vm"></i>
     
     
         <span class="vm">Created at</span>
     
-    <time class="vm" datetime="2023-07-08T16:00:00.000Z" itemprop="datePublished">2023-07-09</time>
+    <time class="vm" datetime="2024-04-20T16:00:00.000Z" itemprop="datePublished">2024-04-21</time>
 </a>
 
             <div class="article-updated">
@@ -123,7 +123,7 @@
             
 <div class="article-tag-list">
     <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
+    <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/" rel="tag">前端工程</a>
 </div>
 
 
@@ -137,22 +137,18 @@
                 
             
             
-                <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">121. 买卖股票的最佳时机</a></p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>题目要求只能在某一天买，之后的某天卖，利润 &#x3D; 卖的价格 - 买的价格，让卖的价格最高，买的价格最低，则利润最大，且附加限制条件：先买后卖；</p>
-<p>以这样的顺序迭代：</p>
+                <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>覆盖式：新版本会覆盖上一个版本；<br>非覆盖式：每个版本共存；</p>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><p>覆盖式：节省存储空间，但不容易做版本回退；<br>非覆盖式：占用大量存储空间，无缝切换版本；</p>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>覆盖式：强调系统一致性，不接受特定版本的定制、维护；<br>非覆盖式：强调风险控制，或者有版本定制的需求；</p>
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><p>覆盖式发布比较常见，一般是新版本验收后，推送到远端仓库，通过CI&#x2F;CD或手动部署的方式，先清理服务器静态文件托管目录，再将构建后的资源移动到该目录。</p>
+<p>非覆盖式的重点是多版本共存，一般以版本号来区分，确定用户想访问的版本的常见实现如下：</p>
 <ol>
-<li>第一天买入，第二天卖出；</li>
-<li>前两天的某天以<strong>最低价</strong>买入，第三天卖出；</li>
-<li>前三天的某天以<strong>最低价</strong>买入，第四天卖出；</li>
-<li>…</li>
+<li>URL Segment，例如<code>https://xxx.xxx.com/1.2.1/app</code></li>
+<li>URL Search String，例如<code>https://xxx.xxx.com/app?version=1.2.1</code></li>
+<li>自定义HTTP首部，例如<code>X-App-Version: 1.2.1</code></li>
 </ol>
-<p>细节：</p>
-<ul>
-<li>可见每次迭代需要计算当天以前（不包含当天）的最低价格，可以用变量min记忆并逐步更新最低价；</li>
-<li>最润终需要返回最大利，由于利润每次迭代都要计算，可用变量profit记忆并逐步更新最大利润；</li>
-<li>由于第i天卖出时参与计算的是前i-1天的最低价格，递推一下：min初始化为第一天价格，从第二天开始卖出；</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number[]</span>&#125; <span class="variable">prices</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> &#123;<span class="type">number</span>&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> maxProfit = <span class="keyword">function</span> (<span class="params">prices</span>) &#123;</span><br><span class="line">    <span class="comment">// min表示最低买入价</span></span><br><span class="line">    <span class="keyword">let</span> min = prices[<span class="number">0</span>];</span><br><span class="line">    <span class="comment">// profit表示利润，默认为0</span></span><br><span class="line">    <span class="keyword">let</span> profit = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; prices.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        profit = <span class="title class_">Math</span>.<span class="title function_">max</span>(profit, prices[i] - min);</span><br><span class="line">        min = <span class="title class_">Math</span>.<span class="title function_">min</span>(min, prices[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> profit;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>非覆盖式还可以根据不同客户来区分版本，这种涉及权限校验的实现就更多了，具体要看业务需求。但总的来说，非覆盖式回退版本的成本是远低于覆盖式的。</p>
+
                 </div>
             
     </section>
@@ -161,10 +157,8 @@
 
 
 
-    <a id="pagenext" href="/2023/07/08/algorithm/leetcode124/" class="article-next" title="LeetCode Easy 124. 二叉树中的最大路径和"><i class="icon-arrow-right"></i></a>
+    <a id="pagenext" href="/2024/03/17/interview/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E7%9B%B4%E6%92%AD%E7%BA%BF%E4%B8%80%E9%9D%A2/" class="article-next" title="字节跳动直播线面试（一面）复盘"><i class="icon-arrow-right"></i></a>
 
-
-    <a id="pageprev" href="/2023/07/11/interview/%E4%B8%8A%E6%B5%B7%E5%A5%87%E6%99%AE%E4%B9%90%E9%9D%A2%E8%AF%95%E5%A4%8D%E7%9B%98/" class="article-prev" title="上海奇普乐面试复盘"><i class="icon-arrow-left"></i></a>
 
 
 
