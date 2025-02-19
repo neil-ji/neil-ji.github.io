@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>React 各版本特性一览 | Neil&#39;s Blog</title>
+    <meta name="author" content="Neil Ji" />
+    <meta name="keywords" content="react,js,javascript,react17.0.2,ts,typescript,redux,mobx" />
+    <meta name="description" content="React 是一个用于构建用户界面的 JavaScript 库，自发布以来经历了多个主要版本的更新，每个版本都引入了新的特性和改进。以下是各主要版本的一些关键特性：React 0.3 - 0.14 (2013-2015)初始版本: React 0.3 是最初的发布版本，重点在于引入组件化和虚拟 DOM 的概念。JSX: 支持 JSX 语法，使得编写组件更直观。生命周期方法: 提供了一系列生命周期方法（如 componentDidMount 和 componentWillUnmount）来管理组件" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="Neil&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">Neil&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://neil-ji.github.io"></form> -->
+
+        
+            
+                
+                    
+
+                        
+                            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#React-0-3-0-14-2013-2015"><span class="toc-number">1.</span> <span class="toc-text">React 0.3 - 0.14 (2013-2015)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#React-15-2016"><span class="toc-number">2.</span> <span class="toc-text">React 15 (2016)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#React-16-2017"><span class="toc-number">3.</span> <span class="toc-text">React 16 (2017)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#React-16-8-2019"><span class="toc-number">4.</span> <span class="toc-text">React 16.8 (2019)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#React-17-2020"><span class="toc-number">5.</span> <span class="toc-text">React 17 (2020)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#React-18-2022"><span class="toc-number">6.</span> <span class="toc-text">React 18 (2022)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#React-%E6%9C%AA%E6%9D%A5%E7%89%88%E6%9C%AC"><span class="toc-number">7.</span> <span class="toc-text">React 未来版本</span></a></li></ol>
+                                
+    </div>
+</aside>
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            React 各版本特性一览
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2024/07/31">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2024-07-31T05:56:00.000Z" itemprop="datePublished">2024-07-31</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2025-02-19T07:04:01.925Z" itemprop="datePublished">2025-02-19</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+            
+            
+                <p>React 是一个用于构建用户界面的 JavaScript 库，自发布以来经历了多个主要版本的更新，每个版本都引入了新的特性和改进。以下是各主要版本的一些关键特性：</p>
+<h3 id="React-0-3-0-14-2013-2015"><a href="#React-0-3-0-14-2013-2015" class="headerlink" title="React 0.3 - 0.14 (2013-2015)"></a>React 0.3 - 0.14 (2013-2015)</h3><ul>
+<li><strong>初始版本</strong>: React 0.3 是最初的发布版本，重点在于引入组件化和虚拟 DOM 的概念。</li>
+<li><strong>JSX</strong>: 支持 JSX 语法，使得编写组件更直观。</li>
+<li><strong>生命周期方法</strong>: 提供了一系列生命周期方法（如 <code>componentDidMount</code> 和 <code>componentWillUnmount</code>）来管理组件的状态和行为。</li>
+<li><strong>React.createClass</strong>: 用于创建组件的传统方法。</li>
+</ul>
+<h3 id="React-15-2016"><a href="#React-15-2016" class="headerlink" title="React 15 (2016)"></a>React 15 (2016)</h3><ul>
+<li><strong>改进的渲染</strong>: 更快的服务器端渲染和客户端渲染。</li>
+<li><strong>错误处理</strong>: 增强了错误处理，提供了更多的调试信息。</li>
+<li><strong>更好的 SVG 支持</strong>: 增加了对 SVG 属性的支持。</li>
+</ul>
+<h3 id="React-16-2017"><a href="#React-16-2017" class="headerlink" title="React 16 (2017)"></a>React 16 (2017)</h3><ul>
+<li><strong>Fiber 重写</strong>: 引入 React Fiber 重新架构核心算法，提高了性能和灵活性。</li>
+<li><strong>错误边界</strong>: 提供了 <code>componentDidCatch</code> 方法，允许组件捕获并处理子组件的错误。</li>
+<li><strong>Fragments</strong>: 支持返回多个元素，而不需要一个包裹的父元素。</li>
+<li><strong>Portal</strong>: 引入 Portals，允许将子组件渲染到不同的 DOM 节点。</li>
+</ul>
+<h3 id="React-16-8-2019"><a href="#React-16-8-2019" class="headerlink" title="React 16.8 (2019)"></a>React 16.8 (2019)</h3><ul>
+<li><strong>Hooks</strong>: 引入 Hooks（如 <code>useState</code> 和 <code>useEffect</code>），使函数组件也能使用状态和其他 React 特性，显著简化了组件的开发和维护。</li>
+</ul>
+<h3 id="React-17-2020"><a href="#React-17-2020" class="headerlink" title="React 17 (2020)"></a>React 17 (2020)</h3><ul>
+<li><strong>无重大新特性</strong>: 主要是进行基础设施改进，为未来的特性（如并发模式和服务器组件）做准备。</li>
+<li><strong>Gradual Upgrades</strong>: 允许渐进式升级 React，使得从老版本迁移到新版本更加平滑。</li>
+</ul>
+<h3 id="React-18-2022"><a href="#React-18-2022" class="headerlink" title="React 18 (2022)"></a>React 18 (2022)</h3><ul>
+<li><strong>Concurrent Mode（并发模式）</strong>: 引入了并发特性，使得应用在高负载下依然能够保持响应性。</li>
+<li><strong>自动批处理</strong>: 自动将多个状态更新合并为一个批次，减少重渲染次数，提高性能。</li>
+<li><strong>Transitions</strong>: 提供了 <code>useTransition</code> 和 <code>startTransition</code>，帮助处理非紧急更新。</li>
+</ul>
+<h3 id="React-未来版本"><a href="#React-未来版本" class="headerlink" title="React 未来版本"></a>React 未来版本</h3><ul>
+<li><strong>Server Components</strong>: 未来版本可能会引入服务器组件，进一步提高服务器端渲染的性能和开发体验。</li>
+<li><strong>改善的并发模式</strong>: 持续改进并发模式，使其更加高效和易用。</li>
+</ul>
+<p>每个版本的特性和改进都是为了提高 React 应用的性能、开发体验和可维护性。React 团队不断引入新特性，同时保持向后兼容，确保开发者能够平稳过渡到新版本。</p>
+
+                </div>
+            
+    </section>
+</article>
+
+
+
+
+    <a id="pagenext" href="/2024/04/20/fee/%E8%A6%86%E7%9B%96%E5%BC%8F%E5%8F%91%E5%B8%83VS%E9%9D%9E%E8%A6%86%E7%9B%96%E5%BC%8F%E5%8F%91%E5%B8%83/" class="article-next" title="覆盖式发布VS非覆盖式发布"><i class="icon-arrow-right"></i></a>
+
+
+    <a id="pageprev" href="/2025/01/13/vue/index/" class="article-prev" title="How React Developer Learn Vue？"><i class="icon-arrow-left"></i></a>
+
+
+
+
+
+            </div>
+        </div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>

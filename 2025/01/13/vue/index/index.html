@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+
+    
+
+    
+
+    <title>How React Developer Learn Vue？ | Neil&#39;s Blog</title>
+    <meta name="author" content="Neil Ji" />
+    <meta name="keywords" content="react,js,javascript,react17.0.2,ts,typescript,redux,mobx" />
+    <meta name="description" content="前言本文写于 25 年 1 月，杭州云谷，这两天气候干冷转暖，宜学习，我已断更大半年，恰逢手头无事，就借这个机会写点学习笔记吧。我将尝试以 React 开发者视角，去学习 Vue，找出二者的共性，形成框架，同时将区别填充在框架中。代码组织形式在 React 中，其实有一个事实标准，一个组件会将代码组织在单个 .jsx 或 .tsx 文件中，Vue 在这一点上是相同的，Vue 的单文件组件（Single-File Component）会将代码组织在 .vue 文件中。1234567891011//" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+
+    
+    <link rel="alternate" href="/atom.xml" title="Neil&#39;s Blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/images/favicon.ico">
+    
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'icomoon';
+        src: url("/fonts/icomoon.eot?q628ml");
+        src: url("/fonts/icomoon.eot?q628ml#iefix") format('embedded-opentype'),
+             url("/fonts/icomoon.ttf?q628ml") format('truetype'),
+             url("/fonts/icomoon.woff?q628ml") format('woff'),
+             url("/fonts/icomoon.svg?q628ml#icomoon") format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+    </style>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    <!--[if lt IE 9]><style type="text/css">.nav-inner {top:0;}.author-meta {position:static;top:0;}.search-form {height:36px;}</style><script type="text/javascript" src="https://unpkg.com/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+
+    <main class="app">
+        <header id="header" class="header clearfix">
+    <div id="nav" class="nav">
+    <div class="nav-mobile">
+        <button id="open-panel" class="open-panel nav-mobile-item"><i class="icon-documents"></i></button>
+        <h1 class="nav-mobile-title nav-mobile-item">Neil&#39;s Blog</h1>
+        <button id="open-menus" class="open-panel nav-mobile-item"><i class="icon-library"></i></button>
+    </div>
+
+    <nav id="nav-inner" class="nav-inner">
+        
+            <a class="nav-item" href="/">
+                <span class="nav-text">首页</span>
+            </a>
+        
+            <a class="nav-item" href="/tags">
+                <span class="nav-text">标签</span>
+            </a>
+        
+            <a class="nav-item" href="/archives">
+                <span class="nav-text">归档</span>
+            </a>
+        
+            <a class="nav-item" href="/about">
+                <span class="nav-text">关于</span>
+            </a>
+        
+    </nav>
+</div>
+
+    <aside id="aside" class="aside">
+    <div id="aside-mask" class="aside-mask"></div>
+    <div id="aside-inner" class="aside-inner">
+        <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"><i class="icon-search-stroke"></i></button><input type="hidden" name="sitesearch" value="https://neil-ji.github.io"></form> -->
+
+        
+            
+                
+                    
+
+                        
+                            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87%E5%BD%A2%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">代码组织形式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">模板语法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E7%8A%B6%E6%80%81"><span class="toc-number">4.</span> <span class="toc-text">响应式状态</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#class-amp-style"><span class="toc-number">5.</span> <span class="toc-text">class &amp; style</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6"><span class="toc-number">6.</span> <span class="toc-text">组件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6"><span class="toc-number">7.</span> <span class="toc-text">事件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95"><span class="toc-number">8.</span> <span class="toc-text">表单</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">9.</span> <span class="toc-text">生命周期</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%AF%E4%BD%9C%E7%94%A8"><span class="toc-number">10.</span> <span class="toc-text">副作用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DOM-%E5%BC%95%E7%94%A8"><span class="toc-number">11.</span> <span class="toc-text">DOM 引用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%BC%95%E7%94%A8"><span class="toc-number">12.</span> <span class="toc-text">组件引用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Vue-useComposable-VS-React-Custom-Hook"><span class="toc-number">13.</span> <span class="toc-text">Vue useComposable VS React Custom Hook</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="toc-number">14.</span> <span class="toc-text">写在最后</span></a></li></ol>
+                                
+    </div>
+</aside>
+</header>
+
+        <div id="content" class="content">
+            <div id="wrapper" class="wrapper" style="max-width: 800px">
+                <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            How React Developer Learn Vue？
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2025/01/13">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2025-01-13T16:00:00.000Z" itemprop="datePublished">2025-01-14</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2025-02-19T07:04:01.926Z" itemprop="datePublished">2025-02-19</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>, <a class="article-tag-link" href="/tags/vue/" rel="tag">vue</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+            
+            
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文写于 25 年 1 月，杭州云谷，这两天气候干冷转暖，宜学习，我已断更大半年，恰逢手头无事，就借这个机会写点学习笔记吧。我将尝试以 React 开发者视角，去学习 Vue，找出二者的共性，形成框架，同时将区别填充在框架中。</p>
+<h1 id="代码组织形式"><a href="#代码组织形式" class="headerlink" title="代码组织形式"></a>代码组织形式</h1><p>在 React 中，其实有一个事实标准，一个组件会将代码组织在单个 <code>.jsx</code> 或 <code>.tsx</code> 文件中，Vue 在这一点上是相同的，Vue 的单文件组件（Single-File Component）会将代码组织在 <code>.vue</code> 文件中。</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Counter.tsx</span></span><br><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Counter</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> setCount(count + 1)&#125;&gt;</span></span><br><span class="line"><span class="language-xml">      You clicked me &#123;count&#125; times.</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Counter.vue --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> count = <span class="title function_">ref</span>(<span class="number">0</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;count++&quot;</span>&gt;</span>You clicked me &#123;&#123; count &#125;&#125; times.<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>抛开工程实践，React 组件就是本地定义的 Class 或 Function，所以其实一个文件中可以包含多个组件，只不过工程上考虑到模块化，一般不会这么干。与之对应的，就是对象式的 Vue 组件。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="title function_">setup</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> count = <span class="title function_">ref</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123; count &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">template</span>: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;button @click=&quot;count++&quot;&gt;</span></span><br><span class="line"><span class="string">      You clicked me &#123;&#123; count &#125;&#125; times.</span></span><br><span class="line"><span class="string">    &lt;/button&gt;`</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="模板语法"><a href="#模板语法" class="headerlink" title="模板语法"></a>模板语法</h1><ol>
+<li><p><strong>模板语言</strong>：</p>
+<ul>
+<li>Vue 使用基于 HTML 的模板语法，也支持 JSX 语法（但会失去编译时优化）。</li>
+<li>React 使用 JSX.</li>
+</ul>
+</li>
+<li><p><strong>控制结构</strong>：</p>
+<ul>
+<li>Vue 提供特定的指令（如 <code>v-if</code>、<code>v-for</code>、<code>v-bind</code>、<code>v-on</code> 等）来操作 DOM。</li>
+<li>React 则使用 JavaScript 的控制结构（如条件表达式和循环）来实现同样的功能。</li>
+</ul>
+</li>
+<li><p><strong>数据绑定</strong>：</p>
+<ul>
+<li>Vue 使用双大括号 <code>&#123;&#123;&#125;&#125;</code> 进行文本插值，并提供 <code>.sync</code> 和 <code>.model</code> 修饰符用于<strong>双向绑定</strong>。</li>
+<li>React 中的数据绑定是通过花括号 <code>&#123;&#125;</code> 内嵌 JavaScript 表达式实现的，通常为<strong>单向数据流</strong>。</li>
+</ul>
+</li>
+</ol>
+<h1 id="响应式状态"><a href="#响应式状态" class="headerlink" title="响应式状态"></a>响应式状态</h1><ol>
+<li><p><strong>状态定义</strong></p>
+<ul>
+<li>Vue 使用 <code>ref</code> 或 <code>reactive</code> 定义响应式状态</li>
+<li>React 使用 <code>useState</code> 或 <code>this.state</code></li>
+</ul>
+</li>
+<li><p><strong>状态更新</strong></p>
+<ul>
+<li>Vue 直接修改响应式状态的值即可。</li>
+<li>React 必须使用 <code>useState</code> 或 <code>this.setState</code> 更新状态，且严格遵循不可变更新。</li>
+</ul>
+</li>
+<li><p><strong>状态比较</strong></p>
+<ul>
+<li>Vue 的 <code>ref</code> 或 <code>reactive</code> 默认为<strong>深比较</strong>，修改深层嵌套的属性或数组元素，就能触发更新。</li>
+<li>React 默认为<strong>浅比较</strong>，修改深层嵌套属性或数组元素后，还必须更新对象或数组的引用。</li>
+</ul>
+</li>
+<li><p><strong>更新批处理</strong></p>
+<ul>
+<li>Vue 的 <code>ref</code> 的更新不会同步提交到 Dom 上，而是统一在下一次 tick 中批量处理。</li>
+<li>React（concurrent mode）的更新也不会同步提交到 Dom 上，而是被添加至更新队列，在下次事件循环开始时，一次性处理掉。</li>
+</ul>
+</li>
+<li><p><strong>状态更新感知</strong></p>
+<ul>
+<li>Vue 通过 <code>ES6 Proxy</code> 语法特性实现对响应式状态的监听，进而触发更新。</li>
+<li>React 通过调用 <code>useState</code> 钩子函数或 <code>setState</code> 方法触发更新。</li>
+</ul>
+</li>
+<li><p><strong>状态派生</strong></p>
+<ul>
+<li>Vue 通过计算属性 <code>computed</code> 从状态派生出复杂数据，<strong>自动收集响应式依赖</strong>，响应式状态变化时重新计算，可以通过 setter 函数<strong>直接修改</strong>，且 getter 函数可以拿到上一个计算属性值。</li>
+<li>React 通过 <code>useMemo</code> 缓存复杂计算，依赖改变时重新计算，需<strong>手动管理依赖</strong>，只能通过更新依赖<strong>间接修改</strong>，可以间接通过 useRef 缓存上一个 useMemo 值（即自己维护一个快照）。</li>
+</ul>
+</li>
+</ol>
+<p>[注] 关于 React 批处理，此处是简化的说法，是为了方便理解，React 原生事件或异步代码回调中的更新并不会批处理，除非显式调用 batchUpdate API，详见我另一篇关于 React v17 源码解析的文章 <a href="/2023/05/31/react/reactcode17.0.2">React v17 源码解析</a></p>
+<p>[注] 遗留一个问题，Vue 能否通过 <code>computed</code> 实现类似 React <code>useCallback</code> 的效果？</p>
+<h1 id="class-amp-style"><a href="#class-amp-style" class="headerlink" title="class &amp; style"></a>class &amp; style</h1><p>对于样式开发的优化，是 Vue 的一大亮点。</p>
+<ol>
+<li><p><strong>类名定义的样式</strong></p>
+<ul>
+<li>Vue 通过<strong>字符串、对象或数组</strong> <code>class</code> 定义类名。当使用对象时，key 为类名，value 为布尔值，表示是否添加该类名；当使用数组时，数组中的元素为类名，且数组元素也可以为对象。</li>
+<li>React 通过<strong>字符串</strong> <code>className</code> 定义类名，需要通过字符串拼接实现动态样式。</li>
+</ul>
+</li>
+<li><p><strong>类名的传递</strong></p>
+<ul>
+<li>Vue 会自动将组件接收的类名，默认传递到该组件模板的根元素上，多个根元素时通过 <code>$attr.class</code> 指定类名接收元素。</li>
+<li>React 需要手动将类名 prop 传递到组件的指定元素上。</li>
+</ul>
+</li>
+<li><p><strong>内联样式</strong></p>
+<ul>
+<li>Vue 通过<strong>对象或数组</strong> <code>style</code> 定义内联样式。当使用数组时，数组元素为 style 对象，数组元素会进行合并。</li>
+<li>React 通过<strong>对象</strong> <code>style</code> 定义内联样式。</li>
+</ul>
+</li>
+<li><p><strong>style 样式兼容性</strong></p>
+<ul>
+<li>Vue 优化了 style 对象的兼容性。对于 key，自动检测并使用浏览器支持的样式前缀；对于 value，可以手动设为数组，定义多个值，运行时会使用浏览器支持的值。</li>
+<li>React 需要引入额外的类库来批量处理样式兼容性问题。</li>
+</ul>
+</li>
+</ol>
+<h1 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h1><ol>
+<li><p><strong>组件定义</strong>：</p>
+<ul>
+<li>Vue 支持单文件组件（SFC），允许将模板、脚本和样式封装在一个 <code>.vue</code> 文件中。</li>
+<li>React 组件通常是用纯 JavaScript 定义的函数或类，样式和其他资源需要单独管理。</li>
+</ul>
+</li>
+<li><p><strong>子元素占位符</strong>：</p>
+<ul>
+<li>Vue 使用 <code>&lt;slot /&gt;</code> 作为子元素占位符</li>
+<li>React 使用 <code>props.children</code> 作为子元素占位符</li>
+</ul>
+</li>
+<li><p><strong>作用域</strong></p>
+<ul>
+<li>Vue 中存在模板作用域，指令作用域。</li>
+<li>React 中的作用域同 JS 规范。</li>
+</ul>
+</li>
+<li><p><strong>错误捕获</strong></p>
+<ul>
+<li>Vue 使用 app.config.errorHandler 全局处理</li>
+<li>React 使用 ErrorBoundary 组件</li>
+</ul>
+</li>
+<li><p><strong>HTML 片段</strong></p>
+<ul>
+<li>Vue 使用 <code>v-html</code> 指令来渲染 HTML 内容。</li>
+<li>React 使用 <code>dangerouslySetInnerHTML</code> 属性来渲染 HTML 内容。</li>
+</ul>
+</li>
+<li><p><strong>批量绑定属性</strong></p>
+<ul>
+<li>Vue 使用 <code>&lt;div v-bind=&#123;props&#125;&gt;&lt;/div&gt;</code> 批量绑定属性到元素上。</li>
+<li>React 使用解构赋值的方式来批量绑定属性<code>&lt;div &#123;...props&#125; /&gt;</code>.</li>
+</ul>
+</li>
+<li><p><strong>条件渲染</strong></p>
+<ul>
+<li>Vue 使用 <code>v-if / v-else-if / v-else</code> 实现条件渲染，且 <code>v-show</code> 通过 display 来控制样式显隐。</li>
+<li>React 使用 <code>&#123; executor &amp;&amp; &lt;div&gt;Hello World&lt;/div&gt; &#125;</code> 或 <code>&#123; executor ? &lt;div&gt;Hello World&lt;/div&gt; : null &#125;</code>，通过动态类名或 style display 属性来控制样式显隐。</li>
+</ul>
+</li>
+<li><p><strong>列表渲染</strong></p>
+<ul>
+<li>Vue 使用 <code>v-for=&quot;item in items&quot;</code> 来渲染列表，在 <code>v-for</code> 所在的元素上使用 <code>:key</code> 指定子元素标识符。</li>
+<li>React 使用 <code>Array.prototype.map</code> 或 ReactNode 数组，在子元素上使用 <code>key</code> 指定组件标识符。</li>
+</ul>
+</li>
+<li><p><strong>空元素</strong></p>
+<ul>
+<li>Vue 使用 <code>&lt;template&gt;&lt;template/&gt;</code> 标签来定义空元素，不会生成 DOM 元素。</li>
+<li>React 使用 <code>&lt;Fragment&gt;&lt;/Fragment&gt;</code> 或其简写 <code>&lt;&gt;&lt;/&gt;</code> 标签来定义不生成 DOM 的空元素。</li>
+</ul>
+</li>
+<li><p><strong>Props</strong></p>
+<ul>
+<li>Vue 无论是选项式还是组合式组件，都需要显式声明 Props，否则模板中无法访问 Props.<ul>
+<li>选项式，<code>&#123; props: [&quot;prop1&quot;, &quot;prop2&quot;] &#125;</code></li>
+<li>组合式，<code>defineProps([&quot;prop1&quot;, &quot;prop2&quot;])</code></li>
+</ul>
+</li>
+<li>React 不必显式声明 Props</li>
+</ul>
+</li>
+<li><p><strong>动态组件</strong></p>
+</li>
+</ol>
+<ul>
+<li>Vue 可使用 <code>&lt;component :is=&quot;component&quot; /&gt;</code> 在多个组件中动态切换，并可以通过包裹一层 <code>&lt;KeepAlive&gt;</code> 避免销毁其他组件。</li>
+<li>React 需要手动实现。</li>
+</ul>
+<ol start="12">
+<li><strong>组件注册</strong></li>
+</ol>
+<ul>
+<li>Vue 组合式组件导入其他组件时，无需注册这些组件；选项式组件则必须通过 <code>components</code> 选项显式注册被导入的组件。</li>
+<li>React 使用其他组件时无需注册。</li>
+</ul>
+<ol start="13">
+<li><strong>全局组件</strong></li>
+</ol>
+<ul>
+<li>Vue 可以通过 <code>app.component(name, component)</code> 全局注册组件，在该应用中即可直接使用。</li>
+<li>React 不支持全局组件。</li>
+</ul>
+<h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><p>Vue 的事件回调开发起来相当便捷高效，主要体现在以下方面。</p>
+<ol>
+<li><p><strong>事件绑定</strong></p>
+<ul>
+<li>Vue 使用 <code>v-on</code> 或 <code>@</code> 来绑定事件回调，如 <code>v-on:click=&quot;handleClick&quot;</code>.</li>
+<li>React 使用驼峰命名的事件属性名，如 <code>onClick=&#123;handleClick&#125;</code> 等。</li>
+</ul>
+</li>
+<li><p><strong>事件回调</strong></p>
+<ul>
+<li>Vue 的事件回调支持内联的 JavaScript 语句，如 <code>v-on:click=&quot;count++&quot;</code>，同时也支持传递函数引用。</li>
+<li>React 仅支持传递函数引用。</li>
+</ul>
+</li>
+<li><p><strong>事件修饰符</strong></p>
+<ul>
+<li>Vue 支持事件、按键、鼠标键修饰符，且修饰符支持链式调用，如 <code>v-on:click.prevent.stop=&quot;handleClick&quot;</code>.</li>
+<li>React 不支持事件修饰符，需要手动实现。</li>
+</ul>
+</li>
+<li><p><strong>组件自定义事件</strong></p>
+<ul>
+<li>Vue 可通过 <code>defineEmits</code> 或 <code>$emit</code> 定义或发出自定义事件，有助于维持代码结构的清晰。</li>
+<li>React 组件不支持自定义事件，父组件将事件回调以 props 形式传递给子组件，以此实现类似效果，但大量事件回调和其他 props 混合在一起堪称噩梦。</li>
+</ul>
+</li>
+</ol>
+<h1 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h1><p>Vue 同样对于常用的表单操作进行了简化。</p>
+<ol>
+<li><p><strong>输入监听与状态绑定</strong></p>
+<ul>
+<li>Vue 通过 <code>v-model</code> 简化了表单输入监听与状态绑定，其等价于 <code>v-bind</code> 和 <code>v-on</code>.</li>
+<li>React 需要手动实现。</li>
+</ul>
+</li>
+<li><p><strong>常用行为抽象</strong></p>
+<ul>
+<li>Vue 通过修饰符 <code>.lazy</code>、<code>.number</code>、<code>.trim</code> 等简化了常用行为。</li>
+<li>React 需要手动实现。</li>
+</ul>
+</li>
+</ol>
+<h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p>Vue 的生命周期 API，就我个人观点而言，是有点过时的，这种复杂的生命周期 Hooks 会带来额外的维护成本与心智负担，相比之下，React 已经事实上放弃了类组件基于生命周期开发的心智模型，改为拥抱 useEffect&#x2F;useLayoutEffect，大大降低了开发者的心智负担，而心智负担和维护成本往往是一回事:)</p>
+<p><img src="https://cn.vuejs.org/assets/lifecycle_zh-CN.W0MNXI0C.png" alt="生命周期"></p>
+<h1 id="副作用"><a href="#副作用" class="headerlink" title="副作用"></a>副作用</h1><ol>
+<li><p><strong>依赖管理</strong></p>
+<ul>
+<li>Vue 使用 <code>watch</code> 来收集并执行副作用函数，需手动管理依赖；使用简化版的 <code>watchEffect</code> 自动收集依赖。</li>
+<li>React 使用 <code>useEffect</code> 收集并执行副作用函数，需要手动管理依赖。</li>
+</ul>
+</li>
+<li><p><strong>首次执行 &amp; 再次执行</strong></p>
+<ul>
+<li>Vue <strong>默认不会</strong>在首次渲染后执行 <code>watch</code> 的回调，可通过配置 <code>immediate: true</code> 指定首次渲染后执行（等价于 <code>watchEffect</code>）；后续被监听对象更新时，再次执行副作用函数。</li>
+<li>React <strong>默认会</strong>在首次渲染后执行 <code>useEffect</code> 的回调；后续依赖项更新时，再次执行副作用函数。</li>
+</ul>
+</li>
+<li><p><strong>依赖比较</strong></p>
+<ul>
+<li>Vue <code>watch</code> 传递响应式对象时，通过深比较判断依赖是否变化；也支持 getter 函数这种浅比较，同时支持 <code>deep: true</code> 配置项强制深比较；</li>
+<li>React 仅支持浅比较，但可以将所有属性填入依赖数组，间接实现深比较（并非常见做法）。</li>
+</ul>
+</li>
+<li><p><strong>once 模式</strong></p>
+<ul>
+<li>Vue <code>watch</code> 可以配置 <code>once: true</code> 指定副作用函数仅执行一次。</li>
+<li>React 没法完全做到相同行为，存在各种限制，如下：<ul>
+<li>业务逻辑仅执行一次：函数内部实现，非首次执行时跳出，确保业务逻辑仅执行一次，但<strong>副作用函数可能执行多次</strong>。</li>
+<li>副作用函数仅执行一次：依赖项设为 <code>[]</code>，确保副作用函数仅执行一次，但只能是首次执行时执行一次，<strong>无法监听状态</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>副作用清理</strong></p>
+<ul>
+<li>Vue 可以通过 <code>watch/watchEffect</code> 副作用回调中同步调用 <code>onWatcherCleanup(() =&gt; &#123; ... &#125;)</code> 来实现副作用清理（v3.5 之后），或副作用回调也会接收 <code>cleanup</code> 回调，效果同前者相同。</li>
+<li>React 更为直观，直接在副作用回调函数中 <code>return</code> 一个清理函数即可。</li>
+</ul>
+</li>
+<li><p><strong>副作用执行时机</strong></p>
+<ul>
+<li>Vue 的副作用回调执行于状态更新之后，DOM 更新之前。</li>
+<li>React 的副作用回调执行于状态更新之后，DOM 更新之前。</li>
+</ul>
+</li>
+<li><p><strong>副作用回调中访问 DOM</strong></p>
+<ul>
+<li>Vue <code>watch/watchEffect</code> 配置 <code>flush: &#39;post&#39;</code> 指定在 DOM 更新之后执行（等价于 <code>watchPostEffect</code>），以便访问 DOM.</li>
+<li>React 通过 <code>useLayoutEffect</code> 在 DOM 更新后执行副作用，以便访问 DOM。</li>
+</ul>
+</li>
+<li><p><strong>状态更新前触发副作用</strong></p>
+<ul>
+<li>Vue <code>watch/watchEffect</code> 配置 <code>flush: &#39;sync&#39;</code> 指定在状态更新前执行（等价于 <code>watchSyncEffect</code>）。</li>
+<li>React 函数组件不支持该行为，但可通过类组件的 <code>UNSAFE_componentWillUpdate</code> 实现，注意该方法已废弃，因为 concurrent mode 中，<code>workLoop</code> 可能被打断而多次执行。</li>
+</ul>
+</li>
+<li><p><strong>主动停止监听</strong></p>
+<ul>
+<li>Vue 执行 <code>watch/watchEffect/watchPostEffect/watchSyncEffect</code> 会返回一个回调，用于主动停止监听。</li>
+<li>React 不支持主动停止监听。</li>
+</ul>
+</li>
+<li><p><strong>监听死循环</strong></p>
+<ul>
+<li>Vue <code>watch</code> 在副作用中更新被监听的值，会触发抛出错误，但实际仅执行一次。<code>watchEffect</code> 允许循环更新，不会抛出错误。</li>
+<li>React 不允许在副作用中更新被监听的值，会导致死循环。</li>
+</ul>
+</li>
+</ol>
+<h1 id="DOM-引用"><a href="#DOM-引用" class="headerlink" title="DOM 引用"></a>DOM 引用</h1><ol>
+<li><p><strong>绑定</strong></p>
+<ul>
+<li>Vue 将 <code>useTemplateRef</code> 创建的变量绑定到指定元素的 <code>ref</code> 属性。</li>
+<li>React 通过 <code>useRef</code> 创建的变量绑定到指定元素的 <code>ref</code> 属性。</li>
+</ul>
+</li>
+<li><p><strong>访问</strong></p>
+<ul>
+<li>Vue 访问模版引用变量的 <code>value</code> 属性。</li>
+<li>React 访问引用变量的 <code>current</code> 属性。</li>
+</ul>
+</li>
+<li><p><strong>限制</strong></p>
+<ul>
+<li>Vue 会在组件挂载后更新模板引用，因此需要额外判断引用是否为空，不过在 <code>onMounted</code> 中对于非条件渲染的 ref 是可以安全访问的，无需判空。</li>
+<li>React 会在组件挂载后更新模板引用，因此也需要额外判断引用是否为空，不过 <code>useEffect</code> 中对于非条件渲染的 ref 是可以安全访问的，无需判空。</li>
+</ul>
+</li>
+<li><p><strong>列表渲染</strong></p>
+<ul>
+<li>Vue 允许在列表渲染的元素上绑定 ref，该 ref 实际是一个数组。</li>
+<li>React 没有类似用法，建议获取父元素的 ref，然后通过索引访问子元素。</li>
+</ul>
+</li>
+<li><p><strong>ref 绑定函数</strong></p>
+<ul>
+<li>Vue 可通过 <code>:ref</code> 传递一个函数或方法，该函数或方法的首个参数就是 DOM 引用，且该函数或方法每次更新或卸载都会调用一次。</li>
+<li>React 不支持这种用法。</li>
+</ul>
+</li>
+</ol>
+<h1 id="组件引用"><a href="#组件引用" class="headerlink" title="组件引用"></a>组件引用</h1><ol>
+<li><p><strong>绑定</strong></p>
+<ul>
+<li>Vue 获取组件实例引用的方式和获取 DOM 引用一致，组件无需特殊处理。</li>
+<li>React 分为两种情况：<ul>
+<li>函数组件，需要通过 <code>forwardRef</code> 包装，而且获取的并非组件实例，而是组件通过 <code>useImperativeHandle</code> 显式声明的属性或方法。</li>
+<li>类组件，同获取 DOM 引用一致，无需特殊处理。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>对外暴露属性或方法</strong></p>
+<ul>
+<li>Vue 分为两种：<ul>
+<li>组合式定义的组件，<code>&lt;script setup&gt;</code> 定义的方法是默认私有的，必须通过 <code>defineExpose</code> 暴露指定的属性给外部使用。</li>
+<li>选项式定义的组件，属性或方法都可以通过组件实例引用访问。</li>
+</ul>
+</li>
+<li>React 也分为两种：<ul>
+<li>函数组件，通过 <code>useImperativeHandle</code> 可以在组件内部暴露指定的属性给外部使用。</li>
+<li>类组件，类组件的公共方法、属性都可以通过组件实例引用访问。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="Vue-useComposable-VS-React-Custom-Hook"><a href="#Vue-useComposable-VS-React-Custom-Hook" class="headerlink" title="Vue useComposable VS React Custom Hook"></a>Vue useComposable VS React Custom Hook</h1><p>   Vue 与 React 在响应式状态及相关逻辑封装、复用上达成了一致，不同点在于 Vue 的 useComposable 以 <code>use</code> 开头，实际是一种社区约定或范式，不具备强制性，而 React 的自定义 Hook 则必须以 <code>use</code> 开头，否则编译报错。</p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>综合来看，Vue 抽象层次高，带来的好处就是减少重复代码，使用很方便，开发效率我认为是比 React 要高的。但坏处就是大量的隐式行为让人觉得摸不着头脑，在了解其底层机制前，会有一种割裂感，难以从语法角度建立联系，对于 React 开发者来说，割裂感尤为强烈。</p>
+
+                </div>
+            
+    </section>
+</article>
+
+
+
+
+    <a id="pagenext" href="/2024/07/31/react/react_features/" class="article-next" title="React 各版本特性一览"><i class="icon-arrow-right"></i></a>
+
+
+    <a id="pageprev" href="/2025/02/12/tools/filezilla/" class="article-prev" title="MacOS 借助 FileZilla 快速部署 FTP Server"><i class="icon-arrow-left"></i></a>
+
+
+
+
+
+            </div>
+        </div>
+        <footer class="footer">
+    Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, Theme by <a href="https://github.com/sanonz/hexo-theme-concise" target="_blank">Concise</a>
+
+    
+</footer>
+
+    </main>
+
+    <script type="text/javascript" src="https://unpkg.com/jquery@1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        var nodes = {
+            nav: $('#nav'),
+            aside: $('#aside'),
+            asideInner: $('#aside-inner'),
+            navInner: $('#nav-inner')
+        };
+
+        var doing = false;
+        nodes.asideInner.on('webkitAnimationEnd mozAnimationEnd oAnimationEnd oanimationend animationend', function() {
+            if (nodes.aside.hasClass('mobile-open')) {
+                nodes.aside.removeClass('mobile-open');
+            } else {
+                nodes.aside.removeClass('mobile-close panel-show');
+            }
+            doing = false;
+        });
+        $('#open-panel, #aside-mask').on('click', function() {
+            if (doing) {
+                return;
+            }
+
+            if (nodes.aside.hasClass('panel-show')) {
+                nodes.aside.addClass('mobile-close');
+            } else {
+                nodes.aside.addClass('mobile-open panel-show');
+            }
+        });
+        $('#open-menus').on('click', function() {
+            nodes.navInner.slideToggle('normal', slideDone);
+        });
+
+        if (window.innerWidth <= 960) {
+            setTimeout(function() {
+                nodes.navInner.slideUp('normal', slideDone);
+            }, 3000);
+        }
+
+        function slideDone() {
+            if (nodes.navInner.css('display') !== 'none') {
+                nodes.navInner.css('display', '');
+            }
+        }
+
+        $(window).on('resize', function() {
+            if ($(this).width() > 960) {
+                nodes.navInner.css('display', '');
+            }
+        });
+    });
+    </script>
+
+</body>
+</html>

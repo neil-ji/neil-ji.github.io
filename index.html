@@ -132,6 +132,264 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2025/02/12/tools/filezilla/">MacOS 借助 FileZilla 快速部署 FTP Server</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2025/02/13">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2025-02-12T16:00:00.000Z" itemprop="datePublished">2025-02-13</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2025-02-19T07:04:01.926Z" itemprop="datePublished">2025-02-19</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/filezilla/" rel="tag">filezilla</a>, <a class="article-tag-link" href="/tags/ftp-server/" rel="tag">ftp server</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><ul>
+<li>系统：MacOS 15.2 Sequoia</li>
+<li>工具：FileZilla Server 19.4(Apple Silicon)</li>
+</ul>
+<h1 id="下载与安装"><a href="#下载与安装" class="headerlink" title="下载与安装"></a>下载与安装</h1><p>下载系统所适配的<a target="_blank" rel="noopener" href="https://filezilla-project.org/download.php?show_all=1&type=server">FileZilla Server</a></p>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2025/02/12/tools/filezilla/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2025/01/13/vue/index/">How React Developer Learn Vue？</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2025/01/14">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2025-01-13T16:00:00.000Z" itemprop="datePublished">2025-01-14</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2025-02-19T07:04:01.926Z" itemprop="datePublished">2025-02-19</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>, <a class="article-tag-link" href="/tags/vue/" rel="tag">vue</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文写于 25 年 1 月，杭州云谷，这两天气候干冷转暖，宜学习，我已断更大半年，恰逢手头无事，就借这个机会写点学习笔记吧。我将尝试以 React 开发者视角，去学习 Vue，找出二者的共性，形成框架，同时将区别填充在框架中。</p>
+<h1 id="代码组织形式"><a href="#代码组织形式" class="headerlink" title="代码组织形式"></a>代码组织形式</h1><p>在 React 中，其实有一个事实标准，一个组件会将代码组织在单个 <code>.jsx</code> 或 <code>.tsx</code> 文件中，Vue 在这一点上是相同的，Vue 的单文件组件（Single-File Component）会将代码组织在 <code>.vue</code> 文件中。</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Counter.tsx</span></span><br><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Counter</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> setCount(count + 1)&#125;&gt;</span></span><br><span class="line"><span class="language-xml">      You clicked me &#123;count&#125; times.</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Counter.vue --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">setup</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">import</span> &#123; ref &#125; <span class="keyword">from</span> <span class="string">&quot;vue&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> count = <span class="title function_">ref</span>(<span class="number">0</span>);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;count++&quot;</span>&gt;</span>You clicked me &#123;&#123; count &#125;&#125; times.<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2025/01/13/vue/index/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
+            <a href="/2024/07/31/react/react_features/">React 各版本特性一览</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2024/07/31">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2024-07-31T05:56:00.000Z" itemprop="datePublished">2024-07-31</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2025-02-19T07:04:01.925Z" itemprop="datePublished">2025-02-19</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><p>React 是一个用于构建用户界面的 JavaScript 库，自发布以来经历了多个主要版本的更新，每个版本都引入了新的特性和改进。以下是各主要版本的一些关键特性：</p>
+<h3 id="React-0-3-0-14-2013-2015"><a href="#React-0-3-0-14-2013-2015" class="headerlink" title="React 0.3 - 0.14 (2013-2015)"></a>React 0.3 - 0.14 (2013-2015)</h3><ul>
+<li><strong>初始版本</strong>: React 0.3 是最初的发布版本，重点在于引入组件化和虚拟 DOM 的概念。</li>
+<li><strong>JSX</strong>: 支持 JSX 语法，使得编写组件更直观。</li>
+<li><strong>生命周期方法</strong>: 提供了一系列生命周期方法（如 <code>componentDidMount</code> 和 <code>componentWillUnmount</code>）来管理组件的状态和行为。</li>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2024/07/31/react/react_features/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2024/04/20/fee/%E8%A6%86%E7%9B%96%E5%BC%8F%E5%8F%91%E5%B8%83VS%E9%9D%9E%E8%A6%86%E7%9B%96%E5%BC%8F%E5%8F%91%E5%B8%83/">覆盖式发布VS非覆盖式发布</a>
         </h1>
         
@@ -154,7 +412,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2024-04-21T03:47:27.950Z" itemprop="datePublished">2024-04-21</time>
+    <time class="vm" datetime="2025-02-19T07:04:01.924Z" itemprop="datePublished">2025-02-19</time>
 </div>
 
             
@@ -240,7 +498,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2024-04-21T03:47:27.950Z" itemprop="datePublished">2024-04-21</time>
+    <time class="vm" datetime="2025-02-19T07:04:01.924Z" itemprop="datePublished">2025-02-19</time>
 </div>
 
             
@@ -290,264 +548,6 @@
                 </div>   
                 <div class="article-more-link">
                     <a href="/2024/03/17/interview/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E7%9B%B4%E6%92%AD%E7%BA%BF%E4%B8%80%E9%9D%A2/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2024/03/17/interview/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E7%9B%B4%E6%92%AD%E7%BA%BF%E4%BA%8C%E9%9D%A2/">字节跳动直播线面试（二面）复盘</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2024/03/18">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2024-03-17T16:00:00.000Z" itemprop="datePublished">2024-03-18</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2024-04-21T03:47:27.950Z" itemprop="datePublished">2024-04-21</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/interview/" rel="tag">interview</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><ol>
-<li>Webpack 本地构建优化</li>
-<li>Webpack 联邦模块</li>
-<li>除了 redux、mobx，还了解哪些前端状态管理类库</li>
-<li>了解哪些基于 redux 二次开发的类库</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2024/03/17/interview/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E7%9B%B4%E6%92%AD%E7%BA%BF%E4%BA%8C%E9%9D%A2/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2024/03/16/webpack/webpack/">Webpack 常识</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2024/03/17">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2024-03-16T16:00:00.000Z" itemprop="datePublished">2024-03-17</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2024-04-21T03:47:27.950Z" itemprop="datePublished">2024-04-21</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/webpack/" rel="tag">webpack</a>, <a class="article-tag-link" href="/tags/%E5%89%8D%E7%AB%AF%E8%BF%9B%E9%98%B6/" rel="tag">前端进阶</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><ol>
-<li>Loader vs Plugin</li>
-</ol>
-<ul>
-<li>Loader 用于加载并解析各类文件，如 css &#x2F; sass &#x2F; ts &#x2F; markdown &#x2F; png 等；</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2024/03/16/webpack/webpack/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2023/07/26/algorithm/leetcode-btree3/">数算再回顾（三）二叉树常见算法</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2023/07/26">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2023-07-26T07:00:00.000Z" itemprop="datePublished">2023-07-26</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2024-04-21T03:47:27.950Z" itemprop="datePublished">2024-04-21</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/leetcode/" rel="tag">leetcode</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>数（据结构）算（法）再回顾，加深记忆抗遗忘。</p>
-<h2 id="基于遍历的简单问题"><a href="#基于遍历的简单问题" class="headerlink" title="基于遍历的简单问题"></a>基于遍历的简单问题</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/same-tree/">100. 相同的树</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/symmetric-tree/">101. 对称二叉树</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/invert-binary-tree/">226. 翻转二叉树</a></li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2023/07/26/algorithm/leetcode-btree3/#more">
                         <span class="vm">阅读全文</span>
                         <i class="icon-arrow-double-right vm"></i>     
                     </a>
