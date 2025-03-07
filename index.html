@@ -132,6 +132,92 @@
     <header class="article-header">
         
         <h1 itemprop="name">
+            <a href="/2025/03/06/react/react_useReducer/">React v17 源码系列：一文搞懂 useReducer</a>
+        </h1>
+        
+        <div class="article-meta clearfix">
+            
+            <a class="article-date" href="/archives/2025/03/07">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Created at</span>
+    
+    <time class="vm" datetime="2025-03-06T16:00:00.000Z" itemprop="datePublished">2025-03-07</time>
+</a>
+
+            <div class="article-updated">
+    
+    <i class="icon-calendar vm"></i>
+    
+    
+        <span class="vm">Modified at</span>
+    
+    <time class="vm" datetime="2025-03-07T09:26:13.916Z" itemprop="datePublished">2025-03-07</time>
+</div>
+
+            
+<div class="article-tag-list">
+    <i class="icon-tag vm"></i>
+    <a class="article-tag-link" href="/tags/react/" rel="tag">react</a>
+</div>
+
+
+        </div>
+    </header>
+    
+    <section class="article-body markdown-body">
+        <div>
+            
+            
+                
+                    
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                        
+                        
+                    
+                    
+                        
+                        <p><h1 id="前瞻"><a href="#前瞻" class="headerlink" title="前瞻"></a>前瞻</h1><p>本文将介绍 useReducer 的核心机制，在阅读之前，推荐先大致了解 React Reconcile 机制，想要从本文获益的话，至少应当理解 <strong>React Fiber, Work Loop, 单向、循环链表数据结构</strong>的概念，关于 React 源码解析可参考我的另一篇文章：<a href="/2023/05/31/react/reactcode17.0.2">React v17 源码解析</a></p>
+<p>由于 React Hook 的复杂度较高，读一遍文章就想建立起结构化记忆是很困难的，所以我推荐先了解以下核心机制，待熟悉后，再参考我给出的完整代码，把以下概念串联起来：</p>
+<ol>
+<li>Mount 与 Update 的区别</li>
+<li>ReactCurrentDispatcher 运行时注入</li>
+<p>
+                    
+                
+            
+            
+                </div>   
+                <div class="article-more-link">
+                    <a href="/2025/03/06/react/react_useReducer/#more">
+                        <span class="vm">阅读全文</span>
+                        <i class="icon-arrow-double-right vm"></i>     
+                    </a>
+                </div>
+            
+    </section>
+</article>
+
+
+    <article class="article" itemscope itemprop="blogPost">
+    
+    <header class="article-header">
+        
+        <h1 itemprop="name">
             <a href="/2025/02/12/tools/filezilla/">MacOS 借助 FileZilla 快速部署 FTP Server</a>
         </h1>
         
@@ -154,7 +240,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2025-03-06T11:30:36.953Z" itemprop="datePublished">2025-03-06</time>
+    <time class="vm" datetime="2025-03-07T09:26:13.917Z" itemprop="datePublished">2025-03-07</time>
 </div>
 
             
@@ -240,7 +326,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2025-03-06T11:30:36.953Z" itemprop="datePublished">2025-03-06</time>
+    <time class="vm" datetime="2025-03-07T09:26:13.917Z" itemprop="datePublished">2025-03-07</time>
 </div>
 
             
@@ -326,7 +412,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2025-03-06T11:30:36.953Z" itemprop="datePublished">2025-03-06</time>
+    <time class="vm" datetime="2025-03-07T09:26:13.916Z" itemprop="datePublished">2025-03-07</time>
 </div>
 
             
@@ -412,7 +498,7 @@
     
         <span class="vm">Modified at</span>
     
-    <time class="vm" datetime="2025-03-06T11:30:36.951Z" itemprop="datePublished">2025-03-06</time>
+    <time class="vm" datetime="2025-03-07T09:26:13.914Z" itemprop="datePublished">2025-03-07</time>
 </div>
 
             
@@ -471,96 +557,10 @@
 </article>
 
 
-    <article class="article" itemscope itemprop="blogPost">
-    
-    <header class="article-header">
-        
-        <h1 itemprop="name">
-            <a href="/2024/03/17/interview/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E7%9B%B4%E6%92%AD%E7%BA%BF%E4%B8%80%E9%9D%A2/">字节跳动直播线面试（一面）复盘</a>
-        </h1>
-        
-        <div class="article-meta clearfix">
-            
-            <a class="article-date" href="/archives/2024/03/18">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Created at</span>
-    
-    <time class="vm" datetime="2024-03-17T16:00:00.000Z" itemprop="datePublished">2024-03-18</time>
-</a>
-
-            <div class="article-updated">
-    
-    <i class="icon-calendar vm"></i>
-    
-    
-        <span class="vm">Modified at</span>
-    
-    <time class="vm" datetime="2025-03-06T11:30:36.951Z" itemprop="datePublished">2025-03-06</time>
-</div>
-
-            
-<div class="article-tag-list">
-    <i class="icon-tag vm"></i>
-    <a class="article-tag-link" href="/tags/interview/" rel="tag">interview</a>
-</div>
-
-
-        </div>
-    </header>
-    
-    <section class="article-body markdown-body">
-        <div>
-            
-            
-                
-                    
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                        
-                        
-                    
-                    
-                        
-                        <p><ol>
-<li>自我介绍</li>
-<li>两列布局，左定宽，右适应</li>
-<li>重排和重绘是什么，如何降低重排重绘的性能开销？</li>
-<li>如何判断一个变量是 Array？</li>
-<p>
-                    
-                
-            
-            
-                </div>   
-                <div class="article-more-link">
-                    <a href="/2024/03/17/interview/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E7%9B%B4%E6%92%AD%E7%BA%BF%E4%B8%80%E9%9D%A2/#more">
-                        <span class="vm">阅读全文</span>
-                        <i class="icon-arrow-double-right vm"></i>     
-                    </a>
-                </div>
-            
-    </section>
-</article>
-
-
 
 
 <nav class="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
 </nav>
 
 
