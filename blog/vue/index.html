@@ -1,0 +1,448 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Neil's Blog" href="https://neil-ji.github.io/rss.xml"><meta name="generator" content="Astro v6.1.8"><!-- Atkinson Hyperlegible via Google Fonts CDN --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://neil-ji.github.io/blog/vue/"><!-- Primary Meta Tags --><title>How React Developer Learn Vue？</title><meta name="title" content="How React Developer Learn Vue？"><meta name="description" content><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://neil-ji.github.io/blog/vue/"><meta property="og:title" content="How React Developer Learn Vue？"><meta property="og:description" content><meta property="og:image" content="https://neil-ji.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://neil-ji.github.io/blog/vue/"><meta property="twitter:title" content="How React Developer Learn Vue？"><meta property="twitter:description" content><meta property="twitter:image" content="https://neil-ji.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><style>:root{--accent: #2337ff;--accent-dark: #000d8a;--black: 15, 18, 25;--gray: 96, 115, 159;--gray-light: 229, 233, 240;--gray-dark: 34, 41, 57;--gray-gradient: rgba(var(--gray-light), 50%), #fff;--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%)}body{font-family:var(--font-atkinson);margin:0;padding:0;text-align:left;background:linear-gradient(var(--gray-gradient)) no-repeat;background-size:100% 600px;word-wrap:break-word;overflow-wrap:break-word;color:rgb(var(--gray-dark));font-size:20px;line-height:1.7}main{width:720px;max-width:calc(100% - 2em);margin:auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--black));line-height:1.2}h1{font-size:3.052em}h2{font-size:2.441em}h3{font-size:1.953em}h4{font-size:1.563em}h5{font-size:1.25em}strong,b{font-weight:700}a,a:hover{color:var(--accent)}p{margin-bottom:1em}.prose p{margin-bottom:2em}textarea{width:100%;font-size:16px}input{font-size:16px}table{width:100%}img{max-width:100%;height:auto;border-radius:8px}code{padding:2px 5px;background-color:rgb(var(--gray-light));border-radius:2px}pre{padding:1.5em;border-radius:8px}pre>code{all:unset}blockquote{border-left:4px solid var(--accent);padding:0 0 0 20px;margin:0;font-size:1.333em}hr{border:none;border-top:1px solid rgb(var(--gray-light))}@media(max-width:720px){body{font-size:18px}main{padding:1em}}.sr-only{border:0;padding:0;margin:0;position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);clip-path:inset(50%);white-space:nowrap}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:linear-gradient(var(--gray-gradient)) no-repeat;color:rgb(var(--gray));text-align:center}.social-links[data-astro-cid-sz7xmlte]{display:flex;justify-content:center;gap:1em;margin-top:1em}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{text-decoration:none;color:rgb(var(--gray))}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:rgb(var(--gray-dark))}a[data-astro-cid-eimmu3lg]{display:inline-block;text-decoration:none}a[data-astro-cid-eimmu3lg].active{font-weight:bolder;text-decoration:underline}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:#fff;box-shadow:0 2px 8px rgba(var(--black),5%)}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:var(--black);border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:var(--accent)}.social-links[data-astro-cid-3ef6ksr2],.social-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{display:flex}@media(max-width:720px){.social-links[data-astro-cid-3ef6ksr2]{display:none}}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Neil&#39;s Blog</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a> <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a> <a href="/about" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a> </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo>  </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2025-01-14T00:00:00.000Z"> Jan 14, 2025 </time>  </div> <h1 data-astro-cid-bvzihdzo>How React Developer Learn Vue？</h1> <hr data-astro-cid-bvzihdzo> </div>  <h1 id="前言">前言</h1>
+<p>本文写于 25 年 1 月，杭州云谷，这两天气候干冷转暖，宜学习，我已断更大半年，恰逢手头无事，就借这个机会写点学习笔记吧。我将尝试以 React 开发者视角，去学习 Vue，找出二者的共性，形成框架，同时将区别填充在框架中。</p>
+<h1 id="代码组织形式">代码组织形式</h1>
+<p>在 React 中，其实有一个事实标准，一个组件会将代码组织在单个 <code>.jsx</code> 或 <code>.tsx</code> 文件中，Vue 在这一点上是相同的，Vue 的单文件组件（Single-File Component）会将代码组织在 <code>.vue</code> 文件中。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#6A737D">// Counter.tsx</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { useState } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "react"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> Counter</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">count</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">setCount</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#B392F0"> useState</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;</span><span style="color:#85E89D">button</span><span style="color:#B392F0"> onClick</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">{() </span><span style="color:#F97583">=></span><span style="color:#B392F0"> setCount</span><span style="color:#E1E4E8">(count </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">)}></span></span>
+<span class="line"><span style="color:#E1E4E8">      You clicked me {count} times.</span></span>
+<span class="line"><span style="color:#E1E4E8">    &#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#6A737D">&#x3C;!-- Counter.vue --></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">script</span><span style="color:#B392F0"> setup</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#F97583">  import</span><span style="color:#E1E4E8"> { ref } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "vue"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> count</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> ref</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">script</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">template</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">button</span><span style="color:#B392F0"> @click</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"count++"</span><span style="color:#E1E4E8">>You clicked me {{ count }} times.&#x3C;/</span><span style="color:#85E89D">button</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">template</span><span style="color:#E1E4E8">></span></span></code></pre>
+<p>抛开工程实践，React 组件就是本地定义的 Class 或 Function，所以其实一个文件中可以包含多个组件，只不过工程上考虑到模块化，一般不会这么干。与之对应的，就是对象式的 Vue 组件。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="typescript"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { ref } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "vue"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">  setup</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> count</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> ref</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> { count };</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">  template: </span><span style="color:#9ECBFF">`</span></span>
+<span class="line"><span style="color:#9ECBFF">    &#x3C;button @click="count++"></span></span>
+<span class="line"><span style="color:#9ECBFF">      You clicked me {{ count }} times.</span></span>
+<span class="line"><span style="color:#9ECBFF">    &#x3C;/button>`</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<h1 id="模板语法">模板语法</h1>
+<ol>
+<li>
+<p><strong>模板语言</strong>：</p>
+<ul>
+<li>Vue 使用基于 HTML 的模板语法，也支持 JSX 语法（但会失去编译时优化）。</li>
+<li>React 使用 JSX.</li>
+</ul>
+</li>
+<li>
+<p><strong>控制结构</strong>：</p>
+<ul>
+<li>Vue 提供特定的指令（如 <code>v-if</code>、<code>v-for</code>、<code>v-bind</code>、<code>v-on</code> 等）来操作 DOM。</li>
+<li>React 则使用 JavaScript 的控制结构（如条件表达式和循环）来实现同样的功能。</li>
+</ul>
+</li>
+<li>
+<p><strong>数据绑定</strong>：</p>
+<ul>
+<li>Vue 使用双大括号 <code>{{}}</code> 进行文本插值，并提供 <code>.sync</code> 和 <code>.model</code> 修饰符用于<strong>双向绑定</strong>。</li>
+<li>React 中的数据绑定是通过花括号 <code>{}</code> 内嵌 JavaScript 表达式实现的，通常为<strong>单向数据流</strong>。</li>
+</ul>
+</li>
+</ol>
+<h1 id="响应式状态">响应式状态</h1>
+<ol>
+<li>
+<p><strong>状态定义</strong></p>
+<ul>
+<li>Vue 使用 <code>ref</code> 或 <code>reactive</code> 定义响应式状态</li>
+<li>React 使用 <code>useState</code> 或 <code>this.state</code></li>
+</ul>
+</li>
+<li>
+<p><strong>状态更新</strong></p>
+<ul>
+<li>Vue 直接修改响应式状态的值即可。</li>
+<li>React 必须使用 <code>useState</code> 或 <code>this.setState</code> 更新状态，且严格遵循不可变更新。</li>
+</ul>
+</li>
+<li>
+<p><strong>状态比较</strong></p>
+<ul>
+<li>Vue 的 <code>ref</code> 或 <code>reactive</code> 默认为<strong>深比较</strong>，修改深层嵌套的属性或数组元素，就能触发更新。</li>
+<li>React 默认为<strong>浅比较</strong>，修改深层嵌套属性或数组元素后，还必须更新对象或数组的引用。</li>
+</ul>
+</li>
+<li>
+<p><strong>更新批处理</strong></p>
+<ul>
+<li>Vue 的 <code>ref</code> 的更新不会同步提交到 Dom 上，而是统一在下一次 tick 中批量处理。</li>
+<li>React（concurrent mode）的更新也不会同步提交到 Dom 上，而是被添加至更新队列，在下次事件循环开始时，一次性处理掉。</li>
+</ul>
+</li>
+<li>
+<p><strong>状态更新感知</strong></p>
+<ul>
+<li>Vue 通过 <code>ES6 Proxy</code> 语法特性实现对响应式状态的监听，进而触发更新。</li>
+<li>React 通过调用 <code>useState</code> 钩子函数或 <code>setState</code> 方法触发更新。</li>
+</ul>
+</li>
+<li>
+<p><strong>状态派生</strong></p>
+<ul>
+<li>Vue 通过计算属性 <code>computed</code> 从状态派生出复杂数据，<strong>自动收集响应式依赖</strong>，响应式状态变化时重新计算，可以通过 setter 函数<strong>直接修改</strong>，且 getter 函数可以拿到上一个计算属性值。</li>
+<li>React 通过 <code>useMemo</code> 缓存复杂计算，依赖改变时重新计算，需<strong>手动管理依赖</strong>，只能通过更新依赖<strong>间接修改</strong>，可以间接通过 useRef 缓存上一个 useMemo 值（即自己维护一个快照）。</li>
+</ul>
+</li>
+</ol>
+<p>[注] 关于 React 批处理，此处是简化的说法，是为了方便理解，React 原生事件或异步代码回调中的更新并不会批处理，除非显式调用 batchUpdate API，详见我另一篇关于 React v17 源码解析的文章 <a href="/2023/05/31/react/reactcode17.0.2">React v17 源码解析</a></p>
+<p>[注] 遗留一个问题，Vue 能否通过 <code>computed</code> 实现类似 React <code>useCallback</code> 的效果？</p>
+<h1 id="class--style">class &#x26; style</h1>
+<p>对于样式开发的优化，是 Vue 的一大亮点。</p>
+<ol>
+<li>
+<p><strong>类名定义的样式</strong></p>
+<ul>
+<li>Vue 通过<strong>字符串、对象或数组</strong> <code>class</code> 定义类名。当使用对象时，key 为类名，value 为布尔值，表示是否添加该类名；当使用数组时，数组中的元素为类名，且数组元素也可以为对象。</li>
+<li>React 通过<strong>字符串</strong> <code>className</code> 定义类名，需要通过字符串拼接实现动态样式。</li>
+</ul>
+</li>
+<li>
+<p><strong>类名的传递</strong></p>
+<ul>
+<li>Vue 会自动将组件接收的类名，默认传递到该组件模板的根元素上，多个根元素时通过 <code>$attr.class</code> 指定类名接收元素。</li>
+<li>React 需要手动将类名 prop 传递到组件的指定元素上。</li>
+</ul>
+</li>
+<li>
+<p><strong>内联样式</strong></p>
+<ul>
+<li>Vue 通过<strong>对象或数组</strong> <code>style</code> 定义内联样式。当使用数组时，数组元素为 style 对象，数组元素会进行合并。</li>
+<li>React 通过<strong>对象</strong> <code>style</code> 定义内联样式。</li>
+</ul>
+</li>
+<li>
+<p><strong>style 样式兼容性</strong></p>
+<ul>
+<li>Vue 优化了 style 对象的兼容性。对于 key，自动检测并使用浏览器支持的样式前缀；对于 value，可以手动设为数组，定义多个值，运行时会使用浏览器支持的值。</li>
+<li>React 需要引入额外的类库来批量处理样式兼容性问题。</li>
+</ul>
+</li>
+</ol>
+<h1 id="组件">组件</h1>
+<ol>
+<li>
+<p><strong>组件定义</strong>：</p>
+<ul>
+<li>Vue 支持单文件组件（SFC），允许将模板、脚本和样式封装在一个 <code>.vue</code> 文件中。</li>
+<li>React 组件通常是用纯 JavaScript 定义的函数或类，样式和其他资源需要单独管理。</li>
+</ul>
+</li>
+<li>
+<p><strong>子元素占位符</strong>：</p>
+<ul>
+<li>Vue 使用 <code>&#x3C;slot /></code> 作为子元素占位符</li>
+<li>React 使用 <code>props.children</code> 作为子元素占位符</li>
+</ul>
+</li>
+<li>
+<p><strong>作用域</strong></p>
+<ul>
+<li>Vue 中存在模板作用域，指令作用域。</li>
+<li>React 中的作用域同 JS 规范。</li>
+</ul>
+</li>
+<li>
+<p><strong>错误捕获</strong></p>
+<ul>
+<li>Vue 使用 app.config.errorHandler 全局处理</li>
+<li>React 使用 ErrorBoundary 组件</li>
+</ul>
+</li>
+<li>
+<p><strong>HTML 片段</strong></p>
+<ul>
+<li>Vue 使用 <code>v-html</code> 指令来渲染 HTML 内容。</li>
+<li>React 使用 <code>dangerouslySetInnerHTML</code> 属性来渲染 HTML 内容。</li>
+</ul>
+</li>
+<li>
+<p><strong>批量绑定属性</strong></p>
+<ul>
+<li>Vue 使用 <code>&#x3C;div v-bind={props}>&#x3C;/div></code> 批量绑定属性到元素上。</li>
+<li>React 使用解构赋值的方式来批量绑定属性<code>&#x3C;div {...props} /></code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>条件渲染</strong></p>
+<ul>
+<li>Vue 使用 <code>v-if / v-else-if / v-else</code> 实现条件渲染，且 <code>v-show</code> 通过 display 来控制样式显隐。</li>
+<li>React 使用 <code>{ executor &#x26;&#x26; &#x3C;div>Hello World&#x3C;/div> }</code> 或 <code>{ executor ? &#x3C;div>Hello World&#x3C;/div> : null }</code>，通过动态类名或 style display 属性来控制样式显隐。</li>
+</ul>
+</li>
+<li>
+<p><strong>列表渲染</strong></p>
+<ul>
+<li>Vue 使用 <code>v-for="item in items"</code> 来渲染列表，在 <code>v-for</code> 所在的元素上使用 <code>:key</code> 指定子元素标识符。</li>
+<li>React 使用 <code>Array.prototype.map</code> 或 ReactNode 数组，在子元素上使用 <code>key</code> 指定组件标识符。</li>
+</ul>
+</li>
+<li>
+<p><strong>空元素</strong></p>
+<ul>
+<li>Vue 使用 <code>&#x3C;template>&#x3C;template/></code> 标签来定义空元素，不会生成 DOM 元素。</li>
+<li>React 使用 <code>&#x3C;Fragment>&#x3C;/Fragment></code> 或其简写 <code>&#x3C;>&#x3C;/></code> 标签来定义不生成 DOM 的空元素。</li>
+</ul>
+</li>
+<li>
+<p><strong>Props</strong></p>
+<ul>
+<li>Vue 无论是选项式还是组合式组件，都需要显式声明 Props，否则模板中无法访问 Props.
+<ul>
+<li>选项式，<code>{ props: ["prop1", "prop2"] }</code></li>
+<li>组合式，<code>defineProps(["prop1", "prop2"])</code></li>
+</ul>
+</li>
+<li>React 不必显式声明 Props</li>
+</ul>
+</li>
+<li>
+<p><strong>动态组件</strong></p>
+</li>
+</ol>
+<ul>
+<li>Vue 可使用 <code>&#x3C;component :is="component" /></code> 在多个组件中动态切换，并可以通过包裹一层 <code>&#x3C;KeepAlive></code> 避免销毁其他组件。</li>
+<li>React 需要手动实现。</li>
+</ul>
+<ol start="12">
+<li><strong>组件注册</strong></li>
+</ol>
+<ul>
+<li>Vue 组合式组件导入其他组件时，无需注册这些组件；选项式组件则必须通过 <code>components</code> 选项显式注册被导入的组件。</li>
+<li>React 使用其他组件时无需注册。</li>
+</ul>
+<ol start="13">
+<li><strong>全局组件</strong></li>
+</ol>
+<ul>
+<li>Vue 可以通过 <code>app.component(name, component)</code> 全局注册组件，在该应用中即可直接使用。</li>
+<li>React 不支持全局组件。</li>
+</ul>
+<h1 id="事件">事件</h1>
+<p>Vue 的事件回调开发起来相当便捷高效，主要体现在以下方面。</p>
+<ol>
+<li>
+<p><strong>事件绑定</strong></p>
+<ul>
+<li>Vue 使用 <code>v-on</code> 或 <code>@</code> 来绑定事件回调，如 <code>v-on:click="handleClick"</code>.</li>
+<li>React 使用驼峰命名的事件属性名，如 <code>onClick={handleClick}</code> 等。</li>
+</ul>
+</li>
+<li>
+<p><strong>事件回调</strong></p>
+<ul>
+<li>Vue 的事件回调支持内联的 JavaScript 语句，如 <code>v-on:click="count++"</code>，同时也支持传递函数引用。</li>
+<li>React 仅支持传递函数引用。</li>
+</ul>
+</li>
+<li>
+<p><strong>事件修饰符</strong></p>
+<ul>
+<li>Vue 支持事件、按键、鼠标键修饰符，且修饰符支持链式调用，如 <code>v-on:click.prevent.stop="handleClick"</code>.</li>
+<li>React 不支持事件修饰符，需要手动实现。</li>
+</ul>
+</li>
+<li>
+<p><strong>组件自定义事件</strong></p>
+<ul>
+<li>Vue 可通过 <code>defineEmits</code> 或 <code>$emit</code> 定义或发出自定义事件，有助于维持代码结构的清晰。</li>
+<li>React 组件不支持自定义事件，父组件将事件回调以 props 形式传递给子组件，以此实现类似效果，但大量事件回调和其他 props 混合在一起堪称噩梦。</li>
+</ul>
+</li>
+</ol>
+<h1 id="表单">表单</h1>
+<p>Vue 同样对于常用的表单操作进行了简化。</p>
+<ol>
+<li>
+<p><strong>输入监听与状态绑定</strong></p>
+<ul>
+<li>Vue 通过 <code>v-model</code> 简化了表单输入监听与状态绑定，其等价于 <code>v-bind</code> 和 <code>v-on</code>.</li>
+<li>React 需要手动实现。</li>
+</ul>
+</li>
+<li>
+<p><strong>常用行为抽象</strong></p>
+<ul>
+<li>Vue 通过修饰符 <code>.lazy</code>、<code>.number</code>、<code>.trim</code> 等简化了常用行为。</li>
+<li>React 需要手动实现。</li>
+</ul>
+</li>
+</ol>
+<h1 id="生命周期">生命周期</h1>
+<p>Vue 的生命周期 API，就我个人观点而言，是有点过时的，这种复杂的生命周期 Hooks 会带来额外的维护成本与心智负担，相比之下，React 已经事实上放弃了类组件基于生命周期开发的心智模型，改为拥抱 useEffect/useLayoutEffect，大大降低了开发者的心智负担，而心智负担和维护成本往往是一回事:)</p>
+<p><img src="https://cn.vuejs.org/assets/lifecycle_zh-CN.W0MNXI0C.png" alt="生命周期"></p>
+<h1 id="副作用">副作用</h1>
+<ol>
+<li>
+<p><strong>依赖管理</strong></p>
+<ul>
+<li>Vue 使用 <code>watch</code> 来收集并执行副作用函数，需手动管理依赖；使用简化版的 <code>watchEffect</code> 自动收集依赖。</li>
+<li>React 使用 <code>useEffect</code> 收集并执行副作用函数，需要手动管理依赖。</li>
+</ul>
+</li>
+<li>
+<p><strong>首次执行 &#x26; 再次执行</strong></p>
+<ul>
+<li>Vue <strong>默认不会</strong>在首次渲染后执行 <code>watch</code> 的回调，可通过配置 <code>immediate: true</code> 指定首次渲染后执行（等价于 <code>watchEffect</code>）；后续被监听对象更新时，再次执行副作用函数。</li>
+<li>React <strong>默认会</strong>在首次渲染后执行 <code>useEffect</code> 的回调；后续依赖项更新时，再次执行副作用函数。</li>
+</ul>
+</li>
+<li>
+<p><strong>依赖比较</strong></p>
+<ul>
+<li>Vue <code>watch</code> 传递响应式对象时，通过深比较判断依赖是否变化；也支持 getter 函数这种浅比较，同时支持 <code>deep: true</code> 配置项强制深比较；</li>
+<li>React 仅支持浅比较，但可以将所有属性填入依赖数组，间接实现深比较（并非常见做法）。</li>
+</ul>
+</li>
+<li>
+<p><strong>once 模式</strong></p>
+<ul>
+<li>Vue <code>watch</code> 可以配置 <code>once: true</code> 指定副作用函数仅执行一次。</li>
+<li>React 没法完全做到相同行为，存在各种限制，如下：
+<ul>
+<li>业务逻辑仅执行一次：函数内部实现，非首次执行时跳出，确保业务逻辑仅执行一次，但<strong>副作用函数可能执行多次</strong>。</li>
+<li>副作用函数仅执行一次：依赖项设为 <code>[]</code>，确保副作用函数仅执行一次，但只能是首次执行时执行一次，<strong>无法监听状态</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>副作用清理</strong></p>
+<ul>
+<li>Vue 可以通过 <code>watch/watchEffect</code> 副作用回调中同步调用 <code>onWatcherCleanup(() => { ... })</code> 来实现副作用清理（v3.5 之后），或副作用回调也会接收 <code>cleanup</code> 回调，效果同前者相同。</li>
+<li>React 更为直观，直接在副作用回调函数中 <code>return</code> 一个清理函数即可。</li>
+</ul>
+</li>
+<li>
+<p><strong>副作用执行时机</strong></p>
+<ul>
+<li>Vue 的副作用回调执行于状态更新之后，DOM 更新之前。</li>
+<li>React 的副作用回调执行于状态更新之后，DOM 更新之前。</li>
+</ul>
+</li>
+<li>
+<p><strong>副作用回调中访问 DOM</strong></p>
+<ul>
+<li>Vue <code>watch/watchEffect</code> 配置 <code>flush: 'post'</code> 指定在 DOM 更新之后执行（等价于 <code>watchPostEffect</code>），以便访问 DOM.</li>
+<li>React 通过 <code>useLayoutEffect</code> 在 DOM 更新后执行副作用，以便访问 DOM。</li>
+</ul>
+</li>
+<li>
+<p><strong>状态更新前触发副作用</strong></p>
+<ul>
+<li>Vue <code>watch/watchEffect</code> 配置 <code>flush: 'sync'</code> 指定在状态更新前执行（等价于 <code>watchSyncEffect</code>）。</li>
+<li>React 函数组件不支持该行为，但可通过类组件的 <code>UNSAFE_componentWillUpdate</code> 实现，注意该方法已废弃，因为 concurrent mode 中，<code>workLoop</code> 可能被打断而多次执行。</li>
+</ul>
+</li>
+<li>
+<p><strong>主动停止监听</strong></p>
+<ul>
+<li>Vue 执行 <code>watch/watchEffect/watchPostEffect/watchSyncEffect</code> 会返回一个回调，用于主动停止监听。</li>
+<li>React 不支持主动停止监听。</li>
+</ul>
+</li>
+<li>
+<p><strong>监听死循环</strong></p>
+<ul>
+<li>Vue <code>watch</code> 在副作用中更新被监听的值，会触发抛出错误，但实际仅执行一次。<code>watchEffect</code> 允许循环更新，不会抛出错误。</li>
+<li>React 不允许在副作用中更新被监听的值，会导致死循环。</li>
+</ul>
+</li>
+</ol>
+<h1 id="dom-引用">DOM 引用</h1>
+<ol>
+<li>
+<p><strong>绑定</strong></p>
+<ul>
+<li>Vue 将 <code>useTemplateRef</code> 创建的变量绑定到指定元素的 <code>ref</code> 属性。</li>
+<li>React 通过 <code>useRef</code> 创建的变量绑定到指定元素的 <code>ref</code> 属性。</li>
+</ul>
+</li>
+<li>
+<p><strong>访问</strong></p>
+<ul>
+<li>Vue 访问模版引用变量的 <code>value</code> 属性。</li>
+<li>React 访问引用变量的 <code>current</code> 属性。</li>
+</ul>
+</li>
+<li>
+<p><strong>限制</strong></p>
+<ul>
+<li>Vue 会在组件挂载后更新模板引用，因此需要额外判断引用是否为空，不过在 <code>onMounted</code> 中对于非条件渲染的 ref 是可以安全访问的，无需判空。</li>
+<li>React 会在组件挂载后更新模板引用，因此也需要额外判断引用是否为空，不过 <code>useEffect</code> 中对于非条件渲染的 ref 是可以安全访问的，无需判空。</li>
+</ul>
+</li>
+<li>
+<p><strong>列表渲染</strong></p>
+<ul>
+<li>Vue 允许在列表渲染的元素上绑定 ref，该 ref 实际是一个数组。</li>
+<li>React 没有类似用法，建议获取父元素的 ref，然后通过索引访问子元素。</li>
+</ul>
+</li>
+<li>
+<p><strong>ref 绑定函数</strong></p>
+<ul>
+<li>Vue 可通过 <code>:ref</code> 传递一个函数或方法，该函数或方法的首个参数就是 DOM 引用，且该函数或方法每次更新或卸载都会调用一次。</li>
+<li>React 不支持这种用法。</li>
+</ul>
+</li>
+</ol>
+<h1 id="组件引用">组件引用</h1>
+<ol>
+<li>
+<p><strong>绑定</strong></p>
+<ul>
+<li>Vue 获取组件实例引用的方式和获取 DOM 引用一致，组件无需特殊处理。</li>
+<li>React 分为两种情况：
+<ul>
+<li>函数组件，需要通过 <code>forwardRef</code> 包装，而且获取的并非组件实例，而是组件通过 <code>useImperativeHandle</code> 显式声明的属性或方法。</li>
+<li>类组件，同获取 DOM 引用一致，无需特殊处理。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>对外暴露属性或方法</strong></p>
+<ul>
+<li>Vue 分为两种：
+<ul>
+<li>组合式定义的组件，<code>&#x3C;script setup></code> 定义的方法是默认私有的，必须通过 <code>defineExpose</code> 暴露指定的属性给外部使用。</li>
+<li>选项式定义的组件，属性或方法都可以通过组件实例引用访问。</li>
+</ul>
+</li>
+<li>React 也分为两种：
+<ul>
+<li>函数组件，通过 <code>useImperativeHandle</code> 可以在组件内部暴露指定的属性给外部使用。</li>
+<li>类组件，类组件的公共方法、属性都可以通过组件实例引用访问。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="vue-usecomposable-vs-react-custom-hook">Vue useComposable VS React Custom Hook</h1>
+<p>Vue 与 React 在响应式状态及相关逻辑封装、复用上达成了一致，不同点在于 Vue 的 useComposable 以 <code>use</code> 开头，实际是一种社区约定或范式，不具备强制性，而 React 的自定义 Hook 则必须以 <code>use</code> 开头，否则编译报错。</p>
+<h1 id="写在最后">写在最后</h1>
+<p>综合来看，Vue 抽象层次高，带来的好处就是减少重复代码，使用很方便，开发效率我认为是比 React 要高的。但坏处就是大量的隐式行为让人觉得摸不着头脑，在了解其底层机制前，会有一种割裂感，难以从语法角度建立联系，对于 React 开发者来说，割裂感尤为强烈。</p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 Your name here. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/mastodon" data-astro-cid-sz7xmlte><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/twitter" data-astro-cid-sz7xmlte><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/github" data-astro-cid-sz7xmlte><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path></svg> </a> </div> </footer> </body></html>

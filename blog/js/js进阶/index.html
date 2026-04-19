@@ -1,0 +1,320 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Neil's Blog" href="https://neil-ji.github.io/rss.xml"><meta name="generator" content="Astro v6.1.8"><!-- Atkinson Hyperlegible via Google Fonts CDN --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://neil-ji.github.io/blog/js/js%E8%BF%9B%E9%98%B6/"><!-- Primary Meta Tags --><title>Javascript进阶</title><meta name="title" content="Javascript进阶"><meta name="description" content><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://neil-ji.github.io/blog/js/js%E8%BF%9B%E9%98%B6/"><meta property="og:title" content="Javascript进阶"><meta property="og:description" content><meta property="og:image" content="https://neil-ji.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://neil-ji.github.io/blog/js/js%E8%BF%9B%E9%98%B6/"><meta property="twitter:title" content="Javascript进阶"><meta property="twitter:description" content><meta property="twitter:image" content="https://neil-ji.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><style>:root{--accent: #2337ff;--accent-dark: #000d8a;--black: 15, 18, 25;--gray: 96, 115, 159;--gray-light: 229, 233, 240;--gray-dark: 34, 41, 57;--gray-gradient: rgba(var(--gray-light), 50%), #fff;--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%)}body{font-family:var(--font-atkinson);margin:0;padding:0;text-align:left;background:linear-gradient(var(--gray-gradient)) no-repeat;background-size:100% 600px;word-wrap:break-word;overflow-wrap:break-word;color:rgb(var(--gray-dark));font-size:20px;line-height:1.7}main{width:720px;max-width:calc(100% - 2em);margin:auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--black));line-height:1.2}h1{font-size:3.052em}h2{font-size:2.441em}h3{font-size:1.953em}h4{font-size:1.563em}h5{font-size:1.25em}strong,b{font-weight:700}a,a:hover{color:var(--accent)}p{margin-bottom:1em}.prose p{margin-bottom:2em}textarea{width:100%;font-size:16px}input{font-size:16px}table{width:100%}img{max-width:100%;height:auto;border-radius:8px}code{padding:2px 5px;background-color:rgb(var(--gray-light));border-radius:2px}pre{padding:1.5em;border-radius:8px}pre>code{all:unset}blockquote{border-left:4px solid var(--accent);padding:0 0 0 20px;margin:0;font-size:1.333em}hr{border:none;border-top:1px solid rgb(var(--gray-light))}@media(max-width:720px){body{font-size:18px}main{padding:1em}}.sr-only{border:0;padding:0;margin:0;position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);clip-path:inset(50%);white-space:nowrap}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:linear-gradient(var(--gray-gradient)) no-repeat;color:rgb(var(--gray));text-align:center}.social-links[data-astro-cid-sz7xmlte]{display:flex;justify-content:center;gap:1em;margin-top:1em}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{text-decoration:none;color:rgb(var(--gray))}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:rgb(var(--gray-dark))}a[data-astro-cid-eimmu3lg]{display:inline-block;text-decoration:none}a[data-astro-cid-eimmu3lg].active{font-weight:bolder;text-decoration:underline}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:#fff;box-shadow:0 2px 8px rgba(var(--black),5%)}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:var(--black);border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:var(--accent)}.social-links[data-astro-cid-3ef6ksr2],.social-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{display:flex}@media(max-width:720px){.social-links[data-astro-cid-3ef6ksr2]{display:none}}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Neil&#39;s Blog</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a> <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a> <a href="/about" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a> </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo>  </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2023-03-16T00:00:00.000Z"> Mar 16, 2023 </time>  </div> <h1 data-astro-cid-bvzihdzo>Javascript进阶</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2 id="什么是原型链">什么是原型链？</h2>
+<p>定义的函数、类或对象会自动创建原型对象，并通过<code>prototype</code>和<code>constructor</code>互相指向对方，原型之间通过<code>__proto__</code>构成原型链，实例调用某个方法时，会沿原型链寻找该方法，直到找到指定方法，或遍历完整个原型链后抛出异常；</p>
+<p>借助单链表理解：针对实例调用某方法的角度来讲，原型链可以看作一个链表，每个节点都是原型对象，以<code>__proto__</code>属性指向下一节点，头节点是实例本身，尾节点是<code>Object.prototype</code>；</p>
+<p>不同情况下的<code>__proto__</code>如下：</p>
+<ul>
+<li>function 函数，箭头函数，其<code>__proto__</code>一定是<code>Function.prototype</code>，包括<code>Function</code>；</li>
+<li>实例的<code>__proto__</code>一定是其构造函数的原型；</li>
+<li>原型的<code>__proto__</code>一定是<code>Object.prototype</code>；</li>
+</ul>
+<p>举个例子，画出下列代码执行过程中的所有相关对象，如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> Person</span><span style="color:#E1E4E8">() {} </span><span style="color:#6A737D">// or like this: class Person {}</span></span></code></pre>
+<p><img src="https://img1.imgtp.com/2023/03/16/Ok7Qp0OO.png" alt="原型链.png"></p>
+<h2 id="箭头函数与-function-函数">箭头函数与 function 函数</h2>
+<p>“An ArrowFunction does not define local bindings for <code>arguments, super, this, or new.target</code>. ” —— <a href="https://tc39.es/ecma262/multipage/ecmascript-language-functions-and-classes.html#sec-arrow-function-definitions">ECMAScript Language Specification</a></p>
+<ul>
+<li>没有 new.target，不能通过 new 实例化，也没有 super；</li>
+<li>没有 prototype，不能通过 Object.create(prototype)实例化（虽然可以将参数设为箭头函数本身，但无意义，相当于箭头函数做返回值的原型，返回值的父级原型是 Function.prototype，而非 Object.prototype，）；</li>
+<li>没有 arguments；</li>
+<li>不能通过 call、apply、bind 改变 this 指向；</li>
+</ul>
+<p>注：非箭头函数，其 new.target 指向函数原型的 constructor；</p>
+<h2 id="什么是属性描述符property-descriptor">什么是属性描述符（property descriptor）</h2>
+<p>属性描述符是属性的配置，分为：</p>
+<ul>
+<li>数据描述符（configurable、enumerable、value、writable）</li>
+<li>存取描述符（configurable、enumerable、set、get）</li>
+</ul>
+<p>configurable 标识描述符是否可配置，即属性是否可以通过 delete 删除，描述符是否可修改，默认为 false，即不可再次修改描述符，且不能删除属性；</p>
+<p>enumerable 标识属性是否可枚举，默认为 false；</p>
+<p>value 标识属性值，默认为 undefined；</p>
+<p>writable 标识 value 是否可以修改，默认为 false，即不可再次修改属性值；</p>
+<p>get/set 标识属性的 getter/setter 函数，默认为 undefined；</p>
+<h2 id="什么是闭包">什么是闭包？</h2>
+<p>简单回答：读取其他函数内部变量的函数；</p>
+<p>详细回答：从现象上看，对于一个返回函数的函数，其第一次执行后，内部定义的变量将只能被返回的函数访问，这就形成了一个闭包；</p>
+<p>作用：</p>
+<ul>
+<li>闭包内的变量无法被外部访问，可以实现私有属性；</li>
+<li>for 循环内，闭包及变量提升导致的回调函数无法正确捕捉到自增变量：</li>
+</ul>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#6A737D">// 修改前</span></span>
+<span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">var</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 10</span><span style="color:#E1E4E8">; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">  document.</span><span style="color:#B392F0">getElementById</span><span style="color:#E1E4E8">(i).</span><span style="color:#B392F0">onClick</span><span style="color:#F97583"> =</span><span style="color:#F97583"> function</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">    alert</span><span style="color:#E1E4E8">(i); </span><span style="color:#6A737D">// 所有元素点击后都提示9</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// 借助匿名自执行函数实现的双重闭包技巧修改后</span></span>
+<span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">var</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">; i </span><span style="color:#F97583">&#x3C;</span><span style="color:#79B8FF"> 10</span><span style="color:#E1E4E8">; i</span><span style="color:#F97583">++</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">  document.</span><span style="color:#B392F0">getElementById</span><span style="color:#E1E4E8">(i).onClick </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">function</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">msg</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#F97583"> function</span><span style="color:#E1E4E8"> () {</span></span>
+<span class="line"><span style="color:#B392F0">      alert</span><span style="color:#E1E4E8">(msg); </span><span style="color:#6A737D">// 正确显示各自id</span></span>
+<span class="line"><span style="color:#E1E4E8">    };</span></span>
+<span class="line"><span style="color:#E1E4E8">  })(i);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>注：闭包需要维护一个词法作用域，将带来额外的性能开销，谨慎使用；</p>
+<h2 id="js-有几种数据类型">JS 有几种数据类型？</h2>
+<p>JS 是一种动态类型（变量可以动态赋予任意类型的值）、弱类型（不检查类型一致性，允许隐式类型转换）语言；</p>
+<p>原始类型有七种：</p>
+<ol>
+<li>null，<code>typeof null</code> 显示 <code>object</code>；</li>
+<li>undefined；</li>
+<li>boolean；</li>
+<li>number（Infinity, NaN）；</li>
+<li>bigint；</li>
+<li>string；</li>
+<li>symbol；</li>
+</ol>
+<p>引用类型有一种：</p>
+<ol>
+<li>object，<code>typeof function () {}</code>、<code>typeof class Person {}</code>结果都为<code>function</code>，但函数实际上是 object 类型；</li>
+</ol>
+<p>注：原始值就是语言底层的不可变值，共有七种类型，称为原始类型；</p>
+<h2 id="typeof-有几种结果">typeof 有几种结果</h2>
+<ol>
+<li><code>typeof null is object</code></li>
+<li><code>typeof undefined is undefined</code></li>
+<li><code>typeof boolean is boolean</code></li>
+<li><code>typeof number is number</code></li>
+<li><code>typeof bigint is bigint</code></li>
+<li><code>typeof string is string</code></li>
+<li><code>typeof symbol is symbol</code></li>
+<li><code>typeof function is function</code></li>
+</ol>
+<h2 id="null-和-undefined-的区别">null 和 undefined 的区别</h2>
+<ul>
+<li>typeof null 结果为 object，typeof undefined 结果为 undefined；</li>
+<li>null 是关键字，undefined 不是；</li>
+<li>null 表示空对象或空指针，undefined 表示空值，用途不同：
+<ul>
+<li>原型链的终点是 null；</li>
+<li>未赋值的变量或属性隐式初始化为 undefined，没有 return 语句的函数隐式返回 undefined；</li>
+</ul>
+</li>
+</ul>
+<h2 id="instanceof-作用与模拟">instanceof 作用与模拟</h2>
+<p>instanceof 用于判断右值是否在左值的原型链上；</p>
+<h2 id="for-in-与-for-of">for in 与 for of</h2>
+<ul>
+<li>for in 遍历键（一般用于对象），for of 遍历值（一般用于数组）；</li>
+<li>for of 本质是遍历 iterator，被遍历的目标必须实现<code>Symbol.iterator</code>方法，for in 则不必；</li>
+<li>for in 遍历自身及原型链上的可枚举属性名，顺序无法保证，for of 循环调用 iterator，顺序由 iterator 的实现决定；</li>
+</ul>
+<h2 id="promise-用途与机制">Promise 用途与机制</h2>
+<p>Promise 用于解决 ES5 中的回调地狱问题，将层级嵌套结构改为链式结构，以提高代码可读性，降低维护成本；</p>
+<p>Promise 本质上是采用观察者模式，通过 then 收集回调函数，监听的是 Promise 实例化时传入的 executor 函数，executor 在 Promise 实例化时执行，并且会获得两个参数 resolve 和 reject，通过执行 resolve/reject 来触发 then 收集的回调函数；</p>
+<p>Promise 具有三种状态：pending，fulfilled，rejected；按照规范，只能由 pending 向 fulfilled 或 rejected 转化；</p>
+<p>Promise 能够链式调用是由于 then 方法会返回一个新的 Promise 实例；</p>
+<p>常用静态方法：</p>
+<ul>
+<li>Promise.all(iterable)在 iterable 全部 fulfill 或其中一个 reject 时，返回一个 fulfilled 或 rejected Promise；</li>
+<li>Promise.any(iterable)，任意一个 fulfill 或全部 reject 时，返回 fulfilled 或 rejected Promise；</li>
+<li>Promise.race(iterable)，第一个 fulfill 或 reject 时，返回 fulfilled 或 rejected Promise；</li>
+<li>Promise.resolve(value)，返回 fulfilled Promise；</li>
+<li>Promise.reject(error)，返回 rejected Promise；</li>
+</ul>
+<p>注：iterable 是指可迭代对象，如数组；</p>
+<h2 id="generator-function-用途和机制">Generator Function 用途和机制</h2>
+<p>Generator Function 用 function*创建，执行后返回一个 Iterator，Iterator 的 next 方法用于执行被 yield 分割的函数体的代码，并返回一个对象，该对象的 value 属性就是 yield 右侧的值，done 标识迭代是否完成；</p>
+<p>Generator Function 常见于执行异步操作，yield 交出控制权，next 交还控制权，并且 next 接受的参数会作为 yield 表达式的值，这都是执行异步操作的关键点；</p>
+<p>因为需要把 next 方法传递给异步操作，以便完成后调用 next 交还控制权，异步操作的流程控制不太方便，代码也不直观；</p>
+<p>yield*用于 Generator Function 内调用 Generator Function</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function*</span><span style="color:#B392F0"> a</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  yield</span><span style="color:#79B8FF"> 3</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  yield</span><span style="color:#79B8FF"> 4</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#F97583">function*</span><span style="color:#B392F0"> b</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  yield</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  yield</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  yield*</span><span style="color:#B392F0"> a</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#6A737D">// b 等同于 c</span></span>
+<span class="line"><span style="color:#F97583">function*</span><span style="color:#B392F0"> c</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  yield</span><span style="color:#79B8FF"> 1</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  yield</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  yield</span><span style="color:#79B8FF"> 3</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  yield</span><span style="color:#79B8FF"> 4</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="async-function-用途和机制">Async Function 用途和机制</h2>
+<p>Async Function 可以视为 Generator 函数与 Promise 的语法糖，内置实现了 Generator 的自动执行，并将 Generator 的最终执行结果封装进 Promise，下一步处理更方便；</p>
+<p>await 可以看作 yield 的语法糖；</p>
+<p>Async Function 与 Generator Function、Promise 的关系可以从伪造的代码中理解：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> boo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> Promise</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">resolve</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    setTimeout</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">      resolve</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">11111</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }, </span><span style="color:#79B8FF">3000</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#F97583">async</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> a</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#B392F0"> boo</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> a;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#B392F0">foo</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">v</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(v)); </span><span style="color:#6A737D">// 11111</span></span></code></pre>
+<p>相当于</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> boo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> Promise</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">resolve</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    setTimeout</span><span style="color:#E1E4E8">(() </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">      resolve</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">11111</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }, </span><span style="color:#79B8FF">3000</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> foo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#F97583"> new</span><span style="color:#79B8FF"> Promise</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">resolve</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // 此处相当于Async Function的函数体</span></span>
+<span class="line"><span style="color:#F97583">    function*</span><span style="color:#B392F0"> _foo</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> a</span><span style="color:#F97583"> =</span><span style="color:#F97583"> yield</span><span style="color:#E1E4E8"> boo;</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> a;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    // 自动执行Generator</span></span>
+<span class="line"><span style="color:#F97583">    function</span><span style="color:#B392F0"> run</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">genFunc</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> gen</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> genFunc</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">      function</span><span style="color:#B392F0"> next</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">data</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> result</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> gen.</span><span style="color:#B392F0">next</span><span style="color:#E1E4E8">(data);</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (result.done) {</span></span>
+<span class="line"><span style="color:#B392F0">          resolve</span><span style="color:#E1E4E8">(result.value);</span></span>
+<span class="line"><span style="color:#F97583">          return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#6A737D">        // 注意这里！封装了then</span></span>
+<span class="line"><span style="color:#E1E4E8">        result.</span><span style="color:#B392F0">value</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">(next);</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#B392F0">      next</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#B392F0">    run</span><span style="color:#E1E4E8">(_foo);</span></span>
+<span class="line"><span style="color:#E1E4E8">  });</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#B392F0">foo</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">then</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">v</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(v)); </span><span style="color:#6A737D">// 11111</span></span></code></pre>
+<h2 id="es6-新特性汇总">ES6 新特性汇总</h2>
+<ol>
+<li>const，let</li>
+<li>解构赋值</li>
+<li>模板字符串</li>
+<li>参数默认值，剩余参数</li>
+<li>Arrow Function</li>
+<li>Generator Function</li>
+<li>Async Function</li>
+<li>新增数组方法：entries，keys，values，includes，from，find，findIndex 等</li>
+<li>新增 Object 方法：assign，keys，values，entries 等</li>
+<li>表达式定义的属性名</li>
+<li>Symbol</li>
+<li>Set，Map，WeakSet，WeakMap</li>
+<li>Promise</li>
+<li>Iterator</li>
+</ol>
+<h2 id="iterator-用途和机制">Iterator 用途和机制</h2>
+<p>Iterator 就是符合迭代器协议（Iterator protocol）的对象，实现了如下方法（必须实现 next）：</p>
+<ul>
+<li>next：用于遍历 Iterator 的一系列值，返回一个具有 value 和 done 属性的对象；</li>
+<li>return：结束迭代；</li>
+<li>throw：结束迭代并返回一个 Error 实例；</li>
+</ul>
+<h2 id="symboliterator-用途和机制">Symbol.Iterator 用途和机制</h2>
+<p>Symbol.Iterator 就是可迭代对象必须实现的一个 Symbol 类型的方法名，实现该方法的对象可以：</p>
+<ul>
+<li>通过 for…of 遍历；</li>
+<li>解构赋值；</li>
+<li>通过 Array.from(iterable)转化为数组；</li>
+<li>初始化 Set，Map；</li>
+<li>作为 Promise.all，Promise.race 的参数；</li>
+<li>通过 yield*把值导入到 Generator Function；</li>
+</ul>
+<p>该方法名标识的方法要符合可迭代协议（Iterable protocol），该方法返回一个 Iterator；</p>
+<p>显然，可以通过 Generator Function 实现该方法，因为 Generator Function 会返回一个 Iterator；</p>
+<h2 id="weakset-和-weakmap">WeakSet 和 WeakMap</h2>
+<p>键只能存非空对象，且键与对象地址是一种弱引用关系，GC 机制不关注弱引用，所以在没有强引用（如通过变量指向一个对象地址）存在的情况下，弱引用的对象将被回收；</p>
+<p>典型场景：保存 Dom 节点，被删除的节点会被 GC 正常回收，避免强引用导致内存泄漏；</p>
+<h2 id="decorator">Decorator</h2>
+<p>Decorator 是编译时执行的函数，目前提案处于 Stage 3（2023 年 7 月 5 日），但 ts 或 babel 等类库已经支持。</p>
+<p>语法如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#6A737D">// tsconfig.json 中配置 compileOptions.experimentalDecorators = true</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> myDecorator</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">target</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">    target</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">prototype</span><span style="color:#E1E4E8">.description </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "hello decorator"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">@myDecorator</span></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Person</span><span style="color:#E1E4E8">() {}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">((</span><span style="color:#F97583">new</span><span style="color:#E1E4E8"> Person).description) </span><span style="color:#6A737D">// "hello decorator"</span></span></code></pre>
+<h2 id="proxy-和-reflect">Proxy 和 Reflect</h2>
+<p>Proxy 用于代理目标对象的操作，例如读、写、添加属性、删除属性等，语法如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> target</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> handler</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">  set</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">target</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">prop</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">value</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">    // do something</span></span>
+<span class="line"><span style="color:#E1E4E8">    target[prop] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> value;</span></span>
+<span class="line"><span style="color:#6A737D">    // do something</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#B392F0">  get</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">target</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">prop</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">    // do something</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> target[prop];</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> proxy</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Proxy</span><span style="color:#E1E4E8">(target, handler);</span></span></code></pre>
+<p>Proxy 提供了元编程的能力，即针对编程的编程，基本可以看作是<strong>代理模式</strong>，代理属性读写（get、set、赋值、.）、delete、new、in 等；</p>
+<p>Reflect 用于搭配 Proxy 使用，Reflect 有 Proxy 构造函数中的参数 handler 上的所有方法，通过 Reflect 执行这些方法等同于执行被代理对象的对应原生操作；</p>
+<p>Proxy + Reflect 可以方便地实现对操作符的代理，改变默认行为或增加自定义行为，例如每次赋值时在控制台打印值：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> target</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  name: </span><span style="color:#9ECBFF">"Neil"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> proxy</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Proxy</span><span style="color:#E1E4E8">(target, {</span></span>
+<span class="line"><span style="color:#B392F0">  set</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">target</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">key</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">value</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">`${</span><span style="color:#E1E4E8">key</span><span style="color:#9ECBFF">} will be changed from ${</span><span style="color:#E1E4E8">target</span><span style="color:#9ECBFF">[</span><span style="color:#E1E4E8">key</span><span style="color:#9ECBFF">]</span><span style="color:#9ECBFF">} to ${</span><span style="color:#E1E4E8">value</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#6A737D">    // 原生行为</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> result</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Reflect.</span><span style="color:#B392F0">set</span><span style="color:#E1E4E8">(target, key, value);</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> result;</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">proxy.name </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> "Jack"</span><span style="color:#E1E4E8">; </span><span style="color:#6A737D">// print: name will be changed from Neil to Jack</span></span></code></pre>
+<p>细节：</p>
+<ul>
+<li>Proxy 代理是在 Proxy 实例上，直接操作被代理对象 target 将不会触发代理行为；</li>
+<li><code>const {proxy, revoke} = Proxy.revokable(target, handler)</code>，revoke 调用后将销毁 proxy 实例，后续调用将抛出错误；</li>
+</ul>
+<h2 id="class">class</h2>
+<p>class 用于定义类，细节如下：</p>
+<ul>
+<li>不提供 constructor 则将隐式地提供一个<code>constructor() { return this; }</code>；</li>
+<li>类名指向其构造函数，typeof 结果为<code>function</code>；</li>
+<li>constructor 只能通过 new 指令调用，直接调用将抛出异常；</li>
+<li>依赖于 this 的方法必须定义为实例方法，通过箭头函数或 bind 绑定 this 指向；</li>
+</ul>
+<p>原型方法是定义在 prototype 上方法，静态方法是定义在 constructor 上的方法，实例方法是定义在实例上的方法；</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> Person</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#FFAB70">  name</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> "Neil"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">  // 实例方法</span></span>
+<span class="line"><span style="color:#B392F0">  print1</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.name;</span></span>
+<span class="line"><span style="color:#6A737D">  // 原型方法</span></span>
+<span class="line"><span style="color:#B392F0">  print2</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> this</span><span style="color:#E1E4E8">.name;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"><span style="color:#6A737D">// 静态方法</span></span>
+<span class="line"><span style="color:#E1E4E8">Person.</span><span style="color:#B392F0">print3</span><span style="color:#F97583"> =</span><span style="color:#F97583"> function</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">name</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> name;</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<p><img src="https://s1.locimg.com/2023/07/05/464fbc0759846.jpg" alt="class与实例之间的关系.jpg"></p>
+<h2 id="01--02--030000000000000004">0.1 + 0.2 = 0.30000000000000004</h2>
+<p>首先，十进制数在计算机底层只能以二进制形式存储：</p>
+<ol>
+<li>整数部分转二进制：每次除 2 取余入栈，除数为 0 时顺序出栈；</li>
+<li>小数部分转二进制：每次乘 2 取整入队，小数部分为 0 时顺序出队；</li>
+</ol>
+<p>其次，js 中数字存储遵循 IEEE 754 标准——64 位双精度浮点数，1 符号位，11 位指数位，52 位尾数位，数字以科学计数法表示：<code>符号 尾数 * 基数^指数</code>。</p>
+<p>该问题的关键就在于尾数位是有限的（52 位），十进制小数经过上述转换后，尾数长度可能远超 52 位，此时就要舍去 52 位之后的二进制数，0.1 和 0.2 就是这样，它们在计算机中只是一个近似数，加运算实际是两个近似数之和，也就是<code>0.30000000000000004</code>.</p>
+<p>解决方案：</p>
+<ol>
+<li>先乘上 10 的倍数 x，把小数转换成整数，计算后结果除以 x 还原为小数；</li>
+<li>Number.prototype.toFixed(digits)指定计算结果的小数精度；</li>
+<li>Number.prototype.toPrecision(precision)指定计算结果的整体精度；</li>
+<li>目前仍处于 stage 1 的<a href="https://github.com/tc39/proposal-decimal">Ecma TC39 JavaScript Decimal proposal</a>，即显式十进制数运算（对应的，js 默认为隐式二进制数运算）；</li>
+</ol>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 Your name here. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/mastodon" data-astro-cid-sz7xmlte><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/twitter" data-astro-cid-sz7xmlte><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/github" data-astro-cid-sz7xmlte><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path></svg> </a> </div> </footer> </body></html>

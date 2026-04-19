@@ -1,0 +1,1229 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Neil's Blog" href="https://neil-ji.github.io/rss.xml"><meta name="generator" content="Astro v6.1.8"><!-- Atkinson Hyperlegible via Google Fonts CDN --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://neil-ji.github.io/blog/react/reactcode1702/"><!-- Primary Meta Tags --><title>React v17.0.2源码</title><meta name="title" content="React v17.0.2源码"><meta name="description" content><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://neil-ji.github.io/blog/react/reactcode1702/"><meta property="og:title" content="React v17.0.2源码"><meta property="og:description" content><meta property="og:image" content="https://neil-ji.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://neil-ji.github.io/blog/react/reactcode1702/"><meta property="twitter:title" content="React v17.0.2源码"><meta property="twitter:description" content><meta property="twitter:image" content="https://neil-ji.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><style>:root{--accent: #2337ff;--accent-dark: #000d8a;--black: 15, 18, 25;--gray: 96, 115, 159;--gray-light: 229, 233, 240;--gray-dark: 34, 41, 57;--gray-gradient: rgba(var(--gray-light), 50%), #fff;--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%)}body{font-family:var(--font-atkinson);margin:0;padding:0;text-align:left;background:linear-gradient(var(--gray-gradient)) no-repeat;background-size:100% 600px;word-wrap:break-word;overflow-wrap:break-word;color:rgb(var(--gray-dark));font-size:20px;line-height:1.7}main{width:720px;max-width:calc(100% - 2em);margin:auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--black));line-height:1.2}h1{font-size:3.052em}h2{font-size:2.441em}h3{font-size:1.953em}h4{font-size:1.563em}h5{font-size:1.25em}strong,b{font-weight:700}a,a:hover{color:var(--accent)}p{margin-bottom:1em}.prose p{margin-bottom:2em}textarea{width:100%;font-size:16px}input{font-size:16px}table{width:100%}img{max-width:100%;height:auto;border-radius:8px}code{padding:2px 5px;background-color:rgb(var(--gray-light));border-radius:2px}pre{padding:1.5em;border-radius:8px}pre>code{all:unset}blockquote{border-left:4px solid var(--accent);padding:0 0 0 20px;margin:0;font-size:1.333em}hr{border:none;border-top:1px solid rgb(var(--gray-light))}@media(max-width:720px){body{font-size:18px}main{padding:1em}}.sr-only{border:0;padding:0;margin:0;position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);clip-path:inset(50%);white-space:nowrap}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:linear-gradient(var(--gray-gradient)) no-repeat;color:rgb(var(--gray));text-align:center}.social-links[data-astro-cid-sz7xmlte]{display:flex;justify-content:center;gap:1em;margin-top:1em}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{text-decoration:none;color:rgb(var(--gray))}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:rgb(var(--gray-dark))}a[data-astro-cid-eimmu3lg]{display:inline-block;text-decoration:none}a[data-astro-cid-eimmu3lg].active{font-weight:bolder;text-decoration:underline}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:#fff;box-shadow:0 2px 8px rgba(var(--black),5%)}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:var(--black);border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:var(--accent)}.social-links[data-astro-cid-3ef6ksr2],.social-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{display:flex}@media(max-width:720px){.social-links[data-astro-cid-3ef6ksr2]{display:none}}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Neil&#39;s Blog</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a> <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a> <a href="/about" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a> </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo>  </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2023-05-31T15:11:19.000Z"> May 31, 2023 </time>  </div> <h1 data-astro-cid-bvzihdzo>React v17.0.2源码</h1> <hr data-astro-cid-bvzihdzo> </div>  <h2 id="资源一览">资源一览</h2>
+<ul>
+<li><a href="https://github1s.com/neil-ji/react/blob/HEAD/packages/">React v17.0.2 源码在线编辑器（vscode）</a></li>
+<li><a href="https://github.com/neil-ji/react/blob/HEAD/packages/">React v17.0.2 源码仓库（github）</a></li>
+</ul>
+<h2 id="react-内部函数调用关系草图">React 内部函数调用关系草图</h2>
+<p>Mount 阶段大致如下，可供参考，缩进意为被上一层调用，标记<code>!!!</code>的注释意为核心代码。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#E1E4E8">ReactDOM.render;</span></span>
+<span class="line"><span style="color:#E1E4E8">legacyRenderSubtreeIntoContainer;</span></span>
+<span class="line"><span style="color:#E1E4E8">legacyCreateRootFromDOMContainer;</span></span>
+<span class="line"><span style="color:#E1E4E8">createRoot;</span></span>
+<span class="line"><span style="color:#F97583">new</span><span style="color:#B392F0"> ReactDOMRoot</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">createRootImpl;</span></span>
+<span class="line"><span style="color:#E1E4E8">createContainer;</span></span>
+<span class="line"><span style="color:#E1E4E8">createFiberRoot;</span></span>
+<span class="line"><span style="color:#F97583">new</span><span style="color:#B392F0"> FiberRootNode</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">createHostRootFiber;</span></span>
+<span class="line"><span style="color:#E1E4E8">createFiber;</span></span>
+<span class="line"><span style="color:#F97583">new</span><span style="color:#B392F0"> FiberNode</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">initializeUpdateQueue;</span></span>
+<span class="line"><span style="color:#E1E4E8">unbatchedUpdates;</span></span>
+<span class="line"><span style="color:#E1E4E8">updateContainer;</span></span>
+<span class="line"><span style="color:#E1E4E8">requestEventTime;</span></span>
+<span class="line"><span style="color:#E1E4E8">requestUpdateLane;</span></span>
+<span class="line"><span style="color:#E1E4E8">getContextForSubtree;</span></span>
+<span class="line"><span style="color:#E1E4E8">createUpdate;</span></span>
+<span class="line"><span style="color:#E1E4E8">enqueueUpdate;</span></span>
+<span class="line"><span style="color:#E1E4E8">scheduleUpdateOnFiber; </span><span style="color:#6A737D">// !!! reconcile开始</span></span>
+<span class="line"><span style="color:#E1E4E8">markUpdateLaneFromFiberToRoot; </span><span style="color:#6A737D">// 从当前节点到根节点，依次更新节点的Lane</span></span>
+<span class="line"><span style="color:#E1E4E8">markRootUpdated; </span><span style="color:#6A737D">// 根节点标记为：存在pending update</span></span>
+<span class="line"><span style="color:#E1E4E8">performSyncWorkOnRoot; </span><span style="color:#6A737D">// !!! reconcile开始</span></span>
+<span class="line"><span style="color:#E1E4E8">getNextLanes;</span></span>
+<span class="line"><span style="color:#E1E4E8">renderRootSync;</span></span>
+<span class="line"><span style="color:#E1E4E8">prepareFreshStack; </span><span style="color:#6A737D">// 初始化Work Loop必需的所有变量</span></span>
+<span class="line"><span style="color:#E1E4E8">createWorkInProgress;</span></span>
+<span class="line"><span style="color:#E1E4E8">createFiber;</span></span>
+<span class="line"><span style="color:#E1E4E8">enqueueInterleavedUpdates;</span></span>
+<span class="line"><span style="color:#E1E4E8">pushDispatcher; </span><span style="color:#6A737D">// 设置一个ReactCurrentDispatcher，主要用于处理Hooks</span></span>
+<span class="line"><span style="color:#E1E4E8">workLoopSync; </span><span style="color:#6A737D">// !!! 循环处理unitOfWork，正在处理的work称为workInProgress</span></span>
+<span class="line"><span style="color:#E1E4E8">performUnitOfWork;</span></span>
+<span class="line"><span style="color:#E1E4E8">beginWork; </span><span style="color:#6A737D">// !!! 沿child构建Fiber，直到child为null</span></span>
+<span class="line"><span style="color:#E1E4E8">updateHostRoot; </span><span style="color:#6A737D">// !!! 不同的任务有不同的函数去处理</span></span>
+<span class="line"><span style="color:#E1E4E8">pushHostRootContext;</span></span>
+<span class="line"><span style="color:#E1E4E8">cloneUpdateQueue;</span></span>
+<span class="line"><span style="color:#E1E4E8">processUpdateQueue; </span><span style="color:#6A737D">// 处理update queue，计算出最终state</span></span>
+<span class="line"><span style="color:#E1E4E8">reconcileChildren; </span><span style="color:#6A737D">// 处理children</span></span>
+<span class="line"><span style="color:#E1E4E8">mountChildFibers;</span></span>
+<span class="line"><span style="color:#E1E4E8">reconcileChildFibers;</span></span>
+<span class="line"><span style="color:#E1E4E8">placeSingleChild;</span></span>
+<span class="line"><span style="color:#E1E4E8">reconcileSingleElement;</span></span>
+<span class="line"><span style="color:#E1E4E8">completeUnitOfWork; </span><span style="color:#6A737D">// !!! 将sibling设为workInProgress，没有则沿return找父节点的sibling，直到return为null</span></span>
+<span class="line"><span style="color:#E1E4E8">completeWork;</span></span>
+<span class="line"><span style="color:#E1E4E8">resetContextDependencies;</span></span>
+<span class="line"><span style="color:#E1E4E8">popDispatcher; </span><span style="color:#6A737D">// render结束，还原Dispatcher</span></span>
+<span class="line"><span style="color:#E1E4E8">commitRoot;</span></span>
+<span class="line"><span style="color:#E1E4E8">commitRootImpl;</span></span>
+<span class="line"><span style="color:#E1E4E8">commitBeforeMutationEffects; </span><span style="color:#6A737D">// !!! 1阶段，Before Mutation，执行生命周期函数</span></span>
+<span class="line"><span style="color:#E1E4E8">prepareForCommit;</span></span>
+<span class="line"><span style="color:#E1E4E8">commitBeforeMutationEffects_begin;</span></span>
+<span class="line"><span style="color:#E1E4E8">commitBeforeMutationEffects_complete;</span></span>
+<span class="line"><span style="color:#E1E4E8">commitBeforeMutationEffectsOnFiber; </span><span style="color:#6A737D">// 执行getSnapshotBeforeUpdate</span></span>
+<span class="line"><span style="color:#E1E4E8">commitMutationEffects; </span><span style="color:#6A737D">// !!! 2阶段，根据fiber.flags更新DOM</span></span>
+<span class="line"><span style="color:#E1E4E8">commitMutationEffects_begin;</span></span>
+<span class="line"><span style="color:#E1E4E8">commitMutationEffects_complete;</span></span>
+<span class="line"><span style="color:#E1E4E8">commitDetachRef; </span><span style="color:#6A737D">// 解除ref</span></span>
+<span class="line"><span style="color:#E1E4E8">commitAttachRef; </span><span style="color:#6A737D">// 重新设置ref</span></span>
+<span class="line"><span style="color:#E1E4E8">commitPlacement;</span></span>
+<span class="line"><span style="color:#E1E4E8">insertOrAppendPlacementNodeIntoContainer; </span><span style="color:#6A737D">// React DOM Api</span></span>
+<span class="line"><span style="color:#E1E4E8">insertOrAppendPlacementNode; </span><span style="color:#6A737D">// React DOM Api</span></span>
+<span class="line"><span style="color:#E1E4E8">commitWork;</span></span>
+<span class="line"><span style="color:#E1E4E8">commitHookEffectListUnmount;</span></span>
+<span class="line"><span style="color:#E1E4E8">commitContainer;</span></span>
+<span class="line"><span style="color:#E1E4E8">replaceContainerChildren; </span><span style="color:#6A737D">// React DOM Api</span></span>
+<span class="line"><span style="color:#E1E4E8">commitLayoutEffects; </span><span style="color:#6A737D">// !!! 3阶段，执行layout</span></span>
+<span class="line"><span style="color:#E1E4E8">commitLayoutEffects_begin; </span><span style="color:#6A737D">// componentDidMount</span></span>
+<span class="line"><span style="color:#E1E4E8">safelyCallCommitHookLayoutEffectListMount;</span></span>
+<span class="line"><span style="color:#E1E4E8">commitHookEffectListMount; </span><span style="color:#6A737D">// HookLayout</span></span>
+<span class="line"><span style="color:#E1E4E8">ensureRootIsScheduled;</span></span>
+<span class="line"><span style="color:#E1E4E8">entangleTransitions;</span></span>
+<span class="line"><span style="color:#E1E4E8">getPublicRootInstance;</span></span></code></pre>
+<p>Update 阶段（setState，其他类似）</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#79B8FF">Component</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">prototype</span><span style="color:#E1E4E8">.setState;</span></span>
+<span class="line"><span style="color:#E1E4E8">classComponentUpdater.enqueueSetState;</span></span>
+<span class="line"><span style="color:#E1E4E8">createUpdate;</span></span>
+<span class="line"><span style="color:#E1E4E8">enqueueUpdate;</span></span>
+<span class="line"><span style="color:#E1E4E8">scheduleUpdateOnFiber; </span><span style="color:#6A737D">// !!!核心函数</span></span>
+<span class="line"><span style="color:#E1E4E8">ensureRootIsScheduled;</span></span>
+<span class="line"><span style="color:#E1E4E8">performConcurrentWorkOnRoot;</span></span>
+<span class="line"><span style="color:#E1E4E8">renderRootConcurrent;</span></span>
+<span class="line"><span style="color:#E1E4E8">pushDispatcher;</span></span>
+<span class="line"><span style="color:#E1E4E8">workLoopConcurrent; </span><span style="color:#6A737D">// !!!循环处理unitOfWork，正在处理的work称为workInProgress</span></span>
+<span class="line"><span style="color:#E1E4E8">shouldYield; </span><span style="color:#6A737D">// !!!来自scheduler，为true时停止任务处理</span></span>
+<span class="line"><span style="color:#E1E4E8">performUnitOfWork; </span><span style="color:#6A737D">// 和Mount类似，只不过只处理更新阶段对应的任务，以下省略</span></span>
+<span class="line"><span style="color:#E1E4E8">popDispatcher;</span></span>
+<span class="line"><span style="color:#E1E4E8">finishConcurrentRender;</span></span>
+<span class="line"><span style="color:#E1E4E8">commitRoot; </span><span style="color:#6A737D">// 省略</span></span></code></pre>
+<h2 id="mount-基本流程">Mount 基本流程</h2>
+<ol>
+<li>React.createElement()构建出 React DOM；</li>
+<li>ReactDOM.render()是 React App 初始化的起点，以下 API 如无特殊说明，默认属于<code>reconciler</code>库；
+<ol>
+<li>构建两个互相引用的实例：fiberRoot 是整个 App 的根节点，rootFiber 是基于 ReactDOM 构建的 Fiber Tree 的根节点；</li>
+<li>updateContainer 正式开始 reconcile 过程，在此期间触发的更新以 unbatched 形式执行，主要执行两个函数：
+<ol>
+<li>renderRootSync，进入 render 阶段，核心函数调用为：
+<ol>
+<li>pushDispatcher，初始化一个 ReactCurrentDispatcher，内含所有 React Hook 的实现；</li>
+<li>workLoopSync，不同类型的 FiberNode 在 render 阶段对应不同的任务（例如类组件和函数组件，任务显然不同），WorkLoopSync 通过一个循环<strong>同步地</strong>处理这些任务；</li>
+<li>popDispatcher，还原 ReactCurrentDispatcher；</li>
+</ol>
+</li>
+<li>commitRoot，进入 commit 阶段，根据 Diff 结果更新浏览器 DOM，触发对应 Effect Hook 或生命周期方法；</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="类组件-update-基本流程">类组件 Update 基本流程</h2>
+<p>类组件有两种更新组件的方式：</p>
+<ol>
+<li>setState；</li>
+<li>forceUpdate；</li>
+</ol>
+<p>这两个都是定义在 React.Component.prototype 上的方法，流程相似。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#79B8FF">Component</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">prototype</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">setState</span><span style="color:#F97583"> =</span><span style="color:#F97583"> function</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">partialState</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">callback</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">  this</span><span style="color:#E1E4E8">.updater.</span><span style="color:#B392F0">enqueueSetState</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, partialState, callback, </span><span style="color:#9ECBFF">"setState"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">Component</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">prototype</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">forceUpdate</span><span style="color:#F97583"> =</span><span style="color:#F97583"> function</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">callback</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#79B8FF">  this</span><span style="color:#E1E4E8">.updater.</span><span style="color:#B392F0">enqueueForceUpdate</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">, callback, </span><span style="color:#9ECBFF">"forceUpdate"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<p>以 setState 为例的流程：</p>
+<ol>
+<li>创建 update 对象并添加进 updateQueue；</li>
+<li>调用 scheduleUpdateOnFiber，开始处理更新：
+<ol>
+<li>如果是 batchedUpdates，则每次取消上个调度任务，再重新申请一个新的调度任务；</li>
+<li>否则直接申请一个调度任务；</li>
+</ol>
+</li>
+<li>轮到该任务执行时，进入 workLoop</li>
+</ol>
+<p>注：被调度的任务就是<code>performConcurrentWorkOnRoot</code>函数；</p>
+<h3 id="classcomponentupdater">classComponentUpdater</h3>
+<p>实际调用的是<code>this.updater.enqueueSetState</code>，<code>this.updater</code>是在 render 阶段的<code>updateClassComponent</code> -> <code>constructClassInstance</code> -> <code>adoptClassInstance</code>函数中注入的。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> adoptClassInstance</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">workInProgress</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">instance</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> void</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">  // 注意这一行!!!instance就是ClassComponent的实例</span></span>
+<span class="line"><span style="color:#E1E4E8">  instance.updater </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> classComponentUpdater;</span></span>
+<span class="line"><span style="color:#E1E4E8">  workInProgress.stateNode </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> instance;</span></span>
+<span class="line"><span style="color:#6A737D">  // The instance needs access to the fiber so that it can schedule updates</span></span>
+<span class="line"><span style="color:#B392F0">  setInstance</span><span style="color:#E1E4E8">(instance, workInProgress);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>对照关系：</p>
+<ol>
+<li>setState：实际调用 classComponentUpdater.enqueueSetState；</li>
+<li>forceUpdate：实际调用 classComponentUpdater.enqueueForceUpdate；</li>
+</ol>
+<p>其实这两个方法逻辑几乎一样，唯一不同点是 setState 需要携带上 payload，也就是组件中调用 setState 时传入的 partialState，而 forceUpdate 不需要携带 payload，只是把 update.tag 置为 ForceUpdate（一个二进制数）。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> classComponentUpdater</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  isMounted,</span></span>
+<span class="line"><span style="color:#B392F0">  enqueueSetState</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">inst</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">payload</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">callback</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> fiber</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> getInstance</span><span style="color:#E1E4E8">(inst);</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> eventTime</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> requestEventTime</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> lane</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> requestUpdateLane</span><span style="color:#E1E4E8">(fiber);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> update</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> createUpdate</span><span style="color:#E1E4E8">(eventTime, lane);</span></span>
+<span class="line"><span style="color:#E1E4E8">    update.payload </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> payload;</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (callback </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> undefined</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> callback </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      update.callback </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> callback;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    enqueueUpdate</span><span style="color:#E1E4E8">(fiber, update, lane);</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> root</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> scheduleUpdateOnFiber</span><span style="color:#E1E4E8">(fiber, lane, eventTime);</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (root </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">      entangleTransitions</span><span style="color:#E1E4E8">(root, fiber, lane);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#B392F0">  enqueueForceUpdate</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">inst</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">callback</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> fiber</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> getInstance</span><span style="color:#E1E4E8">(inst);</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> eventTime</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> requestEventTime</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> lane</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> requestUpdateLane</span><span style="color:#E1E4E8">(fiber);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> update</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> createUpdate</span><span style="color:#E1E4E8">(eventTime, lane);</span></span>
+<span class="line"><span style="color:#E1E4E8">    update.tag </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ForceUpdate;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (callback </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> undefined</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> callback </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      update.callback </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> callback;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    enqueueUpdate</span><span style="color:#E1E4E8">(fiber, update, lane);</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> root</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> scheduleUpdateOnFiber</span><span style="color:#E1E4E8">(fiber, lane, eventTime);</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (root </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">      entangleTransitions</span><span style="color:#E1E4E8">(root, fiber, lane);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span></code></pre>
+<h3 id="update-queue">Update Queue</h3>
+<p>setState/forceUpdate/react hook 等触发的更新会创建一个 update 对象，并添加到 updateQueue，这是为了实现更新批处理而设计的，批处理生效期间，多次更新按顺序加到 updateQueue 中，期间每个更新会取消上一次更新的任务调度，并申请一次新的任务调度（scheduler 提供任务调度能力），直到批处理结束，进入下一轮事件循环，被调度的任务得到执行机会，真正进入 render 阶段并通过<code>processUpdateQueue</code>一次性处理所有更新。</p>
+<p>React 合成事件默认开启更新批处理，其他场景必须手动调用<code>unstable_batchedUpdates</code>，例如异步的回调（setTimeout、Promise.then 等）是无法批处理的，这里引申一个常见问题——setState 是异步还是同步的？</p>
+<p>[注 1]：batched updates 参考这篇博客——<a href="https://juejin.cn/post/6978304166154207239#heading-2">React 源码解读之 Automatic Batching</a></p>
+<p>[注 2]：update queue 结构、计算过程参考这篇博客——<a href="https://zhuanlan.zhihu.com/p/386897467">React 源码细读-UpdateQueue 机制与 Lane 优先级模型</a></p>
+<h4 id="setstate是异步还是同步的"><code>setState</code>是异步还是同步的？</h4>
+<p>合成事件与生命周期函数中是异步的，异步函数回调与原生事件中是同步的。</p>
+<p>注意，此处同步、异步并非指 setState 在 JS 引擎层面的同步或异步，而是指 this.state 的更新能否立刻体现出来：</p>
+<ol>
+<li>同步：setState 后立刻可以通过 this.state 取到更新后的 state；</li>
+<li>异步：setState 后不能立刻取到更新后的 state；</li>
+</ol>
+<p>从源码层面解释：</p>
+<ol>
+<li>合成事件默认开启更新批处理，setState 执行后并不会在本次事件循环中完成 state 更新，因此批处理结束前不能获取到最新 state；</li>
+<li>生命周期方法中的 setState 执行后，state 的赋值不是立刻执行的，因此也无法得到最新 state；</li>
+</ol>
+<p>异步函数、原生事件的回调中不会应用更新批处理，因此每个 setState 都会触发一次 render、commit，因此可以 setState 后立刻获得最新 state；</p>
+<h3 id="scheduleupdateonfiber">scheduleUpdateOnFiber</h3>
+<p>update 会被赋予一个优先级，根据优先级选择对应的任务调度方式，SyncLane 直接调用<code>performSyncWorkOnRoot</code>处理。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#6A737D">// scheduleUpdateOnFiber</span></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> (lane </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> SyncLane) {</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#6A737D">    // Check if we're inside unbatchedUpdates</span></span>
+<span class="line"><span style="color:#E1E4E8">    (executionContext </span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> LegacyUnbatchedContext) </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> NoContext </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#6A737D">    // Check if we're not already rendering</span></span>
+<span class="line"><span style="color:#E1E4E8">    (executionContext </span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> (RenderContext </span><span style="color:#F97583">|</span><span style="color:#E1E4E8"> CommitContext)) </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> NoContext</span></span>
+<span class="line"><span style="color:#E1E4E8">  ) {</span></span>
+<span class="line"><span style="color:#6A737D">    // This is a legacy edge case. The initial mount of a ReactDOM.render-ed</span></span>
+<span class="line"><span style="color:#6A737D">    // root inside of batchedUpdates should be synchronous, but layout updates</span></span>
+<span class="line"><span style="color:#6A737D">    // should be deferred until the end of the batch.</span></span>
+<span class="line"><span style="color:#B392F0">    performSyncWorkOnRoot</span><span style="color:#E1E4E8">(root);</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    //...</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">} </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">  // Schedule other updates after in case the callback is sync.</span></span>
+<span class="line"><span style="color:#B392F0">  ensureRootIsScheduled</span><span style="color:#E1E4E8">(root, eventTime);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>其他优先级通过<code>ensureRootIsScheduled</code>-><code>scheduleCallback</code>调度一个<code>performConcurrentWorkOnRoot</code>函数。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#6A737D">// ensureRootIsScheduled</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// !!!batchedUpdates情况下，取消上一次调度</span></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> (existingCallbackNode </span><span style="color:#F97583">!=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">  // Cancel the existing callback. We'll schedule a new one below.</span></span>
+<span class="line"><span style="color:#B392F0">  cancelCallback</span><span style="color:#E1E4E8">(existingCallbackNode);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// !!!申请一个新的调度任务</span></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> newCallbackNode;</span></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> (newCallbackPriority </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> SyncLane) {</span></span>
+<span class="line"><span style="color:#6A737D">  // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">} </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> schedulerPriorityLevel;</span></span>
+<span class="line"><span style="color:#F97583">  switch</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">lanesToEventPriority</span><span style="color:#E1E4E8">(nextLanes)) {</span></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#E1E4E8"> DiscreteEventPriority:</span></span>
+<span class="line"><span style="color:#E1E4E8">      schedulerPriorityLevel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ImmediateSchedulerPriority;</span></span>
+<span class="line"><span style="color:#F97583">      break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#E1E4E8"> ContinuousEventPriority:</span></span>
+<span class="line"><span style="color:#E1E4E8">      schedulerPriorityLevel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> UserBlockingSchedulerPriority;</span></span>
+<span class="line"><span style="color:#F97583">      break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#E1E4E8"> DefaultEventPriority:</span></span>
+<span class="line"><span style="color:#E1E4E8">      schedulerPriorityLevel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> NormalSchedulerPriority;</span></span>
+<span class="line"><span style="color:#F97583">      break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#E1E4E8"> IdleEventPriority:</span></span>
+<span class="line"><span style="color:#E1E4E8">      schedulerPriorityLevel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> IdleSchedulerPriority;</span></span>
+<span class="line"><span style="color:#F97583">      break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    default</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      schedulerPriorityLevel </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> NormalSchedulerPriority;</span></span>
+<span class="line"><span style="color:#F97583">      break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#6A737D">  // !!!看这里，调度一个performConcurrentWorkOnRoot</span></span>
+<span class="line"><span style="color:#E1E4E8">  newCallbackNode </span><span style="color:#F97583">=</span><span style="color:#B392F0"> scheduleCallback</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    schedulerPriorityLevel,</span></span>
+<span class="line"><span style="color:#E1E4E8">    performConcurrentWorkOnRoot.</span><span style="color:#B392F0">bind</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">null</span><span style="color:#E1E4E8">, root)</span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><code>performConcurrentWorkOnRoot</code>得到执行机会时，会去执行<code>renderRootConcurrent</code>，若已经超时则直接以同步优先级执行<code>renderRootSync</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#6A737D">// performConcurrentWorkOnRoot</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> exitStatus </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#B392F0">  shouldTimeSlice</span><span style="color:#E1E4E8">(root, lanes) </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">  (disableSchedulerTimeoutInWorkLoop </span><span style="color:#F97583">||</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">didTimeout)</span></span>
+<span class="line"><span style="color:#F97583">    ?</span><span style="color:#B392F0"> renderRootConcurrent</span><span style="color:#E1E4E8">(root, lanes)</span></span>
+<span class="line"><span style="color:#F97583">    :</span><span style="color:#B392F0"> renderRootSync</span><span style="color:#E1E4E8">(root, lanes);</span></span></code></pre>
+<h2 id="work-loop">Work Loop</h2>
+<p>Work Loop 根据 Legacy/Concurrent 模式的不同，分为两套逻辑，但总的来说，不同 Fiber 节点的不同阶段各有不同的任务，二者都是为了循环处理每个 Fiber 节点对应的任务：</p>
+<ol>
+<li><code>workLoopSync</code></li>
+<li><code>workLoopConcurrent</code></li>
+</ol>
+<p>workLoop 都是在 try catch 块中调用的，原因就是为了在 catch 块中通过<code>handleError</code>处理错误，如下：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#6A737D">// renderRootSync</span></span>
+<span class="line"><span style="color:#F97583">do</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    workLoopSync</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (thrownValue) {</span></span>
+<span class="line"><span style="color:#B392F0">    handleError</span><span style="color:#E1E4E8">(root, thrownValue);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">} </span><span style="color:#F97583">while</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// renderRootConcurrent</span></span>
+<span class="line"><span style="color:#F97583">do</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    workLoopConcurrent</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#F97583">    break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (thrownValue) {</span></span>
+<span class="line"><span style="color:#B392F0">    handleError</span><span style="color:#E1E4E8">(root, thrownValue);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">} </span><span style="color:#F97583">while</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">);</span></span></code></pre>
+<p>核心逻辑中的相关变量定义：</p>
+<ul>
+<li><code>workInProgress</code>：当前正在处理的 Fiber；</li>
+<li><code>unitOfWork</code>：每个 Fiber 节点都有对应的一系列任务，译为工作单元；</li>
+</ul>
+<p>Fiber 节点重要属性：</p>
+<ul>
+<li><code>child</code>：指向首个子节点；</li>
+<li><code>sibling</code>：指向右侧首个兄弟节点（此处右指的是 ReactDOM 画图后方向上的右，注意树是没有逻辑上的左右之分的，只有二叉树有）；</li>
+<li><code>return</code>：指向父节点；</li>
+<li><code>flags</code>：用于在 render 阶段添加一些标记如 Update、Delete、Snapshot 等，以便 render 后续逻辑或 commit 阶段通过这些标记执行特定逻辑；</li>
+<li><code>tag</code>：组件类型，如 ClassComponent、FunctionComponent；</li>
+</ul>
+<p>注：flags 是用二进制位表示各种标记，位运算符实现加、删、验；</p>
+<h3 id="异常处理机制">异常处理机制</h3>
+<p>上文可知 handleError 就是 React 组件抛错的处理入口，该函数通过 throwException 来处理组件异常，核心逻辑：</p>
+<ol>
+<li>沿 return 遍历父组件，找到最近的 ErrorBoundary，创建一个 ErrorUpdate，处理该 Update 时，将调用生命周期方法：
+<ol>
+<li>getDerivedStateFromError</li>
+<li>componentDidCatch</li>
+</ol>
+</li>
+<li>如果没有找到 ErrorBoundary，则在 HostRoot 上触发一个 ErrorUpdate，该 Update 将打印一些 Error Log；</li>
+</ol>
+<p>注：实现了<code>getDerivedStateFromError</code>或<code>componentDidCatch</code>的类组件称为 ErrorBoundary.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#6A737D">// throwException</span></span>
+<span class="line"><span style="color:#E1E4E8">value </span><span style="color:#F97583">=</span><span style="color:#B392F0"> createCapturedValue</span><span style="color:#E1E4E8">(value, sourceFiber);</span></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> workInProgress </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> returnFiber;</span></span>
+<span class="line"><span style="color:#F97583">do</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  switch</span><span style="color:#E1E4E8"> (workInProgress.tag) {</span></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#E1E4E8"> HostRoot: {</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> errorInfo</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> value;</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress.flags </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> ShouldCapture;</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> lane</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> pickArbitraryLane</span><span style="color:#E1E4E8">(rootRenderLanes);</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress.lanes </span><span style="color:#F97583">=</span><span style="color:#B392F0"> mergeLanes</span><span style="color:#E1E4E8">(workInProgress.lanes, lane);</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> update</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> createRootErrorUpdate</span><span style="color:#E1E4E8">(workInProgress, errorInfo, lane);</span></span>
+<span class="line"><span style="color:#B392F0">      enqueueCapturedUpdate</span><span style="color:#E1E4E8">(workInProgress, update);</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#E1E4E8"> ClassComponent:</span></span>
+<span class="line"><span style="color:#6A737D">      // Capture and retry</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> errorInfo</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> value;</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> ctor</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.type;</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> instance</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.stateNode;</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">        (workInProgress.flags </span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> DidCapture) </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> NoFlags </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">        (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> ctor.getDerivedStateFromError </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#F97583"> ||</span></span>
+<span class="line"><span style="color:#E1E4E8">          (instance </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span></span>
+<span class="line"><span style="color:#F97583">            typeof</span><span style="color:#E1E4E8"> instance.componentDidCatch </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#F97583"> &#x26;&#x26;</span></span>
+<span class="line"><span style="color:#F97583">            !</span><span style="color:#B392F0">isAlreadyFailedLegacyErrorBoundary</span><span style="color:#E1E4E8">(instance)))</span></span>
+<span class="line"><span style="color:#E1E4E8">      ) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        workInProgress.flags </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> ShouldCapture;</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> lane</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> pickArbitraryLane</span><span style="color:#E1E4E8">(rootRenderLanes);</span></span>
+<span class="line"><span style="color:#E1E4E8">        workInProgress.lanes </span><span style="color:#F97583">=</span><span style="color:#B392F0"> mergeLanes</span><span style="color:#E1E4E8">(workInProgress.lanes, lane);</span></span>
+<span class="line"><span style="color:#6A737D">        // Schedule the error boundary to re-render using updated state</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> update</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> createClassErrorUpdate</span><span style="color:#E1E4E8">(workInProgress, errorInfo, lane);</span></span>
+<span class="line"><span style="color:#B392F0">        enqueueCapturedUpdate</span><span style="color:#E1E4E8">(workInProgress, update);</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#F97583">      break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">    default</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">      break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">  workInProgress </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> workInProgress.return;</span></span>
+<span class="line"><span style="color:#E1E4E8">} </span><span style="color:#F97583">while</span><span style="color:#E1E4E8"> (workInProgress </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">);</span></span></code></pre>
+<p>ErrorUpdate 与普通 Update 的处理类似，ErrorUpdate 可看作定制化的 Update，这里的定制指：</p>
+<ol>
+<li>tag 标记为 CaptureUpdate，意为抛出异常所触发的一次特殊更新；</li>
+<li>payload，将调用 getDerivedStateFromError；</li>
+<li>callback，将调用 componentDidCatch；</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> createClassErrorUpdate</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#FFAB70">  fiber</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  errorInfo</span><span style="color:#F97583">:</span><span style="color:#B392F0"> CapturedValue</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">mixed</span><span style="color:#E1E4E8">>,</span></span>
+<span class="line"><span style="color:#FFAB70">  lane</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Lane</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Update</span><span style="color:#E1E4E8">&#x3C;</span><span style="color:#B392F0">mixed</span><span style="color:#E1E4E8">> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> update</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> createUpdate</span><span style="color:#E1E4E8">(NoTimestamp, lane);</span></span>
+<span class="line"><span style="color:#E1E4E8">  update.tag </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> CaptureUpdate;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> getDerivedStateFromError</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> fiber.type.getDerivedStateFromError;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> getDerivedStateFromError </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> error</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> errorInfo.value;</span></span>
+<span class="line"><span style="color:#E1E4E8">    update.</span><span style="color:#B392F0">payload</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">      logCapturedError</span><span style="color:#E1E4E8">(fiber, errorInfo);</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#B392F0"> getDerivedStateFromError</span><span style="color:#E1E4E8">(error);</span></span>
+<span class="line"><span style="color:#E1E4E8">    };</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> inst</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> fiber.stateNode;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (inst </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#F97583"> typeof</span><span style="color:#E1E4E8"> inst.componentDidCatch </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    update.</span><span style="color:#B392F0">callback</span><span style="color:#F97583"> =</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> callback</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> getDerivedStateFromError </span><span style="color:#F97583">!==</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">        // To preserve the preexisting retry behavior of error boundaries,</span></span>
+<span class="line"><span style="color:#6A737D">        // we keep track of which ones already failed during this batch.</span></span>
+<span class="line"><span style="color:#6A737D">        // This gets reset before we yield back to the browser.</span></span>
+<span class="line"><span style="color:#6A737D">        // TODO: Warn in strict mode if getDerivedStateFromError is</span></span>
+<span class="line"><span style="color:#6A737D">        // not defined.</span></span>
+<span class="line"><span style="color:#B392F0">        markLegacyErrorBoundaryAsFailed</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">this</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">        // Only log here if componentDidCatch is the only error boundary method defined</span></span>
+<span class="line"><span style="color:#B392F0">        logCapturedError</span><span style="color:#E1E4E8">(fiber, errorInfo);</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> error</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> errorInfo.value;</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> stack</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> errorInfo.stack;</span></span>
+<span class="line"><span style="color:#79B8FF">      this</span><span style="color:#E1E4E8">.</span><span style="color:#B392F0">componentDidCatch</span><span style="color:#E1E4E8">(error, {</span></span>
+<span class="line"><span style="color:#E1E4E8">        componentStack: stack </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> ?</span><span style="color:#E1E4E8"> stack </span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> ""</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      });</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#6A737D">        // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    };</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> update;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h3 id="workloopsync">workLoopSync</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> workLoopSync</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">  // Already timed out, so perform work without checking if we need to yield.</span></span>
+<span class="line"><span style="color:#F97583">  while</span><span style="color:#E1E4E8"> (workInProgress </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">    performUnitOfWork</span><span style="color:#E1E4E8">(workInProgress);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>workLoopSync 很简单，就是循环处理 workInProgress，处理完一个，再将下一个 Fiber 节点赋值给 workInProgress，处理顺序可看作树的 DFS，或者将 FiberTree 看作孩子-兄弟表示法得到的二叉树（左孩子，右兄弟），则顺序就是二叉树的先序遍历：</p>
+<p>伪代码表示：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#6A737D">// 1 如果child存在，则切换到child；</span></span>
+<span class="line"><span style="color:#6A737D">// 2 否则：</span></span>
+<span class="line"><span style="color:#6A737D">//   2.1 如果sibling存在，切换到sibling，跳到1；</span></span>
+<span class="line"><span style="color:#6A737D">//   2.2 否则，通过return切换到父节点，跳到2.1；</span></span></code></pre>
+<h4 id="performunitofwork">performUnitOfWork</h4>
+<p>performUnitOfWork 就是 unitOfWork 的处理函数，它的作用就是处理当前任务，并得到下个待处理的 Fiber 节点；</p>
+<p>注意 FiberTree 是有两颗的，互相以 alternate 指向各自对应节点，这两颗树一个是 workInProgress，代表当前正在处理的页面；一个是 current，代表当前正在显示的页面；</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> performUnitOfWork</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">unitOfWork</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> void</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">  // The current, flushed, state of this fiber is the alternate. Ideally</span></span>
+<span class="line"><span style="color:#6A737D">  // nothing should rely on this, but relying on it here means that we don't</span></span>
+<span class="line"><span style="color:#6A737D">  // need an additional field on the work in progress.</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> current</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> unitOfWork.alternate;</span></span>
+<span class="line"><span style="color:#B392F0">  setCurrentDebugFiberInDEV</span><span style="color:#E1E4E8">(unitOfWork);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> next;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (enableProfilerTimer </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> (unitOfWork.mode </span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> ProfileMode) </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> NoMode) {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    next </span><span style="color:#F97583">=</span><span style="color:#B392F0"> beginWork</span><span style="color:#E1E4E8">(current, unitOfWork, subtreeRenderLanes);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  //resetCurrentDebugFiberInDEV();</span></span>
+<span class="line"><span style="color:#E1E4E8">  unitOfWork.memoizedProps </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> unitOfWork.pendingProps;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (next </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">    // If this doesn't spawn new work, complete the current work.</span></span>
+<span class="line"><span style="color:#B392F0">    completeUnitOfWork</span><span style="color:#E1E4E8">(unitOfWork);</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    workInProgress </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> next;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  ReactCurrentOwner.current </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="beginwork">beginWork</h4>
+<p>beginWork 代表任务开始处理，根据 Mount、Update 阶段的不同，以及组件类型的不同，各有其对应的处理函数，这里主要介绍 ClassComponent.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> beginWork</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#FFAB70">  current</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#F97583"> |</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  workInProgress</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  renderLanes</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Lanes</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#F97583"> |</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">  // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">  workInProgress.lanes </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> NoLanes;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  switch</span><span style="color:#E1E4E8"> (workInProgress.tag) {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#E1E4E8"> FunctionComponent: {</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> Component</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.type;</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> unresolvedProps</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.pendingProps;</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> resolvedProps</span><span style="color:#F97583"> =</span></span>
+<span class="line"><span style="color:#E1E4E8">        workInProgress.elementType </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> Component</span></span>
+<span class="line"><span style="color:#F97583">          ?</span><span style="color:#E1E4E8"> unresolvedProps</span></span>
+<span class="line"><span style="color:#F97583">          :</span><span style="color:#B392F0"> resolveDefaultProps</span><span style="color:#E1E4E8">(Component, unresolvedProps);</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#B392F0"> updateFunctionComponent</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        current,</span></span>
+<span class="line"><span style="color:#E1E4E8">        workInProgress,</span></span>
+<span class="line"><span style="color:#E1E4E8">        Component,</span></span>
+<span class="line"><span style="color:#E1E4E8">        resolvedProps,</span></span>
+<span class="line"><span style="color:#E1E4E8">        renderLanes</span></span>
+<span class="line"><span style="color:#E1E4E8">      );</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#E1E4E8"> ClassComponent: {</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> Component</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.type;</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> unresolvedProps</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.pendingProps;</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> resolvedProps</span><span style="color:#F97583"> =</span></span>
+<span class="line"><span style="color:#E1E4E8">        workInProgress.elementType </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> Component</span></span>
+<span class="line"><span style="color:#F97583">          ?</span><span style="color:#E1E4E8"> unresolvedProps</span></span>
+<span class="line"><span style="color:#F97583">          :</span><span style="color:#B392F0"> resolveDefaultProps</span><span style="color:#E1E4E8">(Component, unresolvedProps);</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#B392F0"> updateClassComponent</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        current,</span></span>
+<span class="line"><span style="color:#E1E4E8">        workInProgress,</span></span>
+<span class="line"><span style="color:#E1E4E8">        Component,</span></span>
+<span class="line"><span style="color:#E1E4E8">        resolvedProps,</span></span>
+<span class="line"><span style="color:#E1E4E8">        renderLanes</span></span>
+<span class="line"><span style="color:#E1E4E8">      );</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    case</span><span style="color:#E1E4E8"> HostRoot:</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#B392F0"> updateHostRoot</span><span style="color:#E1E4E8">(current, workInProgress, renderLanes);</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="updateclasscomponent">updateClassComponent</h4>
+<p>updateClassComponent 相对比较简单，核心逻辑就是：</p>
+<ol>
+<li>constructClassInstance，组件 Mount 时调用</li>
+<li>mountClassInstance，组件 Mount 时调用</li>
+<li>updateClassInstance，组件 Update 时调用</li>
+<li>finishClassComponent，beginWork 结束时调用，获取下一个 unitOfWork；</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> updateClassComponent</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#FFAB70">  current</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#F97583"> |</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  workInProgress</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  Component</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  nextProps</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  renderLanes</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Lanes</span></span>
+<span class="line"><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> hasContext;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">isLegacyContextProvider</span><span style="color:#E1E4E8">(Component)) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    hasContext </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#B392F0">    pushLegacyContextProvider</span><span style="color:#E1E4E8">(workInProgress);</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    hasContext </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#B392F0">  prepareToReadContext</span><span style="color:#E1E4E8">(workInProgress, renderLanes);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> instance</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.stateNode;</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> shouldUpdate;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (instance </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (current </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      current.alternate </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress.alternate </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">      // Since this is conceptually a new fiber, schedule a Placement effect</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress.flags </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> Placement;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    // In the initial pass we might need to construct the instance.</span></span>
+<span class="line"><span style="color:#B392F0">    constructClassInstance</span><span style="color:#E1E4E8">(workInProgress, Component, nextProps);</span></span>
+<span class="line"><span style="color:#B392F0">    mountClassInstance</span><span style="color:#E1E4E8">(workInProgress, Component, nextProps, renderLanes);</span></span>
+<span class="line"><span style="color:#E1E4E8">    shouldUpdate </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (current </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">    // In a resume, we'll already have an instance we can reuse.</span></span>
+<span class="line"><span style="color:#E1E4E8">    shouldUpdate </span><span style="color:#F97583">=</span><span style="color:#B392F0"> resumeMountClassInstance</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress,</span></span>
+<span class="line"><span style="color:#E1E4E8">      Component,</span></span>
+<span class="line"><span style="color:#E1E4E8">      nextProps,</span></span>
+<span class="line"><span style="color:#E1E4E8">      renderLanes</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">    shouldUpdate </span><span style="color:#F97583">=</span><span style="color:#B392F0"> updateClassInstance</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      current,</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress,</span></span>
+<span class="line"><span style="color:#E1E4E8">      Component,</span></span>
+<span class="line"><span style="color:#E1E4E8">      nextProps,</span></span>
+<span class="line"><span style="color:#E1E4E8">      renderLanes</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> nextUnitOfWork</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> finishClassComponent</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">    current,</span></span>
+<span class="line"><span style="color:#E1E4E8">    workInProgress,</span></span>
+<span class="line"><span style="color:#E1E4E8">    Component,</span></span>
+<span class="line"><span style="color:#E1E4E8">    shouldUpdate,</span></span>
+<span class="line"><span style="color:#E1E4E8">    hasContext,</span></span>
+<span class="line"><span style="color:#E1E4E8">    renderLanes</span></span>
+<span class="line"><span style="color:#E1E4E8">  );</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> nextUnitOfWork;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="constructclassinstance">constructClassInstance</h4>
+<p>核心逻辑：</p>
+<ol>
+<li>实例化类组件</li>
+<li>通过 adoptClassInstance 注入 ReactUpdater</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> constructClassInstance</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#FFAB70">  workInProgress</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  ctor</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  props</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> isLegacyContextConsumer </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> unmaskedContext </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> emptyContextObject;</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> context </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> emptyContextObject;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> contextType</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ctor.contextType;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> contextType </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "object"</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> contextType </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    context </span><span style="color:#F97583">=</span><span style="color:#B392F0"> readContext</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">contextType</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">));</span></span>
+<span class="line"><span style="color:#E1E4E8">  } else if (!</span><span style="color:#FFAB70">disableLegacyContext</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    unmaskedContext </span><span style="color:#F97583">=</span><span style="color:#B392F0"> getUnmaskedContext</span><span style="color:#E1E4E8">(workInProgress, ctor, </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    const contextTypes </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> ctor.contextTypes;</span></span>
+<span class="line"><span style="color:#E1E4E8">    isLegacyContextConsumer </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">      contextTypes !== null &#x26;&#x26; contextTypes !== undefined;</span></span>
+<span class="line"><span style="color:#E1E4E8">    context </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> isLegacyContextConsumer</span></span>
+<span class="line"><span style="color:#E1E4E8">      ? </span><span style="color:#B392F0">getMaskedContext</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">workInProgress</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">unmaskedContext</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">      : emptyContextObject;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // Instantiate twice to help detect side-effects.</span></span>
+<span class="line"><span style="color:#B392F0">  if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  const instance </span><span style="color:#F97583">=</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> ctor</span><span style="color:#E1E4E8">(props, context);</span></span>
+<span class="line"><span style="color:#E1E4E8">  const state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (workInProgress.memoizedState </span><span style="color:#F97583">=</span></span>
+<span class="line"><span style="color:#E1E4E8">    instance.state </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> instance.state </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> undefined</span></span>
+<span class="line"><span style="color:#F97583">      ?</span><span style="color:#E1E4E8"> instance.state</span></span>
+<span class="line"><span style="color:#F97583">      :</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#B392F0">  adoptClassInstance</span><span style="color:#E1E4E8">(workInProgress, instance);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // Cache unmasked context so we can avoid recreating masked context unless necessary.</span></span>
+<span class="line"><span style="color:#6A737D">  // ReactFiberContext usually updates this cache but can't for newly-created instances.</span></span>
+<span class="line"><span style="color:#B392F0">  if</span><span style="color:#E1E4E8"> (isLegacyContextConsumer) {</span></span>
+<span class="line"><span style="color:#B392F0">    cacheContext</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">workInProgress</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">unmaskedContext</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">context</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  return instance;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>就是在 Mount 时通过该函数注入<code>classComponentUpdater</code>，具体机制已经介绍过。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> adoptClassInstance</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">workInProgress</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">instance</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> void</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  instance.updater </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> classComponentUpdater;</span></span>
+<span class="line"><span style="color:#E1E4E8">  workInProgress.stateNode </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> instance;</span></span>
+<span class="line"><span style="color:#6A737D">  // The instance needs access to the fiber so that it can schedule updates</span></span>
+<span class="line"><span style="color:#B392F0">  setInstance</span><span style="color:#E1E4E8">(instance, workInProgress);</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    instance._reactInternalInstance </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> fakeInternalInstance;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="mountclassinstance">mountClassInstance</h4>
+<p>主要逻辑就是触发生命周期函数：</p>
+<ol>
+<li>getDerivedStateFromProps()</li>
+<li>UNSAFE_componentWillMount()</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> mountClassInstance</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#FFAB70">  workInProgress</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  ctor</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">, </span><span style="color:#6A737D">// constructor缩写</span></span>
+<span class="line"><span style="color:#FFAB70">  newProps</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  renderLanes</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Lanes</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> void</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">  // ...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> instance</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.stateNode;</span></span>
+<span class="line"><span style="color:#E1E4E8">  instance.props </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> newProps;</span></span>
+<span class="line"><span style="color:#E1E4E8">  instance.state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> workInProgress.memoizedState;</span></span>
+<span class="line"><span style="color:#E1E4E8">  instance.refs </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> emptyRefsObject;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  initializeUpdateQueue</span><span style="color:#E1E4E8">(workInProgress);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> contextType</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ctor.contextType;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> contextType </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "object"</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> contextType </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    instance.context </span><span style="color:#F97583">=</span><span style="color:#B392F0"> readContext</span><span style="color:#E1E4E8">(contextType);</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (disableLegacyContext) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    instance.context </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> emptyContextObject;</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> unmaskedContext</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> getUnmaskedContext</span><span style="color:#E1E4E8">(workInProgress, ctor, </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    instance.context </span><span style="color:#F97583">=</span><span style="color:#B392F0"> getMaskedContext</span><span style="color:#E1E4E8">(workInProgress, unmaskedContext);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">  instance.state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> workInProgress.memoizedState;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // 调用定义在组件构造函数上的static getDerivedStateFromProps()</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> getDerivedStateFromProps</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ctor.getDerivedStateFromProps;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> getDerivedStateFromProps </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">    applyDerivedStateFromProps</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress,</span></span>
+<span class="line"><span style="color:#E1E4E8">      ctor,</span></span>
+<span class="line"><span style="color:#E1E4E8">      getDerivedStateFromProps,</span></span>
+<span class="line"><span style="color:#E1E4E8">      newProps</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">    instance.state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> workInProgress.memoizedState;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // In order to support react-lifecycles-compat polyfilled components,</span></span>
+<span class="line"><span style="color:#6A737D">  // Unsafe lifecycles should not be invoked for components using the new APIs.</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#F97583">    typeof</span><span style="color:#E1E4E8"> ctor.getDerivedStateFromProps </span><span style="color:#F97583">!==</span><span style="color:#9ECBFF"> "function"</span><span style="color:#F97583"> &#x26;&#x26;</span></span>
+<span class="line"><span style="color:#F97583">    typeof</span><span style="color:#E1E4E8"> instance.getSnapshotBeforeUpdate </span><span style="color:#F97583">!==</span><span style="color:#9ECBFF"> "function"</span><span style="color:#F97583"> &#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">    (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> instance.UNSAFE_componentWillMount </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#F97583"> ||</span></span>
+<span class="line"><span style="color:#F97583">      typeof</span><span style="color:#E1E4E8"> instance.componentWillMount </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  ) {</span></span>
+<span class="line"><span style="color:#B392F0">    callComponentWillMount</span><span style="color:#E1E4E8">(workInProgress, instance);</span></span>
+<span class="line"><span style="color:#6A737D">    // If we had additional state updates during this life-cycle, let's</span></span>
+<span class="line"><span style="color:#6A737D">    // process them now.</span></span>
+<span class="line"><span style="color:#B392F0">    processUpdateQueue</span><span style="color:#E1E4E8">(workInProgress, newProps, instance, renderLanes);</span></span>
+<span class="line"><span style="color:#E1E4E8">    instance.state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> workInProgress.memoizedState;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> instance.componentDidMount </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    let</span><span style="color:#E1E4E8"> fiberFlags</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Flags</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> Update;</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (enableSuspenseLayoutEffectSemantics) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      fiberFlags </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> LayoutStatic;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    workInProgress.flags </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> fiberFlags;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="updateclassinstance">updateClassInstance</h4>
+<p>该函数较为复杂，只有更新类组件时调用，主要作用：</p>
+<ol>
+<li>直接调用部分生命周期方法；</li>
+<li>检测部分生命周期方法，并在 fiber 上添加特定 flags，以便在 commit 阶段调用对应生命周期方法；</li>
+<li>processUpdateQueue 计算 updates 并得到 state；</li>
+<li>根据 props、state 的全等比较，以及 shouldComponentUpdate 的调用结果，返回一个 shouldUpdate 布尔值，指示是否抛弃本次更新；</li>
+</ol>
+<p>该函数将触发以下生命周期方法：</p>
+<ol>
+<li>UNSAFE_componentWillReceiveProps</li>
+<li>getDerivedStateFromProps</li>
+<li>shouldComponentUpdate</li>
+<li>UNSAFE_componentWillUpdate</li>
+</ol>
+<p>该函数将添加 flags，然后再在 commit 阶段触发生命周期方法：</p>
+<ol>
+<li>componentDidUpdate，Flag：<code>Update</code>；</li>
+<li>getSnapshotBeforeUpdate，Flag：<code>Snapshot</code>；</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> updateClassInstance</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#FFAB70">  current</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  workInProgress</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  ctor</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  newProps</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  renderLanes</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Lanes</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> boolean</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> instance</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.stateNode;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  cloneUpdateQueue</span><span style="color:#E1E4E8">(current, workInProgress);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> unresolvedOldProps</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.memoizedProps;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> oldProps</span><span style="color:#F97583"> =</span></span>
+<span class="line"><span style="color:#E1E4E8">    workInProgress.type </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> workInProgress.elementType</span></span>
+<span class="line"><span style="color:#F97583">      ?</span><span style="color:#E1E4E8"> unresolvedOldProps</span></span>
+<span class="line"><span style="color:#F97583">      :</span><span style="color:#B392F0"> resolveDefaultProps</span><span style="color:#E1E4E8">(workInProgress.type, unresolvedOldProps);</span></span>
+<span class="line"><span style="color:#E1E4E8">  instance.props </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> oldProps;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> unresolvedNewProps</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.pendingProps;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> oldContext</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> instance.context;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> contextType</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ctor.contextType;</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> nextContext </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> emptyContextObject;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> contextType </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "object"</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> contextType </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    nextContext </span><span style="color:#F97583">=</span><span style="color:#B392F0"> readContext</span><span style="color:#E1E4E8">(contextType);</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#F97583"> if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">disableLegacyContext) {</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> nextUnmaskedContext</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> getUnmaskedContext</span><span style="color:#E1E4E8">(workInProgress, ctor, </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    nextContext </span><span style="color:#F97583">=</span><span style="color:#B392F0"> getMaskedContext</span><span style="color:#E1E4E8">(workInProgress, nextUnmaskedContext);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> getDerivedStateFromProps</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> ctor.getDerivedStateFromProps;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> hasNewLifecycles</span><span style="color:#F97583"> =</span></span>
+<span class="line"><span style="color:#F97583">    typeof</span><span style="color:#E1E4E8"> getDerivedStateFromProps </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#F97583"> ||</span></span>
+<span class="line"><span style="color:#F97583">    typeof</span><span style="color:#E1E4E8"> instance.getSnapshotBeforeUpdate </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // Note: During these life-cycles, instance.props/instance.state are what</span></span>
+<span class="line"><span style="color:#6A737D">  // ever the previously attempted to render - not the "current". However,</span></span>
+<span class="line"><span style="color:#6A737D">  // during componentDidUpdate we pass the "current" props.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // In order to support react-lifecycles-compat polyfilled components,</span></span>
+<span class="line"><span style="color:#6A737D">  // Unsafe lifecycles should not be invoked for components using the new APIs.</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#F97583">    !</span><span style="color:#E1E4E8">hasNewLifecycles </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">    (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> instance.UNSAFE_componentWillReceiveProps </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#F97583"> ||</span></span>
+<span class="line"><span style="color:#F97583">      typeof</span><span style="color:#E1E4E8"> instance.componentWillReceiveProps </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">  ) {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">      unresolvedOldProps </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> unresolvedNewProps </span><span style="color:#F97583">||</span></span>
+<span class="line"><span style="color:#E1E4E8">      oldContext </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> nextContext</span></span>
+<span class="line"><span style="color:#E1E4E8">    ) {</span></span>
+<span class="line"><span style="color:#B392F0">      callComponentWillReceiveProps</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        workInProgress,</span></span>
+<span class="line"><span style="color:#E1E4E8">        instance,</span></span>
+<span class="line"><span style="color:#E1E4E8">        newProps,</span></span>
+<span class="line"><span style="color:#E1E4E8">        nextContext</span></span>
+<span class="line"><span style="color:#E1E4E8">      );</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">  resetHasForceUpdateBeforeProcessing</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> oldState</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.memoizedState;</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> newState </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> (instance.state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> oldState);</span></span>
+<span class="line"><span style="color:#B392F0">  processUpdateQueue</span><span style="color:#E1E4E8">(workInProgress, newProps, instance, renderLanes);</span></span>
+<span class="line"><span style="color:#E1E4E8">  newState </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> workInProgress.memoizedState;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    unresolvedOldProps </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> unresolvedNewProps </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">    oldState </span><span style="color:#F97583">===</span><span style="color:#E1E4E8"> newState </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#F97583">    !</span><span style="color:#B392F0">hasContextChanged</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#F97583">    !</span><span style="color:#B392F0">checkHasForceUpdateAfterProcessing</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#F97583">    !</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      enableLazyContextPropagation </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">      current </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">      current.dependencies </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span></span>
+<span class="line"><span style="color:#B392F0">      checkIfContextChanged</span><span style="color:#E1E4E8">(current.dependencies)</span></span>
+<span class="line"><span style="color:#E1E4E8">    )</span></span>
+<span class="line"><span style="color:#E1E4E8">  ) {</span></span>
+<span class="line"><span style="color:#6A737D">    // If an update was already in progress, we should schedule an Update</span></span>
+<span class="line"><span style="color:#6A737D">    // effect even though we're bailing out, so that cWU/cDU are called.</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> instance.componentDidUpdate </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">        unresolvedOldProps </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> current.memoizedProps </span><span style="color:#F97583">||</span></span>
+<span class="line"><span style="color:#E1E4E8">        oldState </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> current.memoizedState</span></span>
+<span class="line"><span style="color:#E1E4E8">      ) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        workInProgress.flags </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> Update;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> instance.getSnapshotBeforeUpdate </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">        unresolvedOldProps </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> current.memoizedProps </span><span style="color:#F97583">||</span></span>
+<span class="line"><span style="color:#E1E4E8">        oldState </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> current.memoizedState</span></span>
+<span class="line"><span style="color:#E1E4E8">      ) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        workInProgress.flags </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> Snapshot;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> getDerivedStateFromProps </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#B392F0">    applyDerivedStateFromProps</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress,</span></span>
+<span class="line"><span style="color:#E1E4E8">      ctor,</span></span>
+<span class="line"><span style="color:#E1E4E8">      getDerivedStateFromProps,</span></span>
+<span class="line"><span style="color:#E1E4E8">      newProps</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">    newState </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> workInProgress.memoizedState;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> shouldUpdate</span><span style="color:#F97583"> =</span></span>
+<span class="line"><span style="color:#B392F0">    checkHasForceUpdateAfterProcessing</span><span style="color:#E1E4E8">() </span><span style="color:#F97583">||</span></span>
+<span class="line"><span style="color:#B392F0">    checkShouldComponentUpdate</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress,</span></span>
+<span class="line"><span style="color:#E1E4E8">      ctor,</span></span>
+<span class="line"><span style="color:#E1E4E8">      oldProps,</span></span>
+<span class="line"><span style="color:#E1E4E8">      newProps,</span></span>
+<span class="line"><span style="color:#E1E4E8">      oldState,</span></span>
+<span class="line"><span style="color:#E1E4E8">      newState,</span></span>
+<span class="line"><span style="color:#E1E4E8">      nextContext</span></span>
+<span class="line"><span style="color:#E1E4E8">    ) </span><span style="color:#F97583">||</span></span>
+<span class="line"><span style="color:#6A737D">    // TODO: In some cases, we'll end up checking if context has changed twice,</span></span>
+<span class="line"><span style="color:#6A737D">    // both before and after `shouldComponentUpdate` has been called. Not ideal,</span></span>
+<span class="line"><span style="color:#6A737D">    // but I'm loath to refactor this function. This only happens for memoized</span></span>
+<span class="line"><span style="color:#6A737D">    // components so it's not that common.</span></span>
+<span class="line"><span style="color:#E1E4E8">    (enableLazyContextPropagation </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">      current </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">      current.dependencies </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span></span>
+<span class="line"><span style="color:#B392F0">      checkIfContextChanged</span><span style="color:#E1E4E8">(current.dependencies));</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (shouldUpdate) {</span></span>
+<span class="line"><span style="color:#6A737D">    // In order to support react-lifecycles-compat polyfilled components,</span></span>
+<span class="line"><span style="color:#6A737D">    // Unsafe lifecycles should not be invoked for components using the new APIs.</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#F97583">      !</span><span style="color:#E1E4E8">hasNewLifecycles </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">      (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> instance.UNSAFE_componentWillUpdate </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#F97583"> ||</span></span>
+<span class="line"><span style="color:#F97583">        typeof</span><span style="color:#E1E4E8"> instance.componentWillUpdate </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    ) {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> instance.componentWillUpdate </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        instance.</span><span style="color:#B392F0">componentWillUpdate</span><span style="color:#E1E4E8">(newProps, newState, nextContext);</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> instance.UNSAFE_componentWillUpdate </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        instance.</span><span style="color:#B392F0">UNSAFE_componentWillUpdate</span><span style="color:#E1E4E8">(newProps, newState, nextContext);</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> instance.componentDidUpdate </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress.flags </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> Update;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> instance.getSnapshotBeforeUpdate </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress.flags </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> Snapshot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // If an update was already in progress, we should schedule an Update</span></span>
+<span class="line"><span style="color:#6A737D">    // effect even though we're bailing out, so that cWU/cDU are called.</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> instance.componentDidUpdate </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">        unresolvedOldProps </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> current.memoizedProps </span><span style="color:#F97583">||</span></span>
+<span class="line"><span style="color:#E1E4E8">        oldState </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> current.memoizedState</span></span>
+<span class="line"><span style="color:#E1E4E8">      ) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        workInProgress.flags </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> Update;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> instance.getSnapshotBeforeUpdate </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">        unresolvedOldProps </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> current.memoizedProps </span><span style="color:#F97583">||</span></span>
+<span class="line"><span style="color:#E1E4E8">        oldState </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> current.memoizedState</span></span>
+<span class="line"><span style="color:#E1E4E8">      ) {</span></span>
+<span class="line"><span style="color:#E1E4E8">        workInProgress.flags </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> Snapshot;</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // If shouldComponentUpdate returned false, we should still update the</span></span>
+<span class="line"><span style="color:#6A737D">    // memoized props/state to indicate that this work can be reused.</span></span>
+<span class="line"><span style="color:#E1E4E8">    workInProgress.memoizedProps </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> newProps;</span></span>
+<span class="line"><span style="color:#E1E4E8">    workInProgress.memoizedState </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> newState;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // Update the existing instance's state, props, and context pointers even</span></span>
+<span class="line"><span style="color:#6A737D">  // if shouldComponentUpdate returns false.</span></span>
+<span class="line"><span style="color:#E1E4E8">  instance.props </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> newProps;</span></span>
+<span class="line"><span style="color:#E1E4E8">  instance.state </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> newState;</span></span>
+<span class="line"><span style="color:#E1E4E8">  instance.context </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> nextContext;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> shouldUpdate;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>checkShouldComponentUpdate 中将触发 shouldComponentUpdate 生命周期方法；</p>
+<p>注意，对于 PureComponent，shouldComponentUpdate 可以不提供实现，此时默认启用 props、state 的浅比较来判断是否抛弃本次更新；</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> checkShouldComponentUpdate</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#FFAB70">  workInProgress</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  ctor</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  oldProps</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  newProps</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  oldState</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  newState</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  nextContext</span></span>
+<span class="line"><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> instance</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.stateNode;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> instance.shouldComponentUpdate </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "function"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#6A737D">      // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#F97583">    const</span><span style="color:#79B8FF"> shouldUpdate</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> instance.</span><span style="color:#B392F0">shouldComponentUpdate</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      newProps,</span></span>
+<span class="line"><span style="color:#E1E4E8">      newState,</span></span>
+<span class="line"><span style="color:#E1E4E8">      nextContext</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#6A737D">      //...</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> shouldUpdate;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">ctor</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">prototype</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#79B8FF"> ctor</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">prototype</span><span style="color:#E1E4E8">.isPureReactComponent) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#F97583">      !</span><span style="color:#B392F0">shallowEqual</span><span style="color:#E1E4E8">(oldProps, newProps) </span><span style="color:#F97583">||</span><span style="color:#F97583"> !</span><span style="color:#B392F0">shallowEqual</span><span style="color:#E1E4E8">(oldState, newState)</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#79B8FF"> true</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="finishclasscomponent">finishClassComponent</h4>
+<p>该函数在 Mount 或 Update 之后调用，主要作用：</p>
+<ol>
+<li>添加 Ref flag，以便在 commit 阶段更新组件 ref；</li>
+<li>当抛出错误时卸载所有子组件；</li>
+<li>无错误时，调用生命周期方法 render 获取 ReactDOM（ReactElements），进而执行 reconcile 逻辑；</li>
+<li>返回 child fiber，作为下一个 unitOfWork；</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> finishClassComponent</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#FFAB70">  current</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#F97583"> |</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  workInProgress</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  Component</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  shouldUpdate</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> boolean</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  hasContext</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> boolean</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  renderLanes</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Lanes</span></span>
+<span class="line"><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">  // Refs should update even if shouldComponentUpdate returns false</span></span>
+<span class="line"><span style="color:#B392F0">  markRef</span><span style="color:#E1E4E8">(current, workInProgress);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> didCaptureError</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (workInProgress.flags </span><span style="color:#F97583">&#x26;</span><span style="color:#E1E4E8"> DidCapture) </span><span style="color:#F97583">!==</span><span style="color:#E1E4E8"> NoFlags;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">shouldUpdate </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">didCaptureError) {</span></span>
+<span class="line"><span style="color:#6A737D">    // Context providers should defer to sCU for rendering</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (hasContext) {</span></span>
+<span class="line"><span style="color:#B392F0">      invalidateContextProvider</span><span style="color:#E1E4E8">(workInProgress, Component, </span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#B392F0"> bailoutOnAlreadyFinishedWork</span><span style="color:#E1E4E8">(current, workInProgress, renderLanes);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> instance</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> workInProgress.stateNode;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // Rerender</span></span>
+<span class="line"><span style="color:#E1E4E8">  ReactCurrentOwner.current </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> workInProgress;</span></span>
+<span class="line"><span style="color:#F97583">  let</span><span style="color:#E1E4E8"> nextChildren;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span></span>
+<span class="line"><span style="color:#E1E4E8">    didCaptureError </span><span style="color:#F97583">&#x26;&#x26;</span></span>
+<span class="line"><span style="color:#F97583">    typeof</span><span style="color:#E1E4E8"> Component.getDerivedStateFromError </span><span style="color:#F97583">!==</span><span style="color:#9ECBFF"> "function"</span></span>
+<span class="line"><span style="color:#E1E4E8">  ) {</span></span>
+<span class="line"><span style="color:#6A737D">    // If we captured an error, but getDerivedStateFromError is not defined,</span></span>
+<span class="line"><span style="color:#6A737D">    // unmount all the children. componentDidCatch will schedule an update to</span></span>
+<span class="line"><span style="color:#6A737D">    // re-render a fallback. This is temporary until we migrate everyone to</span></span>
+<span class="line"><span style="color:#6A737D">    // the new API.</span></span>
+<span class="line"><span style="color:#6A737D">    // TODO: Warn in a future release.</span></span>
+<span class="line"><span style="color:#E1E4E8">    nextChildren </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (enableProfilerTimer) {</span></span>
+<span class="line"><span style="color:#6A737D">      // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#6A737D">      // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">    } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">      nextChildren </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> instance.</span><span style="color:#B392F0">render</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // React DevTools reads this flag.</span></span>
+<span class="line"><span style="color:#E1E4E8">  workInProgress.flags </span><span style="color:#F97583">|=</span><span style="color:#E1E4E8"> PerformedWork;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (current </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> didCaptureError) {</span></span>
+<span class="line"><span style="color:#6A737D">    // If we're recovering from an error, reconcile without reusing any of</span></span>
+<span class="line"><span style="color:#6A737D">    // the existing children. Conceptually, the normal children and the children</span></span>
+<span class="line"><span style="color:#6A737D">    // that are shown on error are two different sets, so we shouldn't reuse</span></span>
+<span class="line"><span style="color:#6A737D">    // normal children even if their identities match.</span></span>
+<span class="line"><span style="color:#B392F0">    forceUnmountCurrentAndReconcile</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      current,</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress,</span></span>
+<span class="line"><span style="color:#E1E4E8">      nextChildren,</span></span>
+<span class="line"><span style="color:#E1E4E8">      renderLanes</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#B392F0">    reconcileChildren</span><span style="color:#E1E4E8">(current, workInProgress, nextChildren, renderLanes);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // Memoize state using the values we just used to render.</span></span>
+<span class="line"><span style="color:#6A737D">  // TODO: Restructure so we never read values from the instance.</span></span>
+<span class="line"><span style="color:#E1E4E8">  workInProgress.memoizedState </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> instance.state;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // The context might have changed so we need to recalculate it.</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (hasContext) {</span></span>
+<span class="line"><span style="color:#B392F0">    invalidateContextProvider</span><span style="color:#E1E4E8">(workInProgress, Component, </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> workInProgress.child;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h4 id="reconcilechildren">reconcileChildren</h4>
+<p>仍然是通过简单的 current 是否为 null 判断当前是 Mount 还是 Update，mountChildFibers 用于创建 ReactDOM 中子元素的 Fiber 节点，reconcileChildren 用于执行 Diff，根据 Diff 结果在 Fiber 节点上添加 flags，commit 阶段将根据 flags 决定如何更新浏览器 DOM.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> reconcileChildren</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#FFAB70">  current</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#F97583"> |</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  workInProgress</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  nextChildren</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  renderLanes</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Lanes</span></span>
+<span class="line"><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (current </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#6A737D">    // If this is a fresh new component that hasn't been rendered yet, we</span></span>
+<span class="line"><span style="color:#6A737D">    // won't update its child set by applying minimal side-effects. Instead,</span></span>
+<span class="line"><span style="color:#6A737D">    // we will add them all to the child before it gets rendered. That means</span></span>
+<span class="line"><span style="color:#6A737D">    // we can optimize this reconciliation pass by not tracking side-effects.</span></span>
+<span class="line"><span style="color:#E1E4E8">    workInProgress.child </span><span style="color:#F97583">=</span><span style="color:#B392F0"> mountChildFibers</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress,</span></span>
+<span class="line"><span style="color:#79B8FF">      null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      nextChildren,</span></span>
+<span class="line"><span style="color:#E1E4E8">      renderLanes</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">else</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">    // If the current child is the same as the work in progress, it means that</span></span>
+<span class="line"><span style="color:#6A737D">    // we haven't yet started any work on these children. Therefore, we use</span></span>
+<span class="line"><span style="color:#6A737D">    // the clone algorithm to create a copy of all the current children.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // If we had any progressed work already, that is invalid at this point so</span></span>
+<span class="line"><span style="color:#6A737D">    // let's throw it out.</span></span>
+<span class="line"><span style="color:#E1E4E8">    workInProgress.child </span><span style="color:#F97583">=</span><span style="color:#B392F0"> reconcileChildFibers</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">      workInProgress,</span></span>
+<span class="line"><span style="color:#E1E4E8">      current.child,</span></span>
+<span class="line"><span style="color:#E1E4E8">      nextChildren,</span></span>
+<span class="line"><span style="color:#E1E4E8">      renderLanes</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>mountChildFibers 和 reconcileChildFibers 将根据 children 的不同类型（例如 Fragment、Array、纯文本、HTMLElement 等）调用不同的处理逻辑；</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> reconcileChildFibers</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#FFAB70">  returnFiber</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  currentFirstChild</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#F97583"> |</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  newChild</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">  lanes</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Lanes</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#B392F0"> Fiber</span><span style="color:#F97583"> |</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#6A737D">  // This function is not recursive.</span></span>
+<span class="line"><span style="color:#6A737D">  // If the top level item is an array, we treat it as a set of children,</span></span>
+<span class="line"><span style="color:#6A737D">  // not as a fragment. Nested arrays on the other hand will be treated as</span></span>
+<span class="line"><span style="color:#6A737D">  // fragment nodes. Recursion happens at the normal flow.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // Handle top level unkeyed fragments as if they were arrays.</span></span>
+<span class="line"><span style="color:#6A737D">  // This leads to an ambiguity between &#x3C;>{[...]}&#x3C;/> and &#x3C;>...&#x3C;/>.</span></span>
+<span class="line"><span style="color:#6A737D">  // We treat the ambiguous cases above the same.</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> isUnkeyedTopLevelFragment</span><span style="color:#F97583"> =</span></span>
+<span class="line"><span style="color:#F97583">    typeof</span><span style="color:#E1E4E8"> newChild </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "object"</span><span style="color:#F97583"> &#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">    newChild </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">    newChild.type </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> REACT_FRAGMENT_TYPE</span><span style="color:#F97583"> &#x26;&#x26;</span></span>
+<span class="line"><span style="color:#E1E4E8">    newChild.key </span><span style="color:#F97583">===</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (isUnkeyedTopLevelFragment) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    newChild </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> newChild.props.children;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // Handle object types</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> newChild </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "object"</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#E1E4E8"> newChild </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    switch</span><span style="color:#E1E4E8"> (newChild.$$typeof) {</span></span>
+<span class="line"><span style="color:#F97583">      case</span><span style="color:#79B8FF"> REACT_ELEMENT_TYPE</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> placeSingleChild</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#B392F0">          reconcileSingleElement</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            returnFiber,</span></span>
+<span class="line"><span style="color:#E1E4E8">            currentFirstChild,</span></span>
+<span class="line"><span style="color:#E1E4E8">            newChild,</span></span>
+<span class="line"><span style="color:#E1E4E8">            lanes</span></span>
+<span class="line"><span style="color:#E1E4E8">          )</span></span>
+<span class="line"><span style="color:#E1E4E8">        );</span></span>
+<span class="line"><span style="color:#F97583">      case</span><span style="color:#79B8FF"> REACT_PORTAL_TYPE</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#B392F0"> placeSingleChild</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#B392F0">          reconcileSinglePortal</span><span style="color:#E1E4E8">(returnFiber, currentFirstChild, newChild, lanes)</span></span>
+<span class="line"><span style="color:#E1E4E8">        );</span></span>
+<span class="line"><span style="color:#F97583">      case</span><span style="color:#79B8FF"> REACT_LAZY_TYPE</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (enableLazyElements) {</span></span>
+<span class="line"><span style="color:#F97583">          const</span><span style="color:#79B8FF"> payload</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> newChild._payload;</span></span>
+<span class="line"><span style="color:#F97583">          const</span><span style="color:#79B8FF"> init</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> newChild._init;</span></span>
+<span class="line"><span style="color:#6A737D">          // TODO: This function is supposed to be non-recursive.</span></span>
+<span class="line"><span style="color:#F97583">          return</span><span style="color:#B392F0"> reconcileChildFibers</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            returnFiber,</span></span>
+<span class="line"><span style="color:#E1E4E8">            currentFirstChild,</span></span>
+<span class="line"><span style="color:#B392F0">            init</span><span style="color:#E1E4E8">(payload),</span></span>
+<span class="line"><span style="color:#E1E4E8">            lanes</span></span>
+<span class="line"><span style="color:#E1E4E8">          );</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">isArray</span><span style="color:#E1E4E8">(newChild)) {</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#B392F0"> reconcileChildrenArray</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        returnFiber,</span></span>
+<span class="line"><span style="color:#E1E4E8">        currentFirstChild,</span></span>
+<span class="line"><span style="color:#E1E4E8">        newChild,</span></span>
+<span class="line"><span style="color:#E1E4E8">        lanes</span></span>
+<span class="line"><span style="color:#E1E4E8">      );</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#B392F0">getIteratorFn</span><span style="color:#E1E4E8">(newChild)) {</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#B392F0"> reconcileChildrenIterator</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        returnFiber,</span></span>
+<span class="line"><span style="color:#E1E4E8">        currentFirstChild,</span></span>
+<span class="line"><span style="color:#E1E4E8">        newChild,</span></span>
+<span class="line"><span style="color:#E1E4E8">        lanes</span></span>
+<span class="line"><span style="color:#E1E4E8">      );</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    throwOnInvalidObjectType</span><span style="color:#E1E4E8">(returnFiber, newChild);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> newChild </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "string"</span><span style="color:#F97583"> ||</span><span style="color:#F97583"> typeof</span><span style="color:#E1E4E8"> newChild </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "number"</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#B392F0"> placeSingleChild</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#B392F0">      reconcileSingleTextNode</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        returnFiber,</span></span>
+<span class="line"><span style="color:#E1E4E8">        currentFirstChild,</span></span>
+<span class="line"><span style="color:#9ECBFF">        ""</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> newChild,</span></span>
+<span class="line"><span style="color:#E1E4E8">        lanes</span></span>
+<span class="line"><span style="color:#E1E4E8">      )</span></span>
+<span class="line"><span style="color:#E1E4E8">    );</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#6A737D">    // ...</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">typeof</span><span style="color:#E1E4E8"> newChild </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> "undefined"</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#F97583"> !</span><span style="color:#E1E4E8">isUnkeyedTopLevelFragment) {</span></span>
+<span class="line"><span style="color:#6A737D">    // If the new child is undefined, and the return fiber is a composite</span></span>
+<span class="line"><span style="color:#6A737D">    // component, throw an error. If Fiber return types are disabled,</span></span>
+<span class="line"><span style="color:#6A737D">    // we already threw above.</span></span>
+<span class="line"><span style="color:#F97583">    switch</span><span style="color:#E1E4E8"> (returnFiber.tag) {</span></span>
+<span class="line"><span style="color:#F97583">      case</span><span style="color:#E1E4E8"> ClassComponent: {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (__DEV__) {</span></span>
+<span class="line"><span style="color:#F97583">          const</span><span style="color:#79B8FF"> instance</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> returnFiber.stateNode;</span></span>
+<span class="line"><span style="color:#F97583">          if</span><span style="color:#E1E4E8"> (instance.render._isMockFunction) {</span></span>
+<span class="line"><span style="color:#6A737D">            // We allow auto-mocks to proceed as if they're returning null.</span></span>
+<span class="line"><span style="color:#F97583">            break</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">          }</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#6A737D">      // Intentionally fall through to the next case, which handles both</span></span>
+<span class="line"><span style="color:#6A737D">      // functions and classes</span></span>
+<span class="line"><span style="color:#6A737D">      // eslint-disable-next-lined no-fallthrough</span></span>
+<span class="line"><span style="color:#F97583">      case</span><span style="color:#E1E4E8"> FunctionComponent:</span></span>
+<span class="line"><span style="color:#F97583">      case</span><span style="color:#E1E4E8"> ForwardRef:</span></span>
+<span class="line"><span style="color:#F97583">      case</span><span style="color:#E1E4E8"> SimpleMemoComponent: {</span></span>
+<span class="line"><span style="color:#B392F0">        invariant</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#79B8FF">          false</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">          "%s(...): Nothing was returned from render. This usually means a "</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#9ECBFF">            "return statement is missing. Or, to render nothing, "</span><span style="color:#F97583"> +</span></span>
+<span class="line"><span style="color:#9ECBFF">            "return null."</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">          getComponentNameFromFiber</span><span style="color:#E1E4E8">(returnFiber) </span><span style="color:#F97583">||</span><span style="color:#9ECBFF"> "Component"</span></span>
+<span class="line"><span style="color:#E1E4E8">        );</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // Remaining cases are all treated as empty.</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#B392F0"> deleteRemainingChildren</span><span style="color:#E1E4E8">(returnFiber, currentFirstChild);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>[注]：Diff 过程可参考这篇博客：<a href="https://juejin.cn/post/7199329705706127419#heading-2">老生常谈 React 的 diff 算法原理-面试版</a></p>
+<h3 id="workloopconcurrent">workLoopConcurrent</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> workLoopConcurrent</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#6A737D">  // Perform work until Scheduler asks us to yield</span></span>
+<span class="line"><span style="color:#F97583">  while</span><span style="color:#E1E4E8"> (workInProgress </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> null</span><span style="color:#F97583"> &#x26;&#x26;</span><span style="color:#F97583"> !</span><span style="color:#B392F0">shouldYield</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#B392F0">    performUnitOfWork</span><span style="color:#E1E4E8">(workInProgress);</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>显然 Concurrent 模式下，与 Legacy 模式唯一的不同点就在于 shouldYield 函数的调用，shouldYield 是 scheduler 导出的函数，简单来说，当时间分片已经耗尽时，就会通过 shouldYield 返回一个 true，使 Work Loop 停止处理，等待下一时间分片。</p>
+<p><code>performUnitOfWork</code>逻辑同上。</p>
+<h2 id="functioncomponent的-mount-与-update"><code>FunctionComponent</code>的 Mount 与 Update</h2>
+<p>鸽。。。下次补上</p>
+<h2 id="scheduler">scheduler</h2>
+<p>鸽。。。下次补上</p>
+<h2 id="备注">备注</h2>
+<ul>
+<li>类组件 state 的更新发生在 mountClassInstance，被赋值为 workInProgress.memoizedState；</li>
+</ul>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 Your name here. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/mastodon" data-astro-cid-sz7xmlte><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/twitter" data-astro-cid-sz7xmlte><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/github" data-astro-cid-sz7xmlte><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path></svg> </a> </div> </footer> </body></html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-bvzihdzo> <head><!-- Global Metadata --><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/favicon.ico"><link rel="sitemap" href="/sitemap-index.xml"><link rel="alternate" type="application/rss+xml" title="Neil's Blog" href="https://neil-ji.github.io/rss.xml"><meta name="generator" content="Astro v6.1.8"><!-- Atkinson Hyperlegible via Google Fonts CDN --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"><!-- Canonical URL --><link rel="canonical" href="https://neil-ji.github.io/blog/others/github-heatmap/"><!-- Primary Meta Tags --><title>基于cheerio实现的github contributions crawler</title><meta name="title" content="基于cheerio实现的github contributions crawler"><meta name="description" content><!-- Open Graph / Facebook --><meta property="og:type" content="website"><meta property="og:url" content="https://neil-ji.github.io/blog/others/github-heatmap/"><meta property="og:title" content="基于cheerio实现的github contributions crawler"><meta property="og:description" content><meta property="og:image" content="https://neil-ji.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><!-- Twitter --><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://neil-ji.github.io/blog/others/github-heatmap/"><meta property="twitter:title" content="基于cheerio实现的github contributions crawler"><meta property="twitter:description" content><meta property="twitter:image" content="https://neil-ji.github.io/_astro/blog-placeholder-1.Bx0Zcyzv.jpg"><style>:root{--accent: #2337ff;--accent-dark: #000d8a;--black: 15, 18, 25;--gray: 96, 115, 159;--gray-light: 229, 233, 240;--gray-dark: 34, 41, 57;--gray-gradient: rgba(var(--gray-light), 50%), #fff;--box-shadow: 0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%)}body{font-family:var(--font-atkinson);margin:0;padding:0;text-align:left;background:linear-gradient(var(--gray-gradient)) no-repeat;background-size:100% 600px;word-wrap:break-word;overflow-wrap:break-word;color:rgb(var(--gray-dark));font-size:20px;line-height:1.7}main{width:720px;max-width:calc(100% - 2em);margin:auto;padding:3em 1em}h1,h2,h3,h4,h5,h6{margin:0 0 .5rem;color:rgb(var(--black));line-height:1.2}h1{font-size:3.052em}h2{font-size:2.441em}h3{font-size:1.953em}h4{font-size:1.563em}h5{font-size:1.25em}strong,b{font-weight:700}a,a:hover{color:var(--accent)}p{margin-bottom:1em}.prose p{margin-bottom:2em}textarea{width:100%;font-size:16px}input{font-size:16px}table{width:100%}img{max-width:100%;height:auto;border-radius:8px}code{padding:2px 5px;background-color:rgb(var(--gray-light));border-radius:2px}pre{padding:1.5em;border-radius:8px}pre>code{all:unset}blockquote{border-left:4px solid var(--accent);padding:0 0 0 20px;margin:0;font-size:1.333em}hr{border:none;border-top:1px solid rgb(var(--gray-light))}@media(max-width:720px){body{font-size:18px}main{padding:1em}}.sr-only{border:0;padding:0;margin:0;position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);clip-path:inset(50%);white-space:nowrap}footer[data-astro-cid-sz7xmlte]{padding:2em 1em 6em;background:linear-gradient(var(--gray-gradient)) no-repeat;color:rgb(var(--gray));text-align:center}.social-links[data-astro-cid-sz7xmlte]{display:flex;justify-content:center;gap:1em;margin-top:1em}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]{text-decoration:none;color:rgb(var(--gray))}.social-links[data-astro-cid-sz7xmlte] a[data-astro-cid-sz7xmlte]:hover{color:rgb(var(--gray-dark))}a[data-astro-cid-eimmu3lg]{display:inline-block;text-decoration:none}a[data-astro-cid-eimmu3lg].active{font-weight:bolder;text-decoration:underline}header[data-astro-cid-3ef6ksr2]{margin:0;padding:0 1em;background:#fff;box-shadow:0 2px 8px rgba(var(--black),5%)}h2[data-astro-cid-3ef6ksr2]{margin:0;font-size:1em}h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2],h2[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none}nav[data-astro-cid-3ef6ksr2]{display:flex;align-items:center;justify-content:space-between}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{padding:1em .5em;color:var(--black);border-bottom:4px solid transparent;text-decoration:none}nav[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2].active{text-decoration:none;border-bottom-color:var(--accent)}.social-links[data-astro-cid-3ef6ksr2],.social-links[data-astro-cid-3ef6ksr2] a[data-astro-cid-3ef6ksr2]{display:flex}@media(max-width:720px){.social-links[data-astro-cid-3ef6ksr2]{display:none}}
+main[data-astro-cid-bvzihdzo]{width:calc(100% - 2em);max-width:100%;margin:0}.hero-image[data-astro-cid-bvzihdzo]{width:100%}.hero-image[data-astro-cid-bvzihdzo] img[data-astro-cid-bvzihdzo]{display:block;margin:0 auto;border-radius:12px;box-shadow:var(--box-shadow)}.prose[data-astro-cid-bvzihdzo]{width:720px;max-width:calc(100% - 2em);margin:auto;padding:1em;color:rgb(var(--gray-dark))}.title[data-astro-cid-bvzihdzo]{margin-bottom:1em;padding:1em 0;text-align:center;line-height:1}.title[data-astro-cid-bvzihdzo] h1[data-astro-cid-bvzihdzo]{margin:0 0 .5em}.date[data-astro-cid-bvzihdzo]{margin-bottom:.5em;color:rgb(var(--gray))}.last-updated-on[data-astro-cid-bvzihdzo]{font-style:italic}
+</style></head> <body data-astro-cid-bvzihdzo> <header data-astro-cid-3ef6ksr2> <nav data-astro-cid-3ef6ksr2> <h2 data-astro-cid-3ef6ksr2><a href="/" data-astro-cid-3ef6ksr2>Neil&#39;s Blog</a></h2> <div class="internal-links" data-astro-cid-3ef6ksr2> <a href="/" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Home </a> <a href="/blog" class="active" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> Blog </a> <a href="/about" data-astro-cid-3ef6ksr2="true" data-astro-cid-eimmu3lg> About </a> </div> <div class="social-links" data-astro-cid-3ef6ksr2> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-3ef6ksr2></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-3ef6ksr2> <span class="sr-only" data-astro-cid-3ef6ksr2>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" data-astro-cid-3ef6ksr2><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-3ef6ksr2></path></svg> </a> </div> </nav> </header> <main data-astro-cid-bvzihdzo> <article data-astro-cid-bvzihdzo> <div class="hero-image" data-astro-cid-bvzihdzo>  </div> <div class="prose" data-astro-cid-bvzihdzo> <div class="title" data-astro-cid-bvzihdzo> <div class="date" data-astro-cid-bvzihdzo> <time datetime="2023-07-19T12:00:00.000Z"> Jul 19, 2023 </time>  </div> <h1 data-astro-cid-bvzihdzo>基于cheerio实现的github contributions crawler</h1> <hr data-astro-cid-bvzihdzo> </div>  <p><a href="https://badge.fury.io/js/github-contribution"><img src="https://img.shields.io/npm/v/github-contribution" alt="npm"></a> <img src="https://img.shields.io/github/languages/top/neil-ji/github-contribution" alt="GitHub top language"> <a href="https://github.com/neil-ji/github-contribution"><img src="https://img.shields.io/github/stars/neil-ji/github-contribution?label=Github%20stars" alt="GitHub Repo stars">
+</a></p>
+<ul>
+<li><a href="https://www.npmjs.com/package/github-contribution">github-contribution NPM</a></li>
+<li><a href="https://github.com/neil-ji/github-contribution">github-contribution Github</a></li>
+</ul>
+<h2 id="前言">前言</h2>
+<p>起因是想在博客上加一个类似 github contribution heatmap 的小组件，用来展示博客更新频率，但社区没有这种高度定制（集成 github api）的组件，大体符合需求的开源项目，只有<a href="https://github.com/2016rshah/githubchart-api">githubchart-api</a>，但它只能生成 heatmap 的图片 url，然后只能以 img 元素的形式插入到博客 DOM 中，缺乏交互能力，而且也不够灵活。</p>
+<p>githubchart-api 获取 contributions 依赖于<a href="https://github.com/akerl/githubstats">githubstats</a>——一个 ruby 实现的爬取 github contribution 数据的库，核心就是访问<code>https://github.com/users/{user_name}/contributions</code></p>
+<p>总之多方调研发现并没有可以直接满足需求的类库，所以尝试自己写一个开源类库，核心功能就是爬取 github contributions，至于 heatmap 已经有很多成熟实现了，可以直接拿来用。</p>
+<h2 id="思路">思路</h2>
+<p>构思了以下几套方案：</p>
+<ol>
+<li>cheerio.js：访问上述的 URL，拿到 html，通过 cheerio 解析并获取相关的数据；</li>
+<li>nodejs + ruby：通过 node.js child_process 模块执行 ruby 指令，直接复用 gem module <code>githubstats</code>；</li>
+<li>octokit.js：通过 github 开源的 octokit.js 直接调用 Github RESTful Api；</li>
+</ol>
+<p>获取数据后可以：</p>
+<ol>
+<li>组件运行时调用，直接获取动态数据；</li>
+<li>在后台生成静态 json 文件，组件获取静态数据；</li>
+</ol>
+<h2 id="可行性分析">可行性分析</h2>
+<p>对于稳定性来说，方案 1、2，都存在一个问题，那就是以爬虫的形式去获取数据，一旦源文档改变结构，爬虫程序就要跟着改，不够稳定，而方案 3 直接从 github server 获取数据显然是最稳定的。</p>
+<p>对于开发成本来说，方案 1 需要实现一整套代码，方案 2 存在 ruby 的学习成本，方案 3 成本最少。</p>
+<p>对于入参来说，方案 1、2 都只需要 username，方案 3 却需要 github personal token，显然是不够方便的。</p>
+<p>调研过程中发现的其他相关细节：</p>
+<ol>
+<li>github.com 设置了严格的 CSP，只要是现代浏览器，从一个跨源的站点对 github.com 的资源发起请求，这个请求就会被浏览器拦截，这就意味着爬虫方案只能实现在 Nodejs 或服务器等非现代浏览器环境中。</li>
+<li>国内使用，还需要实现一个 proxy，否则不能保证每次都能连接到 github.com</li>
+<li>Github Api 没有提供获取 contributions 的接口，contributions 派生自 commits、opened issues、created repository 等，同理 octokit 就得实现一套同样的 contributions 计算逻辑。</li>
+<li>Github Api 有速率限制，则 octokit 在浏览器端的实时获取数据就有问题了，而且实时获取的话，token 也存在安全问题。</li>
+</ol>
+<p>综合来看，octokit 是最优的，但由于必须传入 token，那就不能写进组件里在运行时获取数据了，这是因为别人打开 devtools 直接就能从 authentication 首部拿到我的 token，虽然可以设置该 token 的权限为 readonly，但由于 Github Api 速率限制，拿到我的 token 就意味着可以调用 Github Api，进而直接耗光调用次数。</p>
+<p>至此可以确定，这三套方案都<strong>只能实现在 Node.js 或服务器上</strong>，<strong>获取数据后只能先持久化为静态数据</strong>。</p>
+<p>考虑到使用上，octokit 需要 token，其他方案不需要，显然对于用户来说更容易接受其他方案，既然要开源，就要优先考虑用户习惯，所以直接排除方案 3.</p>
+<p>ruby 方案看似简单，实则实现过程有很多坑，首先就是<code>githubstats</code>库没有提供设置 proxy 的接口，本地调试不易，其次 ruby 与我学过的语言语法差别很大，学习成本并不像其宣称的那么低，排除方案 2.</p>
+<p>最终敲定方案 1：访问上述的 URL，拿到 html，通过 cheerio 解析并获取相关的数据，持久化为静态数据；</p>
+<h2 id="当前场景特化">当前场景特化</h2>
+<p>数据的更新比较简单，contributions 时效性要求不高，可以起一个任务每天跑一次就行，至于数据怎么传递到组件是有必要考虑的：</p>
+<ol>
+<li>高成本：数据持久化到数据库中，起一个服务器，定时 job 更新数据，实现一个获取数据的 api；</li>
+<li>低成本：数据持久化为 json 文件，利用 Github Action 定时执行脚本以更新数据，json 可以推送到任意地方；</li>
+</ol>
+<p>由于不想买服务器，我只好考虑低成本方案 QAQ，当前场景下，我已经实现博客 push 后 github action 自动 build 并推送到 github page，只需要在 build 时把获取数据集成进来就行，然后生成的 json 文件同样推送到 github page，组件本身也在 github page，这样也不存在跨域问题。</p>
+<h2 id="实施">实施</h2>
+<p>开发环境脚手架基本配置：</p>
+<ol>
+<li>webpack</li>
+<li>ts</li>
+</ol>
+<p>需要使用的开源类库：</p>
+<ol>
+<li>cheerio（解析 html）</li>
+<li>arg（解析命令行参数，主要是为了构建一个简单的 cli 程序，便于集成到 hexo 里）</li>
+<li>node-fetch（替换 nodejs 原生 fetch，搭配 http-proxy-agent 实现请求代理，便于本地调试）</li>
+</ol>
+<h2 id="crawler-核心逻辑">Crawler 核心逻辑</h2>
+<p>contributions 的 html 结构如下，暂称之为数据项（省略祖先节点 table tbody tr）：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">td</span></span>
+<span class="line"><span style="color:#B392F0">  tabindex</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"0"</span></span>
+<span class="line"><span style="color:#B392F0">  data-ix</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"0"</span></span>
+<span class="line"><span style="color:#B392F0">  aria-selected</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"false"</span></span>
+<span class="line"><span style="color:#B392F0">  style</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"width: 11px"</span></span>
+<span class="line"><span style="color:#B392F0">  class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"ContributionCalendar-day"</span></span>
+<span class="line"><span style="color:#B392F0">  data-date</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"2022-07-24"</span></span>
+<span class="line"><span style="color:#B392F0">  data-level</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"0"</span></span>
+<span class="line"><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">span</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"sr-only"</span><span style="color:#E1E4E8">>19 contributions on Sunday, July 24, 2022&#x3C;/</span><span style="color:#85E89D">span</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">td</span><span style="color:#E1E4E8">></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">&#x3C;!-- or --></span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">td</span></span>
+<span class="line"><span style="color:#B392F0">  tabindex</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"0"</span></span>
+<span class="line"><span style="color:#B392F0">  data-ix</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"0"</span></span>
+<span class="line"><span style="color:#B392F0">  aria-selected</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"false"</span></span>
+<span class="line"><span style="color:#B392F0">  style</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"width: 11px"</span></span>
+<span class="line"><span style="color:#B392F0">  class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"ContributionCalendar-day"</span></span>
+<span class="line"><span style="color:#B392F0">  data-date</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"2022-07-24"</span></span>
+<span class="line"><span style="color:#B392F0">  data-level</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"0"</span></span>
+<span class="line"><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">span</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"sr-only"</span><span style="color:#E1E4E8">>No contributions on Sunday, July 24, 2022&#x3C;/</span><span style="color:#85E89D">span</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">td</span><span style="color:#E1E4E8">></span></span></code></pre>
+<p>还存在干扰项：</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="html"><code><span class="line"><span style="color:#E1E4E8">&#x3C;</span><span style="color:#85E89D">td</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"ContributionCalendar-label"</span><span style="color:#B392F0"> style</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"position: relative"</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">span</span><span style="color:#B392F0"> class</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"sr-only"</span><span style="color:#E1E4E8">>Sunday&#x3C;/</span><span style="color:#85E89D">span</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;</span><span style="color:#85E89D">span</span></span>
+<span class="line"><span style="color:#B392F0">    aria-hidden</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"true"</span></span>
+<span class="line"><span style="color:#B392F0">    style</span><span style="color:#E1E4E8">=</span><span style="color:#9ECBFF">"clip-path: Circle(0); position: absolute; bottom: -4px"</span></span>
+<span class="line"><span style="color:#E1E4E8">  ></span></span>
+<span class="line"><span style="color:#E1E4E8">    Sun</span></span>
+<span class="line"><span style="color:#E1E4E8">  &#x3C;/</span><span style="color:#85E89D">span</span><span style="color:#E1E4E8">></span></span>
+<span class="line"><span style="color:#E1E4E8">&#x3C;/</span><span style="color:#85E89D">td</span><span style="color:#E1E4E8">></span></span></code></pre>
+<p>cheerio 的 <code>load</code> 方法加载并解析 html，然后选择器定为<code>table tbody tr td</code>，其实 cheerio 选择器就是通过 css selector 实现，这里直接看作 css 选择器就可以了。</p>
+<p>由于这里会选中干扰项——标明周几的单元格，所以需要根据二者差异过滤掉干扰项，这里选用数据属性<code>data-ix</code>，通过 cheerio element 的<code>data</code>方法获取数据属性，注意省略<code>data-</code>前缀，这点与 Element 原生属性<code>dataset</code>行为一致。</p>
+<p>接下来就是从 span 元素中提取第一个数字作为 contributions 值，提取第一个数字只需要一个简单的正则表达式<code>/^\d*/</code>，再从 td 的<code>data-date</code>提取日期。</p>
+<p>最后注意由于文档流中表格 cell 的顺序并非按时间顺序排列，还需要做一次排序。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> extractContributions</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">html</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#B392F0"> ContributionItem</span><span style="color:#E1E4E8">[] {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> pattern</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> /</span><span style="color:#F97583">^</span><span style="color:#79B8FF">\d</span><span style="color:#F97583">*</span><span style="color:#9ECBFF">/</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> $</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> load</span><span style="color:#E1E4E8">(html);</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> contributions</span><span style="color:#F97583">:</span><span style="color:#B392F0"> ContributionItem</span><span style="color:#E1E4E8">[] </span><span style="color:#F97583">=</span><span style="color:#B392F0"> $</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"table tbody tr td"</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    .</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">_</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">el</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#B392F0"> $</span><span style="color:#E1E4E8">(el).</span><span style="color:#B392F0">data</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"ix"</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">!==</span><span style="color:#79B8FF"> undefined</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    .</span><span style="color:#B392F0">map</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">_</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">el</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> date</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> $</span><span style="color:#E1E4E8">(el).</span><span style="color:#B392F0">data</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"date"</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">as</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> matchedValue</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> $</span><span style="color:#E1E4E8">(el, </span><span style="color:#9ECBFF">"span"</span><span style="color:#E1E4E8">).</span><span style="color:#B392F0">text</span><span style="color:#E1E4E8">().</span><span style="color:#B392F0">match</span><span style="color:#E1E4E8">(pattern);</span></span>
+<span class="line"><span style="color:#F97583">      const</span><span style="color:#79B8FF"> value</span><span style="color:#F97583"> =</span></span>
+<span class="line"><span style="color:#E1E4E8">        matchedValue </span><span style="color:#F97583">&#x26;&#x26;</span><span style="color:#E1E4E8"> matchedValue[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">!==</span><span style="color:#9ECBFF"> ""</span><span style="color:#F97583"> ?</span><span style="color:#E1E4E8"> matchedValue[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">:</span><span style="color:#9ECBFF"> "0"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">      return</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">        date: </span><span style="color:#F97583">new</span><span style="color:#B392F0"> Date</span><span style="color:#E1E4E8">(date),</span></span>
+<span class="line"><span style="color:#E1E4E8">        value,</span></span>
+<span class="line"><span style="color:#E1E4E8">      };</span></span>
+<span class="line"><span style="color:#E1E4E8">    })</span></span>
+<span class="line"><span style="color:#E1E4E8">    .</span><span style="color:#B392F0">toArray</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">  // default sort as asc</span></span>
+<span class="line"><span style="color:#B392F0">  sortByDate</span><span style="color:#E1E4E8">(contributions, (</span><span style="color:#FFAB70">item</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> item.date);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> contributions;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<h2 id="fetch-替换及注入-proxy">fetch 替换及注入 Proxy</h2>
+<p>由于以下两点</p>
+<ol>
+<li>发布 npm module 时，不要把无关依赖打到一个包里</li>
+<li>不是所有人都需要请求代理才能正常获取 github.com 数据</li>
+</ol>
+<p>fetch 不能直接使用 node-fetch，这里我的实现不算优雅，加一个 Monkey patch，调用<code>fetchHtml</code>之前通过<code>injectFetch</code>用<code>node-fetch</code>替换原生<code>fetch</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> fetchFunc</span><span style="color:#F97583">:</span><span style="color:#B392F0"> FetchFunc</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> fetch;</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> injectFetch</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">_fetch</span><span style="color:#F97583">:</span><span style="color:#B392F0"> FetchFunc</span><span style="color:#E1E4E8">)</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> void</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  fetchFunc </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> _fetch </span><span style="color:#F97583">||</span><span style="color:#E1E4E8"> fetch;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#B392F0"> __fetch</span><span style="color:#F97583">:</span><span style="color:#B392F0"> FetchFunc</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> (</span><span style="color:#FFAB70">input</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">init</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#B392F0"> fetchFunc</span><span style="color:#E1E4E8">(input, init);</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">async</span><span style="color:#F97583"> function</span><span style="color:#B392F0"> fetchHtml</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">url</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> string</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> res</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#B392F0"> __fetch</span><span style="color:#E1E4E8">(url);</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> res.</span><span style="color:#B392F0">text</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p><code>node-fetch</code>中设置 proxy，这里是一种代理模式的实现。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { HttpsProxyAgent } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "https-proxy-agent"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> fetch </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> "node-fetch"</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">function</span><span style="color:#B392F0"> applyProxyAgent</span><span style="color:#E1E4E8">() {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> agent</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> HttpsProxyAgent</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"http://127.0.0.1:7890"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">  function</span><span style="color:#B392F0"> myFetch</span><span style="color:#E1E4E8">(</span><span style="color:#FFAB70">input</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">init</span><span style="color:#F97583">:</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#B392F0"> fetch</span><span style="color:#E1E4E8">(input, {</span></span>
+<span class="line"><span style="color:#F97583">      ...</span><span style="color:#E1E4E8">init,</span></span>
+<span class="line"><span style="color:#E1E4E8">      agent,</span></span>
+<span class="line"><span style="color:#E1E4E8">    });</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#B392F0">  injectFetch</span><span style="color:#E1E4E8">(myFetch </span><span style="color:#F97583">as</span><span style="color:#79B8FF"> any</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>如此一来，可以把<code>node-fetch, https-proxy-agent</code>排除到 dependencies 之外，只在本地调试时执行（即 devDependencies），打包时也可以完全排除掉（按 webpack 的概念讲，连 externals 都不算）。</p>
+<h2 id="cli-实现">CLI 实现</h2>
+<p>目标是写一个简单的 CLI 应用，调用 crawler 并把数据持久化为 json 文件。</p>
+<p>首行注释<code>#!/usr/bin/env node</code>声明执行环境为 nodejs.</p>
+<p>然后，参数指令解析比较麻烦，没必要造轮子，小脚本也没必要使用<code>commander</code>，通过轻量级的<code>arg</code>实现即可。定义了三个指令<code>--username --years --path</code>，分别是 github 用户名、时间范围及 json 文件路径。</p>
+<p>为了简化<code>--years</code>指令的参数格式，约定以逗号<code>,</code>分割每一年，这样可以把<code>-y 2021 -y 2022 -y 2023</code>简化为<code>-y 2021,2022,2023</code>.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#6A737D">#!/usr/bin/env node</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#E1E4E8"> { </span><span style="color:#79B8FF">run</span><span style="color:#E1E4E8"> } </span><span style="color:#F97583">=</span><span style="color:#B392F0"> require</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"../dist/scripts.js"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> arg</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> require</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"arg"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">// parse the arguments passed by user</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> args</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> arg</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">  {</span></span>
+<span class="line"><span style="color:#6A737D">    // Types</span></span>
+<span class="line"><span style="color:#9ECBFF">    "--username"</span><span style="color:#E1E4E8">: String,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "--years"</span><span style="color:#E1E4E8">: String,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "--path"</span><span style="color:#E1E4E8">: String,</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">    // Aliases</span></span>
+<span class="line"><span style="color:#9ECBFF">    "-u"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"--username"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "-y"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"--years"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">    "-p"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"--path"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  },</span></span>
+<span class="line"><span style="color:#E1E4E8">  { argv: process.argv }</span></span>
+<span class="line"><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">args[</span><span style="color:#9ECBFF">"--username"</span><span style="color:#E1E4E8">]) {</span></span>
+<span class="line"><span style="color:#F97583">  throw</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Error</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">"missing required argument: --username or -u"</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">args[</span><span style="color:#9ECBFF">"--years"</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> args[</span><span style="color:#9ECBFF">"--years"</span><span style="color:#E1E4E8">]?.</span><span style="color:#B392F0">split</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">","</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#E1E4E8"> { [</span><span style="color:#9ECBFF">"--username"</span><span style="color:#E1E4E8">]: </span><span style="color:#79B8FF">username</span><span style="color:#E1E4E8">, [</span><span style="color:#9ECBFF">"--years"</span><span style="color:#E1E4E8">]: </span><span style="color:#79B8FF">years</span><span style="color:#E1E4E8">, [</span><span style="color:#9ECBFF">"--path"</span><span style="color:#E1E4E8">]: </span><span style="color:#79B8FF">path</span><span style="color:#E1E4E8"> } </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> args;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">run</span><span style="color:#E1E4E8">({ username, years, path });</span></span></code></pre>
+<p>在<code>package.json</code>中定义 js 脚本文件与 CLI 指令的映射。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#9ECBFF">"bin"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">    "crawl"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"bin/cli.js"</span></span>
+<span class="line"><span style="color:#E1E4E8">},</span></span></code></pre>
+<p>OK，全局安装的情况下就可以通过<code>crawl -u "user-name"</code>来执行该脚本了，本地安装则需要配置 npm script，这是 nodejs 查找模块、命令的规则限制的。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="json"><code><span class="line"><span style="color:#9ECBFF">"scripts"</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#79B8FF">    "crawl"</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"crawl"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">},</span></span></code></pre>
+<p>具体来说，本地安装的模块，package.json 的 bin 字段会指示 npm 在当前项目的 node_modules/.bin 中添加一条命令，但直接调用<code>crawl</code>命令却是从全局的 node_modules 中查找的，显然是找不到的，而编写进 npm script 后，执行<code>npm run crawl</code>，此时查找范围就是当前项目的 node_modules，所以可以找到。</p>
+<h2 id="webpack-config">Webpack config</h2>
+<p>将项目发布为 npm module 之前需要做一些额外工作：</p>
+<ol>
+<li>依赖分析；</li>
+<li>排除外部依赖；</li>
+<li>确定打包后资源的模块类型；</li>
+<li>入口分离，chunk 分割；</li>
+<li>打包成生产版本；</li>
+</ol>
+<p>为了实现目标 1，引入了<code>webpack-bundle-analyzer</code>插件；</p>
+<p>为了实现目标 2，做以下配置，把 dependencies 统统排除，并且指定这些外部依赖的模块类型<code>externalsType</code>为<code>commonjs</code>，这个会影响打包后资源中导入这些模块的方式，由于运行在 nodejs，直接定义为<code>commonjs</code>即可；<code>externalsPresets.node</code>用于标明 nodejs built-in module 为外部依赖，运行时导入即可，无需打包。</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#B392F0">externals</span><span style="color:#E1E4E8">: [</span><span style="color:#9ECBFF">"arg"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"cheerio"</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">"signale"</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#B392F0">externalsType</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"commonjs"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">externalsPresets</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#B392F0">    node</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">true</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">},</span></span></code></pre>
+<p>为了实现目标 3，做以下配置，注意 index 是一切核心逻辑的入口，scripts 是 CLI 所需逻辑的入口，是在核心逻辑的基础上构建的，因此指定 dependOn 为 index，避免两个入口打包后的资源中各包含一份重复的核心逻辑；另外对于以发布 lib 为目标的项目，必须指定 library 的 type，否则默认为<code>"var"</code>，也就是导出模块会被视为变量，显然在 nodejs 中就没办法通过 require 导入了，因为按照 commonjs 规范定义，导出模块的标准语句是<code>exports</code>。</p>
+<p>顺带说一下初始的<code>commonjs</code>规范只定义了 exports，而 nodejs 及很多其他 commonjs 的实现都引入了 module.exports，而只把 exports 实现为 module.exports 的引用，这就是为什么 webpack 加了一种<code>commonjs2</code>的构建类型，因为这二者在 build 后的代码是截然不同的，具体可以看这个<a href="https://github.com/webpack/webpack/issues/1114#issuecomment-462240689">例子</a></p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8; overflow-x: auto;" tabindex="0" data-language="js"><code><span class="line"><span style="color:#B392F0">entry</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#B392F0">    index</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#B392F0">      import</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"./src/index.ts"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#6A737D">    // split run function as single chunk</span></span>
+<span class="line"><span style="color:#B392F0">    scripts</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#B392F0">      import</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"./src/scripts/index.ts"</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#B392F0">      dependOn</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"index"</span><span style="color:#E1E4E8">, </span><span style="color:#6A737D">// remove shard dependencies</span></span>
+<span class="line"><span style="color:#B392F0">      library</span><span style="color:#E1E4E8">: {</span></span>
+<span class="line"><span style="color:#B392F0">        type</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">"commonjs2"</span><span style="color:#E1E4E8">, </span><span style="color:#6A737D">// export run function as module.exports.run</span></span>
+<span class="line"><span style="color:#E1E4E8">      },</span></span>
+<span class="line"><span style="color:#E1E4E8">    },</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span></code></pre>
+<p>剩下的没什么可说的，都是基础用法，最后看一下<code>github-contribution</code>的项目依赖图，相对来说是比较小巧的。</p>
+<p><img src="https://dsm01pap001files.storage.live.com/y4mc-FEK0Sf2XqwDeLgkdJsDsrqjZILcWNRIfLPxuhRkeO7vQJoTmrupdcZMdSgkUnTHO5GZTdZov_jjT1871N9smkCGerUayN-DBCxgv66QWiJKnsLAc5AgCTriun3hJwo2Kyu9yWv2yEfLQmsKv5tCH5WKcCkWQWQdI0jC9tJxB3TOMiJXdR85mFaCnwS48MS?encodeFailures=1&#x26;width=1585&#x26;height=892" alt="github-contribution dependencies report"></p>  </div> </article> </main> <footer data-astro-cid-sz7xmlte>
+&copy; 2026 Your name here. All rights reserved.
+<div class="social-links" data-astro-cid-sz7xmlte> <a href="https://m.webtoo.ls/@astro" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow Astro on Mastodon</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/mastodon" data-astro-cid-sz7xmlte><path fill="currentColor" d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://twitter.com/astrodotbuild" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Follow Astro on Twitter</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/twitter" data-astro-cid-sz7xmlte><path fill="currentColor" d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" data-astro-cid-sz7xmlte></path></svg> </a> <a href="https://github.com/withastro/astro" target="_blank" data-astro-cid-sz7xmlte> <span class="sr-only" data-astro-cid-sz7xmlte>Go to Astro's GitHub repo</span> <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32" astro-icon="social/github" data-astro-cid-sz7xmlte><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" data-astro-cid-sz7xmlte></path></svg> </a> </div> </footer> </body></html>
